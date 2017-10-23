@@ -1,6 +1,8 @@
 package entidades;
 
-public class Persona {
+import java.io.Serializable;
+
+public class Persona implements Serializable {
 
 	private int id_persona;
 	private String nombre;
@@ -11,14 +13,45 @@ public class Persona {
 	private String password;
 	private Categoria categoria;
 	
-	public Categoria getCategoria(){
-		return categoria;
+	public int getId_persona(){
+		return id_persona;
 	}
 	
-	public void setCategoria(Categoria categoria){
-		this.categoria=categoria;
+	public void setId_persona(int id){
+		this.id_persona=id;
 	}
 	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public String getApellido() {
+		return apellido;
+	}
+	
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+	
+	public String getDni() {
+		return dni;
+	}
+	
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+	
+	public boolean isHabilitado() {
+		return habilitado;
+	}
+	
+	public void setHabilitado(boolean habilitado) {
+		this.habilitado = habilitado;
+	}
 
 	public String getUsuario() {
 		return usuario;
@@ -36,37 +69,13 @@ public class Persona {
 		this.password = password;
 	}
 
-	public int getId_persona(){
-		return id_persona;
+	
+	public Categoria getCategoria(){
+		return categoria;
 	}
 	
-	public void setId_persona(int id){
-		this.id_persona=id;
-	}
-	
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getApellido() {
-		return apellido;
-	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-	public String getDni() {
-		return dni;
-	}
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
-	public boolean isHabilitado() {
-		return habilitado;
-	}
-	public void setHabilitado(boolean habilitado) {
-		this.habilitado = habilitado;
+	public void setCategoria(Categoria categoria){
+		this.categoria=categoria;
 	}
 	
 	

@@ -1,6 +1,8 @@
 package entidades;
 
-public class Elemento {
+import java.io.Serializable;
+
+public class Elemento implements Serializable {
 	
 	private int id_elemento;
 	private String nombre;
@@ -8,47 +10,13 @@ public class Elemento {
 	private String descripcion;
 	private String autor;
 	private String genero;
-	private int id_tipoelemento;
 	private Tipo_Elemento Tipo_Elemento;
 
-		
 
-
-	
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-
-	
-	public int getStock() {
-		return stock;
-	}
-	
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-	public String getAutor() {
-		return autor;
-	}
-	public void setAutor(String autor) {
-		this.autor = autor;
-	}
-	
-	
-	
 	public int getId_elemento() {
 		return id_elemento;
 	}
+	
 	public void setId_elemento(int id_clase) {
 		this.id_elemento = id_clase;
 	}
@@ -61,6 +29,30 @@ public class Elemento {
 		this.nombre = nombre;
 	}
 	
+	public int getStock() {
+		return stock;
+	}
+	
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
+	
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+	public String getAutor() {
+		return autor;
+	}
+	
+	public void setAutor(String autor) {
+		this.autor = autor;
+	}
+	
 	public Tipo_Elemento getTipo_Elemento() {
 		return Tipo_Elemento;
 	}
@@ -68,9 +60,18 @@ public class Elemento {
 	public void setTipo_Elemento(Tipo_Elemento tipo_Elemento) {
 		Tipo_Elemento = tipo_Elemento;
 	}
-	
-	
 
+
+	
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+		
 	public Elemento(int id_elemento, String nombre, int stock, String descripcion, String autor,String genero) {
 		super();
 		this.id_elemento = id_elemento;

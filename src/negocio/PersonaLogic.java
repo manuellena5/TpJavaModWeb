@@ -115,5 +115,9 @@ public class PersonaLogic {
 		public ArrayList<Categoria> getCategorias() throws Exception{
 			return perC.getAll();
 		}
+		
+		public Persona login(Persona per) throws Exception{
+			return perD.getLogedUser(per);
+		}
 	
 }

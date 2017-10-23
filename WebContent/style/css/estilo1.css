@@ -1,0 +1,124 @@
+/*----- BODY ------ */
+
+	.contenedorprincipal{
+			margin:0;
+			padding:0;
+			widht:100%;
+			}
+			
+			
+/*------- FIN BODY --------*/
+
+/*-------- CABEZA ----------*/
+
+	.usulogueado{
+			margin-left:auto;
+	}
+	
+	 
+
+
+
+
+
+/*--------- FIN CABEZA -----------*/
+
+
+/*-------- CUERPO ---------*/
+		
+		h1{
+			height: -webkit-fill-available;
+			font-family: monospace;
+		}
+		
+		.cuerpo{
+			margin:0;
+			padding:0;
+			widht:100%;
+			height: -webkit-fill-available;
+		}
+
+		.cuerpo h1{
+		display: flex;
+		justify-content: center;
+		align-items: center;}
+
+/*-------- FIN CUERPO -------*/			
+
+
+/*----- FOOTER ----*/
+			
+			pie{
+				background: #ECEFF1;
+					margin:0;
+					padding:50px;
+					width: 100%;
+			}		
+			
+			footer .pie .container-fluid{
+			padding:0px;
+			}
+			
+			footer .contacto{
+				background: #CFD8DC;
+				width: 100%;
+				
+			}
+
+			footer .dr{
+				background: #CFD8DC;
+				text-indent: 20px;
+				width: 100%;
+				height: 100%;
+			}
+
+
+			.contacto p{
+				font-size: 14px;
+				margin: 1px 0px;
+				text-indent: 5px;
+			}
+
+			footer .datospersona{
+
+
+			}
+
+			footer .politicas{
+				text-indent: 5px;
+				
+
+			}
+
+			.datospersona a{
+				font-size: 20px;
+			}
+
+			.mapa{
+				margin:0px;
+				padding: 0px;
+			}
+			
+			.itemmapa{
+				padding: 0;}
+			
+			
+@media (min-width: 992px){
+.container-fluid {
+    padding: 0;
+}
+}
+
+@media (min-width: 768px){
+.container-fluid {
+    padding: 0;
+}
+}
+
+@media (min-width: 576px){
+.container-fluid {
+    padding: 0;
+}
+}
+
+			/*FIN FOOTER*/

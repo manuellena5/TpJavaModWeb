@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import entidades.*;
 import util.AppDataException;
 import javax.swing.JOptionPane;
+
+import org.apache.logging.log4j.Level;
+
 import java.security.KeyStore.ProtectionParameter;
 
 public class DataPersona {
@@ -41,7 +44,8 @@ public class DataPersona {
 				
 				}catch (SQLException e) {
 					
-					throw e;
+					AppDataException ade=new AppDataException(e, "Error al recuperar listado de Personas.\n"+e.getSQLState()+":"+e.getMessage(), Level.WARN);
+					throw ade;
 				}
 				catch (AppDataException ade){
 					throw ade;
@@ -199,4 +203,42 @@ public class DataPersona {
 			}
 		} 
 		 
+		
+		public Persona getLogedUser(Persona per) throws Exception{
+			Persona p=null;
+			PreparedStatement stmt=null;
+			ResultSet rs=null;
+			try {
+				stmt=FactoryConexion.getInstancia().getConn().prepareStatement(
+						"select p.id_persona, p.nombre, p.apellido, p.dni, p.estado, p.id_categoria, c.descripcion, p.usuario from personas p inner join categorias c on p.id_categoria=c.id_categoria where p.usuario=? and p.password =?");
+				stmt.setString(1, per.getUsuario());
+				stmt.setString(2, per.getPassword());
+				rs=stmt.executeQuery();
+				if(rs!=null && rs.next()){
+						p=new Persona();
+						p.setCategoria(new Categoria());
+						p.setId_persona(rs.getInt("id_persona"));
+						p.setNombre(rs.getString("nombre"));
+						p.setApellido(rs.getString("apellido"));
+						p.setDni(rs.getString("dni"));
+						p.setHabilitado(rs.getBoolean("estado"));
+						p.getCategoria().setId_Categoria(rs.getInt("id_categoria"));
+						p.getCategoria().setDescripcion(rs.getString("descripcion"));
+						p.setUsuario(rs.getString("usuario"));
+				}
+				
+			} catch (Exception e) {
+				throw e;
+			} finally{
+				try {
+					if(rs!=null)rs.close();
+					if(stmt!=null)stmt.close();
+					FactoryConexion.getInstancia().releaseConn();
+				} catch (SQLException e) {
+					throw e;
+				}
+			}
+
+			return p;
+		}
 }

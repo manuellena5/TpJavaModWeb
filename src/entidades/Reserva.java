@@ -1,9 +1,10 @@
 package entidades;
 
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Reserva{
+public class Reserva implements Serializable{
 
 	private Persona persona;
 	private Elemento elemento;
@@ -16,12 +17,15 @@ public class Reserva{
 	public Persona getPersona() {
 		return persona;
 	}
+	
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
+	
 	public Elemento getElemento() {
 		return elemento;
 	}
+	
 	public void setElemento(Elemento elemento) {
 		this.elemento = elemento;
 	}

@@ -10,7 +10,7 @@ public class FactoryConexion {
 	
 	private Connection conn;
 	private int cantConn=0;
-	private String driver = "com.mysql.jdbc.Driver()";
+	private String driver = "com.mysql.jdbc.Driver";
 	private String host ="localhost";
 	private String user="root";
 	private String port = "3306";

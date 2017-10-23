@@ -1,6 +1,8 @@
 package entidades;
 
-public class Tipo_Elemento {
+import java.io.Serializable;
+
+public class Tipo_Elemento implements Serializable{
 
 	private int id_tipoelemento;
 	private String nombre;
@@ -24,6 +26,7 @@ public class Tipo_Elemento {
 	public void setCantMaxReservasPend(int cantMaxReservasPend) {
 		this.cantMaxReservasPend = cantMaxReservasPend;
 	}
+	
 	public Tipo_Elemento(int id_tipoelemento, String nombre, int cantMaxReservasPend) {
 		super();
 		this.id_tipoelemento = id_tipoelemento;
