@@ -59,12 +59,7 @@ public class PersonaLogic {
 		
 		return perD.getByDni(p);
 		
-		//return this.lista.get(this.lista.indexOf(p));
 		
-		/*if(per.Equals(p)){
-	  return this.GetByDni(p.getDni());
-		}
-		return null;*/
 	
 	}
 	
@@ -75,25 +70,9 @@ public class PersonaLogic {
 		p.setDni(doc);
 		return GetByDni(p);
 		
-		/*for (int i = 0; i < lista.size(); i++) {
-			if (lista.get(i).getDni() == doc) {
-				return lista.get(i);
-			}
-			
-		}
-		return null;*/
 		
 	}
 	
-	
-	
-	
-	/*public void EliminarPersona(Persona p) throws Exception{
-	
-	 lista.remove(this.GetByDni(p));
-		
-	
-	}	*/
 
 
 

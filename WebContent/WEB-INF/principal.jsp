@@ -34,15 +34,15 @@
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="#">Ver personas</a>
+					      <a class="dropdown-item" href="ListadoPersonas.servlet">Ver personas</a>
 					      <a class="dropdown-item" href="#">Gestionar personas</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="#">Ver reservas</a>
-					      <a class="dropdown-item" href="#">Gestionar reservas</a>
+					      <a class="dropdown-item" href="ListadoReservas.servlet">Ver reservas</a>
+					      <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">

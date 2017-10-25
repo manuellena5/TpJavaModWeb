@@ -71,27 +71,14 @@ public class Tipo_ElementosLogic {
 		te.setNombre(nombre);
 		return GetByNombre(te);
 		
-		/*for (int i = 0; i < lista.size(); i++) {
-			if (lista.get(i).getNombre() == nombre) {
-				return lista.get(i);
-			}
-			
-		}
-		return null;*/
+		
 		
 	}
 	
 	
 	
 	
-	/*public void EliminarTipoElemento(Tipo_Elemento te) throws Exception{
 	
-	 lista.remove(this.GetByNombre(te));
-		
-	
-	}	
-
-*/
 
 
 		public ArrayList<Tipo_Elemento> GetAll() throws Exception{
@@ -101,11 +88,6 @@ public class Tipo_ElementosLogic {
 		}
 
 
-		/*public void ModificarTipoElemento(Tipo_Elemento te) throws Exception {
-			
-			this.EliminarTipoElemento(te);
-			this.add(te);
-			
-		}*/
+		
 	
 }

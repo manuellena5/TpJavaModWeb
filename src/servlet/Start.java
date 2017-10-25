@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Level;
 /**
  * Servlet implementation class Start
  */
-@WebServlet({ "/Start", "/start" })
+@WebServlet({"/Start", "/start" })
 public class Start extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Logger logger;
@@ -58,18 +58,9 @@ public class Start extends HttpServlet {
 			Persona pers = perlogic.login(per);
 			
 			
+			request.getSession().setAttribute("user",pers);
 			
-			/*try {
-				request.setAttribute("listaPersonas", perlogic.GetAll());
-			} catch (AppDataException ade) {
-				request.setAttribute("Error", ade.getMessage());
-			} catch (Exception e) {
-				response.setStatus(502);
-			}*/
-			
-			request.getSession().setAttribute("user", pers);
-			
-			logger.log(Level.INFO,"log in " + pers.getDni() + " " + pers.getNombre() + " " + pers.getApellido()) ;
+			logger.log(Level.INFO,"log in " + pers.getDni() + " " + pers.getNombre() + " " + pers.getApellido());
 			
 			
 			request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
@@ -79,7 +70,6 @@ public class Start extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//doGet(request, response);
 		
 	}
 

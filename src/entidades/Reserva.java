@@ -63,20 +63,23 @@ public class Reserva implements Serializable{
 		this.fecha_registro = fecha_registro;
 	}
 	
+	public Reserva(){
+		
+	}
 	
-	public Reserva(int id_persona, int id_elemento, Date fecha_registro, Date fecha_inicio,
-			Date fecha_fin, String detalle, String estado) {
+	public Reserva(Persona persona, Elemento elemento, Date fecha_registro, Date fecha_inicio, Date fecha_fin,
+			String detalle, String estado) {
 		super();
+		this.persona = persona;
+		this.elemento = elemento;
 		this.fecha_registro = fecha_registro;
 		this.fecha_inicio = fecha_inicio;
 		this.fecha_fin = fecha_fin;
 		this.detalle = detalle;
 		this.estado = estado;
 	}
+
 	
-	public Reserva(){
-		
-	}
 	
 	
 	

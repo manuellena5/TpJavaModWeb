@@ -1,5 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
+<%@page import="entidades.Tipo_Elemento"%>
+<%@page import="java.util.ArrayList"%>
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
@@ -20,7 +22,18 @@
     <link href="style/css/bootstrap.min.css" rel="stylesheet">
     <link href="style/css/estilo1.css" rel="stylesheet">
     
+    <script type="text/javascript">
     
+    function traerElementos(){
+    	
+    	var id_te = document.getElementById("menulistaelementos");
+    	var form = document.getElementById("formtipoelemento");
+    	form.action = "TraerElementos.servlet";
+    	form.submit();
+    	
+    }
+    
+    </script>
     
   </head>
   <body>
@@ -65,17 +78,22 @@
 
 		<div class="cuerpo">
 		
-			<div class="dropdown">
-			  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			    Dropdown button
-			  </button>
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			    <a class="dropdown-item" href="#">Libro</a>
-			    <a class="dropdown-item" href="#">Revista</a>
-			    <a class="dropdown-item" href="#">Pelicula</a>
-			  </div>
-			</div>
-
+		<form action="TraerElementos.servlet" method="POST" id="formtipoelemento">
+		
+			<div class="form-group col-md-4">
+		      <label for="inputState">¿Que desea reservar?</label>
+		      <select id="eleccion" name="eleccion" class="form-control">
+		        <option selected>Elija...</option>
+		        <% ArrayList<Tipo_Elemento> lista = (ArrayList<Tipo_Elemento>)request.getAttribute("listaTipoElementos"); 
+			  for(Tipo_Elemento te : lista){ %>
+		        <option value="<%=te.getId_tipoelemento()%>"><%=te.getNombre()%></option>
+		        <%} %>
+		      </select>
+		      <button type="submit" class="btn btn-primary">Buscar</button>
+		    </div>
+			
+		
+		</form>
 		</div> 
 		
 		<footer class="pie container-fluid">

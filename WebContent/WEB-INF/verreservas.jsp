@@ -1,5 +1,8 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="entidades.Reserva"%>
 <%@page import="entidades.Persona"%>
+<%@page import="java.util.ArrayList"%>
+
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
@@ -34,14 +37,14 @@
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="ListadoPersonas.servlet">Ver personas</a>
+					      <a class="dropdown-item" href="#">Ver personas</a>
 					      <a class="dropdown-item" href="#">Gestionar personas</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="ListadoReservas.servlet">Ver reservas</a>
+					      <a class="dropdown-item" href="#">Ver reservas</a>
 					      <a class="dropdown-item" href="#">Gestionar reservas</a>
 					    </div>
 					  </li>
@@ -65,16 +68,55 @@
 
 		<div class="cuerpo">
 		
-			<div class="dropdown">
-			  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			    Dropdown button
-			  </button>
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			    <a class="dropdown-item" href="#">Libro</a>
-			    <a class="dropdown-item" href="#">Revista</a>
-			    <a class="dropdown-item" href="#">Pelicula</a>
-			  </div>
-			</div>
+		
+					
+		<table class="table table-striped">
+		
+				<thead>
+				    <tr>
+				      <th scope="col">Reserva</th>
+				      <th scope="col">Id elemento</th>
+				      <th scope="col">Id Persona</th>
+				      <th scope="col">Fecha registro</th>
+				      <th scope="col">Fecha inicio</th>
+				      <th scope="col">Fecha fin</th>
+				      <th scope="col">Detalle</th>
+				      <th scope="col">Persona</th>
+				      <th scope="col">Elemento</th>
+				      <th scope="col">Tipo de elemento</th>
+				      <th scope="col"></th>
+				    </tr>
+				 </thead>
+				  <tbody>
+			<%
+				int count=0;
+				ArrayList<Reserva> listaReservas = (ArrayList<Reserva>)request.getAttribute("listaReservas");
+				for(Reserva r : listaReservas){
+					count++;
+				%>
+			
+				  
+			  
+			    <tr>
+			      <th scope="row"><%=count%></th>
+			      <td><%=r.getElemento().getId_elemento()%></td>
+			      <td><%=r.getPersona().getId_persona()%></td>
+			      <td><%=r.getFecha_registro() %></td>
+			      <td><%=r.getFecha_inicio() %></td>
+			      <td><%=r.getFecha_fin() %></td>
+			      <td><%=r.getDetalle() %></td>
+			      <td><%=r.getPersona().getApellido()+" "+r.getPersona().getNombre()%></td>
+			      <td><%=r.getElemento().getNombre()%></td>
+			      <td><%=r.getElemento().getTipo_Elemento().getNombre() %></td>
+			      <td><div class="btn-group" role="group" aria-label="Basic example">
+						  <button type="button" class="btn btn-secondary">Modificar</button>
+						  <button type="button" class="btn btn-secondary">Eliminar</button>
+					</div>
+				  </td>
+			    </tr>
+			    <% } %>
+			  </tbody>
+			</table>
 
 		</div> 
 		

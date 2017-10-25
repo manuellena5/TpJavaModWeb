@@ -38,7 +38,6 @@ public class DataReservas {
 								te.setNombre(rs.getString("tipoelemento"));
 								te.setCantMaxReservasPend(rs.getInt("cantMaxReservasPend"));
 								
-								
 								res.setFecha_registro(rs.getDate("fecha_registro"));
 								res.setFecha_inicio(rs.getDate("fecha_inicio"));
 								res.setFecha_fin(rs.getDate("fecha_fin"));

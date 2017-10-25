@@ -7,6 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.Level;
+
+import entidades.Persona;
+import negocio.PersonaLogic;
+
 /**
  * Servlet implementation class Reservas
  */
@@ -34,8 +39,36 @@ public class Reservas extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		try{
+		String user=request.getParameter("user");
+		String pass=request.getParameter("pass");
+		
+		Persona per=new Persona();
+		per.setUsuario(user);
+		per.setPassword(pass);
+		
+		PersonaLogic perlogic= new PersonaLogic();
+		
+		Persona pers = perlogic.login(per);
+		
+		
+		
+		/*try {
+			request.setAttribute("listaPersonas", perlogic.GetAll());
+		} catch (AppDataException ade) {
+			request.setAttribute("Error", ade.getMessage());
+		} catch (Exception e) {
+			response.setStatus(502);
+		}*/
+		
+		request.getSession().setAttribute("user", pers);
+		
+		request.getRequestDispatcher("WEB-INF/gestionreservas.jsp").forward(request, response);		
+		
+		//doGet(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

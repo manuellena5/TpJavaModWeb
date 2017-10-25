@@ -42,15 +42,12 @@ public class ElementosLogic {
 		this.elementosD.update(el);
 	}
 
-	public Elemento GetOne (String doc){
+	public Elemento GetOne (int id) throws Exception{
 	
-		for (Elemento elementos : lista) {
-			if (elementos.getNombre() == doc ) {
-				return elementos;
-			}
-			
-		}
-		return null;
+		
+		
+		
+		return elementosD.GetOne(id);
 	}	
 
 	
@@ -59,12 +56,6 @@ public class ElementosLogic {
 		
 		return elementosD.getByNombre(el);
 		
-		//return this.lista.get(this.lista.indexOf(el));
-		
-		/*if(elementos.Equals(el)){
-	  return this.GetByNombre(el.getNombre());
-		}
-		return null;*/
 	
 	}
 	
@@ -75,28 +66,27 @@ public class ElementosLogic {
 		el.setNombre(nombre);
 		return GetByNombre(el);
 		
-		/*for (int i = 0; i < lista.size(); i++) {
-			if (lista.get(i).getNombre() == nombre) {
-				return lista.get(i);
-			}
-			
-		}
-		return null;*/
+		
 		
 	}
-	
-	
-	
-	
-	/*public void EliminarElemento(Elemento el) throws Exception{
-	
-	  elementosD.delete(el);
 		
 	
-	}	
-*/
-
-
+		public ArrayList<Elemento> getByTipoElemento(int idtipoelemento) throws Exception{
+			
+			Tipo_Elemento te = new Tipo_Elemento();
+			te.setId_tipoelemento(idtipoelemento);
+			
+			
+			return getByTipoElemento(te);
+			
+		}
+		
+		public ArrayList<Elemento> getByTipoElemento(Tipo_Elemento te) throws Exception{
+			
+			
+			return elementosD.getByTipoElemento(te);
+			
+		}
 
 		public ArrayList<Elemento> GetAll() throws Exception{
 	
@@ -105,12 +95,7 @@ public class ElementosLogic {
 		}
 
 
-		/*public void ModificarElemento(Elemento el) throws Exception {
-			
-
-			elementosD.update(el);
-			
-		}*/
+		
 		
 		public ArrayList<Tipo_Elemento> getTipo_Elementos() throws Exception{
 			return ted.getAll();

@@ -59,12 +59,7 @@ public class ReservasLogic {
 		
 		return reservasD.getByIdPersona(res);
 		
-		//return this.lista.get(this.lista.indexOf(el));
 		
-		/*if(reservas.Equals(el)){
-	  return this.GetByIdPersona(el.getId_Persona());
-		}
-		return null;*/
 	
 	}
 	
@@ -76,42 +71,18 @@ public class ReservasLogic {
 		res.getElemento().setId_elemento(id_elemento);
 		return GetByIdPersona(res);
 		
-		/*for (int i = 0; i < lista.size(); i++) {
-			if (lista.get(i).getNombre() == nombre) {
-				return lista.get(i);
-			}
-			
-		}
-		return null;*/
+		
 		
 	}
-	
-	
-	
-	
-	/*public void EliminarReservas(Reserva res) throws Exception{
-	
-	 lista.remove(this.GetByIdPersona(res));
-		
-	
-	}	*/
 
-
-
-
-		public ArrayList<Reserva> GetAll() throws Exception{
+	
+	public ArrayList<Reserva> GetAll() throws Exception{
 	
 			return reservasD.getAll();
 			
 		}
 
 
-		/*public void ModificarReservas(Reserva res) throws Exception {
-			
-			this.EliminarReservas(res);
-			this.add(res);
-			
-		}*/
 	
 		
 		
