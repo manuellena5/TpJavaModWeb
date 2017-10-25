@@ -65,7 +65,7 @@
 					  </li>
 					  
 					  <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
-					  			<a href="#" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
+					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
 					  						</p>
 					 
 					</ul>
