@@ -76,7 +76,7 @@
 		<div class="cuerpo">
 		
 		
-					
+		<form action="ModificacionReserva.servlet" method="post">	
 		<table class="table table-striped">
 		
 				<thead>
@@ -116,7 +116,7 @@
 			      <td><%=r.getElemento().getNombre()%></td>
 			      <td><%=r.getElemento().getTipo_Elemento().getNombre() %></td>
 			      <td><div class="btn-group" role="group" aria-label="Basic example">
-						  <button type="button" class="btn btn-secondary">Modificar</button>
+						  <button type="button" class="btn btn-secondary" name="btneleccion" value="">Modificar</button>
 						  <button type="button" class="btn btn-secondary">Eliminar</button>
 					</div>
 				  </td>
@@ -124,7 +124,7 @@
 			    <% } %>
 			  </tbody>
 			</table>
-
+			</form>
 		</div> 
 		
 		<footer class="pie container-fluid">

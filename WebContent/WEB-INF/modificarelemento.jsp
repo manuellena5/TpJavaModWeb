@@ -1,8 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="entidades.Elemento"%>
 
-    
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
 <head>
@@ -16,16 +15,14 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Modificar elemento</title>
 	 
 	 <!-- Bootstrap CSS -->
     <link href="style/css/bootstrap.min.css" rel="stylesheet">
     <link href="style/css/estilo1.css" rel="stylesheet">
     
-    
-    
   </head>
-  <body>
+ <body>
     
     <div class="contenedorprincipal container-fluid">
 		
@@ -54,7 +51,7 @@
 					      <a class="dropdown-item" href="#">Nuevo elemento</a>
 					    </div>
 					  </li>
-					   <li class="nav-item dropdown">
+					    <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoTiposElementos.servlet">Gestionar tipos de elementos</a>
@@ -74,47 +71,46 @@
 
 		<div class="cuerpo">
 		
- 		<table class="table table-striped">
+		<% Elemento elemento = (Elemento)request.getAttribute("elemento"); %>
 		
-				<thead>
-				    <tr>
-				      <th scope="col">Persona</th>
-				      <th scope="col">Id Persona</th>
-				      <th scope="col">Nombre</th>
-				      <th scope="col">Apellido</th>
-				      <th scope="col">Dni</th>
-				      <th scope="col">Usuario</th>
-				      <th scope="col">Categoria</th>
-				    </tr>
-				 </thead>
-				 <tbody>
-				  
-			<%
-				int count=0;
-				ArrayList<Persona> listaPers = (ArrayList<Persona>)request.getAttribute("listaPersonas");
-				for(Persona p : listaPers){
-				count++;
-				%>
+			<form action="FinalizarModificacionElemento.servlet" method="post">
 			
-				  
-			  
-			    <tr>
-			      <th scope="row"><%=count%></th>
-			      <td><%=p.getId_persona() %></td>
-			      <td><%=p.getNombre() %></td>
-			      <td><%=p.getApellido() %></td>
-			      <td><%=p.getDni() %></td>
-			      <td><%=p.getUsuario() %></td>
-			      <td><%=p.getCategoria().getDescripcion() %></td>
-			      <td><div class="btn-group" role="group" aria-label="Basic example">
-						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionPersona.servlet?id=<%=p.getId_persona() %>">Modificar</a>
-						  <a class="btn btn-secondary" name="lnkeliminar" href="#">Eliminar</a>
-					</div>
-				  </td>
-			    </tr>
-			    <% } %>
-			  </tbody>
-			</table> 
+					<div class="form-group">
+					    <label for="txtid">ID</label>
+					    <input type="text" class="form-control" id="txtid" name="txtid" value="<%=elemento.getId_elemento()%>" readonly="true">
+					  </div>
+					  <div class="form-group">
+					    <label for="txtusuario">Nombre</label>
+					    <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="<%=elemento.getNombre()%>">
+					  </div>	
+
+					  <div class="form-group">
+					    <label for="txtnombre">Descripci&oacute;n</label>
+					    <input type="text" class="form-control" id="txtdescripcion" name="txtdescripcion" value="<%=elemento.getDescripcion() %>">
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="txtapellido">Autor</label>
+					    <input type="text" class="form-control" id="txtautor" name="txtautor" value="<%=elemento.getAutor() %>">
+					  </div>
+					  
+					   <div class="form-group">
+					    <label for="txtapellido">G&eacute;nero</label>
+					    <input type="text" class="form-control" id="txtgenerpo" name="txtgenero" value="<%=elemento.getGenero() %>">
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="txtapellido">Stock</label>
+					    <input type="text" class="form-control" id="txtstock" name="txtstock" value="<%=elemento.getStock() %>">
+					  </div>
+					  
+					  
+					  <div class="btn-group" role="group" aria-label="Basic example">
+								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=elemento.getId_elemento()%>">Aceptar</button>
+						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
+					  </div>
+					
+			</form>
 		</div> 
 		
 		<footer class="pie container-fluid">
