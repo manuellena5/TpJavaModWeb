@@ -34,22 +34,29 @@
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="ListadoPersonas.servlet">Ver personas</a>
-					      <a class="dropdown-item" href="#">Gestionar personas</a>
+					      <a class="dropdown-item" href="ListadoPersonas.servlet">Gestionar personas</a>
+					      <a class="dropdown-item" href="#">Nueva persona</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="ListadoReservas.servlet">Ver reservas</a>
+					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
 					      <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Elementos</a>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="#">Ver elementos</a>
-					      <a class="dropdown-item" href="#">Gestionar elementos</a>
+					      <a class="dropdown-item" href="ListadoElementos.servlet">Gestionar elementos</a>
+					      <a class="dropdown-item" href="#">Nuevo elemento</a>
+					    </div>
+					  </li>
+					   <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
+					    <div class="dropdown-menu">
+					      <a class="dropdown-item" href="ListadoTiposElementos.servlet">Gestionar tipos de elementos</a>
+					      <a class="dropdown-item" href="#">Nuevo tipo de elemento</a>
 					    </div>
 					  </li>
 					  
