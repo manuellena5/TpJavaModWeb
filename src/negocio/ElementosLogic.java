@@ -44,9 +44,6 @@ public class ElementosLogic {
 
 	public Elemento GetOne (int id) throws Exception{
 	
-		
-		
-		
 		return elementosD.GetOne(id);
 	}	
 
