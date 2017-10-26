@@ -40,11 +40,11 @@ public class ModificacionTipoElemento extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int idtipoelemento = Integer.parseInt(request.getParameter("id"));
-		
+		System.out.println(idtipoelemento);
 		Tipo_ElementosLogic tipoelementologic = new Tipo_ElementosLogic();
 		Tipo_Elemento tipoelemento = new Tipo_Elemento();
 		try {
-			tipoelemento = tipoelementologic.GetOne(idtipoelemento);
+			tipoelemento = tipoelementologic.GetById(idtipoelemento);
 
 			request.setAttribute("tipoelemento", tipoelemento);
 		} catch (Exception e) {

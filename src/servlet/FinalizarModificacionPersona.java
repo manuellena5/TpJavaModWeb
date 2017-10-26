@@ -42,23 +42,23 @@ public class FinalizarModificacionPersona extends HttpServlet {
 
 		int idpersona = Integer.parseInt(request.getParameter("btneleccion"));
 		String nombre = request.getParameter("txtnombre");
-		String apellido = request.getParameter("txtdescripcion");
-		String dni = request.getParameter("txtautor");
-		String usuario = request.getParameter("txtgenero");
+		String apellido = request.getParameter("txtapellido");
+		String dni = request.getParameter("txtdni");
+		String usuario = request.getParameter("txtusuario");
 		
-		
+		System.out.println(usuario);
 		PersonaLogic personaLogic = new PersonaLogic();
 		
 		Persona per = new Persona();
 		
 		
 		try {
-		per = personaLogic.GetOne(idpersona);
+		per = personaLogic.GetById(idpersona);
 		per.setNombre(nombre);
 		per.setApellido(apellido);
 		per.setDni(dni);
 		per.setUsuario(usuario);
-		
+		System.out.println(usuario);
 		personaLogic.update(per);
 			
 		request.setAttribute("persona", per);

@@ -43,7 +43,7 @@ public class EliminacionPersona extends HttpServlet {
 		PersonaLogic personaLogic = new PersonaLogic();
 		Persona persona = new Persona();
 		try {
-			persona = personaLogic.GetOne(idpersona);
+			persona = personaLogic.GetById(idpersona);
 
 			request.setAttribute("persona", persona);
 			

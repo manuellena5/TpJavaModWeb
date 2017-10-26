@@ -43,15 +43,15 @@ public class FinalizarModificacionTipoElemento extends HttpServlet {
 		
 		int cantMaxReservasPend = Integer.parseInt(request.getParameter("txtcantmax"));
 		
-		
+		System.out.println(cantMaxReservasPend);
 		Tipo_ElementosLogic tipoelementoLogic = new Tipo_ElementosLogic();
 		
 		Tipo_Elemento tipoel = new Tipo_Elemento();
 		
 		
 		try {
-		tipoel = tipoelementoLogic.GetOne(idtipoelemento);
-		
+		tipoel = tipoelementoLogic.GetById(idtipoelemento);
+		System.out.println(tipoel.getCantMaxReservasPend());
 		tipoel.setCantMaxReservasPend(cantMaxReservasPend);
 		
 		tipoelementoLogic.update(tipoel);
@@ -64,7 +64,7 @@ public class FinalizarModificacionTipoElemento extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/modificacionexitosatipoelemento.jsp").forward(request, response);
 	}
 
 }

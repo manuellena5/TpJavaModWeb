@@ -75,7 +75,7 @@ public class DataPersona {
 			try {
 				 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
 				stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-						"select id_persona, nombre, apellido, dni, estado,usuario,password,id_categoria,descripcion from personas p left join categorias c on c.id_categoria=p.id_categoria where dni=?");
+						"select p.id_persona, p.nombre, p.apellido, p.dni, p.estado,p.usuario,p.password,c.id_categoria,c.descripcion from personas p left join categorias c on c.id_categoria=p.id_categoria where p.dni=?");
 						
 				stmt.setString(1, per.getDni());
 				rs = stmt.executeQuery();
@@ -124,7 +124,7 @@ public class DataPersona {
 		try {
 			 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select id_persona, nombre, apellido, dni, estado,usuario,password,id_categoria,descripcion from personas p left join categorias c on c.id_categoria=p.id_categoria where id_persona=?");
+					"select p.id_persona, p.nombre, p.apellido, p.dni, p.estado,p.usuario,p.password,c.id_categoria,c.descripcion from personas p left join categorias c on c.id_categoria=p.id_categoria where p.id_persona=?");
 					
 			stmt.setInt(1, per.getId_persona());
 			rs = stmt.executeQuery();

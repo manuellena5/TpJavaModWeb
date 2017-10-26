@@ -47,7 +47,7 @@ public class FinalizarEliminacionPersona extends HttpServlet {
 		
 		
 		try {
-		per = personaLogic.GetOne(idpersona);
+		per = personaLogic.GetById(idpersona);
 		
 		personaLogic.delete(per);
 			

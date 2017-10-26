@@ -47,7 +47,7 @@ public class FinalizarEliminacionTipoElemento extends HttpServlet {
 		
 		
 		try {
-		tipoel = tipoelementoLogic.GetOne(idtipoelemento);
+		tipoel = tipoelementoLogic.GetById(idtipoelemento);
 		
 		tipoelementoLogic.delete(tipoel);
 			
@@ -59,7 +59,7 @@ public class FinalizarEliminacionTipoElemento extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/modificacionexitosatipoelemento.jsp").forward(request, response);
 	}
 
 }

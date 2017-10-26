@@ -43,7 +43,7 @@ public class EliminacionTipoElemento extends HttpServlet {
 		Tipo_ElementosLogic tipoelementologic = new Tipo_ElementosLogic();
 		Tipo_Elemento tipoelemento = new Tipo_Elemento();
 		try {
-			tipoelemento = tipoelementologic.GetOne(idtipoelemento);
+			tipoelemento = tipoelementologic.GetById(idtipoelemento);
 
 			request.setAttribute("tipoelemento", tipoelemento);
 		} catch (Exception e) {

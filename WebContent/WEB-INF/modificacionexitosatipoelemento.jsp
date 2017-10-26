@@ -1,7 +1,9 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
 <%@page import="entidades.Tipo_Elemento"%>
+<%@page import="entidades.Reserva"%>
 
+    
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
 <head>
@@ -15,20 +17,29 @@
     
     
      
-	 <title>Modificar tipo de elemento</title>
+	 <title>Modificacion exitosa del tipo de elemento</title>
+	 
 	 
 	 <!-- Bootstrap CSS -->
-    <link href="style/css/bootstrap.min.css" rel="stylesheet">
-    <link href="style/css/estilo1.css" rel="stylesheet">
+	  <!-- <link href="style/css/jquery-ui.structure.min.css" rel="stylesheet">
+     <link href="style/css/jquery-ui.theme.min.css" rel="stylesheet"> -->
+	 
+	 <link href="style/css/jquery-ui.min.css" rel="stylesheet">
+	 <link href="style/css/bootstrap.min.css" rel="stylesheet">
+     <link href="style/css/estilo1.css" rel="stylesheet">
+   
+    
+    
+    
     
   </head>
- <body>
+  <body>
     
     <div class="contenedorprincipal container-fluid">
 		
 		<div class="cabeza">	
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-					  <a class="navbar-brand" href="start.jsp">Biblioteca</a>
+					  <a class="navbar-brand" href="">Biblioteca</a>
 					<ul class="nav nav-pills">
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
@@ -41,7 +52,7 @@
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
-					      <a class="dropdown-item" href="#">Nueva reserva</a>
+					      <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
@@ -51,7 +62,7 @@
 					      <a class="dropdown-item" href="#">Nuevo elemento</a>
 					    </div>
 					  </li>
-					    <li class="nav-item dropdown">
+					   <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoTiposElementos.servlet">Gestionar tipos de elementos</a>
@@ -68,34 +79,27 @@
 				</nav>
 		</div>
 
-
 		<div class="cuerpo">
 		
-		<% Tipo_Elemento tipoelemento = (Tipo_Elemento)request.getAttribute("tipoelemento"); %>
 		
-			<form action="FinalizarModificacionTipoElemento.servlet" method="post">
-			
-					<div class="form-group">
-					    <label for="txtid">ID</label>
-					    <input type="text" class="form-control" id="txtid" name="txtid" value="<%=tipoelemento.getId_tipoelemento() %>" readonly="true">
-					  </div>
-					  <div class="form-group">
-					    <label for="txtusuario">Nombre</label>
-					    <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="<%=tipoelemento.getNombre()%>" readonly="true">
-					  </div>	
 
-					  <div class="form-group">
-					    <label for="txtnombre">Cantidad maxima reservas pendientes</label>
-					    <input type="text" class="form-control" id="txtcantmax" name="txtcantmax" value="<%=tipoelemento.getCantMaxReservasPend() %>">
-					  </div>
-					  
-					  
-					  <div class="btn-group" role="group" aria-label="Basic example">
-								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=tipoelemento.getId_tipoelemento()%>">Aceptar</button>
-						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
-					  </div>
-					
-			</form>
+		
+		
+			
+			<div class="alert alert-success" role="alert">
+				<h3>Su tipo de elemento se ha modificado correctamente</h3>
+			   
+				<p>Id: <%=((Tipo_Elemento)request.getAttribute("tipoelemento")).getId_tipoelemento()%></p>
+				<p>Nombre: <%=((Tipo_Elemento)request.getAttribute("tipoelemento")).getNombre()%></p>	
+				<p>Cantidad maxima de reservas pendientes: <%=((Tipo_Elemento)request.getAttribute("tipoelemento")).getCantMaxReservasPend()%></p>	
+				
+			   <a href="Start" class="alert-link">Volver a pagina principal</a>
+			</div>
+			
+	  	
+	  	
+			
+			
 		</div> 
 		
 		<footer class="pie container-fluid">
@@ -155,10 +159,19 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="style/js/jquery-ui.js"></script>
+    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="style/js/datepicker-es.js"></script>
+    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
-    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
-    
+   
+	<script type="text/javascript">
+    $(function () {
+    	$("#datepicker").datepicker();
+    	});
+	</script>
 
   </body>
 </html>

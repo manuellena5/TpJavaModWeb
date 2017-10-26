@@ -103,7 +103,7 @@ public class DataTipo_Elementos {
 		try {
 			 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select id_tipoelemento, nombre, cantMaxReservasPend from tipo_elementos where  id_tipoelemento=?");
+					"select id_tipoelemento, nombre, cantMaxReservasPend from tipo_elementos where id_tipoelemento=?");
 					
 			stmt.setInt(1, tipoElementos.getId_tipoelemento());
 			rs = stmt.executeQuery();
