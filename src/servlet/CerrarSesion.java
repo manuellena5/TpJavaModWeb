@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class CerrarSesion
  */
-@WebServlet({ "/CerrarSesion", "/cerrarsesion", "/Cerrarsesion" })
+@WebServlet({ "/CerrarSesion", "/cerrarsesion", "/Cerrarsesion", "/CerrarSesion.servlet" })
 public class CerrarSesion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
