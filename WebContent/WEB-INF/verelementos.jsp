@@ -1,6 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="entidades.Persona"%>
+<%@page import="entidades.Elemento"%>
 <%@page import="entidades.Tipo_Elemento"%>
+<%@page import="entidades.Persona"%>
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -22,18 +23,7 @@
     <link href="style/css/bootstrap.min.css" rel="stylesheet">
     <link href="style/css/estilo1.css" rel="stylesheet">
     
-    <script type="text/javascript">
     
-    function traerElementos(){
-    	
-    	var id_te = document.getElementById("menulistaelementos");
-    	var form = document.getElementById("formtipoelemento");
-    	form.action = "TraerElementos.servlet";
-    	form.submit();
-    	
-    }
-    
-    </script>
     
   </head>
   <body>
@@ -44,7 +34,7 @@
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 					  <a class="navbar-brand" href="start.jsp">Biblioteca</a>
 					<ul class="nav nav-pills">
-					  <li class="nav-item dropdown">
+					   <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoPersonas.servlet">Gestionar personas</a>
@@ -65,14 +55,7 @@
 					      <a class="dropdown-item" href="#">Nuevo elemento</a>
 					    </div>
 					  </li>
-					    <li class="nav-item dropdown">
-					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Elementos</a>
-					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="ListadoTiposElementos.servlet">Gestionar tipos de elementos</a>
-					      <a class="dropdown-item" href="#">Nuevo tipo de elemento</a>
-					    </div>
-					  </li>
-					    <li class="nav-item dropdown">
+					   <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoTiposElementos.servlet">Gestionar tipos de elementos</a>
@@ -92,22 +75,54 @@
 
 		<div class="cuerpo">
 		
-		<form action="TraerElementos.servlet" method="POST" id="formtipoelemento">
+						
+		<table class="table table-striped">
 		
-			<div class="form-group col-md-4">
-		      <label for="inputState">¿Que desea reservar?</label>
-		      <select id="eleccion" name="eleccion" class="form-control">
-		        <option selected>Elija...</option>
-		        <% ArrayList<Tipo_Elemento> lista = (ArrayList<Tipo_Elemento>)request.getAttribute("listaTipoElementos"); 
-			  for(Tipo_Elemento te : lista){ %>
-		        <option value="<%=te.getId_tipoelemento()%>"><%=te.getNombre()%></option>
-		        <%} %>
-		      </select>
-		      <button type="submit" class="btn btn-primary">Buscar</button>
-		    </div>
+				<thead>
+				    <tr>
+				      <th scope="col">Elemento</th>
+				      <th scope="col">Id elemento</th>
+				      <th scope="col">Nombre</th>
+				      <th scope="col">Descripcion</th>
+				      <th scope="col">Autor</th>
+				      <th scope="col">Genero</th>
+				      <th scope="col">Stock</th>
+				      <th scope="col">Tipo de elemento</th>
+				      <th scope="col">Id tipo de elemento</th>
+				      <th scope="col">Cant max reservas pendientes</th>
+				      <th scope="col"></th>
+				    </tr>
+				 </thead>
+				  <tbody>
+			<%
+				int count=0;
+				ArrayList<Elemento> listaElementos = (ArrayList<Elemento>)request.getAttribute("listaElementos");
+				for(Elemento e : listaElementos){
+					count++;
+				%>
 			
-		
-		</form>
+				  
+			  
+			    <tr>
+			      <th scope="row"><%=count%></th>
+			      <td><%=e.getId_elemento()%></td>
+			      <td><%=e.getNombre() %></td>
+			      <td><%=e.getDescripcion() %></td>
+			      <td><%=e.getAutor() %></td>
+			      <td><%=e.getGenero() %></td>
+			      <td><%=e.getStock() %></td>
+			      <td><%=e.getTipo_Elemento().getNombre() %></td>
+			      <td><%=e.getTipo_Elemento().getId_tipoelemento() %></td>
+			      <td><%=e.getTipo_Elemento().getCantMaxReservasPend() %></td>
+			      <td><div class="btn-group" role="group" aria-label="Basic example">
+						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionElemento.servlet?id=<%=e.getId_elemento() %>">Modificar</a>
+						  <a class="btn btn-secondary" name="lnkeliminar" href="#">Eliminar</a>
+					</div>
+				  </td>
+			    </tr>
+			    <% } %>
+			  </tbody>
+			</table>
 		</div> 
 		
 		<footer class="pie container-fluid">

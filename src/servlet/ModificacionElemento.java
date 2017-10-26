@@ -7,20 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.Elemento;
 import negocio.ElementosLogic;
 import util.AppDataException;
 
 /**
- * Servlet implementation class ListadoElementos
+ * Servlet implementation class ModificacionElemento
  */
-@WebServlet({ "/ListadoElementos", "/ListadoElementos.servlet" })
-public class ListadoElementos extends HttpServlet {
+@WebServlet({ "/ModificacionElemento", "/ModificacionElemento.servlet" })
+public class ModificacionElemento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListadoElementos() {
+    public ModificacionElemento() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +30,7 @@ public class ListadoElementos extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		doPost(request,response);
 	}
 
@@ -37,12 +38,15 @@ public class ListadoElementos extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		int idelemento = Integer.parseInt(request.getParameter("id"));
 		
 		ElementosLogic elementologic = new ElementosLogic();
-		
+		Elemento elemento = new Elemento();
 		try {
+			elemento = elementologic.GetOne(idelemento);
 
-			request.setAttribute("listaElementos", elementologic.GetAll());
+			request.setAttribute("elemento", elemento);
 		} catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());
 		}
@@ -50,7 +54,7 @@ public class ListadoElementos extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/verelementos.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/modificarelemento.jsp").forward(request, response);
 	}
 
 }

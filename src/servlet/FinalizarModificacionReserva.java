@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import negocio.ElementosLogic;
-import util.AppDataException;
-
 /**
- * Servlet implementation class ListadoElementos
+ * Servlet implementation class FinalizarModificacionReserva
  */
-@WebServlet({ "/ListadoElementos", "/ListadoElementos.servlet" })
-public class ListadoElementos extends HttpServlet {
+@WebServlet({ "/FinalizarModificacionReserva", "/FinalizarModificacionReserva.servlet" })
+public class FinalizarModificacionReserva extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListadoElementos() {
+    public FinalizarModificacionReserva() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,28 +26,16 @@ public class ListadoElementos extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		doPost(request,response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ElementosLogic elementologic = new ElementosLogic();
-		
-		try {
-
-			request.setAttribute("listaElementos", elementologic.GetAll());
-		} catch (AppDataException ade) {
-			request.setAttribute("Error", ade.getMessage());
-		}
-		catch (Exception e) {
-			response.setStatus(502);
-		}
-		
-		request.getRequestDispatcher("WEB-INF/verelementos.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

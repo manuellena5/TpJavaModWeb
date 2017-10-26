@@ -1,7 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Reserva"%>
 <%@page import="entidades.Persona"%>
-<%@page import="java.util.ArrayList"%>
+
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -34,30 +34,37 @@
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 					  <a class="navbar-brand" href="">Biblioteca</a>
 					<ul class="nav nav-pills">
-					  <li class="nav-item dropdown">
+					   <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="#">Ver personas</a>
-					      <a class="dropdown-item" href="#">Gestionar personas</a>
+					      <a class="dropdown-item" href="ListadoPersonas.servlet">Gestionar personas</a>
+					      <a class="dropdown-item" href="#">Nueva persona</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="#">Ver reservas</a>
-					      <a class="dropdown-item" href="#">Gestionar reservas</a>
+					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
+					      <a class="dropdown-item" href="#">Nueva reserva</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Elementos</a>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="#">Ver elementos</a>
-					      <a class="dropdown-item" href="#">Gestionar elementos</a>
+					      <a class="dropdown-item" href="ListadoElementos.servlet">Gestionar elementos</a>
+					      <a class="dropdown-item" href="#">Nuevo elemento</a>
+					    </div>
+					  </li>
+					   <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
+					    <div class="dropdown-menu">
+					      <a class="dropdown-item" href="ListadoTiposElementos.servlet">Gestionar tipos de elementos</a>
+					      <a class="dropdown-item" href="#">Nuevo tipo de elemento</a>
 					    </div>
 					  </li>
 					  
 					  <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
-					  			<a href="#" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
+					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
 					  						</p>
 					 
 					</ul>
@@ -69,7 +76,7 @@
 		<div class="cuerpo">
 		
 		
-					
+		<form action="ModificacionReserva.servlet" method="post">	
 		<table class="table table-striped">
 		
 				<thead>
@@ -109,7 +116,7 @@
 			      <td><%=r.getElemento().getNombre()%></td>
 			      <td><%=r.getElemento().getTipo_Elemento().getNombre() %></td>
 			      <td><div class="btn-group" role="group" aria-label="Basic example">
-						  <button type="button" class="btn btn-secondary">Modificar</button>
+						  <button type="button" class="btn btn-secondary" name="btneleccion" value="">Modificar</button>
 						  <button type="button" class="btn btn-secondary">Eliminar</button>
 					</div>
 				  </td>
@@ -117,7 +124,7 @@
 			    <% } %>
 			  </tbody>
 			</table>
-
+			</form>
 		</div> 
 		
 		<footer class="pie container-fluid">

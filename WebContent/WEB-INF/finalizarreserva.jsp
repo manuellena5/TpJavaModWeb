@@ -1,7 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
 <%@page import="entidades.Elemento"%>
-<%@page import="java.util.ArrayList"%>
+
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
@@ -50,21 +50,27 @@
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
+
 						      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
 					      <a class="dropdown-item" href="#">Nueva reserva</a>
 				    </div>
+
 					  </li>
 					  <li class="nav-item dropdown">
+
 							    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
 						    <div class="dropdown-menu">
 								 <a class="dropdown-item" href="ListadoElementos.servlet">Gestionar elementos</a>
 								 <a class="dropdown-item" href="#">Nuevo elemento</a>
 							<div>
+
 					  </li>
+
 					  
 					  <p class="usulogueavenido">Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
 					  		<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
 						</p>
+
 					</ul>
 				 
 				</nav>

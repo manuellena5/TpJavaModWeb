@@ -8,19 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import negocio.ElementosLogic;
+import entidades.Elemento;
 import util.AppDataException;
 
 /**
- * Servlet implementation class ListadoElementos
+ * Servlet implementation class FinalizarModificacionElemento
  */
-@WebServlet({ "/ListadoElementos", "/ListadoElementos.servlet" })
-public class ListadoElementos extends HttpServlet {
+@WebServlet({ "/FinalizarModificacionElemento", "/FinalizarModificacionElemento.servlet" })
+public class FinalizarModificacionElemento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListadoElementos() {
+    public FinalizarModificacionElemento() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +31,36 @@ public class ListadoElementos extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		doPost(request,response);
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		int idelemento = Integer.parseInt(request.getParameter("btneleccion"));
+		String nombre = request.getParameter("txtnombre");
+		String descripcion = request.getParameter("txtdescripcion");
+		String autor = request.getParameter("txtautor");
+		String genero = request.getParameter("txtgenero");
+		int stock = Integer.parseInt(request.getParameter("txtstock"));
 		
-		ElementosLogic elementologic = new ElementosLogic();
+		
+		ElementosLogic elementoLogic = new ElementosLogic();
+		
+		Elemento el = new Elemento();
+		
 		
 		try {
-
-			request.setAttribute("listaElementos", elementologic.GetAll());
+		el = elementoLogic.GetOne(idelemento);
+		el.setNombre(nombre);
+		el.setDescripcion(descripcion);
+		el.setAutor(autor);
+		el.setGenero(genero);
+		el.setStock(stock);
+		elementoLogic.update(el);
+			
 		} catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());
 		}
@@ -50,7 +68,8 @@ public class ListadoElementos extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/verelementos.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
+	
 	}
 
 }

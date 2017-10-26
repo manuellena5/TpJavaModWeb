@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
-<%@page import="java.util.ArrayList"%>
+
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -36,27 +36,34 @@
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="#">Ver personas</a>
-					      <a class="dropdown-item" href="#">Gestionar personas</a>
+					      <a class="dropdown-item" href="ListadoPersonas.servlet">Gestionar personas</a>
+					      <a class="dropdown-item" href="#">Nueva persona</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="#">Ver reservas</a>
-					      <a class="dropdown-item" href="#">Gestionar reservas</a>
+					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
+					      <a class="dropdown-item" href="#">Nueva reserva</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Elementos</a>
 					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="#">Ver elementos</a>
-					      <a class="dropdown-item" href="#">Gestionar elementos</a>
+					      <a class="dropdown-item" href="ListadoElementos.servlet">Gestionar elementos</a>
+					      <a class="dropdown-item" href="#">Nuevo elemento</a>
+					    </div>
+					  </li>
+					   <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
+					    <div class="dropdown-menu">
+					      <a class="dropdown-item" href="ListadoTiposElementos.servlet">Gestionar tipos de elementos</a>
+					      <a class="dropdown-item" href="#">Nuevo tipo de elemento</a>
 					    </div>
 					  </li>
 					  
 					  <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
-					  			<a href="#" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
+					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
 					  						</p>
 					 
 					</ul>
@@ -67,64 +74,47 @@
 
 		<div class="cuerpo">
 		
-		
-			<table>
-		<%
-			ArrayList<Persona> listaPers = (ArrayList<Persona>)request.getAttribute("listaPersonas");
-			for(Persona p : listaPers){
-		%>
-		<tr>
-			<td><%=p.getApellido() %></td>
-			<td><%=p.getDni() %></td>
-			<td><%=p.getNombre() %></td>
-		</tr>
-		<%
-			}
-		%>
-	</table>
-		
-		
-		
-		
-		
-<%-- 		<table class="table table-striped">
+ 		<table class="table table-striped">
 		
 				<thead>
 				    <tr>
-				      <th scope="col">Id elemento</th>
-				      <th scope="col">Id Persona</th>
-				      <th scope="col">Fecha registro</th>
-				      <th scope="col">Fecha inicio</th>
-				      <th scope="col">Fecha fin</th>
-				      <th scope="col">Detalle</th>
 				      <th scope="col">Persona</th>
-				      <th scope="col">Elemento</th>
-				      <th scope="col">Tipo de elemento</th>
+				      <th scope="col">Id Persona</th>
+				      <th scope="col">Nombre</th>
+				      <th scope="col">Apellido</th>
+				      <th scope="col">Dni</th>
+				      <th scope="col">Usuario</th>
+				      <th scope="col">Categoria</th>
 				    </tr>
 				 </thead>
+				 <tbody>
 				  
-			<%ArrayList<Reserva> listaReservas = (ArrayList<Reserva>)request.getAttribute("listaReservas");
-				for(Reserva r : listaReservas){
+			<%
+				int count=0;
+				ArrayList<Persona> listaPers = (ArrayList<Persona>)request.getAttribute("listaPersonas");
+				for(Persona p : listaPers){
+				count++;
 				%>
 			
 				  
-			  <tbody>
+			  
 			    <tr>
-			      <th scope="row">1</th>
-			      <td><%=r.getElemento().getId_elemento()%></td>
-			      <td><%=r.getPersona().getId_persona()%></td>
-			      <td><%=r.getFecha_registro() %></td>
-			      <td><%=r.getFecha_inicio() %></td>
-			      <td><%=r.getFecha_fin() %></td>
-			      <td><%=r.getDetalle() %></td>
-			      <td><%=r.getPersona().getApellido()+" "+r.getPersona().getNombre()%></td>
-			      <td><%=r.getElemento().getNombre()%></td>
-			      <td><%=r.getElemento().getTipo_Elemento().getNombre() %></td>
+			      <th scope="row"><%=count%></th>
+			      <td><%=p.getId_persona() %></td>
+			      <td><%=p.getNombre() %></td>
+			      <td><%=p.getApellido() %></td>
+			      <td><%=p.getDni() %></td>
+			      <td><%=p.getUsuario() %></td>
+			      <td><%=p.getCategoria().getDescripcion() %></td>
+			      <td><div class="btn-group" role="group" aria-label="Basic example">
+						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionPersona.servlet?id=<%=p.getId_persona() %>">Modificar</a>
+						  <a class="btn btn-secondary" name="lnkeliminar" href="#">Eliminar</a>
+					</div>
+				  </td>
 			    </tr>
 			    <% } %>
 			  </tbody>
-			</table> --%>
-
+			</table> 
 		</div> 
 		
 		<footer class="pie container-fluid">
