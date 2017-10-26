@@ -25,7 +25,7 @@
   </head>
   <body>
     
-    <div class="contenedorprincipal container-fluid">
+       <div class="contenedorprincipal container-fluid">
 		
 		<div class="cabeza">	
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
