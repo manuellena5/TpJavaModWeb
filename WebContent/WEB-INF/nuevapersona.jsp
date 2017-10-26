@@ -75,7 +75,7 @@
 
 		<div class="cuerpo">
 		
-			<form action="validarpersona.servlet" method="post">
+			<form action="validarpersona.servlet" method="post" style="width:50%;">
 			
 			<div class="form-group">
 		    	<select id="eleccion" name="txtidcategoria" class="form-control">
@@ -109,19 +109,26 @@
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Contraseña: </label>
-			    <input type="text" name="txtpassword" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese una contraseña">
+			    <input type="password" name="txtpassword" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese una contraseña">
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Repita su contraseña: </label>
-			    <input type="text" name="txtpassword2" class="form-control" id="exampleFormControlInput1" placeholder="Repita su contraseña">
+			    <input type="password" name="txtpassword2" class="form-control" id="exampleFormControlInput1" placeholder="Repita su contraseña">
 			</div>
 			
-			<div class="form-check">
-			    <label class="form-check-label">
-			      <input type="checkbox" name="chkestado" class="form-check-input">
-			      Estado
-			    </label>
+			<div class="form-group">
+				<label for="exampleFormControlInput1">Habilitado: </label>
+				<div class="form-check form-check-inline">
+				  <label class="form-check-label">
+	    			<input class="form-check-input" type="radio" name="estado" id="inlineRadio1" value="true">Si
+					  </label>
+					</div>
+					<div class="form-check form-check-inline">
+					  <label class="form-check-label">
+					    <input class="form-check-input" type="radio" name="estado" id="inlineRadio2" value="false">No
+					  </label>
+				 </div>
 			 </div>
 			
 			 <button type="submit" class="btn btn-secondary" name="btnagregar">Agregar</button>

@@ -70,7 +70,9 @@ public class ValidarPersona extends HttpServlet {
 
 			categoria = categoriaslogic.GetById(idcategoria);
 			
-			boolean estado = Boolean.valueOf(request.getParameter("chkestado"));
+			boolean estado = Boolean.valueOf(request.getParameter("estado"));
+			
+			
 			
 			persona.setNombre(nombre);
 			persona.setApellido(apellido);

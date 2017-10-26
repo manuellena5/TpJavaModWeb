@@ -85,6 +85,16 @@
 			   <p>Id: <%=((Persona)request.getAttribute("persona")).getId_persona()%></p>
 			   <p>Nombre: <%=((Persona)request.getAttribute("persona")).getNombre()%></p>
 			   <p>Apellido: <%=((Persona)request.getAttribute("persona")).getApellido()%></p>
+			   <p>Dni: <%=((Persona)request.getAttribute("persona")).getDni()%></p>
+			   <p>Usuario: <%=((Persona)request.getAttribute("persona")).getUsuario()%></p>
+			   <% String estado;  
+			   boolean var = ((Persona)request.getAttribute("persona")).isHabilitado();
+			   					if(var == true){
+			   						estado= "Habilitado";
+			   					}else{
+			   						estado="No habilitado";
+			   					}%>
+			   <p>Estado:<%=estado%></p>
 			  	
 			  
 			   <a href="Start" class="alert-link">Volver a pagina principal</a>
