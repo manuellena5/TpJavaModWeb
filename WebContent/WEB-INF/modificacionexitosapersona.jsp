@@ -17,7 +17,7 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Modificacion exitosa de la persona</title>
 	 
 	 
 	 <!-- Bootstrap CSS -->
@@ -79,7 +79,6 @@
 				</nav>
 		</div>
 
-
 		<div class="cuerpo">
 		
 		
@@ -88,13 +87,12 @@
 		
 			
 			<div class="alert alert-success" role="alert">
-				<h3>Su reserva sea realizado correctamente</h3>
-			   <p>Tipo de elemento: <%=((Reserva)request.getAttribute("reserva")).getElemento().getTipo_Elemento().getNombre()%></p>
-				<p>Nombre: <%=((Reserva)request.getAttribute("reserva")).getElemento().getNombre()%></p>
-				<p>Fecha de registro: <%=((Reserva)request.getAttribute("reserva")).getFecha_registro()%></p>	
-				<p>Fecha de inicio: <%=((Reserva)request.getAttribute("reserva")).getFecha_inicio()%></p>	
-				<p>Fecha de fin: <%=((Reserva)request.getAttribute("reserva")).getFecha_fin()%></p>	
-				<p>Detalle: <%=((Reserva)request.getAttribute("reserva")).getDetalle()%></p>		
+				<h3>Sus datos se han modificado correctamente</h3>
+			   
+				<p>Nombre: <%=((Persona)request.getAttribute("persona")).getNombre()%></p>
+				<p>Apellido: <%=((Persona)request.getAttribute("persona")).getApellido()%></p>	
+				<p>Dni: <%=((Persona)request.getAttribute("persona")).getDni()%></p>	
+				<p>Usuario: <%=((Persona)request.getAttribute("persona")).getUsuario()%></p>	
 			  
 			   <a href="Start" class="alert-link">Volver a pagina principal</a>
 			</div>

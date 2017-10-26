@@ -7,21 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.Persona;
-import negocio.PersonaLogic;
-import util.AppDataException;
+import entidades.Tipo_Elemento;
+import negocio.Tipo_ElementosLogic;
 
 /**
- * Servlet implementation class ModificacionPersona
+ * Servlet implementation class EliminacionTipoElemento
  */
-@WebServlet({ "/ModificacionPersona", "/ModificacionPersona.servlet" })
-public class ModificacionPersona extends HttpServlet {
+@WebServlet({ "/EliminacionTipoElemento", "/EliminacionTipoElemento.servlet" })
+public class EliminacionTipoElemento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModificacionPersona() {
+    public EliminacionTipoElemento() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +29,7 @@ public class ModificacionPersona extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		doPost(request,response);
 	}
 
@@ -39,19 +38,18 @@ public class ModificacionPersona extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int idpersona = Integer.parseInt(request.getParameter("id"));
+		int idtipoelemento = Integer.parseInt(request.getParameter("id"));
 		
-		PersonaLogic personaLogic = new PersonaLogic();
-		Persona persona = new Persona();
+		Tipo_ElementosLogic tipoelementologic = new Tipo_ElementosLogic();
+		Tipo_Elemento tipoelemento = new Tipo_Elemento();
 		try {
-			persona = personaLogic.GetOne(idpersona);
+			tipoelemento = tipoelementologic.GetOne(idtipoelemento);
 
-			request.setAttribute("persona", persona);
-			
+			request.setAttribute("tipoelemento", tipoelemento);
 		} catch (Exception e) {
 			response.setStatus(502);
 		}
-		request.getRequestDispatcher("WEB-INF/modificarpersona.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/eliminartipoelemento.jsp").forward(request, response);
 	}
 
 }

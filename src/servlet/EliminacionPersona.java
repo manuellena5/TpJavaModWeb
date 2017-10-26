@@ -9,19 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidades.Persona;
 import negocio.PersonaLogic;
-import util.AppDataException;
 
 /**
- * Servlet implementation class ModificacionPersona
+ * Servlet implementation class EliminacionPersona
  */
-@WebServlet({ "/ModificacionPersona", "/ModificacionPersona.servlet" })
-public class ModificacionPersona extends HttpServlet {
+@WebServlet({ "/EliminacionPersona", "/EliminacionPersona.servlet" })
+public class EliminacionPersona extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModificacionPersona() {
+    public EliminacionPersona() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,7 +29,7 @@ public class ModificacionPersona extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		doPost(request,response);
 	}
 
@@ -51,7 +50,7 @@ public class ModificacionPersona extends HttpServlet {
 		} catch (Exception e) {
 			response.setStatus(502);
 		}
-		request.getRequestDispatcher("WEB-INF/modificarpersona.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/eliminarpersona.jsp").forward(request, response);
 	}
 
 }

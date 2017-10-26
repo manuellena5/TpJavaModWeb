@@ -3,6 +3,8 @@ package negocio;
 import java.util.ArrayList;
 
 import data.DataTipo_Elementos;
+import entidades.Elemento;
+import entidades.Persona;
 import entidades.Tipo_Elemento;
 
 public class Tipo_ElementosLogic {
@@ -38,11 +40,11 @@ public class Tipo_ElementosLogic {
 		this.tipoElementosD.update(te);
 	}
 
-	public Tipo_Elemento GetOne (String doc){
-	
-		for (Tipo_Elemento tipoElementos : lista) {
-			if (tipoElementos.getNombre() == doc ) {
-				return tipoElementos;
+	public Tipo_Elemento GetOne(int id){
+		
+		for (Tipo_Elemento te : lista) {
+			if (te.getId_tipoelemento() == id ) {
+				return te;
 			}
 			
 		}
@@ -81,7 +83,7 @@ public class Tipo_ElementosLogic {
 	
 
 
-		public ArrayList<Tipo_Elemento> GetAll() throws Exception{
+	public ArrayList<Tipo_Elemento> GetAll() throws Exception{
 	
 			return tipoElementosD.getAll();
 			

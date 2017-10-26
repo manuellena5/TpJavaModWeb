@@ -42,26 +42,16 @@ public class PersonaLogic {
 		this.perD.update(p);
 	}
 
-	public Persona GetOne (String doc){
+	public Persona GetOne(int id){
 	
 		for (Persona per : lista) {
-			if (per.getDni() == doc ) {
+			if (per.getId_persona() == id ) {
 				return per;
 			}
 			
 		}
 		return null;
 	}	
-
-	
-	public Persona GetByDni(Persona p) throws Exception{
-		
-		
-		return perD.getByDni(p);
-		
-		
-	
-	}
 	
 	
 	public Persona GetByDni (String doc) throws Exception{
@@ -73,7 +63,10 @@ public class PersonaLogic {
 		
 	}
 	
-
+	public Persona GetByDni(Persona p) throws Exception{
+		
+		return perD.getByDni(p);
+	}
 
 
 

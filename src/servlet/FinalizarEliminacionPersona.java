@@ -12,16 +12,16 @@ import negocio.PersonaLogic;
 import util.AppDataException;
 
 /**
- * Servlet implementation class FinalizarModificacionPersona
+ * Servlet implementation class FinalizarEliminacionPersona
  */
-@WebServlet({ "/FinalizarModificacionPersona", "/FinalizarModificacionPersona.servlet" })
-public class FinalizarModificacionPersona extends HttpServlet {
+@WebServlet({ "/FinalizarEliminacionPersona", "/FinalizarEliminacionPersona.servlet" })
+public class FinalizarEliminacionPersona extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FinalizarModificacionPersona() {
+    public FinalizarEliminacionPersona() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,22 +30,16 @@ public class FinalizarModificacionPersona extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		doPost(request, response);
+
+		doPost(request,response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-		int idpersona = Integer.parseInt(request.getParameter("btneleccion"));
-		String nombre = request.getParameter("txtnombre");
-		String apellido = request.getParameter("txtdescripcion");
-		String dni = request.getParameter("txtautor");
-		String usuario = request.getParameter("txtgenero");
 		
+		int idpersona = Integer.parseInt(request.getParameter("btneleccion"));
 		
 		PersonaLogic personaLogic = new PersonaLogic();
 		
@@ -54,12 +48,8 @@ public class FinalizarModificacionPersona extends HttpServlet {
 		
 		try {
 		per = personaLogic.GetOne(idpersona);
-		per.setNombre(nombre);
-		per.setApellido(apellido);
-		per.setDni(dni);
-		per.setUsuario(usuario);
 		
-		personaLogic.update(per);
+		personaLogic.delete(per);
 			
 		request.setAttribute("persona", per);
 		} catch (AppDataException ade) {
@@ -69,8 +59,7 @@ public class FinalizarModificacionPersona extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/modificacionexitosapersona.jsp").forward(request, response);
-	
+		request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
 	}
 
 }

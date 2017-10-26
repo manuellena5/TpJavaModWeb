@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.Tipo_Elemento;
+import negocio.Tipo_ElementosLogic;
+import util.AppDataException;
+
 /**
  * Servlet implementation class FinalizarModificacionTipoElemento
  */
@@ -26,16 +30,41 @@ public class FinalizarModificacionTipoElemento extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		int idtipoelemento = Integer.parseInt(request.getParameter("btneleccion"));
+		
+		int cantMaxReservasPend = Integer.parseInt(request.getParameter("txtcantmax"));
+		
+		
+		Tipo_ElementosLogic tipoelementoLogic = new Tipo_ElementosLogic();
+		
+		Tipo_Elemento tipoel = new Tipo_Elemento();
+		
+		
+		try {
+		tipoel = tipoelementoLogic.GetOne(idtipoelemento);
+		
+		tipoel.setCantMaxReservasPend(cantMaxReservasPend);
+		
+		tipoelementoLogic.update(tipoel);
+			
+		request.setAttribute("tipoelemento", tipoel);
+		} catch (AppDataException ade) {
+			request.setAttribute("Error", ade.getMessage());
+		}
+		catch (Exception e) {
+			response.setStatus(502);
+		}
+		
+		request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
 	}
 
 }

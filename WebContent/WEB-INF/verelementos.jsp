@@ -117,7 +117,7 @@
 			      <td><%=e.getTipo_Elemento().getCantMaxReservasPend() %></td>
 			      <td><div class="btn-group" role="group" aria-label="Basic example">
 						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionElemento.servlet?id=<%=e.getId_elemento() %>">Modificar</a>
-						  <a class="btn btn-secondary" name="lnkeliminar" href="#">Eliminar</a>
+						  <a class="btn btn-secondary" name="lnkeliminar" href="EliminacionElemento.servlet?id=<%=e.getId_elemento() %>">Eliminar</a>
 					</div>
 				  </td>
 			    </tr>
