@@ -93,6 +93,47 @@ public class DataCategorias {
 		}
 	
 	
+	public Categoria getById(Categoria categorias) throws Exception{
+		
+		Categoria cat = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"select id_categoria, descripcion from categorias where id_categoria=?");
+					
+			stmt.setInt(1, categorias.getId_Categoria());
+			rs = stmt.executeQuery();
+			
+			if (rs!=null && rs.next()) {
+				cat = new Categoria();
+				cat.setId_Categoria(rs.getInt("id_categoria"));   /* el dato que va como argumento tiene que ser igual al que esta en la base? */
+				cat.setDescripcion(rs.getString("descripcion"));
+			
+			}
+			
+			
+		
+		
+		} catch (Exception e) {
+			
+			throw e;
+		}
+		
+			try {
+				if (rs != null) {rs.close();}
+				if (stmt != null) {stmt.close();}
+				FactoryConexion.getInstancia().releaseConn();	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+		return cat;
+	}
+	
+	
 		
 		public void add(Categoria cat) throws Exception{
 			PreparedStatement stmt=null;

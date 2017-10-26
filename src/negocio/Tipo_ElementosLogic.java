@@ -55,12 +55,6 @@ public class Tipo_ElementosLogic {
 		
 		return tipoElementosD.getByNombre(te);
 		
-		//return this.lista.get(this.lista.indexOf(te));
-		
-		/*if(tipoElementos.Equals(te)){
-	  return this.GetByNombre(te.getNombre());
-		}
-		return null;*/
 	
 	}
 	
@@ -75,12 +69,22 @@ public class Tipo_ElementosLogic {
 		
 	}
 	
+	public Tipo_Elemento GetById(Tipo_Elemento te) throws Exception{
+		
+		
+		return tipoElementosD.getById(te);
+		
 	
+	}
 	
+	public Tipo_Elemento GetById(int id) throws Exception{
+		
+		Tipo_Elemento te=new Tipo_Elemento();
+		te.setId_tipoelemento(id);
+		return GetById(te);
+				
+	}
 	
-	
-
-
 		public ArrayList<Tipo_Elemento> GetAll() throws Exception{
 	
 			return tipoElementosD.getAll();

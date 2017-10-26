@@ -8,19 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import negocio.ElementosLogic;
+import negocio.Tipo_ElementosLogic;
 import util.AppDataException;
 
 /**
- * Servlet implementation class TraerElementos
+ * Servlet implementation class AltaElemento
  */
-@WebServlet("/TraerElementos.servlet")
-public class TraerElementos extends HttpServlet {
+@WebServlet({ "/AltaElemento", "/altaelemento.servlet" })
+public class AltaElemento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TraerElementos() {
+    public AltaElemento() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,31 +31,32 @@ public class TraerElementos extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request,response);
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
 		
-		int idtipoelemento = Integer.parseInt(request.getParameter("eleccion"));
+		Tipo_ElementosLogic tipoelementoslogic = new Tipo_ElementosLogic();				
 		
 		
-		ElementosLogic elementoslogic = new ElementosLogic();
 		try {
-			request.setAttribute("listaElementos", elementoslogic.getByTipoElemento(idtipoelemento));
+			
+			request.setAttribute("listadoTipoelementos", tipoelementoslogic.GetAll());
 			
 			
-		} catch (AppDataException ade) {
+		}catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());
 		}
 		catch (Exception e) {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/elegirelemento.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/nuevoelemento.jsp").forward(request, response);
+		
+		
+	}
 	}
 
-}
+

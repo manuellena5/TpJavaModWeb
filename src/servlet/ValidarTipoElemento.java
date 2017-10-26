@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import negocio.ElementosLogic;
-import util.AppDataException;
+import entidades.Tipo_Elemento;
+import negocio.Tipo_ElementosLogic;
 
 /**
- * Servlet implementation class TraerElementos
+ * Servlet implementation class ValidarTipoElemento
  */
-@WebServlet("/TraerElementos.servlet")
-public class TraerElementos extends HttpServlet {
+@WebServlet({ "/ValidarTipoElemento", "/validartipoelemento.servlet" })
+public class ValidarTipoElemento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TraerElementos() {
+    public ValidarTipoElemento() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,31 +30,38 @@ public class TraerElementos extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request,response);
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
 		
-		int idtipoelemento = Integer.parseInt(request.getParameter("eleccion"));
+		Tipo_ElementosLogic tipoelementoslogic = new Tipo_ElementosLogic();
+		Tipo_Elemento tipoelemento = new Tipo_Elemento();
+		
+		String nombre =  request.getParameter("txtnombre");
+		int cantmaxreservaspend = Integer.parseInt(request.getParameter("txtcantmaxreservaspend"));
+		
+		tipoelemento.setNombre(nombre);
+		tipoelemento.setCantMaxReservasPend(cantmaxreservaspend);
 		
 		
-		ElementosLogic elementoslogic = new ElementosLogic();
 		try {
-			request.setAttribute("listaElementos", elementoslogic.getByTipoElemento(idtipoelemento));
+			tipoelementoslogic.add(tipoelemento);
 			
+			request.setAttribute("tipoelemento", tipoelemento);
 			
-		} catch (AppDataException ade) {
-			request.setAttribute("Error", ade.getMessage());
-		}
-		catch (Exception e) {
-			response.setStatus(502);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
 		}
 		
-		request.getRequestDispatcher("WEB-INF/elegirelemento.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/altatipoelementoexitosa.jsp").forward(request, response);
+		
+		
+		
+		
 	}
 
 }
