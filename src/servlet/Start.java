@@ -44,7 +44,13 @@ public class Start extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		try {
+			if(request.getSession().getAttribute("user") != null){
+				
+				request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
+			}
+			else{
 			String user=request.getParameter("user");
 			String pass=request.getParameter("pass");
 			
@@ -55,8 +61,7 @@ public class Start extends HttpServlet {
 			PersonaLogic perlogic= new PersonaLogic();
 			
 			Persona pers = perlogic.login(per);
-			
-			
+				
 			request.getSession().setAttribute("user",pers);
 			
 			logger.log(Level.INFO,"log in " + pers.getDni() + " " + pers.getNombre() + " " + pers.getApellido());
@@ -64,7 +69,7 @@ public class Start extends HttpServlet {
 			
 			request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
 
-			
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
