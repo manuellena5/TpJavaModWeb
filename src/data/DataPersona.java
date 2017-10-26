@@ -113,7 +113,55 @@ public class DataPersona {
 			
 			return p;
 		}
+		
 	
+		public Persona getById(Persona per) throws Exception{
+		
+		Persona p = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"select id_persona, nombre, apellido, dni, estado,usuario,password,id_categoria,descripcion from personas p left join categorias c on c.id_categoria=p.id_categoria where id_persona=?");
+					
+			stmt.setInt(1, per.getId_persona());
+			rs = stmt.executeQuery();
+			
+			if (rs!=null && rs.next()) {
+				p = new Persona();
+				p.setCategoria(new Categoria());
+				p.setId_persona(rs.getInt("id_persona"));  
+				p.setNombre(rs.getString("nombre"));
+				p.setApellido(rs.getString("apellido"));
+				p.setDni(rs.getString("dni"));
+				p.setHabilitado(rs.getBoolean("estado"));
+				p.setUsuario(rs.getString("usuario"));
+				p.setPassword(rs.getString("password"));
+				p.getCategoria().setId_Categoria(rs.getInt("id_categoria"));
+				p.getCategoria().setDescripcion(rs.getString("descripcion"));
+			
+			}
+			
+			
+		
+		
+		} catch (Exception e) {
+			
+			throw e;
+		}
+		
+			try {
+				if (rs != null) {rs.close();}
+				if (stmt != null) {stmt.close();}
+				FactoryConexion.getInstancia().releaseConn();	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+		return p;
+	}
 	
 		
 		public void add(Persona p) throws Exception{

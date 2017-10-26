@@ -94,6 +94,47 @@ public class DataTipo_Elementos {
 			return te;
 		}
 	
+	public Tipo_Elemento getById(Tipo_Elemento tipoElementos) throws Exception{
+		
+		Tipo_Elemento te = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"select id_tipoelemento, nombre, cantMaxReservasPend from tipo_elementos where  id_tipoelemento=?");
+					
+			stmt.setInt(1, tipoElementos.getId_tipoelemento());
+			rs = stmt.executeQuery();
+			
+			if (rs!=null && rs.next()) {
+				te = new Tipo_Elemento();
+				te.setId_tipoelemento(rs.getInt("id_tipoelemento")); 
+				te.setNombre(rs.getString("nombre"));
+				te.setCantMaxReservasPend(rs.getInt("cantMaxReservasPend"));
+			
+			}
+			
+			
+		
+		
+		} catch (Exception e) {
+			
+			throw e;
+		}
+		
+			try {
+				if (rs != null) {rs.close();}
+				if (stmt != null) {stmt.close();}
+				FactoryConexion.getInstancia().releaseConn();	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+		return te;
+	}
+	
 	
 		
 		public void add(Tipo_Elemento te) throws Exception{

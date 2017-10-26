@@ -23,19 +23,6 @@
     <link href="style/css/bootstrap.min.css" rel="stylesheet">
     <link href="style/css/estilo1.css" rel="stylesheet">
     
-    <script type="text/javascript">
-    
-    function traerElementos(){
-    	
-    	var id_te = document.getElementById("menulistaelementos");
-    	var form = document.getElementById("formtipoelemento");
-    	form.action = "TraerElementos.servlet";
-    	form.submit();
-    	
-    }
-    
-    </script>
-    
   </head>
   <body>
     

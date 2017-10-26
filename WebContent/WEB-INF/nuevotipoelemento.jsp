@@ -1,5 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
+<%@page import="entidades.Tipo_Elemento"%>
+<%@page import="java.util.ArrayList"%>
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
@@ -35,7 +37,7 @@
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoPersonas.servlet">Gestionar personas</a>
-					      <a class="dropdown-item" href="altapersona.servlet">Nueva persona</a>
+					      <a class="dropdown-item" href="#">Nueva persona</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
@@ -49,14 +51,14 @@
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Elementos</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoElementos.servlet">Gestionar elementos</a>
-					      <a class="dropdown-item" href="altaelemento.servlet">Nuevo elemento</a>
+					      <a class="dropdown-item" href="#">Nuevo elemento</a>
 					    </div>
 					  </li>
 					   <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoTiposElementos.servlet">Gestionar tipos de elementos</a>
-					      <a class="dropdown-item" href="altatipoelemento.servlet">Nuevo tipo de elemento</a>
+					      <a class="dropdown-item" href="#">Nuevo tipo de elemento</a>
 					    </div>
 					  </li>
 					  
@@ -72,7 +74,23 @@
 
 		<div class="cuerpo">
 		
-			<h1>Bienvenido a "Biblioteca Popular Nuestro Pueblo"</h1>
+			<form action="validartipoelemento.servlet" method="post">
+		   
+		   
+		    <div class="form-group">
+			    <label for="exampleFormControlInput1">Nombre del tipo de elemento: </label>
+			    <input type="text" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre del tipo de elemento">
+			</div>
+			
+			<div class="form-group">
+			    <label for="exampleFormControlInput1">Limite de cantidades pendientes: </label>
+			    <input type="text" name="txtcantmaxreservaspend" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese el maximo de cantidades pendientes">
+			</div>
+			
+			 <button type="submit" class="btn btn-secondary" name="btnagregar">Agregar</button>
+			
+			
+			</form>
 
 		</div> 
 		

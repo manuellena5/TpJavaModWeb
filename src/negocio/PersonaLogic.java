@@ -53,6 +53,14 @@ public class PersonaLogic {
 		return null;
 	}	
 	
+	public Persona GetByDni(Persona p) throws Exception{
+		
+		
+		return perD.getByDni(p);
+		
+		
+}
+	
 	
 	public Persona GetByDni (String doc) throws Exception{
 		
@@ -63,10 +71,28 @@ public class PersonaLogic {
 		
 	}
 	
-	public Persona GetByDni(Persona p) throws Exception{
+
+	
+	public Persona GetById(Persona p) throws Exception{
 		
-		return perD.getByDni(p);
+		
+		return perD.getById(p);
+		
+		
+	
 	}
+	
+	
+	public Persona GetById(int id) throws Exception{
+		
+		Persona p=new Persona();
+		p.setId_persona(id);
+		return GetById(p);
+		
+		
+	}
+
+
 
 
 

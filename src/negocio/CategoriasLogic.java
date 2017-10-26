@@ -58,12 +58,7 @@ public class CategoriasLogic {
 		
 		return categoriasD.getByDescripcion(cat);
 		
-		//return this.lista.get(this.lista.indexOf(cat));
-		
-		/*if(categorias.Equals(cat)){
-	  return this.GetByDescripcion(cat.getDescripcion());
-		}
-		return null;*/
+	
 	
 	}
 	
@@ -74,13 +69,22 @@ public class CategoriasLogic {
 		cat.setDescripcion(descripcion);
 		return GetByDescripcion(cat);
 		
-		/*for (int i = 0; i < lista.size(); i++) {
-			if (lista.get(i).getDescripcion() == descripcion) {
-				return lista.get(i);
-			}
-			
-		}
-		return null;*/
+		
+	}
+	
+	public Categoria GetById(int id) throws Exception{
+		
+		Categoria categoria = new Categoria();
+		categoria.setId_Categoria(id);
+		
+		return GetById(categoria);
+		
+	}
+	
+	public Categoria GetById(Categoria cat) throws Exception{
+		
+		
+		return categoriasD.getById(cat);
 		
 	}
 	
