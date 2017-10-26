@@ -50,20 +50,15 @@
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
-<<<<<<< HEAD
+
 
 						      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
 					      <a class="dropdown-item" href="#">Nueva reserva</a>
 				    </div>
 
-=======
-					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
-					      <a class="dropdown-item" href="#">Nueva reserva</a>
-					    </div>
->>>>>>> branch 'master' of https://github.com/manuellena5/TpJavaModWeb.git
 					  </li>
 					  <li class="nav-item dropdown">
-<<<<<<< HEAD
+
 
 							    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
 						    <div class="dropdown-menu">
@@ -71,27 +66,15 @@
 								 <a class="dropdown-item" href="#">Nuevo elemento</a>
 							<div>
 
-=======
-					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
-					    <div class="dropdown-menu">
-					      <a class="dropdown-item" href="ListadoElementos.servlet">Gestionar elementos</a>
-					      <a class="dropdown-item" href="#">Nuevo elemento</a>
-					    </div>
->>>>>>> branch 'master' of https://github.com/manuellena5/TpJavaModWeb.git
 					  </li>
-<<<<<<< HEAD
+
 
 					  
 					  <p class="usulogueavenido">Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
 					  		<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
 						</p>
 
-=======
-					  <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
-					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
-					  						</p>
-					 
->>>>>>> branch 'master' of https://github.com/manuellena5/TpJavaModWeb.git
+
 					</ul>
 				 
 				</nav>
