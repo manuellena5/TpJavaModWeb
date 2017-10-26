@@ -1,6 +1,7 @@
 package negocio;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import data.DataReservas;
 import entidades.Elemento;
@@ -42,24 +43,12 @@ public class ReservasLogic {
 		this.reservasD.update(res);
 	}
 
-	public Reserva GetOne (int id_persona, int id_elemento){
-	
-		for (Reserva reservas : lista) {
-			if (reservas.getPersona().getId_persona() == id_persona && reservas.getElemento().getId_elemento() == id_elemento) {
-				return reservas;
-			}
-			
-		}
-		return null;
-	}	
 
 	
 	public Reserva GetByIdPersona(Reserva res) throws Exception{
 		
 		
 		return reservasD.getByIdPersona(res);
-		
-		
 	
 	}
 	
@@ -72,6 +61,12 @@ public class ReservasLogic {
 		return GetByIdPersona(res);
 		
 		
+		
+	}
+	
+	public Reserva GetOne(int id_persona,int id_elemento,java.sql.Date fecharegistro) throws Exception{
+		
+		return reservasD.GetOne(id_persona,id_elemento,fecharegistro); 
 		
 	}
 

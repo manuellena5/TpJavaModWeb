@@ -43,25 +43,6 @@ public class ValidarReserva extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/*Reserva reserva = new Reserva();
-		ReservasLogic reservalogic = new ReservasLogic();
-		java.util.Date data = null;
-		
-		try {
-			String fecha = request.getParameter("fechainicio");
-			SimpleDateFormat simple= new SimpleDateFormat("dd/MM/yyyy"); 
-			
-			data = simple.parse(fecha);
-		}catch (AppDataException ade) {
-				request.setAttribute("Error", ade.getMessage());
-			
-			
-		} catch (Exception e) {
-			response.setStatus(502);
-		}
-		
-		request.getRequestDispatcher("WEB-INF/verreservas.jsp").forward(request, response);
-		*/
 		
 		ReservasLogic reservalogic = new ReservasLogic();
 		ElementosLogic elementologic = new ElementosLogic();

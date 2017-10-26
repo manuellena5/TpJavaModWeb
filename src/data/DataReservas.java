@@ -279,5 +279,67 @@ public class DataReservas {
 			
 				return cantReservasPendientesPersona;
 		}
+
+
+		public Reserva GetOne(int id_persona, int id_elemento, Date fecharegistro) throws Exception {
+			
+			Reserva res = null;
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			
+			try {
+				 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+				stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+						"select p.id_persona, e.id_elemento, r.fecha_registro, r.fecha_inicio, r.fecha_fin, r.detalle, r.estado from reservas r "
+						+ "inner join elementos e on e.id_elemento=r.id_elemento inner join personas p on p.id_persona=r.id_persona where r.id_persona=? and r.id_elemento=? and r.fecha_registro=?");
+						
+				stmt.setInt(1, id_persona);
+				stmt.setInt(2, id_elemento);
+				stmt.setDate(3, fecharegistro);
+				rs = stmt.executeQuery();
+				
+				if (rs!=null && rs.next()) {
+					res = new Reserva();
+					res.setElemento(new Elemento());
+					res.setPersona(new Persona());
+					res.setFecha_registro(rs.getDate("fecha_registro"));
+					res.setFecha_inicio(rs.getDate("fecha_inicio"));
+					res.setFecha_fin(rs.getDate("fecha_fin"));
+					res.setDetalle(rs.getString("detalle"));
+					res.setEstado(rs.getString("estado"));
+					
+					res.getElemento().setId_elemento(rs.getInt("id_elemento"));
+					res.getElemento().setNombre(rs.getString("nombreElemento"));
+					res.getElemento().setAutor(rs.getString("autor"));
+					res.getElemento().setGenero(rs.getString("genero"));
+					
+					res.getPersona().setId_persona(rs.getInt("id_persona"));
+					res.getPersona().setNombre(rs.getString("nombrePersona"));
+					res.getPersona().setApellido(rs.getString("apellido"));
+					res.getPersona().setDni(rs.getString("dni"));
+					res.getPersona().setUsuario(rs.getString("usuario"));
+				
+				}
+				
+				
+			
+			
+			} catch (Exception e) {
+				
+				throw e;
+			}
+			
+				try {
+					if (rs != null) {rs.close();}
+					if (stmt != null) {stmt.close();}
+					FactoryConexion.getInstancia().releaseConn();	
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			
+			return res;
+			
+			
+		}
 }
 

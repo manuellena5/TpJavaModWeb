@@ -120,8 +120,8 @@
 			      <td><%=r.getElemento().getNombre()%></td>
 			      <td><%=r.getElemento().getTipo_Elemento().getNombre() %></td>
 			      <td><div class="btn-group" role="group" aria-label="Basic example">
-						  <button type="button" class="btn btn-secondary" name="btneleccion" value="">Modificar</button>
-						  <button type="button" class="btn btn-secondary">Eliminar</button>
+						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionReserva.servlet?idpersona=<%=r.getPersona().getId_persona()%>&fecharegistro=<%=r.getFecha_registro()%>&idelemento=<%=r.getElemento().getId_elemento()%>">Modificar</a>
+						  <%-- <a class="btn btn-secondary" name="lnkeliminar" href="EliminacionPersona.servlet?id=<%=r.getId_persona() %>">Eliminar</a> --%>
 					</div>
 				  </td>
 			    </tr>
