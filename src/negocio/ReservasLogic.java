@@ -1,7 +1,8 @@
 package negocio;
 
 import java.util.ArrayList;
-import java.util.Date;
+
+import java.sql.Date;
 
 import data.DataReservas;
 import entidades.Elemento;
@@ -64,7 +65,7 @@ public class ReservasLogic {
 		
 	}
 	
-	public Reserva GetOne(int id_persona,int id_elemento,java.sql.Date fecharegistro) throws Exception{
+	public Reserva GetOne(int id_persona,int id_elemento,Date fecharegistro) throws Exception{
 		
 		return reservasD.GetOne(id_persona,id_elemento,fecharegistro); 
 		

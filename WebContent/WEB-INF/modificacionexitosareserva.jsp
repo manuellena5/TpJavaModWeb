@@ -2,33 +2,6 @@
 <%@page import="entidades.Persona"%>
 <%@page import="entidades.Elemento"%>
 <%@page import="entidades.Reserva"%>
-<%@page import="java.text.SimpleDateFormat"%>
-
-<% Reserva r = (Reserva)request.getAttribute("reserva"); 
-			java.util.Date data = null;
-		    SimpleDateFormat simple= new SimpleDateFormat("yy-MM-dd");
-			String fechainicio = r.getFecha_inicio().toString();
-			data = simple.parse(fechainicio);
-			simple = new SimpleDateFormat("dd/MM/yyyy");
-			fechainicio = simple.format(data);
-
-			
-			data = null;
-		    simple= new SimpleDateFormat("yy-MM-dd");
-			String fecharegistro = r.getFecha_registro().toString();
-			data = simple.parse(fecharegistro);
-			simple = new SimpleDateFormat("dd/MM/yyyy");
-			fecharegistro = simple.format(data);
-			
-			data = null;
-		    simple= new SimpleDateFormat("yy-MM-dd");
-			String fechafin = r.getFecha_fin().toString();
-			data = simple.parse(fechafin);
-			simple = new SimpleDateFormat("dd/MM/yyyy");
-			fechafin = simple.format(data);
-			
-			
-			%>
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -44,7 +17,7 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Modificacion exitosa del elemento</title>
 	 
 	 
 	 <!-- Bootstrap CSS -->
@@ -105,68 +78,32 @@
 				 
 				</nav>
 		</div>
-		
+
 		<div class="cuerpo">
 		
 		
+
 		
 		
-		<form action="FinalizarModificacionReserva.servlet" method="post">
-		
-		
-		<div class="form-group">
-			<label for="txtid">Tipo de elemento a reservar: </label>
-			<input type="text" class="form-control" id="nombretipoelemento" name="nombretipoelemento" value="<%=r.getElemento().getTipo_Elemento().getNombre()%>" readonly="true">
-			<input type="text" class="form-control" style="display:none;" id="idtipoelemento" name="idtipoelemento" value="<%=r.getElemento().getTipo_Elemento().getId_tipoelemento()%>">
 			
-		</div>
-		
-		<div class="form-group">
-			<label for="txtid">Elemento a reservar: </label>
-			<input type="text" class="form-control" id="nombreelemento" name="nombreelemento" value="<%=r.getElemento().getNombre()%>" readonly="true">
-			<input type="text" class="form-control" style="display:none;" id="idelemento" name="idelemento" value="<%=r.getElemento().getId_elemento()%>">
-		</div>
-		
-		<div class="form-group">
-			<label for="txtid">Persona: </label>
-			<input type="text" class="form-control" id="nombrepersona" name="nombrepersona" value="<%=r.getPersona().getNombre()%>" readonly="true">
-			<input type="text" class="form-control" style="display:none;" id="idpersona" name="idpersona" value="<%=r.getPersona().getId_persona()%>">
-		</div>
-		
-		<div class="form-group">
-			<label for="txtid">Fecha de registro: </label>
-			<input type="text" class="form-control" id="fecharegistro" name="fecharegistro" value="<%=fecharegistro%>" readonly="true">
-		</div>
-		
-		<div class="form-group">
-		<label>Fecha de inicio la reserva:</label>	
-		<input id="datepicker2" name="fechainicio" type="text" value="<%=fechainicio%>" >
-		</div>
-		
-		
-		<div class="form-group">
-		<label>Fecha de fin de la reserva:</label>	
-		<input id="datepicker3" name="fechafin" type="text" value="<%=fechafin%>">
-		</div>
+			<div class="alert alert-success" role="alert">
+				<h3>Su elemento se ha modificado correctamente</h3>
+			   
+			   	<p>Fecha de registro: <%=((Reserva)request.getAttribute("reserva")).getFecha_registro()%></p>
+				<p>Fecha de inicio: <%=((Reserva)request.getAttribute("reserva")).getFecha_inicio()%></p>
+				<p>Fecha de fin: <%=((Reserva)request.getAttribute("reserva")).getFecha_fin()%></p>
+				<p>Detalle: <%=((Reserva)request.getAttribute("reserva")).getDetalle()%></p>
+				<p>Estado: <%=((Reserva)request.getAttribute("reserva")).getEstado()%></p>
+				<p>Persona que reserva: <%=((Reserva)request.getAttribute("reserva")).getPersona().getNombre() + " " + ((Reserva)request.getAttribute("reserva")).getPersona().getApellido()%></p>	
+				<p>Tipo de elemento reservado: <%=((Reserva)request.getAttribute("reserva")).getElemento().getTipo_Elemento().getNombre()%></p>	
+			  	<p>Nombre del elemento reservado: <%=((Reserva)request.getAttribute("reserva")).getElemento().getNombre()%></p>	
+			  
+			  
+			   <a href="Start" class="alert-link">Volver a pagina principal</a>
+			</div>
 			
-		<div class="form-group">
-		    <label for="exampleFormControlTextarea1">Detalle:</label>
-		    <textarea class="form-control detalle" name="detalle" value="<%=r.getDetalle()%>" ><%=r.getDetalle()%></textarea>
-	  	</div>
 	  	
-	  	<div class="form-group">
-		    <label for="exampleFormControlSelect1">Estado: </label>
-		    <select class="form-control" name="estado" id="exampleFormControlSelect1">
-		      <option selected value="<%=r.getEstado()%>"><%=r.getEstado()%></option>
-		      <option value="Activa">Activa</option>
-		      <option value="Cancelada">Cancelada</option>
-		      <option value="Terminada">Terminada</option>
-		      <option value="Sin devolver">Sin devolver</option>
-		    </select>
-		 </div>
 	  	
-	  	<button type="submit" class="btn btn-primary">Finalizar reserva</button>
-	  	</form>
 			
 			
 		</div> 
@@ -231,15 +168,14 @@
     <script type="text/javascript" src="style/js/jquery-ui.js"></script>
     <script src="style/js/ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript" src="style/js/datepicker-es.js"></script>
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
    
 	<script type="text/javascript">
     $(function () {
-    	$("#datepicker1").datepicker($.datepicker.regional["es"]);
-    	$("#datepicker2").datepicker($.datepicker.regional["es"]);
-    	$("#datepicker3").datepicker($.datepicker.regional["es"]);
+    	$("#datepicker").datepicker();
     	});
 	</script>
 
