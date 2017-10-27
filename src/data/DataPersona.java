@@ -115,7 +115,7 @@ public class DataPersona {
 		}
 		
 	
-		public Persona getById(Persona per) throws Exception{
+	public Persona getById(Persona per) throws Exception{
 		
 		Persona p = null;
 		PreparedStatement stmt = null;

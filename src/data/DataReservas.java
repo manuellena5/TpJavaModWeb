@@ -22,7 +22,7 @@ public class DataReservas {
 					  		+ " r.`fecha_registro`,p.`nombre` nombrePersona,p.`apellido`,p.`dni`,p.`usuario`,e.`nombre` nombreElemento,"
 							+ " e.`autor`,e.`genero`, te.nombre tipoelemento, te.id_tipoelemento, te.cantMaxReservasPend from reservas r inner join personas p on p.`id_persona` = r.`id_persona`" 
 					  		+ " inner join elementos e on e.`id_elemento` = r.`id_elemento`"
-							+ " inner join tipo_elementos te on te.`id_tipoelemento` = e.`id_tipoelemento`");
+							+ " inner join tipo_elementos te on te.`id_tipoelemento` = e.`id_tipoelemento` order by r.fecha_registro");
 					  
 					  
 					  
@@ -147,7 +147,7 @@ public class DataReservas {
 	
 	
 		
-		public void add(Reserva res) throws Exception{
+	public void add(Reserva res) throws Exception{
 			PreparedStatement stmt=null;
 			ResultSet keyResultSet=null;
 			try {
@@ -180,7 +180,7 @@ public class DataReservas {
 			}
 		}
 		
-		public void update(Reserva res) throws Exception{
+	public void update(Reserva res) throws Exception{
 			PreparedStatement stmt=null;
 			
 			try {
@@ -211,7 +211,7 @@ public class DataReservas {
 			}
 		} 
 		
-		public void delete(Reserva res) throws Exception{
+	public void delete(Reserva res) throws Exception{
 			PreparedStatement stmt=null;
 			
 			try {
@@ -236,7 +236,7 @@ public class DataReservas {
 			}
 		} 
 		 
-		public int getReservasPendientes(Reserva res) throws Exception{
+	public int getReservasPendientes(Reserva res) throws Exception{
 			
 			PreparedStatement stmt = null;
 			ResultSet rs = null;
@@ -281,7 +281,7 @@ public class DataReservas {
 		}
 
 
-		public Reserva GetOne(int id_persona, int id_elemento, Date fecharegistro) throws Exception {
+	public Reserva GetOne(int id_persona, int id_elemento, Date fecharegistro) throws Exception {
 			
 			Tipo_Elemento te = null;
 			Reserva res = null;
@@ -364,5 +364,93 @@ public class DataReservas {
 			
 		}
 		
+	
+	public ArrayList<Reserva> getByUsuario(Persona per) throws Exception{
+		
+		
+		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+		Tipo_Elemento te = null;
+		Categoria cat = null;
+		Reserva res = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"select r.`id_elemento`,r.`id_persona`,r.`fecha_registro`,r.`fecha_inicio`,r.`fecha_fin`,r.`detalle`,r.`detalle`,r.estado,"
+								+ "e.`nombre` nombreelemento,e.`autor`,e.`genero`,e.`descripcion`,e.`stock`,e.`id_tipoelemento`,"
+								+ "te.`nombre` nombretipoelemento,te.`cantMaxReservasPend`,"
+								+ "p.`nombre` nombrepersona,p.`apellido`,p.`dni`,p.`usuario`,p.`password`,p.`estado` estadopersona,p.`dni`,p.`id_categoria` "
+								+ "from reservas r "
+								+ " inner join elementos e on e.id_elemento=r.id_elemento"
+								+ " inner join tipo_elementos te on te.`id_tipoelemento` = e.`id_tipoelemento`"
+								+ " inner join personas p on p.id_persona=r.id_persona"
+								+ " where r.id_persona=? order by r.fecha_registro");
+					
+			stmt.setInt(1, per.getId_persona());
+			rs = stmt.executeQuery();
+			
+			if (rs != null) {
+				while (rs.next()) {
+				res = new Reserva();
+				te = new Tipo_Elemento();
+				cat = new Categoria();
+				res.setElemento(new Elemento());
+				res.setPersona(new Persona());
+				res.setFecha_registro(rs.getDate("fecha_registro"));
+				res.setFecha_inicio(rs.getDate("fecha_inicio"));
+				res.setFecha_fin(rs.getDate("fecha_fin"));
+				res.setDetalle(rs.getString("detalle"));
+				res.setEstado(rs.getString("estado"));
+				
+				te.setId_tipoelemento(rs.getInt("id_tipoelemento"));
+				te.setCantMaxReservasPend(rs.getInt("cantMaxReservasPend"));
+				te.setNombre(rs.getString("nombretipoelemento"));
+				
+				res.getElemento().setTipo_Elemento(te);
+				res.getElemento().setId_elemento(rs.getInt("id_elemento"));
+				res.getElemento().setNombre(rs.getString("nombreelemento"));
+				res.getElemento().setAutor(rs.getString("autor"));
+				res.getElemento().setGenero(rs.getString("genero"));
+				res.getElemento().setDescripcion(rs.getString("descripcion"));
+				res.getElemento().setStock(rs.getInt("stock"));
+				
+				cat.setId_Categoria(rs.getInt("id_categoria"));
+				res.getPersona().setId_persona(rs.getInt("id_persona"));
+				res.getPersona().setNombre(rs.getString("nombrepersona"));
+				res.getPersona().setApellido(rs.getString("apellido"));
+				res.getPersona().setDni(rs.getString("dni"));
+				res.getPersona().setUsuario(rs.getString("usuario"));
+				res.getPersona().setPassword(rs.getString("password"));
+				res.getPersona().setHabilitado(rs.getBoolean("estadopersona"));
+				res.getPersona().setCategoria(cat);
+			
+				reservas.add(res);
+				
+			}
+			}
+			
+		
+		
+		} catch (Exception e) {
+			
+			throw e;
+		}
+		
+			try {
+				if (rs != null) {rs.close();}
+				if (stmt != null) {stmt.close();}
+				FactoryConexion.getInstancia().releaseConn();	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+		return reservas;
+		
+		
+	}
+	
+	
 		}
 

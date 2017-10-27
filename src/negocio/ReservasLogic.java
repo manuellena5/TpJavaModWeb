@@ -70,6 +70,14 @@ public class ReservasLogic {
 		return reservasD.GetOne(id_persona,id_elemento,fecharegistro); 
 		
 	}
+	
+	public ArrayList<Reserva> getByUsuario(Persona per) throws Exception{
+		
+		return reservasD.getByUsuario(per);
+		
+	}
+	
+	
 
 	
 	public ArrayList<Reserva> GetAll() throws Exception{

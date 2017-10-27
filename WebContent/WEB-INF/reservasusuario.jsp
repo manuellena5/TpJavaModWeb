@@ -3,6 +3,20 @@
 <%@page import="entidades.Reserva"%>
 <%@page import="entidades.Persona"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+
+
+<%
+/* String fechaActualString;
+SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd"); /*Establezco el formato que trae de la base*/  
+/* fechaActualString = simple.format(fechaActualDate); /*Le doy el formato a la hora del sistema y me devuelve un string */
+
+Date FechaDelSistema = new Date(); /*Tomo la hora del sistema*/
+java.sql.Date fechaActual = new java.sql.Date(FechaDelSistema.getTime()); /* A la hora del sistema la convierto en el formato que trae la base */
+
+
+%>
 
 
 
@@ -100,7 +114,7 @@
 				  <tbody>
 			<%
 				int count=0;
-				ArrayList<Reserva> listaReservas = (ArrayList<Reserva>)request.getAttribute("listaReservas");
+				ArrayList<Reserva> listaReservas = (ArrayList<Reserva>)request.getAttribute("listareservasusuario");
 				for(Reserva r : listaReservas){
 					count++;
 				%>
@@ -111,7 +125,7 @@
 			      <th scope="row"><%=count%></th>
 			      <td><%=r.getElemento().getId_elemento()%></td>
 			      <td><%=r.getPersona().getId_persona()%></td>
-			       <td><%=r.getEstado() %></td>
+			      <td><%=r.getEstado()%></td>
 			      <td><%=r.getFecha_registro() %></td>
 			      <td><%=r.getFecha_inicio() %></td>
 			      <td><%=r.getFecha_fin() %></td>
@@ -120,7 +134,16 @@
 			      <td><%=r.getElemento().getNombre()%></td>
 			      <td><%=r.getElemento().getTipo_Elemento().getNombre() %></td>
 			      <td><div class="btn-group" role="group" aria-label="Basic example">
-						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionReserva.servlet?idpersona=<%=r.getPersona().getId_persona()%>&fecharegistro=<%=r.getFecha_registro()%>&idelemento=<%=r.getElemento().getId_elemento()%>">Modificar</a>
+						  <% 
+						  java.sql.Date fechainicio = new java.sql.Date(r.getFecha_inicio().getTime());
+						 /* Pregunto si la fecha de la reserva es posterior a la actual para mostrar el boton para poder cancelarla */
+						  if(fechainicio.after(fechaActual) && r.getEstado().equals("Activa")){
+							  %>
+							  <a class="btn btn-secondary" name="lnkmodificar" href="CancelacionReservaUsuario.servlet?idpersona=<%=r.getPersona().getId_persona()%>&fecharegistro=<%=r.getFecha_registro()%>&idelemento=<%=r.getElemento().getId_elemento()%>">Cancelar</a>  
+						  <%
+						  } %>
+						  
+						  
 						  <%-- <a class="btn btn-secondary" name="lnkeliminar" href="EliminacionPersona.servlet?id=<%=r.getId_persona() %>">Eliminar</a> --%>
 					</div>
 				  </td>
