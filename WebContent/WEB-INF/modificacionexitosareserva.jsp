@@ -1,11 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@page import="entidades.Reserva"%>
 <%@page import="entidades.Persona"%>
-<%@page import="java.util.ArrayList"%>
-
-
-
+<%@page import="entidades.Elemento"%>
+<%@page import="entidades.Reserva"%>
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,18 +17,25 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Modificacion exitosa del elemento</title>
+	 
 	 
 	 <!-- Bootstrap CSS -->
-    <link href="style/css/bootstrap.min.css" rel="stylesheet">
-    <link href="style/css/estilo1.css" rel="stylesheet">
+	  <!-- <link href="style/css/jquery-ui.structure.min.css" rel="stylesheet">
+     <link href="style/css/jquery-ui.theme.min.css" rel="stylesheet"> -->
+	 
+	 <link href="style/css/jquery-ui.min.css" rel="stylesheet">
+	 <link href="style/css/bootstrap.min.css" rel="stylesheet">
+     <link href="style/css/estilo1.css" rel="stylesheet">
+   
+    
     
     
     
   </head>
   <body>
     
-        <div class="contenedorprincipal container-fluid">
+       <div class="contenedorprincipal container-fluid">
 		
 		<div class="cabeza">	
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
@@ -76,57 +79,33 @@
 				</nav>
 		</div>
 
-
 		<div class="cuerpo">
-			
-		<table class="table table-striped">
 		
-				<thead>
-				    <tr>
-				      <th scope="col">Reserva</th>
-				      <th scope="col">Id elemento</th>
-				      <th scope="col">Id Persona</th>
-				      <th scope="col">Fecha registro</th>
-				      <th scope="col">Fecha inicio</th>
-				      <th scope="col">Fecha fin</th>
-				      <th scope="col">Detalle</th>
-				      <th scope="col">Persona</th>
-				      <th scope="col">Elemento</th>
-				      <th scope="col">Tipo de elemento</th>
-				      <th scope="col"></th>
-				    </tr>
-				 </thead>
-				  <tbody>
-			<%
-				int count=0;
-				ArrayList<Reserva> listaReservas = (ArrayList<Reserva>)request.getAttribute("listaReservas");
-				for(Reserva r : listaReservas){
-					count++;
-				%>
-			
-				  
-			  
-			    <tr>
-			      <th scope="row"><%=count%></th>
-			      <td><%=r.getElemento().getId_elemento()%></td>
-			      <td><%=r.getPersona().getId_persona()%></td>
-			      <td><%=r.getFecha_registro() %></td>
-			      <td><%=r.getFecha_inicio() %></td>
-			      <td><%=r.getFecha_fin() %></td>
-			      <td><%=r.getDetalle() %></td>
-			      <td><%=r.getPersona().getApellido()+" "+r.getPersona().getNombre()%></td>
-			      <td><%=r.getElemento().getNombre()%></td>
-			      <td><%=r.getElemento().getTipo_Elemento().getNombre() %></td>
-			      <td><div class="btn-group" role="group" aria-label="Basic example">
-						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionReserva.servlet?idpersona=<%=r.getPersona().getId_persona()%>&fecharegistro=<%=r.getFecha_registro()%>&idelemento=<%=r.getElemento().getId_elemento()%>">Modificar</a>
-						  <%-- <a class="btn btn-secondary" name="lnkeliminar" href="EliminacionPersona.servlet?id=<%=r.getId_persona() %>">Eliminar</a> --%>
-					</div>
-				  </td>
-			    </tr>
-			    <% } %>
-			  </tbody>
-			</table>
+		
 
+		
+		
+			
+			<div class="alert alert-success" role="alert">
+				<h3>Su elemento se ha modificado correctamente</h3>
+			   
+			   	<p>Fecha de registro: <%=((Reserva)request.getAttribute("reserva")).getFecha_registro()%></p>
+				<p>Fecha de inicio: <%=((Reserva)request.getAttribute("reserva")).getFecha_inicio()%></p>
+				<p>Fecha de fin: <%=((Reserva)request.getAttribute("reserva")).getFecha_fin()%></p>
+				<p>Detalle: <%=((Reserva)request.getAttribute("reserva")).getDetalle()%></p>
+				<p>Estado: <%=((Reserva)request.getAttribute("reserva")).getEstado()%></p>
+				<p>Persona que reserva: <%=((Reserva)request.getAttribute("reserva")).getPersona().getNombre() + " " + ((Reserva)request.getAttribute("reserva")).getPersona().getApellido()%></p>	
+				<p>Tipo de elemento reservado: <%=((Reserva)request.getAttribute("reserva")).getElemento().getTipo_Elemento().getNombre()%></p>	
+			  	<p>Nombre del elemento reservado: <%=((Reserva)request.getAttribute("reserva")).getElemento().getNombre()%></p>	
+			  
+			  
+			   <a href="Start" class="alert-link">Volver a pagina principal</a>
+			</div>
+			
+	  	
+	  	
+			
+			
 		</div> 
 		
 		<footer class="pie container-fluid">
@@ -186,13 +165,19 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="style/js/jquery-ui.js"></script>
+    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="style/js/datepicker-es.js"></script>
+    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
-    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
-    
    
-		
-	
+	<script type="text/javascript">
+    $(function () {
+    	$("#datepicker").datepicker();
+    	});
+	</script>
 
   </body>
 </html>

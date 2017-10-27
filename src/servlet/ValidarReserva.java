@@ -51,9 +51,12 @@ public class ValidarReserva extends HttpServlet {
 		SimpleDateFormat simple= new SimpleDateFormat("dd/MM/yyyy");
 		
 		try {
-			String fecha = request.getParameter("fechainicio");
-			data = simple.parse(fecha);
-			java.sql.Date sqlDate = new java.sql.Date(data.getTime()); 
+			
+			
+			
+			String fecha = request.getParameter("fechainicio");					
+			data = simple.parse(fecha);						
+			java.sql.Date sqlDate = new java.sql.Date(data.getTime());						
 			reserva.setFecha_inicio(sqlDate);
 			
 			

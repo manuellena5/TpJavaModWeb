@@ -1,7 +1,36 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
 <%@page import="entidades.Elemento"%>
+<%@page import="entidades.Reserva"%>
+<%@page import="java.text.SimpleDateFormat"%>
 
+<% Reserva r = (Reserva)request.getAttribute("reserva"); 
+			java.util.Date data = null;
+		    SimpleDateFormat simple= new SimpleDateFormat("yy-MM-dd");
+			String fechainicio = r.getFecha_inicio().toString();
+			data = simple.parse(fechainicio);
+			simple = new SimpleDateFormat("dd/MM/yyyy");
+			fechainicio = simple.format(data);
+
+			
+			data = null;
+		    simple= new SimpleDateFormat("yy-MM-dd");
+			String fecharegistro = r.getFecha_registro().toString();
+			data = simple.parse(fecharegistro);
+			simple = new SimpleDateFormat("dd/MM/yyyy");
+			fecharegistro = simple.format(data);
+			
+			data = null;
+		    simple= new SimpleDateFormat("yy-MM-dd");
+			String fechafin = r.getFecha_fin().toString();
+			data = simple.parse(fechafin);
+			simple = new SimpleDateFormat("dd/MM/yyyy");
+			fechafin = simple.format(data);
+			
+			
+			%>
+
+    
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
 <head>
@@ -15,47 +44,56 @@
     
     
      
-	 <title>Modificar persona</title>
+	 <title>Pagina principal</title>
+	 
 	 
 	 <!-- Bootstrap CSS -->
-    <link href="style/css/bootstrap.min.css" rel="stylesheet">
-    <link href="style/css/estilo1.css" rel="stylesheet">
+	  <!-- <link href="style/css/jquery-ui.structure.min.css" rel="stylesheet">
+     <link href="style/css/jquery-ui.theme.min.css" rel="stylesheet"> -->
+	 
+	 <link href="style/css/jquery-ui.min.css" rel="stylesheet">
+	 <link href="style/css/bootstrap.min.css" rel="stylesheet">
+     <link href="style/css/estilo1.css" rel="stylesheet">
+   
+    
+    
+    
     
   </head>
- <body>
+  <body>
     
-    <div class="contenedorprincipal container-fluid">
+       <div class="contenedorprincipal container-fluid">
 		
 		<div class="cabeza">	
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-					  <a class="navbar-brand" href="start.jsp">Biblioteca</a>
+					  <a class="navbar-brand" href="">Biblioteca</a>
 					<ul class="nav nav-pills">
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoPersonas.servlet">Gestionar personas</a>
-					      <a class="dropdown-item" href="#">Nueva persona</a>
+					      <a class="dropdown-item" href="altapersona.servlet">Nueva persona</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
-					      <a class="dropdown-item" href="#">Nueva reserva</a>
+					      <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Elementos</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoElementos.servlet">Gestionar elementos</a>
-					      <a class="dropdown-item" href="#">Nuevo elemento</a>
+					      <a class="dropdown-item" href="altaelemento.servlet">Nuevo elemento</a>
 					    </div>
 					  </li>
-					    <li class="nav-item dropdown">
+					   <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoTiposElementos.servlet">Gestionar tipos de elementos</a>
-					      <a class="dropdown-item" href="#">Nuevo tipo de elemento</a>
+					      <a class="dropdown-item" href="altatipoelemento.servlet">Nuevo tipo de elemento</a>
 					    </div>
 					  </li>
 					  
@@ -67,45 +105,70 @@
 				 
 				</nav>
 		</div>
-
-
+		
 		<div class="cuerpo">
 		
-		<% Persona persona = (Persona)request.getAttribute("persona"); %>
 		
-			<form action="FinalizarModificacionPersona.servlet" method="post">
+		
+		
+		<form action="FinalizarModificacionReserva.servlet" method="post">
+		
+		
+		<div class="form-group">
+			<label for="txtid">Tipo de elemento a reservar: </label>
+			<input type="text" class="form-control" id="nombretipoelemento" name="nombretipoelemento" value="<%=r.getElemento().getTipo_Elemento().getNombre()%>" readonly="true">
+			<input type="text" class="form-control" style="display:none;" id="idtipoelemento" name="idtipoelemento" value="<%=r.getElemento().getTipo_Elemento().getId_tipoelemento()%>">
 			
-					<div class="form-group">
-					    <label for="txtid">ID</label>
-					    <input type="text" class="form-control" id="txtid" name="txtid" value="<%=persona.getId_persona()%>" readonly="true">
-					  </div>
-					  <div class="form-group">
-					    <label for="txtusuario">Nombre</label>
-					    <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="<%=persona.getNombre()%>">
-					  </div>	
-
-					  <div class="form-group">
-					    <label for="txtnombre">Apellido</label>
-					    <input type="text" class="form-control" id="txtapellido" name="txtapellido" value="<%=persona.getApellido() %>">
-					  </div>
-					  
-					  <div class="form-group">
-					    <label for="txtapellido">Dni</label>
-					    <input type="text" class="form-control" id="txtdni" name="txtdni" value="<%=persona.getDni() %>">
-					  </div>
-					  
-					   <div class="form-group">
-					    <label for="txtapellido">Usuario</label>
-					    <input type="text" class="form-control" id="txtusuario" name="txtusuario" value="<%=persona.getUsuario() %>">
-					  </div>
-					  
-					  
-					  <div class="btn-group" role="group" aria-label="Basic example">
-								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=persona.getId_persona()%>">Aceptar</button>
-						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
-					  </div>
-					
-			</form>
+		</div>
+		
+		<div class="form-group">
+			<label for="txtid">Elemento a reservar: </label>
+			<input type="text" class="form-control" id="nombreelemento" name="nombreelemento" value="<%=r.getElemento().getNombre()%>" readonly="true">
+			<input type="text" class="form-control" style="display:none;" id="idelemento" name="idelemento" value="<%=r.getElemento().getId_elemento()%>">
+		</div>
+		
+		<div class="form-group">
+			<label for="txtid">Persona: </label>
+			<input type="text" class="form-control" id="nombrepersona" name="nombrepersona" value="<%=r.getPersona().getNombre()%>" readonly="true">
+			<input type="text" class="form-control" style="display:none;" id="idpersona" name="idpersona" value="<%=r.getPersona().getId_persona()%>">
+		</div>
+		
+		<div class="form-group">
+			<label for="txtid">Fecha de registro: </label>
+			<input type="text" class="form-control" id="fecharegistro" name="fecharegistro" value="<%=fecharegistro%>" readonly="true">
+		</div>
+		
+		<div class="form-group">
+		<label>Fecha de inicio la reserva:</label>	
+		<input id="datepicker2" name="fechainicio" type="text" value="<%=fechainicio%>" >
+		</div>
+		
+		
+		<div class="form-group">
+		<label>Fecha de fin de la reserva:</label>	
+		<input id="datepicker3" name="fechafin" type="text" value="<%=fechafin%>">
+		</div>
+			
+		<div class="form-group">
+		    <label for="exampleFormControlTextarea1">Detalle:</label>
+		    <textarea class="form-control detalle" name="detalle" value="<%=r.getDetalle()%>" ><%=r.getDetalle()%></textarea>
+	  	</div>
+	  	
+	  	<div class="form-group">
+		    <label for="exampleFormControlSelect1">Estado: </label>
+		    <select class="form-control" name="estado" id="exampleFormControlSelect1">
+		      <option selected value="<%=r.getEstado()%>"><%=r.getEstado()%></option>
+		      <option value="Activa">Activa</option>
+		      <option value="Cancelada">Cancelada</option>
+		      <option value="Terminada">Terminada</option>
+		      <option value="Sin devolver">Sin devolver</option>
+		    </select>
+		 </div>
+	  	
+	  	<button type="submit" class="btn btn-primary">Finalizar reserva</button>
+	  	</form>
+			
+			
 		</div> 
 		
 		<footer class="pie container-fluid">
@@ -165,13 +228,20 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="style/js/jquery-ui.js"></script>
+    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="style/js/datepicker-es.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
-    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
-    
    
-		
-	
+	<script type="text/javascript">
+    $(function () {
+    	$("#datepicker1").datepicker($.datepicker.regional["es"]);
+    	$("#datepicker2").datepicker($.datepicker.regional["es"]);
+    	$("#datepicker3").datepicker($.datepicker.regional["es"]);
+    	});
+	</script>
 
   </body>
 </html>

@@ -45,8 +45,13 @@ public class Start extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		Persona per= null;
 		try {
 			if(request.getSession().getAttribute("user") != null){
+				
+				per = ((Persona)request.getSession().getAttribute("user"));
+				
+				logger.log(Level.INFO,"log in " + per.getDni() + " " + per.getNombre() + " " + per.getApellido());
 				
 				request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
 			}
@@ -54,7 +59,7 @@ public class Start extends HttpServlet {
 			String user=request.getParameter("user");
 			String pass=request.getParameter("pass");
 			
-			Persona per=new Persona();
+			per =new Persona();
 			per.setUsuario(user);
 			per.setPassword(pass);
 			
