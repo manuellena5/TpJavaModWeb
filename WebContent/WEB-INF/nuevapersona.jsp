@@ -46,6 +46,7 @@
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
 					      <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>
+					    
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
@@ -131,7 +132,7 @@
 				 </div>
 			 </div>
 			
-			 <button type="submit" class="btn btn-secondary" name="btnagregar">Agregar</button>
+			 <button type="submit" class="btn btn-primary" name="btnagregar">Agregar</button>
 			
 			
 			</form>

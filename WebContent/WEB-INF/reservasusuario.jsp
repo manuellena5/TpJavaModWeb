@@ -64,6 +64,7 @@ java.sql.Date fechaActual = new java.sql.Date(FechaDelSistema.getTime()); /* A l
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
 					      <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>
+					      <a class="dropdown-item" href="reservasusuario.servlet">Mis reservas</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">

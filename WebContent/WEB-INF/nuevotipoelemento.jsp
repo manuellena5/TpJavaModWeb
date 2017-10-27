@@ -74,7 +74,7 @@
 
 		<div class="cuerpo">
 		
-			<form action="validartipoelemento.servlet" method="post">
+			<form action="validartipoelemento.servlet" method="post" style="width:50%;">
 		   
 		   
 		    <div class="form-group">
@@ -87,7 +87,7 @@
 			    <input type="text" name="txtcantmaxreservaspend" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese el maximo de cantidades pendientes" required="">
 			</div>
 			
-			 <button type="submit" class="btn btn-secondary" name="btnagregar">Agregar</button>
+			 <button type="submit" class="btn btn-primary" name="btnagregar">Agregar</button>
 			
 			
 			</form>

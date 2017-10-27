@@ -73,7 +73,7 @@
 
 		<div class="cuerpo">
 		
-			<form action="validarelemento.servlet" method="post">
+			<form action="validarelemento.servlet" method="post" style="width:50%;">
 		    
 		    
 		    
@@ -115,7 +115,7 @@
 	  	</div>
 			
 			
-			 <button type="submit" class="btn btn-secondary" name="btnagregar">Agregar</button>
+			 <button type="submit" class="btn btn-primary" name="btnagregar">Agregar</button>
 			
 			
 			</form>

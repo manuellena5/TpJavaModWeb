@@ -74,7 +74,7 @@
 		
 		<% Reserva reserva = (Reserva)request.getAttribute("reserva"); %>
 		
-			<form action="FinalizarEliminacionReserva.servlet" method="post">
+			<form action="FinalizarEliminacionReserva.servlet" method="post" style="width:50%;">
 			
 					<div class="form-group">
 					    <label for="txtid">ID Persona</label>
@@ -102,7 +102,7 @@
 					  
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
-								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=reserva.getPersona().getId_persona()%>">Eliminar</button>
+								  <button type="submit" class="btn btn-outline-danger" name="btneleccion" value="<%=reserva.getPersona().getId_persona()%>">Eliminar</button>
 						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
 					  </div>
 					

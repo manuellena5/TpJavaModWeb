@@ -46,6 +46,7 @@
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoPersonas.servlet">Gestionar personas</a>
 					      <a class="dropdown-item" href="altapersona.servlet">Nueva persona</a>
+					      <a class="dropdown-item" href="reservasusuario.servlet">Mis reservas</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">

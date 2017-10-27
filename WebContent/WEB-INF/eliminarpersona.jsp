@@ -73,7 +73,7 @@
 		
 		<% Persona persona = (Persona)request.getAttribute("persona"); %>
 		
-			<form action="FinalizarEliminacionPersona.servlet" method="post">
+			<form action="FinalizarEliminacionPersona.servlet" method="post" style="width:50%;">
 			
 					<div class="form-group">
 					    <label for="txtid">ID</label>
@@ -101,7 +101,7 @@
 					  
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
-								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=persona.getId_persona()%>">Aceptar</button>
+								  <button type="submit" class="btn btn-outline-danger" name="btneleccion" value="<%=persona.getId_persona()%>">Eliminar</button>
 						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
 					  </div>
 					

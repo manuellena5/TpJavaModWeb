@@ -111,7 +111,7 @@
 		
 		
 		
-		<form action="FinalizarModificacionReserva.servlet" method="post">
+		<form action="FinalizarModificacionReserva.servlet" method="post" style="width:50%;">
 		
 		
 		<div class="form-group">
@@ -165,7 +165,7 @@
 		    </select>
 		 </div>
 	  	
-	  	<button type="submit" class="btn btn-primary">Finalizar reserva</button>
+	  	<button type="submit" class="btn btn-primary">Modificar reserva</button>
 	  	</form>
 			
 			

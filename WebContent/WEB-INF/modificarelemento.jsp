@@ -73,13 +73,13 @@
 		
 		<% Elemento elemento = (Elemento)request.getAttribute("elemento"); %>
 		
-			<form action="FinalizarModificacionElemento.servlet" method="post">
+			<form action="FinalizarModificacionElemento.servlet" method="post" style="width:50%;">
 			
-					<div class="form-group">
+					<div class="form-group formulario">
 					    <label for="txtid">ID</label>
 					    <input type="text" class="form-control" id="txtid" name="txtid" value="<%=elemento.getId_elemento()%>" readonly="true">
 					  </div>
-					  <div class="form-group">
+					  <div class="form-group formulario">
 					    <label for="txtusuario">Nombre</label>
 					    <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="<%=elemento.getNombre()%>">
 					  </div>	
@@ -106,8 +106,8 @@
 					  
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
-								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=elemento.getId_elemento()%>">Aceptar</button>
-						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
+								  <button type="submit" class="btn btn-outline-primary" name="btneleccion" value="<%=elemento.getId_elemento()%>">Aceptar</button>
+						  		  <a class="btn btn-outline-secondary" href="Start">Cancelar</a>
 					  </div>
 					
 			</form>

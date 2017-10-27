@@ -72,7 +72,7 @@
 
 		<div class="cuerpo">
 		
-		<form action="TraerElementos.servlet" method="POST" id="formtipoelemento">
+		<form action="TraerElementos.servlet" method="POST" id="formtipoelemento" style="width:50%;">
 		
 			<div class="form-group col-md-4">
 		      <label for="inputState">¿Que desea reservar?</label>
