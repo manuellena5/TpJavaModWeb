@@ -91,27 +91,27 @@
 		    
 		    <div class="form-group">
 			    <label for="exampleFormControlInput1">Nombre elemento: </label>
-			    <input type="text" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre del elemento">
+			    <input type="text" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre del elemento" required="">
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Autor: </label>
-			    <input type="text" name="txtautor" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese autor">
+			    <input type="text" name="txtautor" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese autor" required="">
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Genero: </label>
-			    <input type="text" name="txtgenero" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese genero">
+			    <input type="text" name="txtgenero" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese genero" required="">
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Stock: </label>
-			    <input type="text" name="txtstock" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese stock inicial">
+			    <input type="text" name="txtstock" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese stock inicial" required="">
 			</div>
 			
 			<div class="form-group">
 		    <label for="exampleFormControlTextarea1">Descripcion :</label>
-		    <textarea class="form-control detalle" name="txtdescripcion" placeholder="Ingrese una descripcion"  ></textarea>
+		    <textarea class="form-control detalle" name="txtdescripcion" placeholder="Ingrese una descripcion" ></textarea>
 	  	</div>
 			
 			

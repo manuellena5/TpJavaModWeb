@@ -91,17 +91,17 @@
 		
 		<div class="form-group">
 		<label>Fecha de registro:</label>	
-		<input id="datepicker1" name="fecharegistro" type="text">
+		<input id="datepicker1" name="fecharegistro" type="text" required="">
 		</div>
 		
 		<div class="form-group">
 		<label>Fecha de inicio la reserva:</label>	
-		<input id="datepicker2" name="fechainicio" type="text">
+		<input id="datepicker2" name="fechainicio" type="text" required="">
 		</div>
 		
 		<div class="form-group">
 		<label>Fecha de fin de la reserva:</label>	
-		<input id="datepicker3" name="fechafin" type="text">
+		<input id="datepicker3" name="fechafin" type="text" required="">
 		</div>
 			
 		<div class="form-group">
