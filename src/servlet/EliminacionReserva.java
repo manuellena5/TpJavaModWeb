@@ -1,10 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,16 +18,16 @@ import negocio.ReservasLogic;
 import util.AppDataException;
 
 /**
- * Servlet implementation class ModificacionReserva
+ * Servlet implementation class EliminacionReserva
  */
-@WebServlet({ "/ModificacionReserva", "/ModificacionReserva.servlet" })
-public class ModificacionReserva extends HttpServlet {
+@WebServlet({ "/EliminacionReserva", "/EliminacionReserva.servlet" })
+public class EliminacionReserva extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModificacionReserva() {
+    public EliminacionReserva() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,39 +45,42 @@ public class ModificacionReserva extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	
+
 		ReservasLogic reservalogic = new ReservasLogic();
+		ElementosLogic elementologic = new ElementosLogic();
+		PersonaLogic personalogic = new PersonaLogic();
 		Reserva reserva = new Reserva();
+		Elemento elemento = new Elemento();
+		Persona persona = new Persona();
 		java.util.Date data = null;
-		SimpleDateFormat simple= new SimpleDateFormat("yy-MM-dd");
+		SimpleDateFormat simple= new SimpleDateFormat("dd/MM/yyyy");
 		
-		
-		
+		try {
+			
 			int idpersona = Integer.parseInt(request.getParameter("idpersona"));
 			int idelemento = Integer.parseInt(request.getParameter("idelemento"));
 			
-			try {
+			persona = personalogic.GetById(idpersona);
+			elemento = elementologic.GetOne(idelemento);
+	
 			
-			String fecha = request.getParameter("fecharegistro");
+			String fecha = request.getParameter("txtfecharegistro");
 			data = simple.parse(fecha);
-			java.sql.Date sqlDate = new java.sql.Date(data.getTime());
-			
+			java.sql.Date sqlDate = new java.sql.Date(data.getTime()); 
 			
 			reserva = reservalogic.GetOne(idpersona, idelemento, sqlDate);
-			
-			
+			System.out.println(reserva.getPersona().getId_persona());
 			request.setAttribute("reserva", reserva);
-			}catch (AppDataException ade) {
-					request.setAttribute("Error", ade.getMessage());
-				}
-			catch (Exception e) {
-				response.setStatus(502);
+		}catch (AppDataException ade) {
+				request.setAttribute("Error", ade.getMessage());
 			}
-			
+		catch (Exception e) {
+			response.setStatus(502);
+		}
 		
-		request.getRequestDispatcher("/WEB-INF/modificarreserva.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/eliminarreserva.jsp").forward(request, response);
 		
-		
+
 	}
 
 }

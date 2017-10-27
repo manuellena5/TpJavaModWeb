@@ -1,13 +1,8 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@page import="entidades.Reserva"%>
 <%@page import="entidades.Persona"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="entidades.Elemento"%>
+<%@page import="entidades.Reserva"%>
 
-
-
-
-    
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
 <head>
@@ -21,22 +16,20 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Eliminar reserva</title>
 	 
 	 <!-- Bootstrap CSS -->
     <link href="style/css/bootstrap.min.css" rel="stylesheet">
     <link href="style/css/estilo1.css" rel="stylesheet">
     
-    
-    
   </head>
-  <body>
+ <body>
     
-        <div class="contenedorprincipal container-fluid">
+    <div class="contenedorprincipal container-fluid">
 		
 		<div class="cabeza">	
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-					  <a class="navbar-brand" href="">Biblioteca</a>
+					  <a class="navbar-brand" href="start.jsp">Biblioteca</a>
 					<ul class="nav nav-pills">
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
@@ -59,7 +52,7 @@
 					      <a class="dropdown-item" href="altaelemento.servlet">Nuevo elemento</a>
 					    </div>
 					  </li>
-					   <li class="nav-item dropdown">
+					    <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoTiposElementos.servlet">Gestionar tipos de elementos</a>
@@ -78,55 +71,42 @@
 
 
 		<div class="cuerpo">
-			
-		<table class="table table-striped">
 		
-				<thead>
-				    <tr>
-				      <th scope="col">Reserva</th>
-				      <th scope="col">Id elemento</th>
-				      <th scope="col">Id Persona</th>
-				      <th scope="col">Fecha registro</th>
-				      <th scope="col">Fecha inicio</th>
-				      <th scope="col">Fecha fin</th>
-				      <th scope="col">Detalle</th>
-				      <th scope="col">Persona</th>
-				      <th scope="col">Elemento</th>
-				      <th scope="col">Tipo de elemento</th>
-				      <th scope="col"></th>
-				    </tr>
-				 </thead>
-				  <tbody>
-			<%
-				int count=0;
-				ArrayList<Reserva> listaReservas = (ArrayList<Reserva>)request.getAttribute("listaReservas");
-				for(Reserva r : listaReservas){
-					count++;
-				%>
+		<% Reserva reserva = (Reserva)request.getAttribute("reserva"); %>
+		
+			<form action="FinalizarEliminacionReserva.servlet" method="post">
 			
-				  
-			  
-			    <tr>
-			      <th scope="row"><%=count%></th>
-			      <td><%=r.getElemento().getId_elemento()%></td>
-			      <td><%=r.getPersona().getId_persona()%></td>
-			      <td><%=r.getFecha_registro() %></td>
-			      <td><%=r.getFecha_inicio() %></td>
-			      <td><%=r.getFecha_fin() %></td>
-			      <td><%=r.getDetalle() %></td>
-			      <td><%=r.getPersona().getApellido()+" "+r.getPersona().getNombre()%></td>
-			      <td><%=r.getElemento().getNombre()%></td>
-			      <td><%=r.getElemento().getTipo_Elemento().getNombre() %></td>
-			      <td><div class="btn-group" role="group" aria-label="Basic example">
-						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionReserva.servlet?idpersona=<%=r.getPersona().getId_persona()%>&fecharegistro=<%=r.getFecha_registro()%>&idelemento=<%=r.getElemento().getId_elemento()%>">Modificar</a>
-						  <a class="btn btn-secondary" name="lnkeliminar" href="EliminacionReserva.servlet?idpersona=<%=r.getPersona().getId_persona()%>&fecharegistro=<%=r.getFecha_registro()%>&idelemento=<%=r.getElemento().getId_elemento()%>">Eliminar</a> 
-					</div>
-				  </td>
-			    </tr>
-			    <% } %>
-			  </tbody>
-			</table>
+					<div class="form-group">
+					    <label for="txtid">ID Persona</label>
+					    <input type="text" class="form-control" id="txtidpersona" name="txtidpersona" value="<%=reserva.getPersona().getId_persona()%>" readonly="true">
+					  </div>
+					  <div class="form-group">
+					    <label for="txtusuario">ID Elemento</label>
+					    <input type="text" class="form-control" id="txtidelemento" name="txtidelemento" value="<%=reserva.getElemento().getId_elemento()%>" readonly="true">
+					  </div>	
 
+					  <div class="form-group">
+					    <label for="txtnombre">Fecha registro</label>
+					    <input type="text" class="form-control" id="txtfecharegistro" name="txtapellido" value="<%=reserva.getFecha_registro() %>" readonly="true">
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="txtapellido">Fecha inicio</label>
+					    <input type="text" class="form-control" id="txtfechainicio" name="txtdni" value="<%=reserva.getFecha_inicio() %>" readonly="true">
+					  </div>
+					  
+					   <div class="form-group">
+					    <label for="txtapellido">Fecha fin</label>
+					    <input type="text" class="form-control" id="txtfechafin" name="txtusuario" value="<%=reserva.getFecha_fin() %>" readonly="true">
+					  </div>
+					  
+					  
+					  <div class="btn-group" role="group" aria-label="Basic example">
+								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=reserva.getPersona().getId_persona()%>">Eliminar</button>
+						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
+					  </div>
+					
+			</form>
 		</div> 
 		
 		<footer class="pie container-fluid">
