@@ -31,7 +31,7 @@
 		
 		<div class="cabeza">	
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-					  <a class="navbar-brand" href="">Biblioteca</a>
+					  <a class="navbar-brand" href="Start">Biblioteca</a>
 					<ul class="nav nav-pills">
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
