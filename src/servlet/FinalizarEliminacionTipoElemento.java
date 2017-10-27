@@ -39,7 +39,7 @@ public class FinalizarEliminacionTipoElemento extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int idtipoelemento = Integer.parseInt(request.getParameter("btneleccion"));
+		int idtipoelemento = Integer.parseInt(request.getParameter("txtidtipoelemento"));
 		
 		Tipo_ElementosLogic tipoelementoLogic = new Tipo_ElementosLogic();
 		

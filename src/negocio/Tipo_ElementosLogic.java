@@ -31,7 +31,7 @@ public class Tipo_ElementosLogic {
 	}
 	
 	public void delete(Tipo_Elemento te)throws Exception{
-		//this.pers.remove(this.getByNombre(te));
+
 		this.tipoElementosD.delete(te);
 	}
 	

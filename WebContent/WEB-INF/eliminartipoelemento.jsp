@@ -77,7 +77,7 @@
 			
 					<div class="form-group">
 					    <label for="txtid">ID</label>
-					    <input type="text" class="form-control" id="txtid" name="txtid" value="<%=tipoelemento.getId_tipoelemento() %>" readonly="true">
+					    <input type="text" class="form-control" id="txtidtipoelemento" name="txtidtipoelemento" value="<%=tipoelemento.getId_tipoelemento() %>" readonly="true">
 					  </div>
 					  <div class="form-group">
 					    <label for="txtusuario">Nombre</label>
@@ -91,7 +91,7 @@
 					  
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
-								  <button type="submit" class="btn btn-outline-danger" name="btneleccion" value="<%=tipoelemento.getNombre()%>">Eliminar</button>
+								  <button type="submit" class="btn btn-outline-danger" name="btneleccion">Eliminar</button>
 						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
 					  </div>
 					
