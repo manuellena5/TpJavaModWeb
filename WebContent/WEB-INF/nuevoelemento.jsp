@@ -91,27 +91,27 @@
 		    
 		    <div class="form-group">
 			    <label for="exampleFormControlInput1">Nombre elemento: </label>
-			    <input type="text" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre del elemento">
+			    <input type="text" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre del elemento" required="">
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Autor: </label>
-			    <input type="text" name="txtautor" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese autor">
+			    <input type="text" name="txtautor" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese autor" required="">
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Genero: </label>
-			    <input type="text" name="txtgenero" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese genero">
+			    <input type="text" name="txtgenero" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese genero" required="">
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Stock: </label>
-			    <input type="text" name="txtstock" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese stock inicial">
+			    <input type="text" name="txtstock" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese stock inicial" required="">
 			</div>
 			
 			<div class="form-group">
 		    <label for="exampleFormControlTextarea1">Descripcion :</label>
-		    <textarea class="form-control detalle" name="txtdescripcion" placeholder="Ingrese una descripcion"  ></textarea>
+		    <textarea class="form-control detalle" name="txtdescripcion" placeholder="Ingrese una descripcion" ></textarea>
 	  	</div>
 			
 			
@@ -146,13 +146,16 @@
 					<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver reservas</a>
+							    <a class="nav-link itemmapa" href="ListadoReservas.servlet">Ver reservas</a>
 							  </li>
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver personas</a>
+							    <a class="nav-link itemmapa" href="ListadoPersonas.servlet">Ver personas</a>
 							  </li>
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver elementos</a>
+							    <a class="nav-link itemmapa" href="ListadoElementos.servlet">Ver elementos</a>
+							  </li>
+							  <li class="nav-item">
+							    <a class="nav-link itemmapa" href="ListadoTiposElementos.servlet">Ver tipos de elementos</a>
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Ayuda</a>

@@ -89,32 +89,32 @@
 		    
 		    <div class="form-group">
 			    <label for="exampleFormControlInput1">Nombre: </label>
-			    <input type="text" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su nombre">
+			    <input type="text" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su nombre" required="">
 			</div>
 			
 			 <div class="form-group">
 			    <label for="exampleFormControlInput1">Apellido: </label>
-			    <input type="text" name="txtapellido" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su apellido">
+			    <input type="text" name="txtapellido" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su apellido" required="">
 			</div>
 		    
 		    <div class="form-group">
 			    <label for="exampleFormControlInput1">Dni: </label>
-			    <input type="text" name="txtdni" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese dni">
+			    <input type="text" name="txtdni" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese dni" required="">
 			</div>
 		    
 		     <div class="form-group">
 			    <label for="exampleFormControlInput1">Usuario: </label>
-			    <input type="text" name="txtusuario" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre de usuario">
+			    <input type="text" name="txtusuario" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre de usuario" required="">
 			</div>	
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Contraseña: </label>
-			    <input type="password" name="txtpassword" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese una contraseña">
+			    <input type="password" name="txtpassword" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese una contraseña" required="">
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Repita su contraseña: </label>
-			    <input type="password" name="txtpassword2" class="form-control" id="exampleFormControlInput1" placeholder="Repita su contraseña">
+			    <input type="password" name="txtpassword2" class="form-control" id="exampleFormControlInput1" placeholder="Repita su contraseña" required="">
 			</div>
 			
 			<div class="form-group">
@@ -162,13 +162,16 @@
 					<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver reservas</a>
+							    <a class="nav-link itemmapa" href="ListadoReservas.servlet">Ver reservas</a>
 							  </li>
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver personas</a>
+							    <a class="nav-link itemmapa" href="ListadoPersonas.servlet">Ver personas</a>
 							  </li>
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver elementos</a>
+							    <a class="nav-link itemmapa" href="ListadoElementos.servlet">Ver elementos</a>
+							  </li>
+							  <li class="nav-item">
+							    <a class="nav-link itemmapa" href="ListadoTiposElementos.servlet">Ver tipos de elementos</a>
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Ayuda</a>

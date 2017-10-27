@@ -79,12 +79,12 @@
 		   
 		    <div class="form-group">
 			    <label for="exampleFormControlInput1">Nombre del tipo de elemento: </label>
-			    <input type="text" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre del tipo de elemento">
+			    <input type="text" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre del tipo de elemento"required="">
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Limite de cantidades pendientes: </label>
-			    <input type="text" name="txtcantmaxreservaspend" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese el maximo de cantidades pendientes">
+			    <input type="text" name="txtcantmaxreservaspend" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese el maximo de cantidades pendientes" required="">
 			</div>
 			
 			 <button type="submit" class="btn btn-secondary" name="btnagregar">Agregar</button>
@@ -118,13 +118,16 @@
 					<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver reservas</a>
+							    <a class="nav-link itemmapa" href="ListadoReservas.servlet">Ver reservas</a>
 							  </li>
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver personas</a>
+							    <a class="nav-link itemmapa" href="ListadoPersonas.servlet">Ver personas</a>
 							  </li>
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver elementos</a>
+							    <a class="nav-link itemmapa" href="ListadoElementos.servlet">Ver elementos</a>
+							  </li>
+							  <li class="nav-item">
+							    <a class="nav-link itemmapa" href="ListadoTiposElementos.servlet">Ver tipos de elementos</a>
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Ayuda</a>

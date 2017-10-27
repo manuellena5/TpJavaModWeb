@@ -120,8 +120,7 @@
 			      <td><%=r.getElemento().getNombre()%></td>
 			      <td><%=r.getElemento().getTipo_Elemento().getNombre() %></td>
 			      <td><div class="btn-group" role="group" aria-label="Basic example">
-						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionReserva.servlet?idpersona=<%=r.getPersona().getId_persona()%>&fecharegistro=<%=r.getFecha_registro()%>&idelemento=<%=r.getElemento().getId_elemento()%>">Modificar</a>
-						  <%-- <a class="btn btn-secondary" name="lnkeliminar" href="EliminacionPersona.servlet?id=<%=r.getId_persona() %>">Eliminar</a> --%>
+						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionReserva.servlet?idpersona=<%=r.getPersona().getId_persona()%>&fecharegistro=<%=r.getFecha_registro()%>&idelemento=<%=r.getElemento().getId_elemento()%>">Modificar</a> 
 					</div>
 				  </td>
 			    </tr>
@@ -155,13 +154,16 @@
 					<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver reservas</a>
+							    <a class="nav-link itemmapa" href="ListadoReservas.servlet">Ver reservas</a>
 							  </li>
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver personas</a>
+							    <a class="nav-link itemmapa" href="ListadoPersonas.servlet">Ver personas</a>
 							  </li>
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver elementos</a>
+							    <a class="nav-link itemmapa" href="ListadoElementos.servlet">Ver elementos</a>
+							  </li>
+							  <li class="nav-item">
+							    <a class="nav-link itemmapa" href="ListadoTiposElementos.servlet">Ver tipos de elementos</a>
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Ayuda</a>

@@ -1,6 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
 <%@page import="entidades.Elemento"%>
+<%@page import="entidades.Reserva"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
@@ -15,7 +16,7 @@
     
     
      
-	 <title>Modificar elemento</title>
+	 <title>Eliminar reserva</title>
 	 
 	 <!-- Bootstrap CSS -->
     <link href="style/css/bootstrap.min.css" rel="stylesheet">
@@ -24,11 +25,11 @@
   </head>
  <body>
     
-       <div class="contenedorprincipal container-fluid">
+    <div class="contenedorprincipal container-fluid">
 		
 		<div class="cabeza">	
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-					  <a class="navbar-brand" href="">Biblioteca</a>
+					  <a class="navbar-brand" href="start.jsp">Biblioteca</a>
 					<ul class="nav nav-pills">
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
@@ -51,7 +52,7 @@
 					      <a class="dropdown-item" href="altaelemento.servlet">Nuevo elemento</a>
 					    </div>
 					  </li>
-					   <li class="nav-item dropdown">
+					    <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoTiposElementos.servlet">Gestionar tipos de elementos</a>
@@ -71,42 +72,37 @@
 
 		<div class="cuerpo">
 		
-		<% Elemento elemento = (Elemento)request.getAttribute("elemento"); %>
+		<% Reserva reserva = (Reserva)request.getAttribute("reserva"); %>
 		
-			<form action="FinalizarModificacionElemento.servlet" method="post">
+			<form action="FinalizarEliminacionReserva.servlet" method="post">
 			
 					<div class="form-group">
-					    <label for="txtid">ID</label>
-					    <input type="text" class="form-control" id="txtid" name="txtid" value="<%=elemento.getId_elemento()%>" readonly="true">
+					    <label for="txtid">ID Persona</label>
+					    <input type="text" class="form-control" id="txtidpersona" name="txtidpersona" value="<%=reserva.getPersona().getId_persona()%>" readonly="true">
 					  </div>
 					  <div class="form-group">
-					    <label for="txtusuario">Nombre</label>
-					    <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="<%=elemento.getNombre()%>">
+					    <label for="txtusuario">ID Elemento</label>
+					    <input type="text" class="form-control" id="txtidelemento" name="txtidelemento" value="<%=reserva.getElemento().getId_elemento()%>" readonly="true">
 					  </div>	
 
 					  <div class="form-group">
-					    <label for="txtnombre">Descripci&oacute;n</label>
-					    <input type="text" class="form-control" id="txtdescripcion" name="txtdescripcion" value="<%=elemento.getDescripcion() %>">
+					    <label for="txtnombre">Fecha registro</label>
+					    <input type="text" class="form-control" id="txtfecharegistro" name="txtapellido" value="<%=reserva.getFecha_registro() %>" readonly="true">
 					  </div>
 					  
 					  <div class="form-group">
-					    <label for="txtapellido">Autor</label>
-					    <input type="text" class="form-control" id="txtautor" name="txtautor" value="<%=elemento.getAutor() %>">
+					    <label for="txtapellido">Fecha inicio</label>
+					    <input type="text" class="form-control" id="txtfechainicio" name="txtdni" value="<%=reserva.getFecha_inicio() %>" readonly="true">
 					  </div>
 					  
 					   <div class="form-group">
-					    <label for="txtapellido">G&eacute;nero</label>
-					    <input type="text" class="form-control" id="txtgenero" name="txtgenero" value="<%=elemento.getGenero() %>">
-					  </div>
-					  
-					  <div class="form-group">
-					    <label for="txtapellido">Stock</label>
-					    <input type="text" class="form-control" id="txtstock" name="txtstock" value="<%=elemento.getStock() %>">
+					    <label for="txtapellido">Fecha fin</label>
+					    <input type="text" class="form-control" id="txtfechafin" name="txtusuario" value="<%=reserva.getFecha_fin() %>" readonly="true">
 					  </div>
 					  
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
-								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=elemento.getId_elemento()%>">Aceptar</button>
+								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=reserva.getPersona().getId_persona()%>">Eliminar</button>
 						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
 					  </div>
 					

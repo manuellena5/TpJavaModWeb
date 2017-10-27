@@ -91,17 +91,17 @@
 		
 		<div class="form-group">
 		<label>Fecha de registro:</label>	
-		<input id="datepicker1" name="fecharegistro" type="text">
+		<input id="datepicker1" name="fecharegistro" type="text" required="">
 		</div>
 		
 		<div class="form-group">
 		<label>Fecha de inicio la reserva:</label>	
-		<input id="datepicker2" name="fechainicio" type="text">
+		<input id="datepicker2" name="fechainicio" type="text" required="">
 		</div>
 		
 		<div class="form-group">
 		<label>Fecha de fin de la reserva:</label>	
-		<input id="datepicker3" name="fechafin" type="text">
+		<input id="datepicker3" name="fechafin" type="text" required="">
 		</div>
 			
 		<div class="form-group">
@@ -139,13 +139,16 @@
 					<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver reservas</a>
+							    <a class="nav-link itemmapa" href="ListadoReservas.servlet">Ver reservas</a>
 							  </li>
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver personas</a>
+							    <a class="nav-link itemmapa" href="ListadoPersonas.servlet">Ver personas</a>
 							  </li>
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ver elementos</a>
+							    <a class="nav-link itemmapa" href="ListadoElementos.servlet">Ver elementos</a>
+							  </li>
+							  <li class="nav-item">
+							    <a class="nav-link itemmapa" href="ListadoTiposElementos.servlet">Ver tipos de elementos</a>
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Ayuda</a>

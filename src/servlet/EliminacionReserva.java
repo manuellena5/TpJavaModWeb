@@ -1,10 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,16 +18,16 @@ import negocio.ReservasLogic;
 import util.AppDataException;
 
 /**
- * Servlet implementation class ModificacionReserva
+ * Servlet implementation class EliminacionReserva
  */
-@WebServlet({ "/ModificacionReserva", "/ModificacionReserva.servlet" })
-public class ModificacionReserva extends HttpServlet {
+@WebServlet({ "/EliminacionReserva", "/EliminacionReserva.servlet" })
+public class EliminacionReserva extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModificacionReserva() {
+    public EliminacionReserva() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,7 +45,7 @@ public class ModificacionReserva extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	
+
 		ReservasLogic reservalogic = new ReservasLogic();
 		Reserva reserva = new Reserva();
 		java.util.Date data = null;
@@ -78,9 +75,9 @@ public class ModificacionReserva extends HttpServlet {
 			}
 			
 		
-		request.getRequestDispatcher("/WEB-INF/modificarreserva.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/eliminarreserva.jsp").forward(request, response);
 
-		}
-	
+
+	}
 
 }
