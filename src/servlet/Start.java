@@ -67,13 +67,17 @@ public class Start extends HttpServlet {
 			
 			Persona pers = perlogic.login(per);
 				
+			if (pers==null)
+			{
+				request.getRequestDispatcher("WEB-INF/loginincorrecto.jsp").forward(request, response);
+			}else{
 			request.getSession().setAttribute("user",pers);
 			
 			logger.log(Level.INFO,"log in " + pers.getDni() + " " + pers.getNombre() + " " + pers.getApellido());
 			
 			
 			request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
-
+			}
 			}
 			
 		} catch (Exception e) {
