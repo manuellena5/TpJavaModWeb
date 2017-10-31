@@ -1,27 +1,28 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@page import="entidades.Reserva"%>
-<%@page import="entidades.Categoria"%>
 <%@page import="entidades.Persona"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="entidades.Reserva"%>
+<%@page import="entidades.Elemento"%>
+<%@page import="entidades.Tipo_Elemento"%>
+<%@page import="entidades.Categoria"%>
 <%@page import="java.util.Date"%>
+<%@page import="entidades.Reserva"%>
 <%@page import="java.text.SimpleDateFormat"%>
 
-
-<%
+<% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 
 Date FechaDelSistema = new Date(); /*Tomo la hora del sistema*/
-java.sql.Date fechaActual = new java.sql.Date(FechaDelSistema.getTime()); /* A la hora del sistema la convierto en el formato que trae la base */
+java.sql.Date fechaActual = new java.sql.Date(FechaDelSistema.getTime());
+
+Reserva r = (Reserva)request.getAttribute("reserva"); 
+java.util.Date data = null;
 
 
-
-
-Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
-
+SimpleDateFormat simple= new SimpleDateFormat("yy-MM-dd");
+String rfecharegistro = r.getFecha_registro().toString();
+data = simple.parse(rfecharegistro);
+simple = new SimpleDateFormat("dd/MM/yyyy");
+rfecharegistro = simple.format(data);
 %>
-
-
-
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -39,16 +40,23 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
      
 	 <title>Pagina principal</title>
 	 
+	 
 	 <!-- Bootstrap CSS -->
-    <link href="style/css/bootstrap.min.css" rel="stylesheet">
-    <link href="style/css/estilo1.css" rel="stylesheet">
+	  <!-- <link href="style/css/jquery-ui.structure.min.css" rel="stylesheet">
+     <link href="style/css/jquery-ui.theme.min.css" rel="stylesheet"> -->
+	 
+	 <link href="style/css/jquery-ui.min.css" rel="stylesheet">
+	 <link href="style/css/bootstrap.min.css" rel="stylesheet">
+     <link href="style/css/estilo1.css" rel="stylesheet">
+   
+    
     
     
     
   </head>
   <body>
     
-        <div class="contenedorprincipal container-fluid">
+       <div class="contenedorprincipal container-fluid">
 		
 		<div class="cabeza">	
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
@@ -113,67 +121,38 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 				 
 				</nav>
 		</div>
-
-
-		<div class="cuerpo">
-			
-		<table class="table table-striped">
 		
-				<thead>
-				    <tr>
-				      <th scope="col">Reserva</th>
-				      <th scope="col">Id elemento</th>
-				      <th scope="col">Id Persona</th>
-				      <th scope="col">Estado</th>
-				      <th scope="col">Fecha registro</th>
-				      <th scope="col">Fecha inicio</th>
-				      <th scope="col">Fecha fin</th>
-				      <th scope="col">Detalle</th>
-				      <th scope="col">Persona</th>
-				      <th scope="col">Elemento</th>
-				      <th scope="col">Tipo de elemento</th>
-				      <th scope="col"></th>
-				    </tr>
-				 </thead>
-				  <tbody>
-			<%
-				int count=0;
-				ArrayList<Reserva> listaReservas = (ArrayList<Reserva>)request.getAttribute("listareservasusuario");
-				for(Reserva r : listaReservas){
-					count++;
-				%>
+		<div class="cuerpo">
+		
+		
+		<form action="finalizaraltareserva.servlet" method="post">
+		
 			
-				  
-			  
-			    <tr>
-			      <th scope="row"><%=count%></th>
-			      <td><%=r.getElemento().getId_elemento()%></td>
-			      <td><%=r.getPersona().getId_persona()%></td>
-			      <td><%=r.getEstado()%></td>
-			      <td><%=r.getFecha_registro() %></td>
-			      <td><%=r.getFecha_inicio() %></td>
-			      <td><%=r.getFecha_fin() %></td>
-			      <td><%=r.getDetalle() %></td>
-			      <td><%=r.getPersona().getApellido()+" "+r.getPersona().getNombre()%></td>
-			      <td><%=r.getElemento().getNombre()%></td>
-			      <td><%=r.getElemento().getTipo_Elemento().getNombre() %></td>
-			      <td><div class="btn-group" role="group" aria-label="Basic example">
-						  <% 
-						  java.sql.Date fechainicio = new java.sql.Date(r.getFecha_inicio().getTime());
-						 
-						  if(fechainicio.after(fechaActual) && r.getEstado().equals("Activa")){
-							 %>
-							  <a class="btn btn-secondary" name="lnkmodificar" href="CancelacionReservaUsuario.servlet?idpersona=<%=r.getPersona().getId_persona()%>&fecharegistro=<%=r.getFecha_registro()%>&idelemento=<%=r.getElemento().getId_elemento()%>">Cancelar</a>  
-						<%  }%>
-						  
-						 
-					</div>
-				  </td>
-			    </tr>
-			    <% } %>
-			  </tbody>
-			</table>
-
+			<input id="fecharegistro" name="fecharegistro" type="text" style="display:none;"  value="<%=rfecharegistro%>">
+			<input id="idtipoelemento" name="idtipoelemento" type="text" style="display:none;"  value="<%=r.getElemento().getTipo_Elemento().getId_tipoelemento()%>">
+			<input id="idelemento" name="idelemento" type="text" style="display:none;"  value="<%=r.getElemento().getId_elemento()%>">
+			<input id="idpersona" name="idpersona" type="text" style="display:none;" value="<%=r.getPersona().getId_persona()%>">
+			
+			<p>Datos de la reserva: </p>
+			<p><%=r.getElemento().getTipo_Elemento().getNombre() %></p>
+			<p><%=r.getElemento().getNombre() %></p>
+			<p>Fecha inicio de la reserva: <%=r.getFecha_inicio() %></p>
+			<p>Fecha fin de la reserva: <%=r.getFecha_fin() %></p>
+			<p>Datos de la persona</p>
+			<p><%=r.getPersona().getNombre() %></p>
+			<p><%=r.getPersona().getApellido() %></p>
+			<p><%=r.getPersona().getDni() %></p>
+			
+			
+			<div class="form-group">
+			    <label for="exampleFormControlTextarea1">¿Desea agregar algun detalle?</label>
+			    <textarea class="form-control detalle" name="txtdetalle"></textarea>
+		  	</div>
+							  	
+		  	<button type="submit" class="btn btn-primary">Finalizar</button>
+	  	</form>
+			
+			
 		</div> 
 		
 		<footer class="pie container-fluid">
@@ -235,6 +214,7 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 							    <a class="nav-link itemmapa" href="#">Contacto</a>
 							  </li>
 							  <%} %>
+							  
 						</ul>
 					</div>
 
@@ -254,12 +234,32 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="style/js/jquery-ui.js"></script>
+    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="style/js/datepicker-es.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
-    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
-    
    
-		
+	<script type="text/javascript">
+    $(function () {
+    	var today = new Date();
+    	$("#datepicker1").datepicker({ minDate: 0 });
+    	$("#datepicker2").datepicker({ minDate: 0 });
+    	$("#datepicker3").datepicker({ minDate: 0 });
+    	$("#datepicker").datepicker($.datepicker.regional["es"]);
+ 
+    });
+    
+    function validarfecha(){
+    	var fechainicio = document.getElementById("datepicker2").value;
+    	var fechafin = document.getElementById("datepicker3").value;
+    	
+    	if (fechainicio > fechafin) {
+			alert("La fecha de fin debe ser mayor a la fecha de inicio");
+		}
+    }
+	</script>
 	
 
   </body>

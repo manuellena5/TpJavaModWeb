@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import negocio.ElementosLogic;
+import negocio.Tipo_ElementosLogic;
 import util.AppDataException;
 
 /**
  * Servlet implementation class ElegirFechas
  */
-@WebServlet({ "/ElegirFechas", "/elegirfecha.servlet" })
+@WebServlet({ "/ElegirFechas", "/elegirfechas.servlet" })
 public class ElegirFechas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,13 +39,13 @@ public class ElegirFechas extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
+		int idtipoelemento = Integer.parseInt(request.getParameter("eleccion"));
+		
+		Tipo_ElementosLogic tipoelementoslogic = new Tipo_ElementosLogic();
 		
 		
-		int idelemento = Integer.parseInt(request.getParameter("btneleccion"));
-		
-		ElementosLogic elementoslogic = new ElementosLogic();
 		try {
-			request.setAttribute("Elemento",elementoslogic.GetOne(idelemento));
+			request.setAttribute("tipoelemento", tipoelementoslogic.GetById(idtipoelemento));
 			
 			
 		} catch (AppDataException ade) {
@@ -54,7 +55,7 @@ public class ElegirFechas extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/finalizarreserva.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/fechasaltareserva.jsp").forward(request, response);
 	}
 
 }

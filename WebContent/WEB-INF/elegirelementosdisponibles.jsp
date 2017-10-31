@@ -2,6 +2,38 @@
 <%@page import="entidades.Persona"%>
 <%@page import="entidades.Elemento"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="entidades.Categoria"%>
+<%@page import="java.sql.Date"%>
+<%@page import="entidades.Reserva"%>
+<%@page import="java.text.SimpleDateFormat"%>
+
+<% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
+
+Reserva r = (Reserva)request.getAttribute("reserva"); 
+			java.util.Date data = null;
+		    SimpleDateFormat simple= new SimpleDateFormat("yy-MM-dd");
+			String fechainicio = request.getAttribute("fechainicio").toString();
+			data = simple.parse(fechainicio);
+			simple = new SimpleDateFormat("dd/MM/yyyy");
+			fechainicio = simple.format(data);
+
+			
+			data = null;
+		    simple= new SimpleDateFormat("yy-MM-dd");
+			String fecharegistro = request.getAttribute("fecharegistro").toString();
+			data = simple.parse(fecharegistro);
+			simple = new SimpleDateFormat("dd/MM/yyyy");
+			fecharegistro = simple.format(data);
+			
+			data = null;
+		    simple= new SimpleDateFormat("yy-MM-dd");
+			String fechafin = request.getAttribute("fechafin").toString();
+			data = simple.parse(fechafin);
+			simple = new SimpleDateFormat("dd/MM/yyyy");
+			fechafin = simple.format(data);
+			
+			
+%>
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -32,6 +64,27 @@
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 					  <a class="navbar-brand" href="Start">Biblioteca</a>
 					<ul class="nav nav-pills">
+					<%if ((cat.getDescripcion().equals("Usuario"))) 
+					  {%>
+					  <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
+					    <div class="dropdown-menu">
+					    	<a class="dropdown-item" href="reservasusuario.servlet">Mis reservas</a>
+					        <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>    
+					    </div>
+					  </li>
+					  <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mis datos</a>
+					    <div class="dropdown-menu">
+					    	<a class="dropdown-item" href="#">Modificar</a>   
+					    </div>
+					  </li>
+					   <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
+					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
+					  						</p>
+					  <%}else
+					  if ((cat.getDescripcion().equals("Administrador"))) 
+					  {%>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
@@ -64,7 +117,8 @@
 					  <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
 					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
 					  						</p>
-					 
+					 <%
+					 } %>
 					</ul>
 				 
 				</nav>
@@ -72,9 +126,13 @@
 
 		<div class="cuerpo">
 		
-			<form action="elegirfecha.servlet" method="post">
+			<form action="validaraltareservausuario.servlet" method="post">
+				<input style="diplay:none;" name="fecharegistro" value="<%=fecharegistro%>" >
+				<input style="diplay:none;" name="fechainicio" value="<%=fechainicio%>" >
+				<input style="diplay:none;" name="fechafin" value="<%=fechafin%>" >
+			
 					<table class="table table-striped">
-				
+					
 						<thead>
 						    <tr>
 						      <th scope="col">Elemento</th>
@@ -103,7 +161,13 @@
 					      <td><%=e.getDescripcion()%></td>
 					      <td><%=e.getStock()%></td>
 					      <td><div class="btn-group" role="group" aria-label="Basic example">
+								  <%if(e.getStock() < 1){%>
+									<p>Agotado</p> 
+								  <%} 
+								  else{%>
 								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=e.getId_elemento()%>">Elegir</button>
+								  <%} %>
+								  
 							</div>
 						  </td>
 					    </tr>
@@ -136,8 +200,25 @@
 	
 					<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
+							   <%if ((cat.getDescripcion().equals("Usuario"))) 
+					  {%>
+							  
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="ListadoReservas.servlet">Ver reservas</a>
+							   <a class="nav-link itemmapa" href="reservasusuario.servlet">Mis reservas</a>
+							  </li>
+							  <li class="nav-item">
+							   <a class="nav-link itemmapa" href="#">Modificar mis datos</a>
+							  </li>
+							  <li class="nav-item">
+							    <a class="nav-link itemmapa" href="#">Ayuda</a>
+							  </li>
+							  <li class="nav-item">
+							    <a class="nav-link itemmapa" href="#">Contacto</a>
+							  </li>
+							  <%}else if ((cat.getDescripcion().equals("Administrador"))) 
+					  {%>	  
+					  		  <li class="nav-item">
+							     <a class="nav-link itemmapa" href="ListadoReservas.servlet">Gestionar reservas</a>
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoPersonas.servlet">Ver personas</a>
@@ -147,13 +228,14 @@
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoTiposElementos.servlet">Ver tipos de elementos</a>
-							  </li>
+							  </li><
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Ayuda</a>
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Contacto</a>
 							  </li>
+							  <%} %>
 						</ul>
 					</div>
 

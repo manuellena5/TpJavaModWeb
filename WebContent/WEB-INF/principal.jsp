@@ -36,46 +36,61 @@
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 					  <a class="navbar-brand" href="Start">Biblioteca</a>
 					<ul class="nav nav-pills">
-					<%if (!(cat.getDescripcion().equals("Usuario"))) 
+					<%if ((cat.getDescripcion().equals("Usuario"))) 
+					  {%>
+					  <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
+					    <div class="dropdown-menu">
+					    	<a class="dropdown-item" href="reservasusuario.servlet">Mis reservas</a>
+					        <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>    
+					    </div>
+					  </li>
+					  <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mis datos</a>
+					    <div class="dropdown-menu">
+					    	<a class="dropdown-item" href="#">Modificar</a>   
+					    </div>
+					  </li>
+					   <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
+					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
+					  						</p>
+					  <%}else
+					  if ((cat.getDescripcion().equals("Administrador"))) 
 					  {%>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoPersonas.servlet">Gestionar personas</a>
 					      <a class="dropdown-item" href="altapersona.servlet">Nueva persona</a>
-					    </div><%} %>
+					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
 					      <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>
-					      <a class="dropdown-item" href="reservasusuario.servlet">Mis reservas</a>
 					    </div>
 					  </li>
-					  	<%if (!(cat.getDescripcion().equals("Usuario"))) 
-					  {%>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Elementos</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoElementos.servlet">Gestionar elementos</a>
 					      <a class="dropdown-item" href="altaelemento.servlet">Nuevo elemento</a>
 					    </div>
-					  </li><%} %>
-					  <%if (!(cat.getDescripcion().equals("Usuario"))) 
-					  {%>
+					  </li>
 					   <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tipos de elementos</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoTiposElementos.servlet">Gestionar tipos de elementos</a>
 					      <a class="dropdown-item" href="altatipoelemento.servlet">Nuevo tipo de elemento</a>
 					    </div>
-					  </li><%} %>
+					  </li>
 					  
 					  <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
 					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
 					  						</p>
-					 
+					 <%
+					 } %>
 					</ul>
 				 
 				</nav>
@@ -111,11 +126,26 @@
 	
 					<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
-							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="ListadoReservas.servlet">Ver reservas</a>
-							  </li>
-							  <%if (!(cat.getDescripcion().equals("Usuario"))) 
+							   <%if ((cat.getDescripcion().equals("Usuario"))) 
 					  {%>
+							  
+							  <li class="nav-item">
+							   <a class="nav-link itemmapa" href="reservasusuario.servlet">Mis reservas</a>
+							  </li>
+							  <li class="nav-item">
+							   <a class="nav-link itemmapa" href="#">Modificar mis datos</a>
+							  </li>
+							  <li class="nav-item">
+							    <a class="nav-link itemmapa" href="#">Ayuda</a>
+							  </li>
+							  <li class="nav-item">
+							    <a class="nav-link itemmapa" href="#">Contacto</a>
+							  </li>
+							  <%}else if ((cat.getDescripcion().equals("Administrador"))) 
+					  {%>	  
+					  		  <li class="nav-item">
+							     <a class="nav-link itemmapa" href="ListadoReservas.servlet">Gestionar reservas</a>
+							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoPersonas.servlet">Ver personas</a>
 							  </li>
@@ -124,13 +154,14 @@
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoTiposElementos.servlet">Ver tipos de elementos</a>
-							  </li><%} %>
+							  </li><
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Ayuda</a>
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Contacto</a>
 							  </li>
+							  <%} %>
 						</ul>
 					</div>
 

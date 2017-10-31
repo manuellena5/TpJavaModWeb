@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import negocio.ElementosLogic;
+import negocio.Tipo_ElementosLogic;
 import util.AppDataException;
 
 /**
@@ -41,10 +42,11 @@ public class TraerElementos extends HttpServlet {
 		
 		int idtipoelemento = Integer.parseInt(request.getParameter("eleccion"));
 		
+		Tipo_ElementosLogic tipoelementoslogic = new Tipo_ElementosLogic();
 		
-		ElementosLogic elementoslogic = new ElementosLogic();
+		
 		try {
-			request.setAttribute("listaElementos", elementoslogic.getByTipoElemento(idtipoelemento));
+			request.setAttribute("tipoelemento", tipoelementoslogic.GetById(idtipoelemento));
 			
 			
 		} catch (AppDataException ade) {
@@ -54,7 +56,7 @@ public class TraerElementos extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/elegirelemento.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/finalizarreserva.jsp").forward(request, response);
 	}
 
 }

@@ -29,7 +29,7 @@ datepicker.regional.es = {
 	firstDay: 1,
 	isRTL: false,
 	showMonthAfterYear: false,
-	yearSuffix: "" };
+	yearSuffix: ""};
 datepicker.setDefaults( datepicker.regional.es );
 
 return datepicker.regional.es;

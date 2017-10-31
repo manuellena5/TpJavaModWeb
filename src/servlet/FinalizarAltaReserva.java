@@ -2,7 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,22 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.Persona;
-import negocio.ElementosLogic;
+import entidades.Reserva;
 import negocio.ReservasLogic;
 import util.AppDataException;
 
 /**
- * Servlet implementation class TraerReservasUsuario
+ * Servlet implementation class ValidarAltaReserva
  */
-@WebServlet({ "/TraerReservasUsuario", "/reservasusuario.servlet" })
-public class TraerReservasUsuario extends HttpServlet {
+@WebServlet({ "/FinalizarAltaReserva", "/finalizaraltareserva.servlet" })
+public class FinalizarAltaReserva extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TraerReservasUsuario() {
+    public FinalizarAltaReserva() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,7 +36,6 @@ public class TraerReservasUsuario extends HttpServlet {
 		
 		doPost(request,response);
 		
-		
 	}
 
 	/**
@@ -45,31 +43,44 @@ public class TraerReservasUsuario extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		Persona usuario = new Persona();
+		java.util.Date data = null;
+		SimpleDateFormat simple= new SimpleDateFormat("dd/MM/yyyy");
+		Reserva reserva = new Reserva();
 		ReservasLogic reservaslogic = new ReservasLogic();
 		
-		usuario = (Persona)request.getSession().getAttribute("user");
-		
-		try {
 			
-			request.setAttribute("listareservasusuario", reservaslogic.getByUsuario(usuario));
+			int idelemento = Integer.parseInt(request.getParameter("idelemento"));
+			int idpersona = Integer.parseInt(request.getParameter("idpersona"));
+			String detalle = request.getParameter("txtdetalle");
 			
-		}catch(SQLException sql){
+			try {
+				
+				String fecha = request.getParameter("fecharegistro");
+				data = simple.parse(fecha);
+				java.sql.Date fecharegistro = new java.sql.Date(data.getTime());
+				
+				reserva = reservaslogic.GetOne(idpersona, idelemento, fecharegistro);
+				
+				reserva.setDetalle(detalle);
+				reserva.setEstado("Activa");
+				
+				reservaslogic.update(reserva);
+			
+		}catch (SQLException sql) {
+			
 			System.out.println(sql.getMessage());
-		} catch (AppDataException ade) {
+			
+		}catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());
 		}
 		catch (Exception e) {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/reservasusuario.jsp").forward(request, response);
-	}		
+		request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
 		
 		
 		
-		
-	
+	}
 
 }
