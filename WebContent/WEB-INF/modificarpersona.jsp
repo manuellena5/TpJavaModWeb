@@ -73,7 +73,7 @@
 		
 		<% Persona persona = (Persona)request.getAttribute("persona"); %>
 		
-			<form action="FinalizarModificacionPersona.servlet" method="post" style="width:50%;">
+			<form name="frm" action="FinalizarModificacionPersona.servlet" method="post" style="width:50%;" onsubmit="return validarfrm();" >
 			
 					<div class="form-group">
 					    <label for="txtid">ID</label>
@@ -96,7 +96,17 @@
 					  
 					   <div class="form-group">
 					    <label for="txtapellido">Usuario</label>
-					    <input type="text" class="form-control" id="txtusuario" name="txtusuario" value="<%=persona.getUsuario() %>">
+					    <input type="text" size="20" class="form-control" id="txtusuario" name="txtusuario" value="<%=persona.getUsuario() %>">
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="txtpass">Password</label>
+					    <input type="text" size="20" class="form-control" id="txtpass" name="txtpass" value="<%=persona.getPassword() %>">
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="txtpass2">Repita el password</label>
+					    <input type="text" size="20" class="form-control" id="txtpass2" name="txtpass2" value="<%=persona.getPassword() %>">
 					  </div>
 					  
 					  
@@ -168,12 +178,13 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="style/js/validaform.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
     <script src="style/js/ie10-viewport-bug-workaround.js"></script>
     
    
-		
+
 	
 
   </body>

@@ -136,7 +136,7 @@ fechaActual = simple.format(FechaDelSistema);
 		
 		<div class="form-group">
 		<label>Fecha de fin de la reserva:</label>	
-		<input id="datepicker3" name="fechafin" type="text" required="">
+		<input id="datepicker3" name="fechafin" type="text" required="" onchange="validarfecha();">
 		</div>
 	  	
 	  	<button type="submit" class="btn btn-primary">Siguiente</button>
@@ -247,6 +247,7 @@ fechaActual = simple.format(FechaDelSistema);
     	
     	if (fechainicio > fechafin) {
 			alert("La fecha de fin debe ser mayor a la fecha de inicio");
+			document.getElementById("datepicker3").value = fechainicio;
 		}
     }
 	</script>

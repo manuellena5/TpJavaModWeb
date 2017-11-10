@@ -127,10 +127,12 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 		<div class="cuerpo">
 		
 			<form action="validaraltareservausuario.servlet" method="post">
-				<input style="diplay:none;" name="fecharegistro" value="<%=fecharegistro%>" >
-				<input style="diplay:none;" name="fechainicio" value="<%=fechainicio%>" >
-				<input style="diplay:none;" name="fechafin" value="<%=fechafin%>" >
-			
+				<input style="display:none;" name="fecharegistro" value="<%=fecharegistro%>" >
+				<input style="display:none;" name="fechainicio" value="<%=fechainicio%>" >
+				<input style="display:none;" name="fechafin" value="<%=fechafin%>" >
+				
+				
+					
 					<table class="table table-striped">
 					
 						<thead>
@@ -145,10 +147,21 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 						      <th scope="col"></th>
 						    </tr>
 						 </thead>
-						  <tbody>
-					<%
+						  
+						
+						<%
 						int count=0;
 						ArrayList<Elemento> listaElementos = (ArrayList<Elemento>)request.getAttribute("listaElementos");
+						if(listaElementos.isEmpty())
+						{%>
+						
+						<div class="alert alert-danger" role="alert">
+						  No se han encontrado elementos disponibles para esa fecha! Por favor seleccione otra
+						</div>	
+						<a href="javascript:window.history.back();">Volver a la pagina anterior</a>
+						 	
+						<!-- window.history.go(-2); -->
+						<%}else{
 						for(Elemento e : listaElementos){
 							count++;
 						%>
@@ -171,7 +184,7 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 							</div>
 						  </td>
 					    </tr>
-					    <% } %>
+					    <% }} %>
 					  </tbody>
 					</table>
 			</form>

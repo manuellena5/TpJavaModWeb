@@ -45,8 +45,8 @@ public class FinalizarModificacionPersona extends HttpServlet {
 		String apellido = request.getParameter("txtapellido");
 		String dni = request.getParameter("txtdni");
 		String usuario = request.getParameter("txtusuario");
+		String pass = request.getParameter("txtpass");
 		
-		System.out.println(usuario);
 		PersonaLogic personaLogic = new PersonaLogic();
 		
 		Persona per = new Persona();
@@ -58,7 +58,9 @@ public class FinalizarModificacionPersona extends HttpServlet {
 		per.setApellido(apellido);
 		per.setDni(dni);
 		per.setUsuario(usuario);
-		System.out.println(usuario);
+		per.setPassword(pass);
+
+
 		personaLogic.update(per);
 			
 		request.setAttribute("persona", per);

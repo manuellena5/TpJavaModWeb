@@ -174,7 +174,7 @@ public class DataCategorias {
 				
 				stmt.setString(1, cat.getDescripcion());
 			
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {
@@ -197,7 +197,7 @@ public class DataCategorias {
 						"delete from categorias where id_categoria=?");
 				
 				stmt.setInt(1, cat.getId_Categoria());
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {

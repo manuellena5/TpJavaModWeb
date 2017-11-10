@@ -213,7 +213,7 @@ public class DataPersona {
 				stmt.setBoolean(6, p.isHabilitado());
 				stmt.setInt(7, p.getCategoria().getId_Categoria());
 				stmt.setInt(8, p.getId_persona());
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {
@@ -236,7 +236,7 @@ public class DataPersona {
 						"delete from personas where id_persona=?");
 				
 				stmt.setInt(1, p.getId_persona());
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {

@@ -214,7 +214,7 @@ public class DataElementos {
 				stmt.setInt(6, el.getTipo_Elemento().getId_tipoelemento());
 				stmt.setInt(7, el.getId_elemento());
 			
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {
@@ -237,7 +237,7 @@ public class DataElementos {
 						"delete from elementos where id_elemento=?");
 				
 				stmt.setInt(1, el.getId_elemento());
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {

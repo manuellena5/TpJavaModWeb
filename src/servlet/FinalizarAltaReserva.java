@@ -61,8 +61,11 @@ public class FinalizarAltaReserva extends HttpServlet {
 				
 				reserva = reservaslogic.GetOne(idpersona, idelemento, fecharegistro);
 				
+				if (detalle.isEmpty()) {
+					detalle="Sin detalle";
+				}
+				
 				reserva.setDetalle(detalle);
-				reserva.setEstado("Activa");
 				
 				reservaslogic.update(reserva);
 			

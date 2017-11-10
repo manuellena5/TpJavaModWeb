@@ -178,7 +178,7 @@ public class DataTipo_Elementos {
 				stmt.setInt(2, te.getCantMaxReservasPend());
 				stmt.setInt(3, te.getId_tipoelemento());
 			
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {
@@ -201,7 +201,7 @@ public class DataTipo_Elementos {
 						"delete from tipo_elementos where id_tipoelemento=?");
 				
 				stmt.setInt(1, te.getId_tipoelemento());
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {

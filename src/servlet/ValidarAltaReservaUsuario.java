@@ -58,7 +58,8 @@ public class ValidarAltaReservaUsuario extends HttpServlet {
 		ElementosLogic elementoslogic = new ElementosLogic();
 		
 		
-			
+			String detalle = "Sin detalle";
+			String estado = "Activa";
 			
 			
 			try {
@@ -85,7 +86,8 @@ public class ValidarAltaReservaUsuario extends HttpServlet {
 				reserva.setFecha_inicio(fechainicio);
 				reserva.setFecha_fin(fechafin);
 				reserva.setPersona(per);
-				
+				reserva.setDetalle(detalle);
+				reserva.setEstado(estado);
 				
 				reservalogic.add(reserva);
 			} catch (SQLException sqle) {

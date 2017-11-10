@@ -122,7 +122,7 @@ rfecharegistro = simple.format(data);
 				</nav>
 		</div>
 		
-		<div class="cuerpo">
+		<div class="cuerpo container">
 		
 		
 		<form action="finalizaraltareserva.servlet" method="post">
@@ -133,20 +133,25 @@ rfecharegistro = simple.format(data);
 			<input id="idelemento" name="idelemento" type="text" style="display:none;"  value="<%=r.getElemento().getId_elemento()%>">
 			<input id="idpersona" name="idpersona" type="text" style="display:none;" value="<%=r.getPersona().getId_persona()%>">
 			
-			<p>Datos de la reserva: </p>
-			<p><%=r.getElemento().getTipo_Elemento().getNombre() %></p>
-			<p><%=r.getElemento().getNombre() %></p>
-			<p>Fecha inicio de la reserva: <%=r.getFecha_inicio() %></p>
-			<p>Fecha fin de la reserva: <%=r.getFecha_fin() %></p>
-			<p>Datos de la persona</p>
-			<p><%=r.getPersona().getNombre() %></p>
-			<p><%=r.getPersona().getApellido() %></p>
-			<p><%=r.getPersona().getDni() %></p>
-			
+			<div class="alert alert-success" role="alert">
+			  <h4 class="alert-heading">Su reserva se ha registrado correctamente</h4>
+			  <p><strong>Datos de la reserva: </strong></p>
+			  <hr>
+			    <p><%=r.getElemento().getTipo_Elemento().getNombre() %></p>
+				<p><%=r.getElemento().getNombre() %></p>
+				<p>Fecha inicio de la reserva: <em><%=r.getFecha_inicio() %></em></p>
+				<p>Fecha fin de la reserva: <em><%=r.getFecha_fin() %></em></p>
+				<p><strong>Datos de la persona</strong></p>
+				<hr>
+				<p>Nombre: <em><%=r.getPersona().getNombre() %></em></p>
+				<p>Apellido: <em><%=r.getPersona().getApellido() %></em></p>
+				<p>Dni: <em><%=r.getPersona().getDni() %></em></p>
+			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlTextarea1">¿Desea agregar algun detalle?</label>
-			    <textarea class="form-control detalle" name="txtdetalle"></textarea>
+			    <textarea class="form-control detalle" name="txtdetalle" placeholder="Sin detalle" value="Sin detalle"></textarea>
+			    <small class="form-text text-muted">*Dejar vacio en caso de no querer agregar un detalle</small>
 		  	</div>
 							  	
 		  	<button type="submit" class="btn btn-primary">Finalizar</button>

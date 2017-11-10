@@ -196,7 +196,7 @@ public class DataReservas {
 				stmt.setInt(6, res.getElemento().getId_elemento());
 				stmt.setDate(7,(Date) res.getFecha_registro());
 			
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {
@@ -221,7 +221,7 @@ public class DataReservas {
 				stmt.setInt(1, res.getPersona().getId_persona());
 				stmt.setInt(2, res.getElemento().getId_elemento());
 				stmt.setDate(3, (Date) res.getFecha_registro());
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {

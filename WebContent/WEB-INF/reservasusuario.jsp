@@ -149,7 +149,11 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 			      <th scope="row"><%=count%></th>
 			      <td><%=r.getElemento().getId_elemento()%></td>
 			      <td><%=r.getPersona().getId_persona()%></td>
-			      <td><%=r.getEstado()%></td>
+			      <% if(r.getEstado().equals("Cancelada")){
+			    	  %>
+			    	  <td class="table-danger"><%=r.getEstado()%></td>
+			      <%}else{ %>
+			      <td><%=r.getEstado()%></td><%} %>
 			      <td><%=r.getFecha_registro() %></td>
 			      <td><%=r.getFecha_inicio() %></td>
 			      <td><%=r.getFecha_fin() %></td>
@@ -159,6 +163,7 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 			      <td><%=r.getElemento().getTipo_Elemento().getNombre() %></td>
 			      <td><div class="btn-group" role="group" aria-label="Basic example">
 						  <% 
+						 
 						  java.sql.Date fechainicio = new java.sql.Date(r.getFecha_inicio().getTime());
 						 
 						  if(fechainicio.after(fechaActual) && r.getEstado().equals("Activa")){
