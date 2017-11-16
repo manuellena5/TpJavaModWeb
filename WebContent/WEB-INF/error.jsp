@@ -41,7 +41,7 @@
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
-					    	<a class="dropdown-item" href="traerreservasusuario.servlet">Mis reservas</a>
+					    	<a class="dropdown-item" href="reservasusuario.servlet">Mis reservas</a>
 					        <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>    
 					    </div>
 					  </li>
@@ -99,7 +99,8 @@
 
 		<div class="cuerpo">
 		
-			<h1>Bienvenido a "Biblioteca Popular Nuestro Pueblo"</h1>
+			<div class="alert alert-danger" role="alert"><%=request.getAttribute("Error").toString()%></div>	
+			<a href="javascript:window.history.back();">Volver a la pagina anterior</a>
 
 		</div> 
 		

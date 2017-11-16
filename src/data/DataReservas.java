@@ -79,7 +79,7 @@ public class DataReservas {
 					FactoryConexion.getInstancia().releaseConn();
 				} catch (SQLException e) {
 					
-					e.printStackTrace();
+					throw e;
 				}
 				
 					return reservas;
@@ -87,7 +87,6 @@ public class DataReservas {
 					
 				}
  
-	
 	public Reserva getByIdPersona(Reserva reservas) throws Exception{
 	
 			Reserva res = null;
@@ -95,7 +94,7 @@ public class DataReservas {
 			ResultSet rs = null;
 			
 			try {
-				 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+				 
 				stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 						"select p.id_persona, e.id_elemento, r.fecha_registro, r.fecha_inicio, r.fecha_fin, r.detalle, r.estado from reservas r "
 						+ "inner join elementos e on e.id_elemento=r.id_elemento inner join personas p on p.id_persona=r.id_persona where r.id_persona=?");
@@ -139,14 +138,12 @@ public class DataReservas {
 					if (stmt != null) {stmt.close();}
 					FactoryConexion.getInstancia().releaseConn();	
 				} catch (SQLException e) {
-					e.printStackTrace();
+					throw e;
 				}
 			
 			return res;
 		}
 	
-	
-		
 	public void add(Reserva res) throws Exception{
 			PreparedStatement stmt=null;
 			ResultSet keyResultSet=null;
@@ -176,7 +173,7 @@ public class DataReservas {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
@@ -207,7 +204,7 @@ public class DataReservas {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		} 
 		
@@ -232,7 +229,7 @@ public class DataReservas {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		} 
 		 
@@ -274,7 +271,7 @@ public class DataReservas {
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
 				
-				e.printStackTrace();
+				throw e;
 			}
 			
 				return cantReservasPendientesPersona;
@@ -356,7 +353,7 @@ public class DataReservas {
 					if (stmt != null) {stmt.close();}
 					FactoryConexion.getInstancia().releaseConn();	
 				} catch (SQLException e) {
-					e.printStackTrace();
+					throw e;
 				}
 			
 			return res;
@@ -443,7 +440,7 @@ public class DataReservas {
 				if (stmt != null) {stmt.close();}
 				FactoryConexion.getInstancia().releaseConn();	
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		
 		return reservas;
@@ -511,7 +508,7 @@ public class DataReservas {
 				if (stmt != null) {stmt.close();}
 				FactoryConexion.getInstancia().releaseConn();	
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		
 		return lista;

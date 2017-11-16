@@ -21,21 +21,22 @@ public class FactoryConexion {
 
 	
 	
-	private FactoryConexion(){
+	private FactoryConexion() throws ClassNotFoundException{
 		
 		try {
 			/*new com.mysql.jdbc.Driver();*/
 			Class.forName(driver);
 			
 		} catch (ClassNotFoundException e) {
-			//e.printStackTrace();  ESTA PARTE TIRA ERROR Y ABRE LA CONSOLA
+			
+			throw e;
 			
 			
 		}
 		
 	}
 	
-	public static FactoryConexion getInstancia(){
+	public static FactoryConexion getInstancia() throws ClassNotFoundException{
 				
 		if (FactoryConexion.instancia == null) {
 		

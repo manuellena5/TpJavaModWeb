@@ -79,9 +79,7 @@ public class ReservasLogic {
 	}
 	
 	
-
-	
-		public ArrayList<Reserva> GetAll() throws Exception{
+	public ArrayList<Reserva> GetAll() throws Exception{
 	
 			return reservasD.getAll();
 			
