@@ -139,6 +139,18 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 			<%
 				int count=0;
 				ArrayList<Reserva> listaReservas = (ArrayList<Reserva>)request.getAttribute("listareservasusuario");
+				if(listaReservas.isEmpty())
+				{%>
+				
+				<div class="alert alert-danger" role="alert">
+				  No se han encontrado reservas!
+				</div>	
+				<a href="javascript:window.history.back();">Volver a la pagina anterior</a>
+				 	
+				<!-- window.history.go(-2); -->
+				<%}else{
+				
+				
 				for(Reserva r : listaReservas){
 					count++;
 				%>
@@ -175,7 +187,7 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 					</div>
 				  </td>
 			    </tr>
-			    <% } %>
+			    <% }} %>
 			  </tbody>
 			</table>
 

@@ -1,29 +1,26 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.Reserva;
-import negocio.ReservasLogic;
-import util.AppDataException;
+import entidades.Persona;
+import negocio.PersonaLogic;
 
 /**
- * Servlet implementation class ListadoReservas
+ * Servlet implementation class ModificarMisDatos
  */
-@WebServlet({ "/ListadoReservas.servlet"})
-public class ListadoReservas extends HttpServlet {
+@WebServlet({ "/ModificarMisDatos", "/modificarmisdatos.servlet" })
+public class ModificarMisDatos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ListadoReservas() {
+    public ModificarMisDatos() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,43 +29,30 @@ public class ListadoReservas extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-						
-		doPost(request,response);
 		
+		doPost(request,response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		int idpersona = ((Persona)request.getSession().getAttribute("user")).getId_persona();
 		
-		ReservasLogic reservalogic = new ReservasLogic();
-		ArrayList<Reserva> listadoreservas;		
 		
+		PersonaLogic personaLogic = new PersonaLogic();
+		Persona persona = new Persona();
 		try {
+			persona = personaLogic.GetById(idpersona);
 			
-			listadoreservas = new ArrayList<>();
+			request.setAttribute("persona", persona);
 			
-			listadoreservas = reservalogic.GetAll();
-			
-			listadoreservas = reservalogic.actualizarlistado(listadoreservas);
-			
-			
-			
-			request.setAttribute("listaReservas", listadoreservas);
-			
-			
-			
-		} catch (AppDataException ade) {
-			request.setAttribute("Error", ade.getMessage());
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			response.setStatus(502);
 		}
-		
-		request.getRequestDispatcher("WEB-INF/verreservas.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/modificarpersona.jsp").forward(request, response);
 	}
 	
-	
-
 }
+

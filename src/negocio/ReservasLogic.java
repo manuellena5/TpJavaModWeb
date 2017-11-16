@@ -3,6 +3,7 @@ package negocio;
 import java.util.ArrayList;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import data.DataReservas;
 import entidades.Elemento;
@@ -80,7 +81,7 @@ public class ReservasLogic {
 	
 
 	
-	public ArrayList<Reserva> GetAll() throws Exception{
+		public ArrayList<Reserva> GetAll() throws Exception{
 	
 			return reservasD.getAll();
 			
@@ -110,7 +111,29 @@ public class ReservasLogic {
 			
 			
 		}
+		
+		
+		public ArrayList<Reserva> actualizarlistado(ArrayList<Reserva> listado) throws Exception{
+		
+			java.util.Date FechaDelSistema = new java.util.Date(); /*Tomo la hora del sistema*/
+			java.sql.Date fechaActual = new java.sql.Date(FechaDelSistema.getTime()); /* A la hora del sistema la convierto en el formato que trae la base */
 
+			
+			
+			for (Reserva r : listado) {
+				
+				java.sql.Date fechafin = new java.sql.Date(r.getFecha_fin().getTime());
+				 
+				  if(fechafin.before(fechaActual) && r.getEstado().equals("Activa")){	
+						
+					  r.setEstado("Sin devolver");
+						
+					}
+					
+				}
+			
+			return listado;
+		}
 
 
 

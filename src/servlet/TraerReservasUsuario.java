@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Persona;
+import entidades.Reserva;
 import negocio.ElementosLogic;
 import negocio.ReservasLogic;
 import util.AppDataException;
@@ -48,12 +50,17 @@ public class TraerReservasUsuario extends HttpServlet {
 		
 		Persona usuario = new Persona();
 		ReservasLogic reservaslogic = new ReservasLogic();
-		
+		ArrayList<Reserva> listadoreservas;
 		usuario = (Persona)request.getSession().getAttribute("user");
 		
 		try {
 			
-			request.setAttribute("listareservasusuario", reservaslogic.getByUsuario(usuario));
+			listadoreservas = new ArrayList<Reserva>();
+			
+			listadoreservas = reservaslogic.getByUsuario(usuario);
+			listadoreservas = reservaslogic.actualizarlistado(listadoreservas);
+			
+			request.setAttribute("listareservasusuario", listadoreservas);
 			
 		}catch(SQLException sql){
 			System.out.println(sql.getMessage());
