@@ -140,6 +140,7 @@ fechaActual = simple.format(FechaDelSistema);
 		</div>
 	  	
 	  	<button type="submit" class="btn btn-primary">Siguiente</button>
+	  	<button type="submit" class="btn btn-primary" name="btnatras" onclick = "javascript:window.history.back();">Atras</button>
 	  	</form>
 			
 			

@@ -179,6 +179,7 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 								  <%} 
 								  else{%>
 								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=e.getId_elemento()%>">Elegir</button>
+								  <button type="submit" class="btn btn-primary" name="btnatras" onclick = "javascript:window.history.back();">Atras</button>
 								  <%} %>
 								  
 							</div>

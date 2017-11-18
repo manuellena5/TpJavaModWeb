@@ -133,6 +133,7 @@
 			 </div>
 			
 			 <button type="submit" class="btn btn-primary" name="btnagregar">Agregar</button>
+			 <a class="btn btn-primary" href="Start">Cancelar</a>
 			
 			
 			</form>

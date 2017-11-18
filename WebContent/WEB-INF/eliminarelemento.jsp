@@ -107,7 +107,7 @@
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
 								  <button type="submit" class="btn btn-outline-danger" name="btneleccion" value="<%=elemento.getId_elemento()%>">Eliminar</button>
-						  		  <a class="btn btn-outline-secondary" href="Start">Cancelar</a>
+						  		  <a class="btn btn btn-secondary" href="Start">Cancelar</a>
 					  </div>
 					
 			</form>
