@@ -156,7 +156,11 @@ fechaActual = simple.format(FechaDelSistema);
 		</div>
 	  	
 	  	<button type="submit" class="btn btn-primary">Siguiente</button>
+<<<<<<< HEAD
 	  	<%} %>
+=======
+	  	<button type="submit" class="btn btn-primary" name="btnatras" onclick = "javascript:window.history.back();">Atras</button>
+>>>>>>> branch 'master' of https://github.com/manuellena5/TpJavaModWeb.git
 	  	</form>
 			
 			
