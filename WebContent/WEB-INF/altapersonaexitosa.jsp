@@ -87,7 +87,7 @@
 		
 			
 			<div class="alert alert-success" role="alert">
-				<h3>Su ha registrado el elemento correctamente</h3>
+				<h3>Su ha registrado la persona correctamente</h3>
 			   <p>Id: <%=((Persona)request.getAttribute("persona")).getId_persona()%></p>
 			   <p>Nombre: <%=((Persona)request.getAttribute("persona")).getNombre()%></p>
 			   <p>Apellido: <%=((Persona)request.getAttribute("persona")).getApellido()%></p>

@@ -69,12 +69,14 @@ public class FinalizarAltaReserva extends HttpServlet {
 				
 				reservaslogic.update(reserva);
 			
-		}catch (SQLException sql) {
-			
-			System.out.println(sql.getMessage());
-			
-		}catch (AppDataException ade) {
+		}catch (SQLException e) {
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		} catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());
+			System.out.println(ade.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
 			response.setStatus(502);

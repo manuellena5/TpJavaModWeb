@@ -99,7 +99,7 @@
 					    <input type="text" class="form-control" id="txtgenero" name="txtgenero" value="<%=elemento.getGenero() %>" readonly="true">
 					  </div>
 					  
-					  <div class="form-group">
+					  <div class="form-group" style="display:none;">
 					    <label for="txtapellido">Stock</label>
 					    <input type="text" class="form-control" id="txtstock" name="txtstock" value="<%=elemento.getStock() %>" readonly="true">
 					  </div>

@@ -54,7 +54,7 @@ public class DataElementos {
 					FactoryConexion.getInstancia().releaseConn();
 				} catch (SQLException e) {
 					
-					e.printStackTrace();
+					throw e;
 				}
 				
 					return elementos;
@@ -70,7 +70,7 @@ public class DataElementos {
 			ResultSet rs = null;
 			
 			try {
-				 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+				 
 				stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 						"select e.id_elemento, e.nombre, e.stock, e.autor, e.genero, e.descripcion, e.id_tipoelementos from elementos e "
 						+ "inner join tipo_elementos te on e.id_tipoelemento=te.id_tipoelemento where e.nombre=?");
@@ -80,7 +80,7 @@ public class DataElementos {
 				
 				if (rs!=null && rs.next()) {
 					el = new Elemento();
-					el.setId_elemento(rs.getInt("id_elemento"));   /* el dato que va como argumento tiene que ser igual al que esta en la base? */
+					el.setId_elemento(rs.getInt("id_elemento"));   
 					el.setNombre(rs.getString("nombre"));
 					el.setStock(rs.getInt("stock"));
 					el.setAutor(rs.getString("autor"));
@@ -103,7 +103,7 @@ public class DataElementos {
 					if (stmt != null) {stmt.close();}
 					FactoryConexion.getInstancia().releaseConn();	
 				} catch (SQLException e) {
-					e.printStackTrace();
+					throw e;
 				}
 			
 			return el;
@@ -116,7 +116,7 @@ public class DataElementos {
 			ResultSet rs = null;
 			
 			try {
-				 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+				 
 				stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 						"select e.`id_elemento`,e.`nombre`,e.`autor`,e.`genero`,e.`descripcion`,e.`stock`,te.`id_tipoelemento`,te.`nombre` nombretipoelemento,te.`cantMaxReservasPend` from elementos e inner join `tipo_elementos` te on te.`id_tipoelemento` = e.`id_tipoelemento` where e.`id_elemento`=?");
 						
@@ -126,7 +126,7 @@ public class DataElementos {
 				if (rs!=null && rs.next()) {
 					el = new Elemento();
 					te = new Tipo_Elemento();
-					el.setId_elemento(rs.getInt("id_elemento"));   /* el dato que va como argumento tiene que ser igual al que esta en la base? */
+					el.setId_elemento(rs.getInt("id_elemento"));   
 					el.setNombre(rs.getString("nombre"));
 					el.setAutor(rs.getString("autor"));
 					el.setGenero(rs.getString("genero"));
@@ -155,7 +155,7 @@ public class DataElementos {
 					if (stmt != null) {stmt.close();}
 					FactoryConexion.getInstancia().releaseConn();	
 				} catch (SQLException e) {
-					e.printStackTrace();
+					throw e;
 				}
 			
 			return el;
@@ -195,7 +195,7 @@ public class DataElementos {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
@@ -225,7 +225,7 @@ public class DataElementos {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		} 
 		
@@ -248,7 +248,7 @@ public class DataElementos {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		} 
 
@@ -301,7 +301,7 @@ public class DataElementos {
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
 				
-				e.printStackTrace();
+				throw e;
 			}
 			
 				return elementos;

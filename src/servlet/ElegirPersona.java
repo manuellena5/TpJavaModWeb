@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,23 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.Elemento;
-import entidades.Tipo_Elemento;
-import negocio.ElementosLogic;
-import negocio.Tipo_ElementosLogic;
+import entidades.Persona;
+import negocio.PersonaLogic;
 import util.AppDataException;
 
 /**
- * Servlet implementation class ValidarElemento
+ * Servlet implementation class ElegirPersona
  */
-@WebServlet({ "/ValidarElemento", "/validarelemento.servlet" })
-public class ValidarElemento extends HttpServlet {
+@WebServlet({ "/ElegirPersona", "/elegirpersona.servlet" })
+public class ElegirPersona extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ValidarElemento() {
+    public ElegirPersona() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +33,7 @@ public class ValidarElemento extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		doPost(request,response);
 		
 	}
@@ -43,42 +43,16 @@ public class ValidarElemento extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Tipo_ElementosLogic tipoelementoslogic = new Tipo_ElementosLogic();
-		Tipo_Elemento tipoelemento = new Tipo_Elemento();
-		Elemento elemento = new Elemento();
-		ElementosLogic elementoslogic = new ElementosLogic();
-		
-		
+		PersonaLogic personalogic = new PersonaLogic();
+		ArrayList<Persona> listadopersonas = new ArrayList<>();
 		
 		try {
-			String nombre = request.getParameter("txtnombre");
-
-			String descripcion = request.getParameter("txtdescripcion");
-
-			String autor = request.getParameter("txtautor");
-
-			String genero = request.getParameter("txtgenero");
-
-			/*int stock = Integer.parseInt(request.getParameter("txtstock"));*/
 			
-			int stock = 1;
-
-			int idtipoelemento = Integer.parseInt(request.getParameter("txtidtipoelemento"));
-
-			tipoelemento = tipoelementoslogic.GetById(idtipoelemento);
+			listadopersonas = personalogic.GetAll();
 			
-			elemento.setTipo_Elemento(tipoelemento);
-			elemento.setStock(stock);
-			elemento.setGenero(genero);
-			elemento.setAutor(autor);
-			elemento.setDescripcion(descripcion);
-			elemento.setNombre(nombre);
+			request.setAttribute("listaPersonas",listadopersonas);
 			
-			elementoslogic.add(elemento);
-			
-			request.setAttribute("elemento", elemento);
-		
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
@@ -90,10 +64,11 @@ public class ValidarElemento extends HttpServlet {
 		catch (Exception e) {
 			response.setStatus(502);
 		}
-		request.getRequestDispatcher("/WEB-INF/altaelementoexitosa.jsp").forward(request, response);
 		
+		request.getRequestDispatcher("WEB-INF/elegirpersona.jsp").forward(request, response);
+	}
 		
 		
 	}
 
-}
+

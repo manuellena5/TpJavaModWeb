@@ -76,11 +76,12 @@
 
 		<div class="cuerpo">
 		
-			<form action="validarpersona.servlet" method="post" style="width:50%;">
+			<form name="frm" action="validarpersona.servlet" method="post" style="width:50%;" onsubmit="return validarfrmNuevapersona();">
 			
 			<div class="form-group">
-		    	<select id="eleccion" name="txtidcategoria" class="form-control">
-			        <option selected>Elija...</option>
+		    	<label>Categoria </label>
+		    	<select id="txtidcategoria" name="txtidcategoria" class="form-control">
+			        <option selected>Elija una categoria...</option>
 			        <% ArrayList<Categoria> lista = (ArrayList<Categoria>)request.getAttribute("listadocategorias"); 
 				    for(Categoria cat : lista){ %> 
 			        <option value="<%=cat.getId_Categoria()%>"><%=cat.getDescripcion()%></option> 
@@ -89,40 +90,43 @@
 		    </div>
 		    
 		    <div class="form-group">
-			    <label for="exampleFormControlInput1">Nombre: </label>
-			    <input type="text" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su nombre" required="">
+			    <label for="exampleFormControlInput1">*Nombre: </label>
+			    <input type="text" name="txtnombre" id="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su nombre">
 			</div>
 			
 			 <div class="form-group">
-			    <label for="exampleFormControlInput1">Apellido: </label>
-			    <input type="text" name="txtapellido" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su apellido" required="">
+			    <label for="exampleFormControlInput1">*Apellido: </label>
+			    <input type="text" name="txtapellido" id="txtapellido" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su apellido">
 			</div>
 		    
 		    <div class="form-group">
-			    <label for="exampleFormControlInput1">Dni: </label>
-			    <input type="text" name="txtdni" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese dni" required="">
+			    <label for="exampleFormControlInput1">*Dni: </label>
+			    <input type="text" name="txtdni" id="txtdni" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese dni">
 			</div>
 		    
 		     <div class="form-group">
-			    <label for="exampleFormControlInput1">Usuario: </label>
-			    <input type="text" name="txtusuario" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre de usuario" required="">
+			    <label for="exampleFormControlInput1">*Usuario: </label>
+			    <input type="text" name="txtusuario" id="txtusuario" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre de usuario">
+			    <small class="form-text text-muted">El nombre de usuario debe contener entre 4 y 20 caracteres</small>
 			</div>	
 			
 			<div class="form-group">
-			    <label for="exampleFormControlInput1">Contraseña: </label>
-			    <input type="password" name="txtpassword" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese una contraseña" required="">
+			    <label for="exampleFormControlInput1">*Contraseña: </label>
+			    <input type="password" name="txtpass" id="txtpass" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese una contraseña">
+			    <small class="form-text text-muted">Su contraseña debe contener entre 8 y 20 caracteres</small>
 			</div>
 			
 			<div class="form-group">
-			    <label for="exampleFormControlInput1">Repita su contraseña: </label>
-			    <input type="password" name="txtpassword2" class="form-control" id="exampleFormControlInput1" placeholder="Repita su contraseña" required="">
+			    <label for="exampleFormControlInput1">*Repita su contraseña: </label>
+			    <input type="password" name="txtpass2" id="txtpass2" class="form-control" id="exampleFormControlInput1" placeholder="Repita su contraseña">
+			    <small class="form-text text-muted">Su contraseña debe contener entre 8 y 20 caracteres</small>
 			</div>
 			
 			<div class="form-group">
-				<label for="exampleFormControlInput1">Habilitado: </label>
+				<label for="exampleFormControlInput1">*Habilitado: </label>
 				<div class="form-check form-check-inline">
 				  <label class="form-check-label">
-	    			<input class="form-check-input" type="radio" name="estado" id="inlineRadio1" value="true">Si
+	    			<input class="form-check-input" type="radio" name="estado" id="inlineRadio1" value="true" checked>Si
 					  </label>
 					</div>
 					<div class="form-check form-check-inline">
@@ -199,6 +203,7 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="style/js/validaform.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
     <script src="style/js/ie10-viewport-bug-workaround.js"></script>

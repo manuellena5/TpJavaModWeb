@@ -81,7 +81,7 @@
 					  </div>
 					  <div class="form-group formulario">
 					    <label for="txtusuario">Nombre</label>
-					    <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="<%=elemento.getNombre()%>">
+					    <input type="text" class="form-control" id="txtnombre" name="txtnombre" required="" value="<%=elemento.getNombre()%>">
 					  </div>	
 
 					  <div class="form-group">
@@ -99,7 +99,7 @@
 					    <input type="text" class="form-control" id="txtgenero" name="txtgenero" value="<%=elemento.getGenero() %>">
 					  </div>
 					  
-					  <div class="form-group">
+					  <div class="form-group" style="display:none;">
 					    <label for="txtapellido">Stock</label>
 					    <input type="text" class="form-control" id="txtstock" name="txtstock" value="<%=elemento.getStock() %>">
 					  </div>

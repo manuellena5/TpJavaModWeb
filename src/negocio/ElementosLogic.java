@@ -33,7 +33,7 @@ public class ElementosLogic {
 	}
 	
 	public void delete(Elemento el)throws Exception{
-		//this.pers.remove(this.getByDni(el));
+		
 		this.elementosD.delete(el);
 	}
 	
@@ -68,7 +68,7 @@ public class ElementosLogic {
 	}
 		
 	
-		public ArrayList<Elemento> getByTipoElemento(int idtipoelemento) throws Exception{
+	public ArrayList<Elemento> getByTipoElemento(int idtipoelemento) throws Exception{
 			
 			Tipo_Elemento te = new Tipo_Elemento();
 			te.setId_tipoelemento(idtipoelemento);

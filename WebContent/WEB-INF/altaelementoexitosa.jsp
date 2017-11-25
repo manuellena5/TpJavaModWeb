@@ -95,7 +95,8 @@
 				<p>Autor: <%=((Elemento)request.getAttribute("elemento")).getAutor()%></p>	
 				<p>Genero: <%=((Elemento)request.getAttribute("elemento")).getGenero()%></p>	
 				<p>Descripcion: <%=((Elemento)request.getAttribute("elemento")).getDescripcion()%></p>
-				<p>Stock: <%=((Elemento)request.getAttribute("elemento")).getStock()%></p>		
+				
+				<%-- <p>Stock: <%=((Elemento)request.getAttribute("elemento")).getStock()%></p>	 --%>	
 			  
 			   <a href="Start" class="alert-link">Volver a pagina principal</a>
 			</div>

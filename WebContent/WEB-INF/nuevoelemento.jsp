@@ -73,13 +73,14 @@
 
 		<div class="cuerpo">
 		
-			<form action="validarelemento.servlet" method="post" style="width:50%;">
+			<form action="validarelemento.servlet" method="post" style="width:50%;" onsubmit="return validarNuevoElemento();">
 		    
 		    
 		    
 		     <div class="form-group">
-		    	<select id="eleccion" name="txtidtipoelemento" class="form-control">
-			        <option selected>Elija...</option>
+		    	<label>*Seleccione un tipo de elemento: </label>
+		    	<select id="txtidtipoelemento" name="txtidtipoelemento" class="form-control">
+			        <option selected>Elija un tipo de elemento...</option>
 			        <% ArrayList<Tipo_Elemento> lista = (ArrayList<Tipo_Elemento>)request.getAttribute("listadoTipoelementos"); 
 				    for(Tipo_Elemento te : lista){ %>
 			        <option value="<%=te.getId_tipoelemento()%>"><%=te.getNombre()%></option>  
@@ -90,28 +91,24 @@
 		    
 		    
 		    <div class="form-group">
-			    <label for="exampleFormControlInput1">Nombre elemento: </label>
-			    <input type="text" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre del elemento" required="">
+			    <label for="exampleFormControlInput1">*Nombre elemento: </label>
+			    <input type="text" id="txtnombre" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre del elemento">
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Autor: </label>
-			    <input type="text" name="txtautor" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese autor" required="">
+			    <input type="text" id="txtautor" name="txtautor" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese autor">
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Genero: </label>
-			    <input type="text" name="txtgenero" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese genero" required="">
+			    <input type="text" id="txtgenero" name="txtgenero" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese genero">
 			</div>
 			
-			<div class="form-group">
-			    <label for="exampleFormControlInput1">Stock: </label>
-			    <input type="text" name="txtstock" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese stock inicial" required="">
-			</div>
 			
 			<div class="form-group">
 		    <label for="exampleFormControlTextarea1">Descripcion :</label>
-		    <textarea class="form-control detalle" name="txtdescripcion" placeholder="Ingrese una descripcion" ></textarea>
+		    <textarea class="form-control detalle" id="txtdescripcion" name="txtdescripcion" placeholder="Ingrese una descripcion" ></textarea>
 	  	</div>
 			
 			
@@ -182,6 +179,7 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
+     <script type="text/javascript" src="style/js/validaform.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
     <script src="style/js/ie10-viewport-bug-workaround.js"></script>

@@ -15,6 +15,7 @@ import entidades.Elemento;
 import entidades.Persona;
 import entidades.Reserva;
 import negocio.ElementosLogic;
+import negocio.PersonaLogic;
 import negocio.ReservasLogic;
 import util.AppDataException;
 
@@ -50,6 +51,12 @@ public class TraerElementosDisponibles extends HttpServlet {
 		java.util.Date data = null;
 		SimpleDateFormat simple= new SimpleDateFormat("dd/MM/yyyy");
 		
+		
+		
+		
+		PersonaLogic personaLogic = new PersonaLogic();
+		Persona persona = new Persona();
+		
 		try {
 			
 			String fecha = request.getParameter("fechainicio");					
@@ -66,21 +73,26 @@ public class TraerElementosDisponibles extends HttpServlet {
 			
 			
 			int idtipoelemento = Integer.parseInt(request.getParameter("idtipoelemento"));
-			int idpersona = ((Persona)request.getSession().getAttribute("user")).getId_persona();
+			int idpersona = Integer.parseInt(request.getParameter("idpersona"));
 			
 			request.setAttribute("fechainicio", fechainicio);
 			request.setAttribute("fecharegistro", fecharegistro);
 			request.setAttribute("fechafin", fechafin);
 			
+			persona = personaLogic.GetById(idpersona);
+			
+			request.setAttribute("persona", persona);
+			
 			listaelementos = reservalogic.getElementosSinReserva(fechainicio, fechafin,fecharegistro, idtipoelemento,idpersona);
 			
-		}catch (SQLException sqle) {
-				System.out.println(sqle.getMessage());
-			}
-			
-				
-		 catch (AppDataException ade) {
+		} catch (SQLException e) {
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		} catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());
+			System.out.println(ade.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
 			response.setStatus(502);

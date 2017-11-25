@@ -1,8 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="entidades.Elemento"%>
-<%@page import="entidades.Tipo_Elemento"%>
 <%@page import="entidades.Persona"%>
 <%@page import="java.util.ArrayList"%>
+
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -73,56 +72,50 @@
 				</nav>
 		</div>
 
+
 		<div class="cuerpo">
 		
-						
-		<table class="table table-striped">
+ 		<table class="table table-striped">
 		
 				<thead>
 				    <tr>
-				      <th scope="col">Elemento</th>
-				      <th scope="col">Id elemento</th>
+				      <th scope="col">Persona</th>
+				      <th scope="col">Id Persona</th>
 				      <th scope="col">Nombre</th>
-				      <th scope="col">Descripcion</th>
-				      <th scope="col">Autor</th>
-				      <th scope="col">Genero</th>
-				      <th scope="col">Stock</th>
-				      <th scope="col">Tipo de elemento</th>
-				      <th scope="col">Id tipo de elemento</th>
-				      <th scope="col">Cant max reservas pendientes</th>
-				      <th scope="col"></th>
+				      <th scope="col">Apellido</th>
+				      <th scope="col">Dni</th>
+				      <th scope="col">Usuario</th>
+				      <th scope="col">Categoria</th>
 				    </tr>
 				 </thead>
-				  <tbody>
+				 <tbody>
+				  
 			<%
 				int count=0;
-				ArrayList<Elemento> listaElementos = (ArrayList<Elemento>)request.getAttribute("listaElementos");
-				for(Elemento e : listaElementos){
-					count++;
+				ArrayList<Persona> listaPers = (ArrayList<Persona>)request.getAttribute("listaPersonas");
+				for(Persona p : listaPers){
+				count++;
 				%>
 			
 				  
 			  
 			    <tr>
 			      <th scope="row"><%=count%></th>
-			      <td><%=e.getId_elemento()%></td>
-			      <td><%=e.getNombre() %></td>
-			      <td><%=e.getDescripcion() %></td>
-			      <td><%=e.getAutor() %></td>
-			      <td><%=e.getGenero() %></td>
-			      <%-- <td><%=e.getStock() %></td> --%>
-			      <td><%=e.getTipo_Elemento().getNombre() %></td>
-			      <td><%=e.getTipo_Elemento().getId_tipoelemento() %></td>
-			      <td><%=e.getTipo_Elemento().getCantMaxReservasPend() %></td>
+			      <td><%=p.getId_persona() %></td>
+			      <td><%=p.getNombre() %></td>
+			      <td><%=p.getApellido() %></td>
+			      <td><%=p.getDni() %></td>
+			      <td><%=p.getUsuario() %></td>
+			      <td><%=p.getCategoria().getDescripcion() %></td>
 			      <td><div class="btn-group" role="group" aria-label="Basic example">
-						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionElemento.servlet?id=<%=e.getId_elemento() %>">Modificar</a>
-						  <a class="btn btn-secondary" name="lnkeliminar" href="EliminacionElemento.servlet?id=<%=e.getId_elemento() %>">Eliminar</a>
+						  <a class="btn btn-secondary" name="lnkmodificar" href="TraerTipoElementos.servlet?idpersona=<%=p.getId_persona() %>">Elegir</a>
+						
 					</div>
 				  </td>
 			    </tr>
 			    <% } %>
 			  </tbody>
-			</table>
+			</table> 
 		</div> 
 		
 		<footer class="pie container-fluid">

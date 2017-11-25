@@ -99,7 +99,7 @@
 		
 		<% Persona persona = (Persona)request.getAttribute("persona"); %>
 		
-			<form name="frm" action="FinalizarModificacionPersona.servlet" method="post" style="width:50%;" onsubmit="return validarfrm();" >
+			<form name="frm" action="FinalizarModificacionPersona.servlet" method="post" style="width:50%;" onsubmit="return validarfrmModificarPersona();" >
 			
 					<div class="form-group">
 					    <label for="txtid">ID</label>
@@ -135,6 +135,22 @@
 					    <input type="text" size="20" class="form-control" id="txtpass2" name="txtpass2" value="<%=persona.getPassword() %>">
 					  </div>
 					  
+					  <%if(((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Administrador")){ %>
+					  
+					  <div class="form-group">
+						<label for="exampleFormControlInput1">*Habilitado: </label>
+						<div class="form-check form-check-inline">
+						  <label class="form-check-label">
+			    			<input class="form-check-input" type="radio" name="estado" id="inlineRadio1" value="true" <%if(persona.isHabilitado()){%> checked<%}%>>Si
+							  </label>
+							</div>
+							<div class="form-check form-check-inline">
+							  <label class="form-check-label">
+							    <input class="form-check-input" type="radio" name="estado" id="inlineRadio2" value="false" <%if(!persona.isHabilitado()){%> checked<%}%>>No
+							  </label>
+						 </div>
+					 </div>
+					 <%} %>
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
 								  <button type="submit" class="btn btn-primary" name="btneleccion" value="<%=persona.getId_persona()%>">Aceptar</button>

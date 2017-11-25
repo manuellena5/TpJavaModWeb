@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidades.Persona;
 import negocio.PersonaLogic;
+import negocio.ReservasLogic;
 import util.AppDataException;
 
 import org.apache.logging.log4j.LogManager;
@@ -46,12 +47,13 @@ public class Start extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String errores = "";
 		Persona per= null;
+		ReservasLogic reservaslogic = new ReservasLogic();
+		
+		
 		try {
 			if(request.getSession().getAttribute("user") != null){
 				
 				per = ((Persona)request.getSession().getAttribute("user"));
-				
-				logger.log(Level.INFO,"log in " + per.getDni() + " " + per.getNombre() + " " + per.getApellido());
 				
 				request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
 			}
@@ -73,19 +75,22 @@ public class Start extends HttpServlet {
 					request.setAttribute("errores", errores);
 					request.getRequestDispatcher("login.jsp").forward(request, response);
 				//request.getRequestDispatcher("WEB-INF/loginincorrecto.jsp").forward(request, response);
+					
 			}else{
 			request.getSession().setAttribute("user",pers);
 			
 			logger.log(Level.INFO,"log in " + pers.getDni() + " " + pers.getNombre() + " " + pers.getApellido());
 			
+			reservaslogic.actualizarEstadoReservas();
 			
 			request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
 			}
 			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+		
+		
 		
 	}
 

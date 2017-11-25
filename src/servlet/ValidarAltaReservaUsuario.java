@@ -15,6 +15,7 @@ import entidades.Elemento;
 import entidades.Persona;
 import entidades.Reserva;
 import negocio.ElementosLogic;
+import negocio.PersonaLogic;
 import negocio.ReservasLogic;
 import util.AppDataException;
 
@@ -52,7 +53,8 @@ public class ValidarAltaReservaUsuario extends HttpServlet {
 		SimpleDateFormat simple= new SimpleDateFormat("dd/MM/yyyy");
 		ReservasLogic reservalogic = new ReservasLogic();
 		Reserva reserva = new Reserva();
-		Persona per = new Persona();
+		PersonaLogic personaLogic = new PersonaLogic();
+		Persona persona = new Persona();
 		
 		
 		ElementosLogic elementoslogic = new ElementosLogic();
@@ -77,7 +79,8 @@ public class ValidarAltaReservaUsuario extends HttpServlet {
 				java.sql.Date fechafin = new java.sql.Date(data.getTime());
 				
 				
-				per = (Persona)request.getSession().getAttribute("user");
+				int idpersona = Integer.parseInt(request.getParameter("idpersona"));
+				persona = personaLogic.GetById(idpersona);
 				
 				elemento = elementoslogic.GetOne(idelemento);
 				
@@ -85,15 +88,20 @@ public class ValidarAltaReservaUsuario extends HttpServlet {
 				reserva.setFecha_registro(fecharegistro);
 				reserva.setFecha_inicio(fechainicio);
 				reserva.setFecha_fin(fechafin);
-				reserva.setPersona(per);
+				reserva.setPersona(persona);
 				reserva.setDetalle(detalle);
 				reserva.setEstado(estado);
 				
 				reservalogic.add(reserva);
-			} catch (SQLException sqle) {
-				System.out.println(sqle.getMessage());
-			}catch (AppDataException ade) {
+			
+			} catch (SQLException e) {
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				System.out.println(e.getMessage());
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			} catch (AppDataException ade) {
 				request.setAttribute("Error", ade.getMessage());
+				System.out.println(ade.getMessage());
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
 			catch (Exception e) {
 				response.setStatus(502);

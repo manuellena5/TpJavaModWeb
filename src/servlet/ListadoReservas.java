@@ -43,18 +43,15 @@ public class ListadoReservas extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ReservasLogic reservalogic = new ReservasLogic();
-		ArrayList<Reserva> listadoreservas;		
+		ReservasLogic reservalogic = new ReservasLogic();	
 		
 		try {
 			
-			listadoreservas = new ArrayList<>();
+			reservalogic.actualizarEstadoReservas();
+			
+			ArrayList<Reserva> listadoreservas = new ArrayList<Reserva>();
 			
 			listadoreservas = reservalogic.GetAll();
-			
-			listadoreservas = reservalogic.actualizarlistado(listadoreservas);
-			
-			
 			
 			request.setAttribute("listaReservas", listadoreservas);
 			

@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,22 +45,28 @@ public class FinalizarModificacionTipoElemento extends HttpServlet {
 		
 		int cantMaxReservasPend = Integer.parseInt(request.getParameter("txtcantmax"));
 		
-		System.out.println(cantMaxReservasPend);
 		Tipo_ElementosLogic tipoelementoLogic = new Tipo_ElementosLogic();
 		
 		Tipo_Elemento tipoel = new Tipo_Elemento();
 		
 		
 		try {
+		
 		tipoel = tipoelementoLogic.GetById(idtipoelemento);
-		System.out.println(tipoel.getCantMaxReservasPend());
 		tipoel.setCantMaxReservasPend(cantMaxReservasPend);
 		
 		tipoelementoLogic.update(tipoel);
 			
 		request.setAttribute("tipoelemento", tipoel);
+		
+		} catch (SQLException e) {
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());
+			System.out.println(ade.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
 			response.setStatus(502);

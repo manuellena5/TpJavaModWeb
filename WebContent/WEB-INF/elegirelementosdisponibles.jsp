@@ -131,7 +131,10 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 				<input style="display:none;" name="fechainicio" value="<%=fechainicio%>" >
 				<input style="display:none;" name="fechafin" value="<%=fechafin%>" >
 				
-				
+				<input id="idpersona" name="idpersona" style="display:none;" value="<%=((Persona)request.getAttribute("persona")).getId_persona()%>">
+		      <label>Reserva a nombre de: </label>
+		      <br>
+		      <label><%=((Persona)request.getAttribute("persona")).getNombre()+" "+((Persona)request.getAttribute("persona")).getApellido()%></label>
 					
 					<table class="table table-striped">
 					

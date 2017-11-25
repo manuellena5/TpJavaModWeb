@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
@@ -64,12 +65,18 @@ public class EliminacionReserva extends HttpServlet {
 			
 			
 			reserva = reservalogic.GetOne(idpersona, idelemento, sqlDate);
-			
-			
+						
 			request.setAttribute("reserva", reserva);
-			}catch (AppDataException ade) {
-					request.setAttribute("Error", ade.getMessage());
-				}
+			
+			}catch (SQLException e) {
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				System.out.println(e.getMessage());
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			} catch (AppDataException ade) {
+				request.setAttribute("Error", ade.getMessage());
+				System.out.println(ade.getMessage());
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
 			catch (Exception e) {
 				response.setStatus(502);
 			}

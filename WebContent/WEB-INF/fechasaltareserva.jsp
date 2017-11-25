@@ -117,9 +117,25 @@ fechaActual = simple.format(FechaDelSistema);
 		<div class="cuerpo">
 		
 		
-		<form action="traerelementosdisponibles.servlet" method="post">
+		<form action="traerelementosdisponibles.servlet" method="post" onsubmit="return validarfrmFechasAltaReserva();">
 		
-		<p>Tipo de elemento a reservar: <%=((Tipo_Elemento)request.getAttribute("tipoelemento")).getNombre()%></p>
+		<% Tipo_Elemento tipoelemento = (Tipo_Elemento)request.getAttribute("tipoelemento"); 
+		if(tipoelemento == null){%>
+			<div class="alert alert-danger" role="alert">
+			  Ha excedido la cantidad de elementos pendientes de devolver de este tipo, por favor devuelva los ejemplares.
+			  Puede seleccionar otro tipo de elemento para reservar
+			</div>	
+			<a href="javascript:window.history.back();">Volver a la pagina anterior</a>
+		
+		
+		<% }else{   %>
+		
+		<input id="idpersona" name="idpersona" style="display:none;" value="<%=((Persona)request.getAttribute("persona")).getId_persona()%>">
+		      <label>Reserva a nombre de: </label>
+		      <br>
+		      <label><%=((Persona)request.getAttribute("persona")).getNombre()+" "+((Persona)request.getAttribute("persona")).getApellido()%></label>
+		      
+		<p>Tipo de elemento a reservar: <%=tipoelemento.getNombre()%></p>
 	
 		<input id="idtipoelemento" name="idtipoelemento" type="text" style="display:none;" value="<%=((Tipo_Elemento)request.getAttribute("tipoelemento")).getId_tipoelemento()%>">
 		
@@ -140,6 +156,7 @@ fechaActual = simple.format(FechaDelSistema);
 		</div>
 	  	
 	  	<button type="submit" class="btn btn-primary">Siguiente</button>
+	  	<%} %>
 	  	</form>
 			
 			
@@ -225,6 +242,7 @@ fechaActual = simple.format(FechaDelSistema);
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="style/js/jquery-ui.js"></script>
+     <script type="text/javascript" src="style/js/validaform.js"></script>
     <script src="style/js/ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript" src="style/js/datepicker-es.js"></script>
 
@@ -241,15 +259,7 @@ fechaActual = simple.format(FechaDelSistema);
  
     });
     
-    function validarfecha(){
-    	var fechainicio = document.getElementById("datepicker2").value;
-    	var fechafin = document.getElementById("datepicker3").value;
-    	
-    	if (fechainicio > fechafin) {
-			alert("La fecha de fin debe ser mayor a la fecha de inicio");
-			document.getElementById("datepicker3").value = fechainicio;
-		}
-    }
+   
 	</script>
 	
 

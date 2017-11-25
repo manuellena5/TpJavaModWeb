@@ -1,12 +1,16 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.Categoria;
 import negocio.CategoriasLogic;
 import util.AppDataException;
 
@@ -39,15 +43,21 @@ public class AltaPersona extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		CategoriasLogic categoriaslogic = new CategoriasLogic();
-		
+		ArrayList<Categoria> listadocategorias = new ArrayList<Categoria>();
 		
 		try {
+			listadocategorias = categoriaslogic.GetAll();
+			request.setAttribute("listadocategorias",listadocategorias);
 			
-			request.setAttribute("listadocategorias", categoriaslogic.GetAll());
 			
-			
-		}catch (AppDataException ade) {
+		}catch (SQLException e) {
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		} catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());
+			System.out.println(ade.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
 			response.setStatus(502);

@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidades.Tipo_Elemento;
 import negocio.Tipo_ElementosLogic;
+import util.AppDataException;
 
 /**
  * Servlet implementation class ValidarTipoElemento
@@ -52,9 +55,17 @@ public class ValidarTipoElemento extends HttpServlet {
 			
 			request.setAttribute("tipoelemento", tipoelemento);
 			
-		} catch (Exception e) {
-			
-			e.printStackTrace();
+		} catch (SQLException e) {
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		} catch (AppDataException ade) {
+			request.setAttribute("Error", ade.getMessage());
+			System.out.println(ade.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
+		catch (Exception e) {
+			response.setStatus(502);
 		}
 		
 		request.getRequestDispatcher("/WEB-INF/altatipoelementoexitosa.jsp").forward(request, response);

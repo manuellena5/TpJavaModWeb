@@ -41,7 +41,7 @@
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
-					    	<a class="dropdown-item" href="reservasusuario.servlet">Mis reservas</a>
+					    	<a class="dropdown-item" href="traerreservasusuario.servlet">Mis reservas</a>
 					        <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>    
 					    </div>
 					  </li>
@@ -98,10 +98,14 @@
 
 		<div class="cuerpo">
 		
-		<form action="elegirfechas.servlet" method="POST" id="formtipoelemento" style="width:50%;">
+		<form action="elegirfechas.servlet" method="POST" id="formtipoelemento" style="width:50%;" onsubmit="return validarfrmNuevaReserva();">
 		
 			<div class="form-group col-md-4">
-		      <label for="inputState">¿Que desea reservar?</label>
+			  <input id="idpersona" name="idpersona" style="display:none;" value="<%=((Persona)request.getAttribute("persona")).getId_persona()%>">
+		      <label>Reserva a nombre de: </label>
+		      <br>
+		      <label><%=((Persona)request.getAttribute("persona")).getNombre()+" "+((Persona)request.getAttribute("persona")).getApellido()%></label>
+		      <label>¿Que desea reservar?</label>
 		      <select id="eleccion" name="eleccion" class="form-control">
 		        <option selected>Elija...</option>
 		        <% ArrayList<Tipo_Elemento> lista = (ArrayList<Tipo_Elemento>)request.getAttribute("listaTipoElementos"); 
@@ -194,6 +198,7 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="style/js/validaform.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
     <script src="style/js/ie10-viewport-bug-workaround.js"></script>

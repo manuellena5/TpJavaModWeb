@@ -50,15 +50,16 @@ public class TraerReservasUsuario extends HttpServlet {
 		
 		Persona usuario = new Persona();
 		ReservasLogic reservaslogic = new ReservasLogic();
-		ArrayList<Reserva> listadoreservas;
+		
 		usuario = (Persona)request.getSession().getAttribute("user");
 		
 		try {
 			
-			listadoreservas = new ArrayList<Reserva>();
+			reservaslogic.actualizarEstadoReservas();
+			
+			ArrayList<Reserva> listadoreservas = new ArrayList<Reserva>();
 			
 			listadoreservas = reservaslogic.getByUsuario(usuario);
-			listadoreservas = reservaslogic.actualizarlistado(listadoreservas);
 			
 			request.setAttribute("listareservasusuario", listadoreservas);
 			

@@ -57,7 +57,7 @@ public class DataPersona {
 					FactoryConexion.getInstancia().releaseConn();
 				} catch (SQLException e) {
 					
-					e.printStackTrace();
+					throw e;
 				}
 				
 					return pers;
@@ -73,7 +73,7 @@ public class DataPersona {
 			ResultSet rs = null;
 			
 			try {
-				 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+				 
 				stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 						"select p.id_persona, p.nombre, p.apellido, p.dni, p.estado,p.usuario,p.password,c.id_categoria,c.descripcion from personas p left join categorias c on c.id_categoria=p.id_categoria where p.dni=?");
 						
@@ -108,7 +108,7 @@ public class DataPersona {
 					if (stmt != null) {stmt.close();}
 					FactoryConexion.getInstancia().releaseConn();	
 				} catch (SQLException e) {
-					e.printStackTrace();
+					throw e;
 				}
 			
 			return p;
@@ -122,7 +122,7 @@ public class DataPersona {
 		ResultSet rs = null;
 		
 		try {
-			 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+			 
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 					"select p.id_persona, p.nombre, p.apellido, p.dni, p.estado,p.usuario,p.password,c.id_categoria,c.descripcion from personas p left join categorias c on c.id_categoria=p.id_categoria where p.id_persona=?");
 					
@@ -157,7 +157,7 @@ public class DataPersona {
 				if (stmt != null) {stmt.close();}
 				FactoryConexion.getInstancia().releaseConn();	
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		
 		return p;
@@ -194,7 +194,7 @@ public class DataPersona {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
@@ -224,7 +224,7 @@ public class DataPersona {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		} 
 		
@@ -233,7 +233,7 @@ public class DataPersona {
 			
 			try {
 				stmt= FactoryConexion.getInstancia().getConn().prepareStatement(
-						"delete from personas where id_persona=?");
+						"update personas set estado=0 where id_persona=?");
 				
 				stmt.setInt(1, p.getId_persona());
 				stmt.executeUpdate();
@@ -247,7 +247,7 @@ public class DataPersona {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		} 
 		 

@@ -44,7 +44,7 @@ public class DataTipo_Elementos {
 					FactoryConexion.getInstancia().releaseConn();
 				} catch (SQLException e) {
 					
-					e.printStackTrace();
+					throw e;
 				}
 				
 					return tipoElementos;
@@ -60,7 +60,7 @@ public class DataTipo_Elementos {
 			ResultSet rs = null;
 			
 			try {
-				 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+				 
 				stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 						"select id_tipoelemento, nombre, cantMaxReservasPend from tipo_elementos where nombre=?");
 						
@@ -69,7 +69,7 @@ public class DataTipo_Elementos {
 				
 				if (rs!=null && rs.next()) {
 					te = new Tipo_Elemento();
-					te.setId_tipoelemento(rs.getInt("id_tipoelemento"));   /* el dato que va como argumento tiene que ser igual al que esta en la base? */
+					te.setId_tipoelemento(rs.getInt("id_tipoelemento")); 
 					te.setNombre(rs.getString("nombre"));
 					te.setCantMaxReservasPend(rs.getInt("cantMaxReservasPend"));
 				
@@ -88,7 +88,7 @@ public class DataTipo_Elementos {
 					if (stmt != null) {stmt.close();}
 					FactoryConexion.getInstancia().releaseConn();	
 				} catch (SQLException e) {
-					e.printStackTrace();
+					throw e;
 				}
 			
 			return te;
@@ -101,7 +101,7 @@ public class DataTipo_Elementos {
 		ResultSet rs = null;
 		
 		try {
-			 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+			 
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 					"select id_tipoelemento, nombre, cantMaxReservasPend from tipo_elementos where id_tipoelemento=?");
 					
@@ -129,15 +129,13 @@ public class DataTipo_Elementos {
 				if (stmt != null) {stmt.close();}
 				FactoryConexion.getInstancia().releaseConn();	
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		
 		return te;
 	}
 	
-	
-		
-		public void add(Tipo_Elemento te) throws Exception{
+	public void add(Tipo_Elemento te) throws Exception{
 			PreparedStatement stmt=null;
 			ResultSet keyResultSet=null;
 			try {
@@ -159,15 +157,15 @@ public class DataTipo_Elementos {
 				throw e;
 			}
 			try {
-				if(keyResultSet!=null)keyResultSet.close();  /* preguntar que hace esta linea */ 
+				if(keyResultSet!=null)keyResultSet.close();  
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
-		public void update(Tipo_Elemento te) throws Exception{
+	public void update(Tipo_Elemento te) throws Exception{
 			PreparedStatement stmt=null;
 			
 			try {
@@ -189,19 +187,20 @@ public class DataTipo_Elementos {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		} 
 		
-		public void delete(Tipo_Elemento te) throws Exception{
+	public void delete(Tipo_Elemento te) throws Exception{
 			PreparedStatement stmt=null;
 			
 			try {
 				stmt= FactoryConexion.getInstancia().getConn().prepareStatement(
-						"delete from tipo_elementos where id_tipoelemento=?");
+						"delete from `tipo_elementos` where id_tipoelemento = ?");
 				
 				stmt.setInt(1, te.getId_tipoelemento());
 				stmt.executeUpdate();
+				
 				
 				
 			} catch (SQLException | AppDataException e) {
@@ -212,9 +211,60 @@ public class DataTipo_Elementos {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		} 
 		 
+	public int getcantidadreservaspendientes(int idpersona,Tipo_Elemento tipoelemento) throws Exception{
+		
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		int cantidadpendientes = 0;
+		
+		try {
+			 
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"SELECT count(*)Cant_pendientes "
+				+	"FROM reservas r "
+				+	"INNER JOIN `elementos` e on r.`id_elemento` = e.`id_elemento` "
+				+ 	"INNER JOIN `tipo_elementos` t on t.`id_tipoelemento` = e.`id_tipoelemento` "
+				+	" WHERE t.`id_tipoelemento`=? and r.`id_persona`=? and r.`estado`='Activa'");
+					
+			stmt.setInt(1, tipoelemento.getId_tipoelemento());
+			stmt.setInt(2, idpersona);
+			rs = stmt.executeQuery();
+			
+			if (rs!=null && rs.next()) {
+				
+				cantidadpendientes = rs.getInt("Cant_pendientes");
+			
+			}
+			
+			
+		
+		
+		} catch (Exception e) {
+			
+			throw e;
+		}
+		
+			try {
+				if (rs != null) {rs.close();}
+				if (stmt != null) {stmt.close();}
+				FactoryConexion.getInstancia().releaseConn();	
+			} catch (SQLException e) {
+				throw e;
+			}
+		
+		return cantidadpendientes;
+	
+	}
+	
+
+
+
+
+
 }
 

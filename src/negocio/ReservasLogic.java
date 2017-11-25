@@ -36,7 +36,7 @@ public class ReservasLogic {
 	}
 	
 	public void delete(Reserva res)throws Exception{
-		//this.pers.remove(this.getByDni(el));
+		
 		this.reservasD.delete(res);
 	}
 	
@@ -83,13 +83,22 @@ public class ReservasLogic {
 	
 			return reservasD.getAll();
 			
-		}
+	}
 
-
-	
+	public boolean ValidarCantidadReservasPendientes(int idpersona,int idtipoelemento) throws Exception{
+			
+			Reserva res = new Reserva();
+			
+			res.getPersona().setId_persona(idpersona);
+			res.getElemento().getTipo_Elemento().setId_tipoelemento(idtipoelemento);
+			
+			return ValidarCantidadReservasPendientes(res);
+			
+	}
 		
 		
-		public boolean ValidarCantidadReservasPendientes(Reserva res) throws Exception{
+		
+	public boolean ValidarCantidadReservasPendientes(Reserva res) throws Exception{
 			
 			
 			int cantReservasPendPersona = reservasD.getReservasPendientes(res);
@@ -99,19 +108,22 @@ public class ReservasLogic {
 			{return false;}
 		
 		
-		}
+	}
 
 
-		public ArrayList<Elemento> getElementosSinReserva(Date fechainicio,Date fechafin,Date fecharegistro,int idtipoelemento,int idpersona) throws Exception{
+	public ArrayList<Elemento> getElementosSinReserva(Date fechainicio,Date fechafin,Date fecharegistro,int idtipoelemento,int idpersona) throws Exception{
 			
 			return reservasD.getElementosSinReserva(fechainicio, fechafin,fecharegistro, idtipoelemento,idpersona);
 			
 			
 			
-		}
+	}
 		
 		
-		public ArrayList<Reserva> actualizarlistado(ArrayList<Reserva> listado) throws Exception{
+	public void actualizarEstadoReservas() throws Exception{
+			
+		    ArrayList<Reserva> listado = new ArrayList<>();
+		    listado = this.GetAll();
 		
 			java.util.Date FechaDelSistema = new java.util.Date(); /*Tomo la hora del sistema*/
 			java.sql.Date fechaActual = new java.sql.Date(FechaDelSistema.getTime()); /* A la hora del sistema la convierto en el formato que trae la base */
@@ -125,13 +137,15 @@ public class ReservasLogic {
 				  if(fechafin.before(fechaActual) && r.getEstado().equals("Activa")){	
 						
 					  r.setEstado("Sin devolver");
-						
+					  this.update(r);
 					}
 					
 				}
 			
-			return listado;
-		}
+	}
+	
+	
+	
 
 
 

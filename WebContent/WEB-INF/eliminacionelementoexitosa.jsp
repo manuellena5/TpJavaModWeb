@@ -1,8 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="entidades.Elemento"%>
-<%@page import="entidades.Tipo_Elemento"%>
 <%@page import="entidades.Persona"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="entidades.Elemento"%>
+<%@page import="entidades.Reserva"%>
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,18 +17,25 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Modificacion exitosa del elemento</title>
+	 
 	 
 	 <!-- Bootstrap CSS -->
-    <link href="style/css/bootstrap.min.css" rel="stylesheet">
-    <link href="style/css/estilo1.css" rel="stylesheet">
+	  <!-- <link href="style/css/jquery-ui.structure.min.css" rel="stylesheet">
+     <link href="style/css/jquery-ui.theme.min.css" rel="stylesheet"> -->
+	 
+	 <link href="style/css/jquery-ui.min.css" rel="stylesheet">
+	 <link href="style/css/bootstrap.min.css" rel="stylesheet">
+     <link href="style/css/estilo1.css" rel="stylesheet">
+   
+    
     
     
     
   </head>
   <body>
     
-        <div class="contenedorprincipal container-fluid">
+       <div class="contenedorprincipal container-fluid">
 		
 		<div class="cabeza">	
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
@@ -75,54 +81,27 @@
 
 		<div class="cuerpo">
 		
-						
-		<table class="table table-striped">
 		
-				<thead>
-				    <tr>
-				      <th scope="col">Elemento</th>
-				      <th scope="col">Id elemento</th>
-				      <th scope="col">Nombre</th>
-				      <th scope="col">Descripcion</th>
-				      <th scope="col">Autor</th>
-				      <th scope="col">Genero</th>
-				      <th scope="col">Stock</th>
-				      <th scope="col">Tipo de elemento</th>
-				      <th scope="col">Id tipo de elemento</th>
-				      <th scope="col">Cant max reservas pendientes</th>
-				      <th scope="col"></th>
-				    </tr>
-				 </thead>
-				  <tbody>
-			<%
-				int count=0;
-				ArrayList<Elemento> listaElementos = (ArrayList<Elemento>)request.getAttribute("listaElementos");
-				for(Elemento e : listaElementos){
-					count++;
-				%>
+
+		
+		
 			
-				  
+			<div class="alert alert-success" role="alert">
+				<h3>Su elemento se ha eliminado correctamente</h3>
+			   
+				<p>Nombre: <%=((Elemento)request.getAttribute("elemento")).getNombre()%></p>
+				<p>Descripcion: <%=((Elemento)request.getAttribute("elemento")).getDescripcion()%></p>	
+				<p>Autor: <%=((Elemento)request.getAttribute("elemento")).getAutor()%></p>	
+				<p>Genero: <%=((Elemento)request.getAttribute("elemento")).getGenero()%></p>	
+				<%-- <p>Stock: <%=((Elemento)request.getAttribute("elemento")).getStock()%></p>	 --%>	
 			  
-			    <tr>
-			      <th scope="row"><%=count%></th>
-			      <td><%=e.getId_elemento()%></td>
-			      <td><%=e.getNombre() %></td>
-			      <td><%=e.getDescripcion() %></td>
-			      <td><%=e.getAutor() %></td>
-			      <td><%=e.getGenero() %></td>
-			      <%-- <td><%=e.getStock() %></td> --%>
-			      <td><%=e.getTipo_Elemento().getNombre() %></td>
-			      <td><%=e.getTipo_Elemento().getId_tipoelemento() %></td>
-			      <td><%=e.getTipo_Elemento().getCantMaxReservasPend() %></td>
-			      <td><div class="btn-group" role="group" aria-label="Basic example">
-						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionElemento.servlet?id=<%=e.getId_elemento() %>">Modificar</a>
-						  <a class="btn btn-secondary" name="lnkeliminar" href="EliminacionElemento.servlet?id=<%=e.getId_elemento() %>">Eliminar</a>
-					</div>
-				  </td>
-			    </tr>
-			    <% } %>
-			  </tbody>
-			</table>
+			   <a href="Start" class="alert-link">Volver a pagina principal</a>
+			</div>
+			
+	  	
+	  	
+			
+			
 		</div> 
 		
 		<footer class="pie container-fluid">
@@ -185,13 +164,19 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="style/js/jquery-ui.js"></script>
+    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="style/js/datepicker-es.js"></script>
+    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
-    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
-    
    
-		
-	
+	<script type="text/javascript">
+    $(function () {
+    	$("#datepicker").datepicker();
+    	});
+	</script>
 
   </body>
 </html>

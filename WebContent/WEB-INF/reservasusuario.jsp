@@ -156,7 +156,6 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 				%>
 			
 				  
-			  
 			    <tr>
 			      <th scope="row"><%=count%></th>
 			      <td><%=r.getElemento().getId_elemento()%></td>
