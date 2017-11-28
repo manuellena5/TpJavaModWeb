@@ -1,27 +1,39 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@page import="entidades.Reserva"%>
-<%@page import="entidades.Categoria"%>
 <%@page import="entidades.Persona"%>
+<%@page import="entidades.Elemento"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="java.util.Date"%>
+<%@page import="entidades.Categoria"%>
+<%@page import="java.sql.Date"%>
+<%@page import="entidades.Reserva"%>
 <%@page import="java.text.SimpleDateFormat"%>
 
+<% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 
-<%
+Reserva r = (Reserva)request.getAttribute("reserva"); 
+			java.util.Date data = null;
+		    SimpleDateFormat simple= new SimpleDateFormat("yy-MM-dd");
+			String fechainicio = request.getAttribute("fechainicio").toString();
+			data = simple.parse(fechainicio);
+			simple = new SimpleDateFormat("dd/MM/yyyy");
+			fechainicio = simple.format(data);
 
-Date FechaDelSistema = new Date(); /*Tomo la hora del sistema*/
-java.sql.Date fechaActual = new java.sql.Date(FechaDelSistema.getTime()); /* A la hora del sistema la convierto en el formato que trae la base */
-
-
-
-
-Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
-
+			
+			data = null;
+		    simple= new SimpleDateFormat("yy-MM-dd");
+			String fecharegistro = request.getAttribute("fecharegistro").toString();
+			data = simple.parse(fecharegistro);
+			simple = new SimpleDateFormat("dd/MM/yyyy");
+			fecharegistro = simple.format(data);
+			
+			data = null;
+		    simple= new SimpleDateFormat("yy-MM-dd");
+			String fechafin = request.getAttribute("fechafin").toString();
+			data = simple.parse(fechafin);
+			simple = new SimpleDateFormat("dd/MM/yyyy");
+			fechafin = simple.format(data);
+			
+			
 %>
-
-
-
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -37,13 +49,11 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
     
     
      
-	 <title>Mis reservas</title>
+	 <title>Pagina principal</title>
 	 
 	 <!-- Bootstrap CSS -->
     <link href="style/css/bootstrap.min.css" rel="stylesheet">
     <link href="style/css/estilo1.css" rel="stylesheet">
-    
-    
     
   </head>
   <body>
@@ -59,7 +69,7 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
-					    	<a class="dropdown-item" href="traerreservasusuario.servlet">Mis reservas</a>
+					    	<a class="dropdown-item" href="reservasusuario.servlet">Mis reservas</a>
 					        <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>    
 					    </div>
 					  </li>
@@ -114,82 +124,74 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 				</nav>
 		</div>
 
-
 		<div class="cuerpo">
-			
-		<table class="table table-striped">
 		
-				<thead>
-				    <tr>
-				      <th scope="col">Reserva</th>
-				      <th scope="col">Id elemento</th>
-				      <th scope="col">Id Persona</th>
-				      <th scope="col">Estado</th>
-				      <th scope="col">Fecha registro</th>
-				      <th scope="col">Fecha inicio</th>
-				      <th scope="col">Fecha fin</th>
-				      <th scope="col">Detalle</th>
-				      <th scope="col">Persona</th>
-				      <th scope="col">Elemento</th>
-				      <th scope="col">Tipo de elemento</th>
-				      <th scope="col"></th>
-				    </tr>
-				 </thead>
-				  <tbody>
-			<%
-				int count=0;
-				ArrayList<Reserva> listaReservas = (ArrayList<Reserva>)request.getAttribute("listareservasusuario");
-				if(listaReservas.isEmpty())
-				{%>
+			<form action="validaraltareservausuario.servlet" method="post">
+				<input style="display:none;" name="fecharegistro" value="<%=fecharegistro%>" >
+				<input style="display:none;" name="fechainicio" value="<%=fechainicio%>" >
+				<input style="display:none;" name="fechafin" value="<%=fechafin%>" >
 				
-				<div class="alert alert-danger" role="alert">
-				  No se han encontrado reservas!
-				</div>	
-				<a href="javascript:window.history.back();">Volver a la pagina anterior</a>
-				 	
-				<!-- window.history.go(-2); -->
-				<%}else{
-				
-				
-				for(Reserva r : listaReservas){
-					count++;
-				%>
-			
-				  
-			    <tr>
-			      <th scope="row"><%=count%></th>
-			      <td><%=r.getElemento().getId_elemento()%></td>
-			      <td><%=r.getPersona().getId_persona()%></td>
-			      <% if(r.getEstado().equals("Cancelada")){
-			    	  %>
-			    	  <td class="table-danger"><%=r.getEstado()%></td>
-			      <%}else{ %>
-			      <td><%=r.getEstado()%></td><%} %>
-			      <td><%=r.getFecha_registro() %></td>
-			      <td><%=r.getFecha_inicio() %></td>
-			      <td><%=r.getFecha_fin() %></td>
-			      <td><%=r.getDetalle() %></td>
-			      <td><%=r.getPersona().getApellido()+" "+r.getPersona().getNombre()%></td>
-			      <td><%=r.getElemento().getNombre()%></td>
-			      <td><%=r.getElemento().getTipo_Elemento().getNombre() %></td>
-			      <td><div class="btn-group" role="group" aria-label="Basic example">
-						  <% 
-						 
-						  java.sql.Date fechainicio = new java.sql.Date(r.getFecha_inicio().getTime());
-						 
-						  if(fechainicio.after(fechaActual) && r.getEstado().equals("Activa")){
-							 %>
-							  <a class="btn btn-secondary" name="lnkmodificar" href="CancelacionReservaUsuario.servlet?idpersona=<%=r.getPersona().getId_persona()%>&fecharegistro=<%=r.getFecha_registro()%>&idelemento=<%=r.getElemento().getId_elemento()%>">Cancelar</a>  
-						<%  }%>
+				<input id="idpersona" name="idpersona" style="display:none;" value="<%=((Persona)request.getAttribute("persona")).getId_persona()%>">
+		      <label>Reserva a nombre de: </label>
+		      <br>
+		      <label><%=((Persona)request.getAttribute("persona")).getNombre()+" "+((Persona)request.getAttribute("persona")).getApellido()%></label>
+					
+					<table class="table table-striped">
+					
+						<thead>
+						    <tr>
+						      <th scope="col">Elemento</th>
+						      <th scope="col">Id elemento</th>
+						      <th scope="col">Nombre</th>
+						      <th scope="col">Autor</th>
+						      <th scope="col">Genero</th>
+						      <th scope="col">Descripcion</th>
+						      <th scope="col">Stock</th>
+						      <th scope="col"></th>
+						    </tr>
+						 </thead>
 						  
-						 
-					</div>
-				  </td>
-			    </tr>
-			    <% }} %>
-			  </tbody>
-			</table>
-
+						
+						<%
+						int count=0;
+						ArrayList<Elemento> listaElementos = (ArrayList<Elemento>)request.getAttribute("listaElementos");
+						if(listaElementos.isEmpty())
+						{%>
+						
+						<div class="alert alert-danger" role="alert">
+						  No se han encontrado elementos disponibles para esa fecha! Por favor seleccione otra
+						</div>	
+						<a href="javascript:window.history.back();">Volver a la pagina anterior</a>
+						 	
+						<!-- window.history.go(-2); -->
+						<%}else{
+						for(Elemento e : listaElementos){
+							count++;
+						%>
+					   <tr>
+					      <th scope="row"><%=count%></th>
+					      <td><%=e.getId_elemento()%></td>
+					      <td><%=e.getNombre()%></td>
+					      <td><%=e.getAutor()%></td>
+					      <td><%=e.getGenero()%></td>
+					      <td><%=e.getDescripcion()%></td>
+					      <td><%=e.getStock()%></td>
+					      <td><div class="btn-group" role="group" aria-label="Basic example">
+								  <%if(e.getStock() < 1){%>
+									<p>Agotado</p> 
+								  <%} 
+								  else{%>
+								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=e.getId_elemento()%>">Elegir</button>
+								  <button type="submit" class="btn btn-primary" name="btnatras" onclick = "javascript:window.history.back();">Atras</button>
+								  <%} %>
+								  
+							</div>
+						  </td>
+					    </tr>
+					    <% }} %>
+					  </tbody>
+					</table>
+			</form>
 		</div> 
 		
 		<footer class="pie container-fluid">
@@ -215,18 +217,14 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 	
 					<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
-
 							   <%if ((cat.getDescripcion().equals("Usuario"))) 
 					  {%>
 							  
 							  <li class="nav-item">
 							   <a class="nav-link itemmapa" href="reservasusuario.servlet">Mis reservas</a>
-
 							  </li>
 							  <li class="nav-item">
-
 							   <a class="nav-link itemmapa" href="#">Modificar mis datos</a>
-
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Ayuda</a>
@@ -247,7 +245,7 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoTiposElementos.servlet">Ver tipos de elementos</a>
-							  </li>
+							  </li><
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Ayuda</a>
 							  </li>

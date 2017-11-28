@@ -166,6 +166,7 @@
 		 </div>
 	  	
 	  	<button type="submit" class="btn btn-primary">Modificar reserva</button>
+	  	<a class="btn btn-outline-secondary" href="Start">Cancelar</a>
 	  	</form>
 			
 			

@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidades.Persona;
 import negocio.PersonaLogic;
+import util.AppDataException;
 
 /**
  * Servlet implementation class EliminacionPersona
@@ -43,11 +46,21 @@ public class EliminacionPersona extends HttpServlet {
 		PersonaLogic personaLogic = new PersonaLogic();
 		Persona persona = new Persona();
 		try {
+			
 			persona = personaLogic.GetById(idpersona);
 
 			request.setAttribute("persona", persona);
 			
-		} catch (Exception e) {
+		} catch (SQLException e) {
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		} catch (AppDataException ade) {
+			request.setAttribute("Error", ade.getMessage());
+			System.out.println(ade.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
+		catch (Exception e) {
 			response.setStatus(502);
 		}
 		request.getRequestDispatcher("WEB-INF/eliminarpersona.jsp").forward(request, response);

@@ -110,7 +110,7 @@
 			      <td><%=e.getDescripcion() %></td>
 			      <td><%=e.getAutor() %></td>
 			      <td><%=e.getGenero() %></td>
-			      <td><%=e.getStock() %></td>
+			      <%-- <td><%=e.getStock() %></td> --%>
 			      <td><%=e.getTipo_Elemento().getNombre() %></td>
 			      <td><%=e.getTipo_Elemento().getId_tipoelemento() %></td>
 			      <td><%=e.getTipo_Elemento().getCantMaxReservasPend() %></td>
@@ -123,6 +123,7 @@
 			    <% } %>
 			  </tbody>
 			</table>
+			<a class="btn btn-primary" href="Start">Cancelar</a>
 		</div> 
 		
 		<footer class="pie container-fluid">

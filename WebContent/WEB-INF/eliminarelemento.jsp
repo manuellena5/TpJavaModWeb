@@ -99,7 +99,7 @@
 					    <input type="text" class="form-control" id="txtgenero" name="txtgenero" value="<%=elemento.getGenero() %>" readonly="true">
 					  </div>
 					  
-					  <div class="form-group">
+					  <div class="form-group" style="display:none;">
 					    <label for="txtapellido">Stock</label>
 					    <input type="text" class="form-control" id="txtstock" name="txtstock" value="<%=elemento.getStock() %>" readonly="true">
 					  </div>
@@ -107,7 +107,7 @@
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
 								  <button type="submit" class="btn btn-outline-danger" name="btneleccion" value="<%=elemento.getId_elemento()%>">Eliminar</button>
-						  		  <a class="btn btn-outline-secondary" href="Start">Cancelar</a>
+						  		  <a class="btn btn btn-secondary" href="Start">Cancelar</a>
 					  </div>
 					
 			</form>

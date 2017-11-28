@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import data.DataTipo_Elementos;
 import entidades.Elemento;
 import entidades.Persona;
+import entidades.Reserva;
 import entidades.Tipo_Elemento;
 
 public class Tipo_ElementosLogic {
@@ -38,17 +39,6 @@ public class Tipo_ElementosLogic {
 	public void update(Tipo_Elemento te)throws Exception{
 		
 		this.tipoElementosD.update(te);
-	}
-
-	public Tipo_Elemento GetOne(int id){
-		
-		for (Tipo_Elemento te : lista) {
-			if (te.getId_tipoelemento() == id ) {
-				return te;
-			}
-			
-		}
-		return null;
 	}	
 
 	
@@ -57,7 +47,6 @@ public class Tipo_ElementosLogic {
 		
 		return tipoElementosD.getByNombre(te);
 		
-	
 	}
 	
 	
@@ -88,13 +77,25 @@ public class Tipo_ElementosLogic {
 	}
 	
 
-		public ArrayList<Tipo_Elemento> GetAll() throws Exception{
+	public ArrayList<Tipo_Elemento> GetAll() throws Exception{
 
-	
 			return tipoElementosD.getAll();
 			
 		}
+	
+	
+	public boolean ValidarCantidadReservasPendientes(int idpersona,Tipo_Elemento tipoelemento) throws Exception{
+		
 
+		int cantReservasPendPersona = tipoElementosD.getcantidadreservaspendientes(idpersona, tipoelemento);
+		if(cantReservasPendPersona < tipoelemento.getCantMaxReservasPend())
+		{return true;}
+		else
+		{return false;}
+	
+	
+	}
+	
 
 		
 	

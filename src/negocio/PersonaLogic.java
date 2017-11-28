@@ -33,7 +33,7 @@ public class PersonaLogic {
 	}
 	
 	public void delete(Persona p)throws Exception{
-		//this.pers.remove(this.getByDni(p));
+		
 		this.perD.delete(p);
 	}
 	
@@ -42,16 +42,6 @@ public class PersonaLogic {
 		this.perD.update(p);
 	}
 
-	public Persona GetOne(int id){
-	
-		for (Persona per : lista) {
-			if (per.getId_persona() == id ) {
-				return per;
-			}
-			
-		}
-		return null;
-	}	
 	
 	public Persona GetByDni(Persona p) throws Exception{
 		
@@ -59,7 +49,7 @@ public class PersonaLogic {
 		return perD.getByDni(p);
 		
 		
-}
+	}
 	
 	
 	public Persona GetByDni (String doc) throws Exception{
@@ -101,14 +91,6 @@ public class PersonaLogic {
 			return perD.getAll();
 			
 		}
-
-
-		/*public void ModificarPersona(Persona p) throws Exception {
-			
-			this.EliminarPersona(p);
-			this.add(p);
-			
-		}*/
 		
 		public ArrayList<Categoria> getCategorias() throws Exception{
 			return perC.getAll();

@@ -43,7 +43,7 @@ public class DataCategorias {
 					FactoryConexion.getInstancia().releaseConn();
 				} catch (SQLException e) {
 					
-					e.printStackTrace();
+					throw e;
 				}
 				
 					return categorias;
@@ -59,7 +59,7 @@ public class DataCategorias {
 			ResultSet rs = null;
 			
 			try {
-				 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+				 
 				stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 						"select id_categoria, descripcion from categorias where descripcion=?");
 						
@@ -68,7 +68,7 @@ public class DataCategorias {
 				
 				if (rs!=null && rs.next()) {
 					cat = new Categoria();
-					cat.setId_Categoria(rs.getInt("id_categoria"));   /* el dato que va como argumento tiene que ser igual al que esta en la base? */
+					cat.setId_Categoria(rs.getInt("id_categoria"));   
 					cat.setDescripcion(rs.getString("descripcion"));
 				
 				}
@@ -86,7 +86,7 @@ public class DataCategorias {
 					if (stmt != null) {stmt.close();}
 					FactoryConexion.getInstancia().releaseConn();	
 				} catch (SQLException e) {
-					e.printStackTrace();
+					throw e;
 				}
 			
 			return cat;
@@ -100,7 +100,7 @@ public class DataCategorias {
 		ResultSet rs = null;
 		
 		try {
-			 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+			 
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 					"select id_categoria, descripcion from categorias where id_categoria=?");
 					
@@ -109,7 +109,7 @@ public class DataCategorias {
 			
 			if (rs!=null && rs.next()) {
 				cat = new Categoria();
-				cat.setId_Categoria(rs.getInt("id_categoria"));   /* el dato que va como argumento tiene que ser igual al que esta en la base? */
+				cat.setId_Categoria(rs.getInt("id_categoria")); 
 				cat.setDescripcion(rs.getString("descripcion"));
 			
 			}
@@ -127,7 +127,7 @@ public class DataCategorias {
 				if (stmt != null) {stmt.close();}
 				FactoryConexion.getInstancia().releaseConn();	
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		
 		return cat;
@@ -157,11 +157,11 @@ public class DataCategorias {
 				throw e;
 			}
 			try {
-				if(keyResultSet!=null)keyResultSet.close();  /* preguntar que hace esta linea */ 
+				if(keyResultSet!=null)keyResultSet.close();  
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
@@ -174,7 +174,7 @@ public class DataCategorias {
 				
 				stmt.setString(1, cat.getDescripcion());
 			
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {
@@ -185,7 +185,7 @@ public class DataCategorias {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		} 
 		
@@ -197,7 +197,7 @@ public class DataCategorias {
 						"delete from categorias where id_categoria=?");
 				
 				stmt.setInt(1, cat.getId_Categoria());
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {
@@ -208,7 +208,7 @@ public class DataCategorias {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		} 
 		 

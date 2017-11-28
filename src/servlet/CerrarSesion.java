@@ -34,7 +34,7 @@ public class CerrarSesion extends HttpServlet {
         sesion.invalidate();
         
         //Redirecciono a index.jsp
-        response.sendRedirect("login.html");
+        response.sendRedirect("login.jsp");
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);

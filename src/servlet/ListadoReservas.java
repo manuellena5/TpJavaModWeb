@@ -1,12 +1,16 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.Reserva;
 import negocio.ReservasLogic;
 import util.AppDataException;
 
@@ -39,13 +43,28 @@ public class ListadoReservas extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ReservasLogic reservalogic = new ReservasLogic();
+		ReservasLogic reservalogic = new ReservasLogic();	
 		
 		try {
-
-			request.setAttribute("listaReservas", reservalogic.GetAll());
-		} catch (AppDataException ade) {
+			
+			reservalogic.actualizarEstadoReservas();
+			
+			ArrayList<Reserva> listadoreservas = new ArrayList<Reserva>();
+			
+			listadoreservas = reservalogic.GetAll();
+			
+			request.setAttribute("listaReservas", listadoreservas);
+			
+			
+			
+		}catch (SQLException e) {
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		} 
+		catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
 			response.setStatus(502);

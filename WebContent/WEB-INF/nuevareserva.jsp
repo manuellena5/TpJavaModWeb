@@ -2,6 +2,10 @@
 <%@page import="entidades.Persona"%>
 <%@page import="entidades.Tipo_Elemento"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="entidades.Categoria"%>
+
+<% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
+%>
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -32,6 +36,27 @@
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 					  <a class="navbar-brand" href="Start">Biblioteca</a>
 					<ul class="nav nav-pills">
+					<%if ((cat.getDescripcion().equals("Usuario"))) 
+					  {%>
+					  <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
+					    <div class="dropdown-menu">
+					    	<a class="dropdown-item" href="traerreservasusuario.servlet">Mis reservas</a>
+					        <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>    
+					    </div>
+					  </li>
+					  <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mis datos</a>
+					    <div class="dropdown-menu">
+					    	<a class="dropdown-item" href="#">Modificar</a>   
+					    </div>
+					  </li>
+					   <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
+					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
+					  						</p>
+					  <%}else
+					  if ((cat.getDescripcion().equals("Administrador"))) 
+					  {%>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
@@ -65,7 +90,8 @@
 					  <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
 					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
 					  						</p>
-					 
+					 <%
+					 } %>
 					</ul>
 				 
 				</nav>
@@ -73,10 +99,14 @@
 
 		<div class="cuerpo">
 		
-		<form action="TraerElementos.servlet" method="POST" id="formtipoelemento" style="width:50%;">
+		<form action="elegirfechas.servlet" method="POST" id="formtipoelemento" style="width:50%;" onsubmit="return validarfrmNuevaReserva();">
 		
 			<div class="form-group col-md-4">
-		      <label for="inputState">¿Que desea reservar?</label>
+			  <input id="idpersona" name="idpersona" style="display:none;" value="<%=((Persona)request.getAttribute("persona")).getId_persona()%>">
+		      <label>Reserva a nombre de: </label>
+		      <br>
+		      <label><%=((Persona)request.getAttribute("persona")).getNombre()+" "+((Persona)request.getAttribute("persona")).getApellido()%></label>
+		      <label>¿Que desea reservar?</label>
 		      <select id="eleccion" name="eleccion" class="form-control">
 		        <option selected>Elija...</option>
 		        <% ArrayList<Tipo_Elemento> lista = (ArrayList<Tipo_Elemento>)request.getAttribute("listaTipoElementos"); 
@@ -85,6 +115,7 @@
 		        <%} %>
 		      </select>
 		      <button type="submit" class="btn btn-primary">Buscar</button>
+		      <a class="btn btn-primary" href="Start">Cancelar</a>
 		    </div>
 			
 		
@@ -114,8 +145,25 @@
 	
 					<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
+							   <%if ((cat.getDescripcion().equals("Usuario"))) 
+					  {%>
+							  
 							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="ListadoReservas.servlet">Ver reservas</a>
+							   <a class="nav-link itemmapa" href="reservasusuario.servlet">Mis reservas</a>
+							  </li>
+							  <li class="nav-item">
+							   <a class="nav-link itemmapa" href="#">Modificar mis datos</a>
+							  </li>
+							  <li class="nav-item">
+							    <a class="nav-link itemmapa" href="#">Ayuda</a>
+							  </li>
+							  <li class="nav-item">
+							    <a class="nav-link itemmapa" href="#">Contacto</a>
+							  </li>
+							  <%}else if ((cat.getDescripcion().equals("Administrador"))) 
+					  {%>	  
+					  		  <li class="nav-item">
+							     <a class="nav-link itemmapa" href="ListadoReservas.servlet">Gestionar reservas</a>
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoPersonas.servlet">Ver personas</a>
@@ -132,6 +180,7 @@
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Contacto</a>
 							  </li>
+							  <%} %>
 						</ul>
 					</div>
 
@@ -151,6 +200,7 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="style/js/validaform.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
     <script src="style/js/ie10-viewport-bug-workaround.js"></script>

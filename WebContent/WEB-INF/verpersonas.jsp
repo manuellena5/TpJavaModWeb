@@ -86,19 +86,23 @@
 				      <th scope="col">Dni</th>
 				      <th scope="col">Usuario</th>
 				      <th scope="col">Categoria</th>
+				      <th scope="col">Estado</th>
 				    </tr>
 				 </thead>
 				 <tbody>
 				  
 			<%
 				int count=0;
+				String estado;
 				ArrayList<Persona> listaPers = (ArrayList<Persona>)request.getAttribute("listaPersonas");
 				for(Persona p : listaPers){
 				count++;
-				%>
-			
-				  
-			  
+				if(p.isHabilitado()){
+					estado = "Habilitado";
+				}else{
+					estado = "No habilitado";
+					} %>
+
 			    <tr>
 			      <th scope="row"><%=count%></th>
 			      <td><%=p.getId_persona() %></td>
@@ -107,15 +111,24 @@
 			      <td><%=p.getDni() %></td>
 			      <td><%=p.getUsuario() %></td>
 			      <td><%=p.getCategoria().getDescripcion() %></td>
+			      <%if(estado.equals("No habilitado")){%>
+			      <td class="table-danger"><%=estado%></td>
+			      <%}else{%>
+			    	  <td><%=estado%></td>
+			      <%} %>
+
+					
+			      
 			      <td><div class="btn-group" role="group" aria-label="Basic example">
 						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionPersona.servlet?id=<%=p.getId_persona() %>">Modificar</a>
 						  <a class="btn btn-secondary" name="lnkeliminar" href="EliminacionPersona.servlet?id=<%=p.getId_persona() %>">Deshabilitar</a>
 					</div>
 				  </td>
 			    </tr>
-			    <% } %>
+			    <%} %>
 			  </tbody>
 			</table> 
+			<a class="btn btn-primary" href="Start">Cancelar</a>
 		</div> 
 		
 		<footer class="pie container-fluid">

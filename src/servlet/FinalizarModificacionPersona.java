@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,8 +47,9 @@ public class FinalizarModificacionPersona extends HttpServlet {
 		String apellido = request.getParameter("txtapellido");
 		String dni = request.getParameter("txtdni");
 		String usuario = request.getParameter("txtusuario");
+		String pass = request.getParameter("txtpass");
+		boolean estado = Boolean.valueOf(request.getParameter("estado"));
 		
-		System.out.println(usuario);
 		PersonaLogic personaLogic = new PersonaLogic();
 		
 		Persona per = new Persona();
@@ -58,12 +61,22 @@ public class FinalizarModificacionPersona extends HttpServlet {
 		per.setApellido(apellido);
 		per.setDni(dni);
 		per.setUsuario(usuario);
-		System.out.println(usuario);
+		per.setPassword(pass);
+		per.setHabilitado(estado);
+
+
 		personaLogic.update(per);
 			
 		request.setAttribute("persona", per);
+		
+		} catch (SQLException e) {
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());
+			System.out.println(ade.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
 			response.setStatus(502);

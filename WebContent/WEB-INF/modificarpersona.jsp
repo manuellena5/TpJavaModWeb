@@ -1,6 +1,10 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
 <%@page import="entidades.Elemento"%>
+<%@page import="entidades.Categoria"%>
+
+<% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
+%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
@@ -30,6 +34,27 @@
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 					  <a class="navbar-brand" href="Start">Biblioteca</a>
 					<ul class="nav nav-pills">
+					<%if ((cat.getDescripcion().equals("Usuario"))) 
+					  {%>
+					  <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
+					    <div class="dropdown-menu">
+					    	<a class="dropdown-item" href="reservasusuario.servlet">Mis reservas</a>
+					        <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>    
+					    </div>
+					  </li>
+					  <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mis datos</a>
+					    <div class="dropdown-menu">
+					    	<a class="dropdown-item" href="modificarmisdatos.servlet">Modificar</a>   
+					    </div>
+					  </li>
+					   <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
+					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
+					  						</p>
+					  <%}else
+					  if ((cat.getDescripcion().equals("Administrador"))) 
+					  {%>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
@@ -62,18 +87,19 @@
 					  <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
 					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
 					  						</p>
-					 
+					 <%
+					 } %>
 					</ul>
 				 
 				</nav>
 		</div>
-
+		
 
 		<div class="cuerpo">
 		
 		<% Persona persona = (Persona)request.getAttribute("persona"); %>
 		
-			<form action="FinalizarModificacionPersona.servlet" method="post" style="width:50%;">
+			<form name="frm" action="FinalizarModificacionPersona.servlet" method="post" style="width:50%;" onsubmit="return validarfrmModificarPersona();" >
 			
 					<div class="form-group">
 					    <label for="txtid">ID</label>
@@ -96,9 +122,35 @@
 					  
 					   <div class="form-group">
 					    <label for="txtapellido">Usuario</label>
-					    <input type="text" class="form-control" id="txtusuario" name="txtusuario" value="<%=persona.getUsuario() %>">
+					    <input type="text" size="20" class="form-control" id="txtusuario" name="txtusuario" value="<%=persona.getUsuario() %>">
 					  </div>
 					  
+					  <div class="form-group">
+					    <label for="txtpass">Password</label>
+					    <input type="text" size="20" class="form-control" id="txtpass" name="txtpass" value="<%=persona.getPassword() %>">
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="txtpass2">Repita el password</label>
+					    <input type="text" size="20" class="form-control" id="txtpass2" name="txtpass2" value="<%=persona.getPassword() %>">
+					  </div>
+					  
+					  <%if(((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Administrador")){ %>
+					  
+					  <div class="form-group">
+						<label for="exampleFormControlInput1">*Habilitado: </label>
+						<div class="form-check form-check-inline">
+						  <label class="form-check-label">
+			    			<input class="form-check-input" type="radio" name="estado" id="inlineRadio1" value="true" <%if(persona.isHabilitado()){%> checked<%}%>>Si
+							  </label>
+							</div>
+							<div class="form-check form-check-inline">
+							  <label class="form-check-label">
+							    <input class="form-check-input" type="radio" name="estado" id="inlineRadio2" value="false" <%if(!persona.isHabilitado()){%> checked<%}%>>No
+							  </label>
+						 </div>
+					 </div>
+					 <%} %>
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
 								  <button type="submit" class="btn btn-primary" name="btneleccion" value="<%=persona.getId_persona()%>">Aceptar</button>
@@ -168,12 +220,13 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="style/js/validaform.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
     <script src="style/js/ie10-viewport-bug-workaround.js"></script>
     
    
-		
+
 	
 
   </body>

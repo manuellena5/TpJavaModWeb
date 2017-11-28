@@ -110,6 +110,7 @@
 			    <% } %>
 			  </tbody>
 			</table>
+			<a class="btn btn-primary" href="Start">Cancelar</a>
 		</div> 
 		
 		<footer class="pie container-fluid">

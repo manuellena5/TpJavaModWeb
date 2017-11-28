@@ -38,8 +38,11 @@
         <label for="inputUser" class="sr-only">User</label>
         <input name="user" id="inputUser" class="form-control" placeholder="Usuario" required="" autofocus="" type="">
         <label for="inputPass" class="sr-only">Password</label>
-        <input name="pass" id="inputPass" class="form-control" placeholder="ContraseÃ±a" required="" type="Password">
+        <input name="pass" id="inputPass" class="form-control" placeholder="Contraseña" required="" type="Password">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+        
+        <br style="color:red"><label style="color:red">${requestScope.errores}</label><br>
+      
       </form>
 
     </div> <!-- /container -->

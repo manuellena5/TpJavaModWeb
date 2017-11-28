@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,23 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.Elemento;
-import entidades.Tipo_Elemento;
-import negocio.ElementosLogic;
-import negocio.Tipo_ElementosLogic;
+import entidades.Reserva;
+import negocio.ReservasLogic;
 import util.AppDataException;
 
 /**
- * Servlet implementation class ValidarElemento
+ * Servlet implementation class ValidarAltaReserva
  */
-@WebServlet({ "/ValidarElemento", "/validarelemento.servlet" })
-public class ValidarElemento extends HttpServlet {
+@WebServlet({ "/FinalizarAltaReserva", "/finalizaraltareserva.servlet" })
+public class FinalizarAltaReserva extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ValidarElemento() {
+    public FinalizarAltaReserva() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +33,7 @@ public class ValidarElemento extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		doPost(request,response);
 		
 	}
@@ -43,41 +43,32 @@ public class ValidarElemento extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Tipo_ElementosLogic tipoelementoslogic = new Tipo_ElementosLogic();
-		Tipo_Elemento tipoelemento = new Tipo_Elemento();
-		Elemento elemento = new Elemento();
-		ElementosLogic elementoslogic = new ElementosLogic();
+		java.util.Date data = null;
+		SimpleDateFormat simple= new SimpleDateFormat("dd/MM/yyyy");
+		Reserva reserva = new Reserva();
+		ReservasLogic reservaslogic = new ReservasLogic();
 		
-		
-		
-		try {
-			String nombre = request.getParameter("txtnombre");
-
-			String descripcion = request.getParameter("txtdescripcion");
-
-			String autor = request.getParameter("txtautor");
-
-			String genero = request.getParameter("txtgenero");
-
-			/*int stock = Integer.parseInt(request.getParameter("txtstock"));*/
 			
-			int stock = 1;
-
-			int idtipoelemento = Integer.parseInt(request.getParameter("txtidtipoelemento"));
-
-			tipoelemento = tipoelementoslogic.GetById(idtipoelemento);
+			int idelemento = Integer.parseInt(request.getParameter("idelemento"));
+			int idpersona = Integer.parseInt(request.getParameter("idpersona"));
+			String detalle = request.getParameter("txtdetalle");
 			
-			elemento.setTipo_Elemento(tipoelemento);
-			elemento.setStock(stock);
-			elemento.setGenero(genero);
-			elemento.setAutor(autor);
-			elemento.setDescripcion(descripcion);
-			elemento.setNombre(nombre);
+			try {
+				
+				String fecha = request.getParameter("fecharegistro");
+				data = simple.parse(fecha);
+				java.sql.Date fecharegistro = new java.sql.Date(data.getTime());
+				
+				reserva = reservaslogic.GetOne(idpersona, idelemento, fecharegistro);
+				
+				if (detalle.isEmpty()) {
+					detalle="Sin detalle";
+				}
+				
+				reserva.setDetalle(detalle);
+				
+				reservaslogic.update(reserva);
 			
-			elementoslogic.add(elemento);
-			
-			request.setAttribute("elemento", elemento);
-		
 		}catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(e.getMessage());
@@ -90,7 +81,8 @@ public class ValidarElemento extends HttpServlet {
 		catch (Exception e) {
 			response.setStatus(502);
 		}
-		request.getRequestDispatcher("/WEB-INF/altaelementoexitosa.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
 		
 		
 		

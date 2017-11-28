@@ -3,6 +3,7 @@ package negocio;
 import java.util.ArrayList;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import data.DataReservas;
 import entidades.Elemento;
@@ -35,7 +36,7 @@ public class ReservasLogic {
 	}
 	
 	public void delete(Reserva res)throws Exception{
-		//this.pers.remove(this.getByDni(el));
+		
 		this.reservasD.delete(res);
 	}
 	
@@ -78,19 +79,26 @@ public class ReservasLogic {
 	}
 	
 	
-
-	
 	public ArrayList<Reserva> GetAll() throws Exception{
 	
 			return reservasD.getAll();
 			
-		}
+	}
 
-
-	
+	public boolean ValidarCantidadReservasPendientes(int idpersona,int idtipoelemento) throws Exception{
+			
+			Reserva res = new Reserva();
+			
+			res.getPersona().setId_persona(idpersona);
+			res.getElemento().getTipo_Elemento().setId_tipoelemento(idtipoelemento);
+			
+			return ValidarCantidadReservasPendientes(res);
+			
+	}
 		
 		
-		public boolean ValidarCantidadReservasPendientes(Reserva res) throws Exception{
+		
+	public boolean ValidarCantidadReservasPendientes(Reserva res) throws Exception{
 			
 			
 			int cantReservasPendPersona = reservasD.getReservasPendientes(res);
@@ -100,5 +108,45 @@ public class ReservasLogic {
 			{return false;}
 		
 		
-		}
+	}
+
+
+	public ArrayList<Elemento> getElementosSinReserva(Date fechainicio,Date fechafin,Date fecharegistro,int idtipoelemento,int idpersona) throws Exception{
+			
+			return reservasD.getElementosSinReserva(fechainicio, fechafin,fecharegistro, idtipoelemento,idpersona);
+			
+			
+			
+	}
+		
+		
+	public void actualizarEstadoReservas() throws Exception{
+			
+		    ArrayList<Reserva> listado = new ArrayList<>();
+		    listado = this.GetAll();
+		
+			java.util.Date FechaDelSistema = new java.util.Date(); /*Tomo la hora del sistema*/
+			java.sql.Date fechaActual = new java.sql.Date(FechaDelSistema.getTime()); /* A la hora del sistema la convierto en el formato que trae la base */
+
+			
+			
+			for (Reserva r : listado) {
+				
+				java.sql.Date fechafin = new java.sql.Date(r.getFecha_fin().getTime());
+				 
+				  if(fechafin.before(fechaActual) && r.getEstado().equals("Activa")){	
+						
+					  r.setEstado("Sin devolver");
+					  this.update(r);
+					}
+					
+				}
+			
+	}
+	
+	
+	
+
+
+
 }

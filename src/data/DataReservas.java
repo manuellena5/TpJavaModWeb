@@ -79,7 +79,7 @@ public class DataReservas {
 					FactoryConexion.getInstancia().releaseConn();
 				} catch (SQLException e) {
 					
-					e.printStackTrace();
+					throw e;
 				}
 				
 					return reservas;
@@ -87,7 +87,6 @@ public class DataReservas {
 					
 				}
  
-	
 	public Reserva getByIdPersona(Reserva reservas) throws Exception{
 	
 			Reserva res = null;
@@ -95,7 +94,7 @@ public class DataReservas {
 			ResultSet rs = null;
 			
 			try {
-				 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+				 
 				stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 						"select p.id_persona, e.id_elemento, r.fecha_registro, r.fecha_inicio, r.fecha_fin, r.detalle, r.estado from reservas r "
 						+ "inner join elementos e on e.id_elemento=r.id_elemento inner join personas p on p.id_persona=r.id_persona where r.id_persona=?");
@@ -139,14 +138,12 @@ public class DataReservas {
 					if (stmt != null) {stmt.close();}
 					FactoryConexion.getInstancia().releaseConn();	
 				} catch (SQLException e) {
-					e.printStackTrace();
+					throw e;
 				}
 			
 			return res;
 		}
 	
-	
-		
 	public void add(Reserva res) throws Exception{
 			PreparedStatement stmt=null;
 			ResultSet keyResultSet=null;
@@ -176,7 +173,7 @@ public class DataReservas {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
@@ -196,7 +193,7 @@ public class DataReservas {
 				stmt.setInt(6, res.getElemento().getId_elemento());
 				stmt.setDate(7,(Date) res.getFecha_registro());
 			
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {
@@ -207,7 +204,7 @@ public class DataReservas {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		} 
 		
@@ -221,7 +218,7 @@ public class DataReservas {
 				stmt.setInt(1, res.getPersona().getId_persona());
 				stmt.setInt(2, res.getElemento().getId_elemento());
 				stmt.setDate(3, (Date) res.getFecha_registro());
-				stmt.execute();
+				stmt.executeUpdate();
 				
 				
 			} catch (SQLException | AppDataException e) {
@@ -232,7 +229,7 @@ public class DataReservas {
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		} 
 		 
@@ -274,7 +271,7 @@ public class DataReservas {
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
 				
-				e.printStackTrace();
+				throw e;
 			}
 			
 				return cantReservasPendientesPersona;
@@ -356,7 +353,7 @@ public class DataReservas {
 					if (stmt != null) {stmt.close();}
 					FactoryConexion.getInstancia().releaseConn();	
 				} catch (SQLException e) {
-					e.printStackTrace();
+					throw e;
 				}
 			
 			return res;
@@ -443,13 +440,94 @@ public class DataReservas {
 				if (stmt != null) {stmt.close();}
 				FactoryConexion.getInstancia().releaseConn();	
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		
 		return reservas;
 		
 		
 	}
+	
+	
+	public ArrayList<Elemento> getElementosSinReserva(Date fechainicio,Date fechafin,Date fecharegistro,int idtipoelemento,int idpersona) throws Exception{
+		
+		ArrayList<Elemento> lista = new ArrayList<Elemento>();
+		Tipo_Elemento te = null;
+		Reserva res = null;
+		Elemento ele = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+			"SELECT DISTINCT e.`id_elemento`,e.`nombre`,e.`autor`,e.`genero`,e.`descripcion`,e.`id_tipoelemento`,e.`stock`, te.`nombre` nombretipoelemento,te.`cantMaxReservasPend` "
+				+	" FROM elementos e "
+				+	" INNER JOIN `tipo_elementos` te on te.`id_tipoelemento` = e.`id_tipoelemento` "
+				+	" LEFT JOIN reservas r on r.`id_elemento` = e.`id_elemento` "
+				+	" LEFT JOIN personas per on per.`id_persona` = r.`id_persona` "
+				+	" WHERE e.`id_tipoelemento`=? and "
+				+	" e.`id_elemento` not IN( SELECT ee.`id_elemento` "
+				+ 	" FROM reservas r "
+				+ 	" INNER JOIN elementos ee on r.`id_elemento` = ee.`id_elemento` "
+				+ 	" INNER JOIN tipo_elementos te on te.`id_tipoelemento` = ee.`id_tipoelemento` "
+				+ 	" WHERE ee.`id_tipoelemento`=? and r.`fecha_inicio` between ? and ? "
+				+ 	" or r.`fecha_fin` BETWEEN  ? and ?) "
+				+ 	" and e.id_elemento NOT IN(SELECT eee.id_elemento "
+				+ 	" FROM elementos eee "
+				+ 	" INNER JOIN reservas r on r.id_elemento=eee.id_elemento "
+				+ 	" WHERE r.fecha_registro=?) "); 
+					
+			stmt.setInt(1, idtipoelemento);
+			stmt.setInt(2, idtipoelemento);
+			stmt.setDate(3, fechainicio);
+			stmt.setDate(4, fechafin);
+			stmt.setDate(5, fechainicio);
+			stmt.setDate(6, fechafin);
+			stmt.setDate(7, fecharegistro);
+			
+			rs = stmt.executeQuery();
+			
+			if (rs != null) {
+				while (rs.next()) {
+				ele = new Elemento();
+				te = new Tipo_Elemento();
+				
+				te.setId_tipoelemento(rs.getInt("id_tipoelemento"));
+				te.setCantMaxReservasPend(rs.getInt("cantMaxReservasPend"));
+				te.setNombre(rs.getString("nombretipoelemento"));
+				
+				ele.setTipo_Elemento(te);
+				ele.setId_elemento(rs.getInt("id_elemento"));
+				ele.setNombre(rs.getString("nombre"));
+				ele.setAutor(rs.getString("autor"));
+				ele.setGenero(rs.getString("genero"));
+				ele.setDescripcion(rs.getString("descripcion"));
+				ele.setStock(rs.getInt("stock"));
+			
+				lista.add(ele);
+				
+			}
+			}
+			
+		
+		
+		} catch (Exception e) {
+			
+			throw e;
+		}
+		
+			try {
+				if (rs != null) {rs.close();}
+				if (stmt != null) {stmt.close();}
+				FactoryConexion.getInstancia().releaseConn();	
+			} catch (SQLException e) {
+				throw e;
+			}
+		
+		return lista;
+	}
+	
 	
 	
 		}

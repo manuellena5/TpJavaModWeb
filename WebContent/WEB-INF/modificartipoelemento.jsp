@@ -85,7 +85,7 @@
 
 					  <div class="form-group">
 					    <label for="txtnombre">Cantidad maxima reservas pendientes</label>
-					    <input type="text" class="form-control" id="txtcantmax" name="txtcantmax" value="<%=tipoelemento.getCantMaxReservasPend() %>">
+					    <input type="text" class="form-control" id="txtcantmax" name="txtcantmax" required="" value="<%=tipoelemento.getCantMaxReservasPend() %>">
 					  </div>
 					  
 					  

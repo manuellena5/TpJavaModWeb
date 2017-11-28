@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -62,7 +64,7 @@ public class ValidarPersona extends HttpServlet {
 
 			String dni = request.getParameter("txtdni");
 
-			String password = request.getParameter("txtpassword");
+			String password = request.getParameter("txtpass");
 			
 			String usuario = request.getParameter("txtusuario");
 
@@ -86,12 +88,17 @@ public class ValidarPersona extends HttpServlet {
 			
 			
 			request.setAttribute("persona",persona);
-		}catch (AppDataException ade) {
+		}catch (SQLException e) {
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		} catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());
-			
-		} catch (Exception e) {
-			
-			e.printStackTrace();
+			System.out.println(ade.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
+		catch (Exception e) {
+			response.setStatus(502);
 		}
 		request.getRequestDispatcher("/WEB-INF/altapersonaexitosa.jsp").forward(request, response);
 		

@@ -17,7 +17,7 @@
     
     
      
-	 <title>Alta exitosa de la persona</title>
+	 <title>Modificacion exitosa del elemento</title>
 	 
 	 
 	 <!-- Bootstrap CSS -->
@@ -87,21 +87,13 @@
 		
 			
 			<div class="alert alert-success" role="alert">
-				<h3>Su ha registrado la persona correctamente</h3>
-			   <p>Id: <%=((Persona)request.getAttribute("persona")).getId_persona()%></p>
-			   <p>Nombre: <%=((Persona)request.getAttribute("persona")).getNombre()%></p>
-			   <p>Apellido: <%=((Persona)request.getAttribute("persona")).getApellido()%></p>
-			   <p>Dni: <%=((Persona)request.getAttribute("persona")).getDni()%></p>
-			   <p>Usuario: <%=((Persona)request.getAttribute("persona")).getUsuario()%></p>
-			   <% String estado;  
-			   boolean var = ((Persona)request.getAttribute("persona")).isHabilitado();
-			   					if(var == true){
-			   						estado= "Habilitado";
-			   					}else{
-			   						estado="No habilitado";
-			   					}%>
-			   <p>Estado:<%=estado%></p>
-			  	
+				<h3>Su elemento se ha eliminado correctamente</h3>
+			   
+				<p>Nombre: <%=((Elemento)request.getAttribute("elemento")).getNombre()%></p>
+				<p>Descripcion: <%=((Elemento)request.getAttribute("elemento")).getDescripcion()%></p>	
+				<p>Autor: <%=((Elemento)request.getAttribute("elemento")).getAutor()%></p>	
+				<p>Genero: <%=((Elemento)request.getAttribute("elemento")).getGenero()%></p>	
+				<%-- <p>Stock: <%=((Elemento)request.getAttribute("elemento")).getStock()%></p>	 --%>	
 			  
 			   <a href="Start" class="alert-link">Volver a pagina principal</a>
 			</div>
@@ -180,6 +172,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
    
+	<script type="text/javascript">
+    $(function () {
+    	$("#datepicker").datepicker();
+    	});
+	</script>
 
   </body>
 </html>

@@ -1,12 +1,16 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.Tipo_Elemento;
 import negocio.ElementosLogic;
 import negocio.Tipo_ElementosLogic;
 import util.AppDataException;
@@ -39,15 +43,23 @@ public class AltaElemento extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Tipo_ElementosLogic tipoelementoslogic = new Tipo_ElementosLogic();				
-		
+		ArrayList<Tipo_Elemento> listadotipoelementos = new ArrayList<Tipo_Elemento>();
 		
 		try {
 			
-			request.setAttribute("listadoTipoelementos", tipoelementoslogic.GetAll());
+			listadotipoelementos = tipoelementoslogic.GetAll();
+					
+			request.setAttribute("listadoTipoelementos", listadotipoelementos);
 			
 			
-		}catch (AppDataException ade) {
+		}catch (SQLException e) {
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		} catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());
+			System.out.println(ade.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
 			response.setStatus(502);

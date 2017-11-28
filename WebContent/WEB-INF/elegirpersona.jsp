@@ -1,7 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
-<%@page import="entidades.Elemento"%>
-<%@page import="entidades.Reserva"%>
+<%@page import="java.util.ArrayList"%>
+
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,25 +17,18 @@
     
     
      
-	 <title>Alta exitosa de la persona</title>
-	 
+	 <title>Pagina principal</title>
 	 
 	 <!-- Bootstrap CSS -->
-	  <!-- <link href="style/css/jquery-ui.structure.min.css" rel="stylesheet">
-     <link href="style/css/jquery-ui.theme.min.css" rel="stylesheet"> -->
-	 
-	 <link href="style/css/jquery-ui.min.css" rel="stylesheet">
-	 <link href="style/css/bootstrap.min.css" rel="stylesheet">
-     <link href="style/css/estilo1.css" rel="stylesheet">
-   
-    
+    <link href="style/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style/css/estilo1.css" rel="stylesheet">
     
     
     
   </head>
   <body>
     
-       <div class="contenedorprincipal container-fluid">
+        <div class="contenedorprincipal container-fluid">
 		
 		<div class="cabeza">	
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
@@ -79,37 +72,50 @@
 				</nav>
 		</div>
 
+
 		<div class="cuerpo">
 		
+ 		<table class="table table-striped">
 		
-
-		
-		
+				<thead>
+				    <tr>
+				      <th scope="col">Persona</th>
+				      <th scope="col">Id Persona</th>
+				      <th scope="col">Nombre</th>
+				      <th scope="col">Apellido</th>
+				      <th scope="col">Dni</th>
+				      <th scope="col">Usuario</th>
+				      <th scope="col">Categoria</th>
+				    </tr>
+				 </thead>
+				 <tbody>
+				  
+			<%
+				int count=0;
+				ArrayList<Persona> listaPers = (ArrayList<Persona>)request.getAttribute("listaPersonas");
+				for(Persona p : listaPers){
+				count++;
+				%>
 			
-			<div class="alert alert-success" role="alert">
-				<h3>Su ha registrado la persona correctamente</h3>
-			   <p>Id: <%=((Persona)request.getAttribute("persona")).getId_persona()%></p>
-			   <p>Nombre: <%=((Persona)request.getAttribute("persona")).getNombre()%></p>
-			   <p>Apellido: <%=((Persona)request.getAttribute("persona")).getApellido()%></p>
-			   <p>Dni: <%=((Persona)request.getAttribute("persona")).getDni()%></p>
-			   <p>Usuario: <%=((Persona)request.getAttribute("persona")).getUsuario()%></p>
-			   <% String estado;  
-			   boolean var = ((Persona)request.getAttribute("persona")).isHabilitado();
-			   					if(var == true){
-			   						estado= "Habilitado";
-			   					}else{
-			   						estado="No habilitado";
-			   					}%>
-			   <p>Estado:<%=estado%></p>
-			  	
+				  
 			  
-			   <a href="Start" class="alert-link">Volver a pagina principal</a>
-			</div>
-			
-	  	
-	  	
-			
-			
+			    <tr>
+			      <th scope="row"><%=count%></th>
+			      <td><%=p.getId_persona() %></td>
+			      <td><%=p.getNombre() %></td>
+			      <td><%=p.getApellido() %></td>
+			      <td><%=p.getDni() %></td>
+			      <td><%=p.getUsuario() %></td>
+			      <td><%=p.getCategoria().getDescripcion() %></td>
+			      <td><div class="btn-group" role="group" aria-label="Basic example">
+						  <a class="btn btn-secondary" name="lnkmodificar" href="TraerTipoElementos.servlet?idpersona=<%=p.getId_persona() %>">Elegir</a>
+						
+					</div>
+				  </td>
+			    </tr>
+			    <% } %>
+			  </tbody>
+			</table> 
 		</div> 
 		
 		<footer class="pie container-fluid">
@@ -172,14 +178,13 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="style/js/jquery-ui.js"></script>
-    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
-    <script type="text/javascript" src="style/js/datepicker-es.js"></script>
-    
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
+    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
+    
    
+		
+	
 
   </body>
 </html>
