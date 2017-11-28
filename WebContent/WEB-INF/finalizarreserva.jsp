@@ -16,7 +16,7 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Finalizar reserva</title>
 	 
 	 
 	 <!-- Bootstrap CSS -->
@@ -52,6 +52,7 @@
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
 					      <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>
+					      <a class="dropdown-item" href="reservasusuario.servlet">Mis reservas</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">

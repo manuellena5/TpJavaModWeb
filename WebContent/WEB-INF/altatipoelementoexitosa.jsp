@@ -17,7 +17,7 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Alta exitosa del tipo de elemento</title>
 	 
 	 
 	 <!-- Bootstrap CSS -->

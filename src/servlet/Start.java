@@ -65,8 +65,12 @@ public class Start extends HttpServlet {
 			
 			PersonaLogic perlogic= new PersonaLogic();
 			
+			
 			Persona pers = perlogic.login(per);
 				
+			/*if (pers==null)
+				request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);*/
+
 			request.getSession().setAttribute("user",pers);
 			
 			logger.log(Level.INFO,"log in " + pers.getDni() + " " + pers.getNombre() + " " + pers.getApellido());

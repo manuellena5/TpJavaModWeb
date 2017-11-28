@@ -17,7 +17,7 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Alta exitosa de la persona</title>
 	 
 	 
 	 <!-- Bootstrap CSS -->

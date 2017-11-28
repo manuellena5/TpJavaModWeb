@@ -101,7 +101,7 @@
 					  
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
-								  <button type="submit" class="btn btn-outline-danger" name="btneleccion" value="<%=persona.getId_persona()%>">Eliminar</button>
+								  <button type="submit" class="btn btn-outline-danger" name="btneleccion" value="<%=persona.getId_persona()%>">Deshabilitar</button>
 						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
 					  </div>
 					

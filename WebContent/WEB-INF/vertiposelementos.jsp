@@ -17,7 +17,7 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Tipos de elementos</title>
 	 
 	 <!-- Bootstrap CSS -->
     <link href="style/css/bootstrap.min.css" rel="stylesheet">

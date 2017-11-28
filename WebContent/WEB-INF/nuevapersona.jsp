@@ -17,7 +17,7 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Alta persona</title>
 	 
 	 <!-- Bootstrap CSS -->
     <link href="style/css/bootstrap.min.css" rel="stylesheet">

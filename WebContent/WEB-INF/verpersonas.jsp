@@ -17,7 +17,7 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Personas</title>
 	 
 	 <!-- Bootstrap CSS -->
     <link href="style/css/bootstrap.min.css" rel="stylesheet">
@@ -109,7 +109,7 @@
 			      <td><%=p.getCategoria().getDescripcion() %></td>
 			      <td><div class="btn-group" role="group" aria-label="Basic example">
 						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionPersona.servlet?id=<%=p.getId_persona() %>">Modificar</a>
-						  <a class="btn btn-secondary" name="lnkeliminar" href="EliminacionPersona.servlet?id=<%=p.getId_persona() %>">Eliminar</a>
+						  <a class="btn btn-secondary" name="lnkeliminar" href="EliminacionPersona.servlet?id=<%=p.getId_persona() %>">Deshabilitar</a>
 					</div>
 				  </td>
 			    </tr>

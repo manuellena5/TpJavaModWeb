@@ -49,8 +49,9 @@ public class FinalizarEliminacionPersona extends HttpServlet {
 		try {
 		per = personaLogic.GetById(idpersona);
 		
-		personaLogic.delete(per);
-			
+		per.setHabilitado(false);
+		personaLogic.update(per);
+		
 		request.setAttribute("persona", per);
 		} catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());

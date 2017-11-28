@@ -16,7 +16,7 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Alta de elemento</title>
 	 
 	 <!-- Bootstrap CSS -->
     <link href="style/css/bootstrap.min.css" rel="stylesheet">
