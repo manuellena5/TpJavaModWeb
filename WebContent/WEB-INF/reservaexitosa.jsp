@@ -22,7 +22,7 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Reserva exitosa</title>
 	 
 	 
 	 <!-- Bootstrap CSS -->
@@ -115,7 +115,7 @@
 		
 			
 			<div class="alert alert-success" role="alert">
-				<h3>Su reserva sea realizado correctamente</h3>
+				<h3>La reserva se ha realizado correctamente</h3>
 			   <p>Tipo de elemento: <%=((Reserva)request.getAttribute("reserva")).getElemento().getTipo_Elemento().getNombre()%></p>
 				<p>Nombre: <%=((Reserva)request.getAttribute("reserva")).getElemento().getNombre()%></p>
 				<p>Fecha de registro: <%=((Reserva)request.getAttribute("reserva")).getFecha_registro()%></p>	

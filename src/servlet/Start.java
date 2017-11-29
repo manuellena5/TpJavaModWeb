@@ -67,8 +67,10 @@ public class Start extends HttpServlet {
 			
 			PersonaLogic perlogic= new PersonaLogic();
 			
+			
 			Persona pers = perlogic.login(per);
 				
+
 			if (pers==null)
 			{	
 					errores+="Usuario y/o contraseña incorrectos.<br>Pruebe nuevamente";
@@ -77,6 +79,7 @@ public class Start extends HttpServlet {
 				//request.getRequestDispatcher("WEB-INF/loginincorrecto.jsp").forward(request, response);
 					
 			}else{
+
 			request.getSession().setAttribute("user",pers);
 			
 			logger.log(Level.INFO,"log in " + pers.getDni() + " " + pers.getNombre() + " " + pers.getApellido());

@@ -1,20 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
 <%@page import="entidades.Elemento"%>
-<%@page import="entidades.Tipo_Elemento"%>
-<%@page import="entidades.Categoria"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
-
-<% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
-
-Date FechaDelSistema = new Date(); /*Tomo la hora del sistema*/
-
-String fechaActual;
-SimpleDateFormat simple = new SimpleDateFormat("dd/MM/yyyy");
-fechaActual = simple.format(FechaDelSistema);
-
-%>
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,7 +16,7 @@ fechaActual = simple.format(FechaDelSistema);
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Finalizar reserva</title>
 	 
 	 
 	 <!-- Bootstrap CSS -->
@@ -54,27 +40,6 @@ fechaActual = simple.format(FechaDelSistema);
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 					  <a class="navbar-brand" href="Start">Biblioteca</a>
 					<ul class="nav nav-pills">
-					<%if ((cat.getDescripcion().equals("Usuario"))) 
-					  {%>
-					  <li class="nav-item dropdown">
-					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
-					    <div class="dropdown-menu">
-					    	<a class="dropdown-item" href="traerreservasusuario.servlet">Mis reservas</a>
-					        <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>    
-					    </div>
-					  </li>
-					  <li class="nav-item dropdown">
-					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mis datos</a>
-					    <div class="dropdown-menu">
-					    	<a class="dropdown-item" href="modificarmisdatos.servlet">Modificar</a>   
-					    </div>
-					  </li>
-					   <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
-					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
-					  						</p>
-					  <%}else
-					  if ((cat.getDescripcion().equals("Administrador"))) 
-					  {%>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
@@ -86,7 +51,8 @@ fechaActual = simple.format(FechaDelSistema);
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
-					      <a class="dropdown-item" href="elegirpersona.servlet">Nueva reserva</a>
+					      <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>
+					      <a class="dropdown-item" href="reservasusuario.servlet">Mis reservas</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
@@ -107,8 +73,7 @@ fechaActual = simple.format(FechaDelSistema);
 					  <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
 					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
 					  						</p>
-					 <%
-					 } %>
+					 
 					</ul>
 				 
 				</nav>
@@ -117,32 +82,17 @@ fechaActual = simple.format(FechaDelSistema);
 		<div class="cuerpo">
 		
 		
-		<form action="traerelementosdisponibles.servlet" method="post" onsubmit="return validarfrmFechasAltaReserva();">
+		<form action="validarreserva.servlet" method="post">
 		
-		<% Tipo_Elemento tipoelemento = (Tipo_Elemento)request.getAttribute("tipoelemento"); 
-		if(tipoelemento == null){%>
-			<div class="alert alert-danger" role="alert">
-			  Ha excedido la cantidad de elementos pendientes de devolver de este tipo, por favor devuelva los ejemplares.
-			  Puede seleccionar otro tipo de elemento para reservar
-			</div>	
-			<a href="javascript:window.history.back();">Volver a la pagina anterior</a>
+		<p>Tipo de elemento a reservar: <%=((Elemento)request.getAttribute("Elemento")).getTipo_Elemento().getNombre() %></p>
 		
-		
-		<% }else{   %>
-		
-		<input id="idpersona" name="idpersona" style="display:none;" value="<%=((Persona)request.getAttribute("persona")).getId_persona()%>">
-		      <label>Reserva a nombre de: </label>
-		      <br>
-		      <label><%=((Persona)request.getAttribute("persona")).getNombre()+" "+((Persona)request.getAttribute("persona")).getApellido()%></label>
-		      
-		<p>Tipo de elemento a reservar: <%=tipoelemento.getNombre()%></p>
-	
-		<input id="idtipoelemento" name="idtipoelemento" type="text" style="display:none;" value="<%=((Tipo_Elemento)request.getAttribute("tipoelemento")).getId_tipoelemento()%>">
+		<p>Elemento a reservar: <%=((Elemento)request.getAttribute("Elemento")).getNombre() %></p>
+		<input name="idelemento" style="display:none;" value="<%=((Elemento)request.getAttribute("Elemento")).getId_elemento()%>">
 		
 		
 		<div class="form-group">
 		<label>Fecha de registro:</label>	
-		<input id="datepicker1" name="fecharegistro" type="text" required="" value="<%=fechaActual%>"> <!-- fechaActual es la fecha del sistema, la seteo arriba de todo --> 
+		<input id="datepicker1" name="fecharegistro" type="text" required="">
 		</div>
 		
 		<div class="form-group">
@@ -152,15 +102,15 @@ fechaActual = simple.format(FechaDelSistema);
 		
 		<div class="form-group">
 		<label>Fecha de fin de la reserva:</label>	
-		<input id="datepicker3" name="fechafin" type="text" required="" onchange="validarfecha();">
+		<input id="datepicker3" name="fechafin" type="text" required="">
 		</div>
+			
+		<div class="form-group">
+		    <label for="exampleFormControlTextarea1">Detalle:</label>
+		    <textarea class="form-control detalle" name="detalle" ></textarea>
+	  	</div>
 	  	
-	  	<button type="submit" class="btn btn-primary">Siguiente</button>
-
-	  	<%} %>
-
-	  	<button type="submit" class="btn btn-primary" name="btnatras" onclick = "javascript:window.history.back();">Atras</button>
-
+	  	<button type="submit" class="btn btn-primary">Finalizar reserva</button>
 	  	</form>
 			
 			
@@ -189,25 +139,8 @@ fechaActual = simple.format(FechaDelSistema);
 	
 					<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
-							   <%if ((cat.getDescripcion().equals("Usuario"))) 
-					  {%>
-							  
 							  <li class="nav-item">
-							   <a class="nav-link itemmapa" href="reservasusuario.servlet">Mis reservas</a>
-							  </li>
-							  <li class="nav-item">
-							   <a class="nav-link itemmapa" href="#">Modificar mis datos</a>
-							  </li>
-							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ayuda</a>
-							  </li>
-							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Contacto</a>
-							  </li>
-							  <%}else if ((cat.getDescripcion().equals("Administrador"))) 
-					  {%>	  
-					  		  <li class="nav-item">
-							     <a class="nav-link itemmapa" href="ListadoReservas.servlet">Gestionar reservas</a>
+							    <a class="nav-link itemmapa" href="ListadoReservas.servlet">Ver reservas</a>
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoPersonas.servlet">Ver personas</a>
@@ -224,8 +157,6 @@ fechaActual = simple.format(FechaDelSistema);
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Contacto</a>
 							  </li>
-							  <%} %>
-							  
 						</ul>
 					</div>
 
@@ -246,7 +177,6 @@ fechaActual = simple.format(FechaDelSistema);
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="style/js/jquery-ui.js"></script>
-     <script type="text/javascript" src="style/js/validaform.js"></script>
     <script src="style/js/ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript" src="style/js/datepicker-es.js"></script>
 
@@ -255,17 +185,11 @@ fechaActual = simple.format(FechaDelSistema);
    
 	<script type="text/javascript">
     $(function () {
-    	var today = new Date();
-    	$("#datepicker1").datepicker({ minDate: 0 });
-    	$("#datepicker2").datepicker({ minDate: 0 });
-    	$("#datepicker3").datepicker({ minDate: 0 });
-    	$("#datepicker").datepicker($.datepicker.regional["es"]);
- 
-    });
-    
-   
+    	$("#datepicker1").datepicker($.datepicker.regional["es"]);
+    	$("#datepicker2").datepicker($.datepicker.regional["es"]);
+    	$("#datepicker3").datepicker($.datepicker.regional["es"]);
+    	});
 	</script>
-	
 
   </body>
 </html>

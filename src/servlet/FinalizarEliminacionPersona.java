@@ -51,8 +51,9 @@ public class FinalizarEliminacionPersona extends HttpServlet {
 		try {
 		per = personaLogic.GetById(idpersona);
 		
-		personaLogic.delete(per);
-			
+		per.setHabilitado(false);
+		personaLogic.update(per);
+		
 		request.setAttribute("persona", per);
 		} catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");

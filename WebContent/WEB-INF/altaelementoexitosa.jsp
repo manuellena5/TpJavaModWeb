@@ -20,7 +20,7 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Alta exitosa del elemento</title>
 	 
 	 
 	 <!-- Bootstrap CSS -->

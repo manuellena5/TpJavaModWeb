@@ -49,7 +49,7 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Modificar reserva</title>
 	 
 	 
 	 <!-- Bootstrap CSS -->

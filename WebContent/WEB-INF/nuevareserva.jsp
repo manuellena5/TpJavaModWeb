@@ -21,7 +21,7 @@
     
     
      
-	 <title>Pagina principal</title>
+	 <title>Alta reserva</title>
 	 
 	 <!-- Bootstrap CSS -->
     <link href="style/css/bootstrap.min.css" rel="stylesheet">
@@ -69,6 +69,7 @@
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
 					      <a class="dropdown-item" href="elegirpersona.servlet">Nueva reserva</a>
+
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
@@ -172,7 +173,7 @@
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoTiposElementos.servlet">Ver tipos de elementos</a>
-							  </li><
+							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Ayuda</a>
 							  </li>
