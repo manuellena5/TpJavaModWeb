@@ -1,6 +1,10 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="entidades.Categoria"%>
+
+<% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
+%>
 
 
     
@@ -34,6 +38,27 @@
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 					  <a class="navbar-brand" href="Start">Biblioteca</a>
 					<ul class="nav nav-pills">
+					<%if ((cat.getDescripcion().equals("Usuario"))) 
+					  {%>
+					  <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
+					    <div class="dropdown-menu">
+					    	<a class="dropdown-item" href="traerreservasusuario.servlet">Mis reservas</a>
+					        <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>    
+					    </div>
+					  </li>
+					  <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mis datos</a>
+					    <div class="dropdown-menu">
+					    	<a class="dropdown-item" href="modificarmisdatos.servlet">Modificar</a>   
+					    </div>
+					  </li>
+					   <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
+					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
+					  						</p>
+					  <%}else
+					  if ((cat.getDescripcion().equals("Administrador"))) 
+					  {%>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
 					    <div class="dropdown-menu">
@@ -45,7 +70,7 @@
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
-					      <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>
+					      <a class="dropdown-item" href="elegirpersona.servlet">Nueva reserva</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
@@ -66,7 +91,8 @@
 					  <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
 					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
 					  						</p>
-					 
+					 <%
+					 } %>
 					</ul>
 				 
 				</nav>

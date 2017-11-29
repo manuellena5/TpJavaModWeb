@@ -116,13 +116,13 @@ function validarfrmFechasAltaReserva(){
 	var fechainicio = document.getElementById("datepicker2").value;
 	var fechafin = document.getElementById("datepicker3").value;
 	
-	if (fecharegistro > fechainicio) {
+	if ($.datepicker.parseDate('dd/mm/yy', fecharegistro) > $.datepicker.parseDate('dd/mm/yy', fechainicio)) {
 		alert("La fecha de registro no puede ser mayor a la fecha de inicio");
 		document.getElementById("datepicker1").value = fechainicio;
 		return false;
 		
 	}else
-	if (fechainicio >= fechafin) {
+	if ($.datepicker.parseDate('dd/mm/yy', fechainicio) > $.datepicker.parseDate('dd/mm/yy', fechafin)) {
 		alert("La fecha de fin debe ser mayor a la fecha de inicio");
 		document.getElementById("datepicker3").value = fechainicio;
 		return false;
@@ -138,13 +138,13 @@ function validarfecha(){
 	var fechainicio = document.getElementById("datepicker2").value;
 	var fechafin = document.getElementById("datepicker3").value;
 	
-	if (fecharegistro > fechainicio) {
+	if ($.datepicker.parseDate('dd/mm/yy', fecharegistro) > $.datepicker.parseDate('dd/mm/yy', fechainicio)) {
 		alert("La fecha de registro no puede ser mayor a la fecha de inicio");
 		document.getElementById("datepicker1").value = fechainicio;
 		
 	}
 	else
-	if (fechainicio >= fechafin) {
+	if ($.datepicker.parseDate('dd/mm/yy', fechainicio) >= $.datepicker.parseDate('dd/mm/yy', fechafin)) {
 		alert("La fecha de fin debe ser mayor a la fecha de inicio");
 		document.getElementById("datepicker3").value = fechainicio;
 	}

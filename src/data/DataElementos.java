@@ -66,13 +66,15 @@ public class DataElementos {
 	public Elemento getByNombre(Elemento elementos) throws Exception{
 	
 			Elemento el = null;
+			Tipo_Elemento te = null;
 			PreparedStatement stmt = null;
 			ResultSet rs = null;
 			
 			try {
 				 
 				stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-						"select e.id_elemento, e.nombre, e.stock, e.autor, e.genero, e.descripcion, e.id_tipoelementos from elementos e "
+						"select e.id_elemento, e.nombre, e.stock, e.autor, e.genero, e.descripcion, e.`id_tipoelemento`, te.`cantMaxReservasPend`,te.`nombre` nombretipoelemento"
+						+ " from elementos e "
 						+ "inner join tipo_elementos te on e.id_tipoelemento=te.id_tipoelemento where e.nombre=?");
 						
 				stmt.setString(1, elementos.getNombre());
@@ -80,13 +82,20 @@ public class DataElementos {
 				
 				if (rs!=null && rs.next()) {
 					el = new Elemento();
+					te = new Tipo_Elemento();
+					
+					te.setId_tipoelemento(rs.getInt("id_tipoelemento"));
+					te.setNombre(rs.getString("nombretipoelemento"));
+					te.setCantMaxReservasPend(rs.getInt("cantMaxReservasPend"));
+					
+					
 					el.setId_elemento(rs.getInt("id_elemento"));   
 					el.setNombre(rs.getString("nombre"));
 					el.setStock(rs.getInt("stock"));
 					el.setAutor(rs.getString("autor"));
 					el.setGenero(rs.getString("genero"));
 					el.setDescripcion(rs.getString("descripcion"));
-					//el.setId_tipoelemento(rs.getInt("id_tipoelemento"));
+					el.setTipo_Elemento(te);
 				
 				}
 				
@@ -109,7 +118,7 @@ public class DataElementos {
 			return el;
 		}
 	
-		public Elemento GetOne(int id) throws Exception{
+	public Elemento GetOne(int id) throws Exception{
 			Tipo_Elemento te=null;
 			Elemento el = null;
 			PreparedStatement stmt = null;
@@ -164,7 +173,7 @@ public class DataElementos {
 			
 		}
 		
-		public void add(Elemento el) throws Exception{
+	public void add(Elemento el) throws Exception{
 			PreparedStatement stmt=null;
 			ResultSet keyResultSet=null;
 			try {
@@ -199,7 +208,7 @@ public class DataElementos {
 			}
 		}
 		
-		public void update(Elemento el) throws Exception{
+	public void update(Elemento el) throws Exception{
 			PreparedStatement stmt=null;
 			
 			try {
@@ -229,7 +238,7 @@ public class DataElementos {
 			}
 		} 
 		
-		public void delete(Elemento el) throws Exception{
+	public void delete(Elemento el) throws Exception{
 			PreparedStatement stmt=null;
 			
 			try {
@@ -252,7 +261,7 @@ public class DataElementos {
 			}
 		} 
 
-		public ArrayList<Elemento> getByTipoElemento(Tipo_Elemento tipoelemento)throws Exception{
+	public ArrayList<Elemento> getByTipoElemento(Tipo_Elemento tipoelemento)throws Exception{
 			
 			PreparedStatement stmt=null;
 			ResultSet rs=null;

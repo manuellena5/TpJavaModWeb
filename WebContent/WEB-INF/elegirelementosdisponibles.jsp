@@ -69,14 +69,14 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
-					    	<a class="dropdown-item" href="reservasusuario.servlet">Mis reservas</a>
+					    	<a class="dropdown-item" href="traerreservasusuario.servlet">Mis reservas</a>
 					        <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>    
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mis datos</a>
 					    <div class="dropdown-menu">
-					    	<a class="dropdown-item" href="#">Modificar</a>   
+					    	<a class="dropdown-item" href="modificarmisdatos.servlet">Modificar</a>   
 					    </div>
 					  </li>
 					   <p class="usulogueado"> Bienvenido: <%=((Persona)session.getAttribute("user")).getUsuario() %>
@@ -96,7 +96,7 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
-					      <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>
+					      <a class="dropdown-item" href="elegirpersona.servlet">Nueva reserva</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
@@ -123,6 +123,7 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 				 
 				</nav>
 		</div>
+
 
 		<div class="cuerpo">
 		
@@ -175,15 +176,12 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 					      <td><%=e.getAutor()%></td>
 					      <td><%=e.getGenero()%></td>
 					      <td><%=e.getDescripcion()%></td>
-					      <td><%=e.getStock()%></td>
+					
 					      <td><div class="btn-group" role="group" aria-label="Basic example">
-								  <%if(e.getStock() < 1){%>
-									<p>Agotado</p> 
-								  <%} 
-								  else{%>
+								  
 								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=e.getId_elemento()%>">Elegir</button>
-								  <button type="submit" class="btn btn-primary" name="btnatras" onclick = "javascript:window.history.back();">Atras</button>
-								  <%} %>
+								  
+								  
 								  
 							</div>
 						  </td>
@@ -191,6 +189,7 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 					    <% }} %>
 					  </tbody>
 					</table>
+					<button type="submit" class="btn btn-primary" name="btnatras" onclick="javascript:window.history.back();">Atras</button>
 			</form>
 		</div> 
 		

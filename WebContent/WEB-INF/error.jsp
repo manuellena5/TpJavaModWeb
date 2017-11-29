@@ -41,7 +41,7 @@
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
-					    	<a class="dropdown-item" href="reservasusuario.servlet">Mis reservas</a>
+					    	<a class="dropdown-item" href="traerreservasusuario.servlet">Mis reservas</a>
 					        <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>    
 					    </div>
 					  </li>
@@ -68,7 +68,7 @@
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="ListadoReservas.servlet">Gestionar reservas</a>
-					      <a class="dropdown-item" href="TraerTipoElementos.servlet">Nueva reserva</a>
+					      <a class="dropdown-item" href="elegirpersona.servlet">Nueva reserva</a>
 					    </div>
 					  </li>
 					  <li class="nav-item dropdown">
