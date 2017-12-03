@@ -131,9 +131,9 @@ fechaActual = simple.format(FechaDelSistema);
 		<% }else{   %>
 		
 		<input id="idpersona" name="idpersona" style="display:none;" value="<%=((Persona)request.getAttribute("persona")).getId_persona()%>">
-		      <label>Reserva a nombre de: </label>
-		      <br>
-		      <label><%=((Persona)request.getAttribute("persona")).getNombre()+" "+((Persona)request.getAttribute("persona")).getApellido()%></label>
+		
+		<p>Reserva a nombre de: <%=((Persona)request.getAttribute("persona")).getNombre()+" "+((Persona)request.getAttribute("persona")).getApellido()%></p>
+		      
 		      
 		<p>Tipo de elemento a reservar: <%=tipoelemento.getNombre()%></p>
 	

@@ -112,7 +112,7 @@
 				      <th scope="col">Descripcion</th>
 				      <th scope="col">Autor</th>
 				      <th scope="col">Genero</th>
-				      <th scope="col">Stock</th>
+				 <!-- <th scope="col">Stock</th> -->
 				      <th scope="col">Tipo de elemento</th>
 				      <th scope="col">Id tipo de elemento</th>
 				      <th scope="col">Cant max reservas pendientes</th>

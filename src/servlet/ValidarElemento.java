@@ -54,10 +54,23 @@ public class ValidarElemento extends HttpServlet {
 			String nombre = request.getParameter("txtnombre");
 
 			String descripcion = request.getParameter("txtdescripcion");
+			
+			
 
 			String autor = request.getParameter("txtautor");
 
 			String genero = request.getParameter("txtgenero");
+			
+			if (descripcion.isEmpty()) {
+				descripcion="Sin descripcion";
+			}
+			if (autor.isEmpty()) {
+				autor="Sin autor";
+			}
+			if (genero.isEmpty()) {
+				genero="Sin genero";
+			}
+			
 
 			/*int stock = Integer.parseInt(request.getParameter("txtstock"));*/
 			

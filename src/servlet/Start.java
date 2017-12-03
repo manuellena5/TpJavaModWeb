@@ -54,21 +54,22 @@ public class Start extends HttpServlet {
 			if(request.getSession().getAttribute("user") != null){
 				
 				per = ((Persona)request.getSession().getAttribute("user"));
-				
 				request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
 			}
 			else{
-			String user=request.getParameter("user");
-			String pass=request.getParameter("pass");
-			
-			per =new Persona();
-			per.setUsuario(user);
-			per.setPassword(pass);
-			
-			PersonaLogic perlogic= new PersonaLogic();
-			
-			
-			Persona pers = perlogic.login(per);
+				
+				String user = request.getParameter("user");
+				String pass = request.getParameter("pass");
+				
+				per = new Persona();
+				per.setUsuario(user);
+				per.setPassword(pass);
+				
+				PersonaLogic perlogic= new PersonaLogic();
+				
+				
+				Persona pers = perlogic.login(per);
+					
 				
 
 			if (pers==null)
@@ -78,6 +79,13 @@ public class Start extends HttpServlet {
 					request.getRequestDispatcher("login.jsp").forward(request, response);
 				//request.getRequestDispatcher("WEB-INF/loginincorrecto.jsp").forward(request, response);
 					
+			}else 
+				if(pers.isHabilitado() == false){
+				
+				errores+="Su usuario no esta habilitado para ingresar al sistema.<br>Por favor contactese con el administrador";
+				request.setAttribute("errores", errores);
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+
 			}else{
 
 			request.getSession().setAttribute("user",pers);
@@ -90,6 +98,8 @@ public class Start extends HttpServlet {
 			}
 			}
 			}catch(Exception e){
+				request.setAttribute("Error", e.getMessage());
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 				System.out.println(e.getMessage());
 			}
 		

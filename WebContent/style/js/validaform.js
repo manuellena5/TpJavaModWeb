@@ -70,7 +70,7 @@ function validarfrmNuevapersona(){
 			return false; 
 			
 	}else	
-	if(isNaN(dni))    
+	if(isNaN(dni) || dni == null || dni.length == 0)    
 	{  
 		alert('Ingrese un numero de dni valido');   
 		return false;  

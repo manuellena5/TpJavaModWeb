@@ -1,14 +1,11 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
-<%@page import="entidades.Tipo_Elemento"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="entidades.Persona"%>
+<%@page import="entidades.Elemento"%>
 <%@page import="entidades.Categoria"%>
 
 <% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 %>
 
-    
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
 <head>
@@ -22,16 +19,14 @@
     
     
      
-	 <title>Alta de elemento</title>
+	 <title>Habilitar persona</title>
 	 
 	 <!-- Bootstrap CSS -->
     <link href="style/css/bootstrap.min.css" rel="stylesheet">
     <link href="style/css/estilo1.css" rel="stylesheet">
     
-    
-    
   </head>
-  <body>
+ <body>
     
        <div class="contenedorprincipal container-fluid">
 		
@@ -99,54 +94,44 @@
 				</nav>
 		</div>
 
+
 		<div class="cuerpo">
 		
-			<form action="validarelemento.servlet" method="post" style="width:50%;" onsubmit="return validarNuevoElemento();">
-		    
-		    
-		    
-		     <div class="form-group">
-		    	<label>*Seleccione un tipo de elemento: </label>
-		    	<select id="txtidtipoelemento" name="txtidtipoelemento" class="form-control">
-			        <option selected>Elija un tipo de elemento...</option>
-			        <% ArrayList<Tipo_Elemento> lista = (ArrayList<Tipo_Elemento>)request.getAttribute("listadoTipoelementos"); 
-				    for(Tipo_Elemento te : lista){ %>
-			        <option value="<%=te.getId_tipoelemento()%>"><%=te.getNombre()%></option>  
-			         <%} %>
-		    	 </select>
-		   
-		    </div>
-		    
-		    
-		    <div class="form-group">
-			    <label for="exampleFormControlInput1">*Nombre elemento: </label>
-			    <input type="text" id="txtnombre" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre del elemento">
-			</div>
+		<% Persona persona = (Persona)request.getAttribute("persona"); %>
+		
+			<form action="FinalizarHabilitacionPersona.servlet" method="post" style="width:50%;">
 			
-			<div class="form-group">
-			    <label for="exampleFormControlInput1">Autor: </label>
-			    <input type="text" id="txtautor" name="txtautor" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese autor" >
-			</div>
-			
-			<div class="form-group">
-			    <label for="exampleFormControlInput1">Genero: </label>
-			    <input type="text" id="txtgenero" name="txtgenero" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese genero">
-			</div>
-			
-			
-			<div class="form-group">
-		    <label for="exampleFormControlTextarea1">Descripcion :</label>
-		    <textarea class="form-control detalle" id="txtdescripcion" name="txtdescripcion" placeholder="Agregue una descripcion"></textarea>
-		     <small class="form-text text-muted">Dejar vacio en caso de no querer agregar una descripcion</small>
-		     <small class="form-text text-muted">*Campos obligatorios</small>
-	  		</div>
-			
-			
-			 <button type="submit" class="btn btn-primary" name="btnagregar">Agregar</button>
-			<a class="btn btn-primary" href="Start">Cancelar</a>
-			
-			</form>
+					<div class="form-group">
+					    <label for="txtid">ID</label>
+					    <input type="text" class="form-control" id="txtid" name="txtid" value="<%=persona.getId_persona()%>" readonly="true">
+					  </div>
+					  <div class="form-group">
+					    <label for="txtusuario">Nombre</label>
+					    <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="<%=persona.getNombre()%>" readonly="true">
+					  </div>	
 
+					  <div class="form-group">
+					    <label for="txtnombre">Apellido</label>
+					    <input type="text" class="form-control" id="txtapellido" name="txtapellido" value="<%=persona.getApellido() %>" readonly="true">
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="txtapellido">Dni</label>
+					    <input type="text" class="form-control" id="txtdni" name="txtdni" value="<%=persona.getDni() %>" readonly="true">
+					  </div>
+					  
+					   <div class="form-group">
+					    <label for="txtapellido">Usuario</label>
+					    <input type="text" class="form-control" id="txtusuario" name="txtusuario" value="<%=persona.getUsuario() %>" readonly="true">
+					  </div>
+					  
+					  
+					  <div class="btn-group" role="group" aria-label="Basic example">
+								  <button type="submit" class="btn btn-outline-danger" name="btneleccion" value="<%=persona.getId_persona()%>">Habilitar</button>
+						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
+					  </div>
+					
+			</form>
 		</div> 
 		
 		<footer class="pie container-fluid">
@@ -209,7 +194,6 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
-     <script type="text/javascript" src="style/js/validaform.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
     <script src="style/js/ie10-viewport-bug-workaround.js"></script>

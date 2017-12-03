@@ -110,10 +110,7 @@
 					    <input type="text" class="form-control" id="txtnombre" name="txtnombre" required="" value="<%=elemento.getNombre()%>">
 					  </div>	
 
-					  <div class="form-group">
-					    <label for="txtnombre">Descripci&oacute;n</label>
-					    <input type="text" class="form-control" id="txtdescripcion" name="txtdescripcion" value="<%=elemento.getDescripcion() %>">
-					  </div>
+					  
 					  
 					  <div class="form-group">
 					    <label for="txtapellido">Autor</label>
@@ -123,6 +120,11 @@
 					   <div class="form-group">
 					    <label for="txtapellido">G&eacute;nero</label>
 					    <input type="text" class="form-control" id="txtgenero" name="txtgenero" value="<%=elemento.getGenero() %>">
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="txtnombre">Descripci&oacute;n</label>
+					    <input type="text" class="form-control" id="txtdescripcion" name="txtdescripcion" value="<%=elemento.getDescripcion() %>">
 					  </div>
 					  
 					  <div class="form-group" style="display:none;">

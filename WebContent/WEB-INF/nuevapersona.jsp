@@ -103,7 +103,7 @@
 			<form name="frm" action="validarpersona.servlet" method="post" style="width:50%;" onsubmit="return validarfrmNuevapersona();">
 			
 			<div class="form-group">
-		    	<label>Categoria </label>
+		    	<label>*Categoria </label>
 		    	<select id="txtidcategoria" name="txtidcategoria" class="form-control">
 			        <option selected>Elija una categoria...</option>
 			        <% ArrayList<Categoria> lista = (ArrayList<Categoria>)request.getAttribute("listadocategorias"); 
@@ -158,7 +158,9 @@
 					    <input class="form-check-input" type="radio" name="estado" id="inlineRadio2" value="false">No
 					  </label>
 				 </div>
+			 <small class="form-text text-muted">* Campos obligatorios</small>
 			 </div>
+			 
 			
 			 <button type="submit" class="btn btn-primary" name="btnagregar">Agregar</button>
 			 <a class="btn btn-primary" href="Start">Cancelar</a>

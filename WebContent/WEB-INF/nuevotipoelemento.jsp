@@ -105,13 +105,14 @@
 		   
 		   
 		    <div class="form-group">
-			    <label for="exampleFormControlInput1">Nombre del tipo de elemento: </label>
+			    <label for="exampleFormControlInput1">*Nombre del tipo de elemento: </label>
 			    <input type="text" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre del tipo de elemento"required="">
 			</div>
 			
 			<div class="form-group">
-			    <label for="exampleFormControlInput1">Limite de cantidades pendientes: </label>
+			    <label for="exampleFormControlInput1">*Limite de cantidades pendientes: </label>
 			    <input type="text" name="txtcantmaxreservaspend" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese el maximo de cantidades pendientes" required="">
+				<small class="form-text text-muted">*Campos obligatorios</small>
 			</div>
 			
 			 <button type="submit" class="btn btn-primary" name="btnagregar">Agregar</button>
