@@ -63,7 +63,7 @@ public class ModificacionTipoElemento extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/modificartipoelemento.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/frmmodificar.jsp").forward(request, response);
 	}
 
 }

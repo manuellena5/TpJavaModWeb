@@ -127,9 +127,33 @@
 					  
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
-								  <button type="submit" class="btn btn-outline-danger" name="btneleccion" value="<%=persona.getId_persona()%>">Habilitar</button>
-						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
+								  <button type="button" class="btn btn-primary" name="btneleccion" data-toggle="modal" data-target="#frmModal">
+			  					  Habilitar
+								  </button>
+								  <a class="btn btn-secondary" href="Start">Cancelar</a>
 					  </div>
+					  
+					  <!-- Modal -->
+										<div class="modal fade" id="frmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										  <div class="modal-dialog" role="document">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <h5 class="modal-title" id="exampleModalLabel">Habilitacion persona</h5>
+										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										          <span aria-hidden="true">&times;</span>
+										        </button>
+										      </div>
+										      <div class="modal-body">
+										        ¿Está seguro que desea habilitar esta persona?
+										      </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+										        <button type="submit" class="btn btn-primary" name="btneleccion">Aceptar</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+						<!--Fin Modal -->
 					
 			</form>
 		</div> 

@@ -22,7 +22,8 @@ public class DataReservas {
 					  		+ " r.`fecha_registro`,p.`nombre` nombrePersona,p.`apellido`,p.`dni`,p.`usuario`,e.`nombre` nombreElemento,"
 							+ " e.`autor`,e.`genero`, te.nombre tipoelemento, te.id_tipoelemento, te.cantMaxReservasPend from reservas r inner join personas p on p.`id_persona` = r.`id_persona`" 
 					  		+ " inner join elementos e on e.`id_elemento` = r.`id_elemento`"
-							+ " inner join tipo_elementos te on te.`id_tipoelemento` = e.`id_tipoelemento` order by r.fecha_registro");
+							+ " inner join tipo_elementos te on te.`id_tipoelemento` = e.`id_tipoelemento` "
+							+ " order by r.fecha_registro, r.fecha_inicio, r.fecha_fin");
 					  
 					  
 					  

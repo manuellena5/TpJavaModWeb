@@ -1,8 +1,9 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
-<%@page import="entidades.Tipo_Elemento"%>
+<%@page import="entidades.Elemento"%>
 <%@page import="entidades.Reserva"%>
 <%@page import="entidades.Categoria"%>
+<%@page import="entidades.Tipo_Elemento"%>
 
 <% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 %>
@@ -21,7 +22,7 @@
     
     
      
-	 <title>Modificacion exitosa del tipo de elemento</title>
+	 <title>Alta exitosa</title>
 	 
 	 
 	 <!-- Bootstrap CSS -->
@@ -108,23 +109,63 @@
 		<div class="cuerpo">
 		
 		
-
-		
-		
+			<%Persona per = ((Persona)request.getAttribute("persona"));
+			Elemento ele = ((Elemento)request.getAttribute("elemento"));
+			Tipo_Elemento te = ((Tipo_Elemento)request.getAttribute("tipoelemento"));
 			
-			<div class="alert alert-success" role="alert">
-				<h3>Su tipo de elemento se ha modificado correctamente</h3>
-			   
-				<p>Id: <%=((Tipo_Elemento)request.getAttribute("tipoelemento")).getId_tipoelemento()%></p>
-				<p>Nombre: <%=((Tipo_Elemento)request.getAttribute("tipoelemento")).getNombre()%></p>	
-				<p>Cantidad maxima de reservas pendientes: <%=((Tipo_Elemento)request.getAttribute("tipoelemento")).getCantMaxReservasPend()%></p>	
+			if(per != null){%>
 				
+				<div class="alert alert-success" role="alert">
+				<h3>Se ha registrado la nueva persona correctamente</h3>
+			   <p>Id: <%=per.getId_persona()%></p>
+			   <p>Nombre: <%=per.getNombre()%></p>
+			   <p>Apellido: <%=per.getApellido()%></p>
+			   <p>Dni: <%=per.getDni()%></p>
+			   <p>Usuario: <%=per.getUsuario()%></p>
+			   <% String estado;  
+			   boolean var = per.isHabilitado();
+			   					if(var == true){
+			   						estado= "Habilitado";
+			   					}else{
+			   						estado="No habilitado";
+			   					}%>
+			   <p>Estado:<%=estado%></p>
+			  	
+			  
 			   <a href="Start" class="alert-link">Volver a pagina principal</a>
 			</div>
-			
-	  	
-	  	
-			
+				
+			<%}else if(ele != null){%>
+				
+				<div class="alert alert-success" role="alert">
+				<h3>Se ha registrado el nuevo elemento correctamente</h3>
+			   <p>Id: <%=ele.getId_elemento()%></p>
+				<p>Nombre: <%=ele.getNombre()%></p>
+				<p>Tipo: <%=ele.getTipo_Elemento().getNombre()%></p>	
+				<p>Autor: <%=ele.getAutor()%></p>	
+				<p>Genero: <%=ele.getGenero()%></p>	
+				<p>Descripcion: <%=ele.getDescripcion()%></p>
+				
+				<%-- <p>Stock: <%=ele.getStock()%></p>	 --%>	
+			  
+			   <a href="Start" class="alert-link">Volver a pagina principal</a>
+			</div>
+				
+				
+			<%}else if(te != null){%>
+				
+				<div class="alert alert-success" role="alert">
+				<h3>Su ha registrado el nuevo tipo de elemento correctamente</h3>
+			    <p>Id: <%=te.getId_tipoelemento()%></p>
+				<p>Nombre: <%=te.getNombre()%></p>
+				<p>Cantidad maxima de pendientes: <%=te.getCantMaxReservasPend()%></p>
+			  
+			   <a href="Start" class="alert-link">Volver a pagina principal</a>
+			</div>
+				
+				
+			<%}%>
+		
 			
 		</div> 
 		
@@ -196,11 +237,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
    
-	<script type="text/javascript">
-    $(function () {
-    	$("#datepicker").datepicker();
-    	});
-	</script>
 
   </body>
 </html>

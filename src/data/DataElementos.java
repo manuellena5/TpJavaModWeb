@@ -17,7 +17,10 @@ public class DataElementos {
 				ArrayList<Elemento> elementos = new ArrayList<Elemento>();
 				try {
 					  stmt = FactoryConexion.getInstancia().getConn().createStatement();
-					  rs = stmt.executeQuery("select e.id_elemento,e.nombre,e.stock,e.autor,e.genero,e.descripcion,te.id_tipoelemento,te.cantMaxReservasPend,te.nombre nombreIdTipoElemento from elementos e inner join tipo_elementos te on te.id_tipoelemento = e.id_tipoelemento");
+					  rs = stmt.executeQuery("select e.id_elemento,e.nombre,e.stock,e.autor,e.genero,e.descripcion,te.id_tipoelemento,te.cantMaxReservasPend,te.nombre nombreTipoElemento "
+					  		+ " from elementos e "
+					  		+ " inner join tipo_elementos te on te.id_tipoelemento = e.id_tipoelemento "
+					  		+ " order by e.nombre, nombreTipoElemento ");
 					  
 				if (rs != null) {
 						while (rs.next()) {
@@ -32,7 +35,7 @@ public class DataElementos {
 								
 								el.getTipo_Elemento().setId_tipoelemento(rs.getInt("id_tipoelemento"));
 								el.getTipo_Elemento().setCantMaxReservasPend(rs.getInt("cantMaxReservasPend"));
-								el.getTipo_Elemento().setNombre((rs.getString("nombreIdTipoElemento")));
+								el.getTipo_Elemento().setNombre((rs.getString("nombreTipoElemento")));
 								
 								
 								

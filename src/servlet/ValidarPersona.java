@@ -100,7 +100,7 @@ public class ValidarPersona extends HttpServlet {
 		catch (Exception e) {
 			response.setStatus(502);
 		}
-		request.getRequestDispatcher("/WEB-INF/altapersonaexitosa.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/altaexitosa.jsp").forward(request, response);
 		
 		
 		

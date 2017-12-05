@@ -148,7 +148,7 @@
 			      <th scope="row"><%=count%></th>
 			      <td><%=r.getElemento().getId_elemento()%></td>
 			      <td><%=r.getPersona().getId_persona()%></td>
-			       <td><%=r.getEstado() %></td>
+			      <td><%=r.getEstado() %></td>
 			      <td><%=r.getFecha_registro() %></td>
 			      <td><%=r.getFecha_inicio() %></td>
 			      <td><%=r.getFecha_fin() %></td>
@@ -164,7 +164,7 @@
 			    <% }} %>
 			  </tbody>
 			</table>
-        <a class="btn btn-primary" href="Start">Cancelar</a>
+        <a class="btn btn-primary" href="Start">Atras</a>
 		</div> 
 		
 		<footer class="pie container-fluid">

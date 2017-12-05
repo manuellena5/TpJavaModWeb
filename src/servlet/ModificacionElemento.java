@@ -64,7 +64,7 @@ public class ModificacionElemento extends HttpServlet {
 		}
 		
 		
-		request.getRequestDispatcher("WEB-INF/modificarelemento.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/frmmodificar.jsp").forward(request, response);
 	}
 
 }

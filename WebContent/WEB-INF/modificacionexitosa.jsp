@@ -1,11 +1,13 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
 <%@page import="entidades.Elemento"%>
+<%@page import="entidades.Reserva"%>
 <%@page import="entidades.Categoria"%>
+<%@page import="entidades.Tipo_Elemento"%>
 
 <% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 %>
-
+    
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="es">
 <head>
@@ -19,16 +21,25 @@
     
     
      
-	 <title>Modificar persona</title>
+	 <title>Modificacion exitosa</title>
+	 
 	 
 	 <!-- Bootstrap CSS -->
-    <link href="style/css/bootstrap.min.css" rel="stylesheet">
-    <link href="style/css/estilo1.css" rel="stylesheet">
+	  <!-- <link href="style/css/jquery-ui.structure.min.css" rel="stylesheet">
+     <link href="style/css/jquery-ui.theme.min.css" rel="stylesheet"> -->
+	 
+	 <link href="style/css/jquery-ui.min.css" rel="stylesheet">
+	 <link href="style/css/bootstrap.min.css" rel="stylesheet">
+     <link href="style/css/estilo1.css" rel="stylesheet">
+   
+    
+    
+    
     
   </head>
- <body>
+  <body>
     
-        <div class="contenedorprincipal container-fluid">
+       <div class="contenedorprincipal container-fluid">
 		
 		<div class="cabeza">	
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
@@ -96,67 +107,77 @@
 
 		<div class="cuerpo">
 		
-		<% Persona persona = (Persona)request.getAttribute("persona"); %>
 		
-			<form name="frm" action="FinalizarModificacionPersona.servlet" method="post" style="width:50%;" onsubmit="return validarfrmModificarPersona();" >
+			<%Elemento ele = ((Elemento)request.getAttribute("elemento"));
+			Persona per = ((Persona)request.getAttribute("persona"));
+			Reserva res = ((Reserva)request.getAttribute("reserva"));
+			Tipo_Elemento te = ((Tipo_Elemento)request.getAttribute("tipoelemento"));
 			
-					<div class="form-group">
-					    <label for="txtid">ID</label>
-					    <input type="text" class="form-control" id="txtid" name="txtid" value="<%=persona.getId_persona()%>" readonly="true">
-					  </div>
-					  <div class="form-group">
-					    <label for="txtusuario">Nombre</label>
-					    <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="<%=persona.getNombre()%>">
-					  </div>	
-
-					  <div class="form-group">
-					    <label for="txtnombre">Apellido</label>
-					    <input type="text" class="form-control" id="txtapellido" name="txtapellido" value="<%=persona.getApellido() %>">
-					  </div>
-					  
-					  <div class="form-group">
-					    <label for="txtapellido">Dni</label>
-					    <input type="text" class="form-control" id="txtdni" name="txtdni" value="<%=persona.getDni() %>">
-					  </div>
-					  
-					   <div class="form-group">
-					    <label for="txtapellido">Usuario</label>
-					    <input type="text" size="20" class="form-control" id="txtusuario" name="txtusuario" value="<%=persona.getUsuario() %>">
-					  </div>
-					  
-					  <div class="form-group">
-					    <label for="txtpass">Password</label>
-					    <input type="text" size="20" class="form-control" id="txtpass" name="txtpass" value="<%=persona.getPassword() %>">
-					  </div>
-					  
-					  <div class="form-group">
-					    <label for="txtpass2">Repita el password</label>
-					    <input type="text" size="20" class="form-control" id="txtpass2" name="txtpass2" value="<%=persona.getPassword() %>">
-					  </div>
-					  
-					  <%if(((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Administrador")){ %>
-					  
-					  <div class="form-group">
-						<label for="exampleFormControlInput1">*Habilitado: </label>
-						<div class="form-check form-check-inline">
-						  <label class="form-check-label">
-			    			<input class="form-check-input" type="radio" name="estado" id="inlineRadio1" value="true" <%if(persona.isHabilitado()){%> checked<%}%>>Si
-							  </label>
-							</div>
-							<div class="form-check form-check-inline">
-							  <label class="form-check-label">
-							    <input class="form-check-input" type="radio" name="estado" id="inlineRadio2" value="false" <%if(!persona.isHabilitado()){%> checked<%}%>>No
-							  </label>
-						 </div>
-					 </div>
-					 <%} %>
-					  
-					  <div class="btn-group" role="group" aria-label="Basic example">
-								  <button type="submit" class="btn btn-primary" name="btneleccion" value="<%=persona.getId_persona()%>">Aceptar</button>
-						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
-					  </div>
+			if(ele != null){%>
+				<div class="alert alert-success" role="alert">
+				<h3>Su elemento se ha modificado correctamente</h3>
+			   
+				<p>Nombre: <%=ele.getNombre()%></p>
+				<p>Autor: <%=ele.getAutor()%></p>
+				<p>Genero: <%=ele.getGenero()%></p>	
+				<p>Descripcion: <%=ele.getDescripcion()%></p>	
 					
-			</form>
+				<%-- <p>Stock: <%=((Elemento)request.getAttribute("elemento")).getStock()%></p>	 --%>	
+			  
+			   <a href="Start" class="alert-link">Volver a pagina principal</a>
+			</div>
+			<%}else if(per != null){%>
+				<div class="alert alert-success" role="alert">
+				<h3>Los datos se han modificado correctamente</h3>
+			   
+				<p>Nombre: <%=per.getNombre()%></p>
+				<p>Apellido: <%=per.getApellido()%></p>	
+				<p>Dni: <%=per.getDni()%></p>
+				<p>Usuario: <%=per.getUsuario()%></p>	
+			  
+			   <a href="Start" class="alert-link">Volver a pagina principal</a>
+			</div>
+			<%}else if(res != null){%>
+				
+				<div class="alert alert-success" role="alert">
+				<h3>Su reserva se ha modificado correctamente</h3>
+			   
+			   	<p>Fecha de registro: <%=res.getFecha_registro()%></p>
+				<p>Fecha de inicio: <%=res.getFecha_inicio()%></p>
+				<p>Fecha de fin: <%=res.getFecha_fin()%></p>
+				<p>Detalle: <%=res.getDetalle()%></p>
+				<p>Estado: <%=res.getEstado()%></p>
+				<p>Persona que reserva: <%=res.getPersona().getNombre() + " " + res.getPersona().getApellido()%></p>
+				<p>Tipo de elemento reservado: <%=res.getElemento().getTipo_Elemento().getNombre()%></p>
+				<p>Nombre del elemento reservado: <%=res.getElemento().getNombre()%></p>
+			  		
+			  
+			  
+			   <a href="Start" class="alert-link">Volver a pagina principal</a>
+			</div>
+			<%}else if(te != null){%>
+				
+				<div class="alert alert-success" role="alert">
+				<h3>Su tipo de elemento se ha modificado correctamente</h3>
+			   
+				<p>Id: <%=te.getId_tipoelemento()%></p>
+				<p>Nombre: <%=te.getNombre()%></p>	
+				<p>Cantidad maxima de reservas pendientes: <%=te.getCantMaxReservasPend()%></p>
+					
+				
+			   <a href="Start" class="alert-link">Volver a pagina principal</a>
+			</div>
+			
+			<%}%>
+		
+		
+			
+			
+			
+	  	
+	  	
+			
+			
 		</div> 
 		
 		<footer class="pie container-fluid">
@@ -219,14 +240,19 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="style/js/validaform.js"></script>
+    <script type="text/javascript" src="style/js/jquery-ui.js"></script>
+    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="style/js/datepicker-es.js"></script>
+    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
-    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
-    
    
-
-	
+	<script type="text/javascript">
+    $(function () {
+    	$("#datepicker").datepicker();
+    	});
+	</script>
 
   </body>
 </html>

@@ -47,7 +47,7 @@ public class ValidarAltaReservaUsuario extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int idelemento = Integer.parseInt(request.getParameter("btneleccion"));
+		
 		Elemento elemento = new Elemento();
 		java.util.Date data = null;
 		SimpleDateFormat simple= new SimpleDateFormat("dd/MM/yyyy");
@@ -65,6 +65,7 @@ public class ValidarAltaReservaUsuario extends HttpServlet {
 			
 			
 			try {
+				int idelemento = Integer.parseInt(request.getParameter("btnenviar"));
 				
 				String fecha = request.getParameter("fechainicio");					
 				data = simple.parse(fecha);						
@@ -104,7 +105,9 @@ public class ValidarAltaReservaUsuario extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
 			catch (Exception e) {
-				response.setStatus(502);
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				System.out.println(e.getMessage());
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
 		
 			

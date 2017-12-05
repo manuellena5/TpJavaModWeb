@@ -18,7 +18,7 @@ function validarfrmModificarPersona(){
 				return false; 
 				
 		}else
-		if(isNaN(dni))    
+		if(isNaN(dni) || dni == null || dni.length == 0)    
 		{  
 			alert('Ingrese un numero de dni valido');   
 			return false;  
@@ -42,7 +42,7 @@ function validarfrmModificarPersona(){
 
 			return false;
 			}
-
+		$('#frmModal').modal('show');
 		return true;
 
 	}
@@ -94,7 +94,7 @@ function validarfrmNuevapersona(){
 
 		return false;
 		}
-
+	$('#frmModal').modal('show');
 	return true;
 
 }
@@ -122,7 +122,7 @@ function validarfrmFechasAltaReserva(){
 		return false;
 		
 	}else
-	if ($.datepicker.parseDate('dd/mm/yy', fechainicio) > $.datepicker.parseDate('dd/mm/yy', fechafin)) {
+	if ($.datepicker.parseDate('dd/mm/yy', fechainicio) >= $.datepicker.parseDate('dd/mm/yy', fechafin)) {
 		alert("La fecha de fin debe ser mayor a la fecha de inicio");
 		document.getElementById("datepicker3").value = fechainicio;
 		return false;
@@ -159,17 +159,72 @@ function validarNuevoElemento(){
 	var genero = document.getElementById("txtgenero").value;
 	var descripcion = document.getElementById("txtdescripcion").value;
 	
+	
 	if(tipoelemento == null || tipoelemento == 0){
-		alert('Seleccione un tipo de elemento');   
+		alert('Seleccione un tipo de elemento'); 
 		return false;  
 	}else
 	if (nombre == null || nombre == 0) {
 		alert('Debe ingresar un nombre');   
 		return false; 
 	}
+		$('#frmModal').modal('show');
 		return true;
 	
 	
+	
+}
+
+function validarNuevoTipoElemento(){
+	
+	var nombre = document.getElementById("txtnombre").value;
+	var maximaspendientes = document.getElementById("txtcantmaxreservaspend").value;
+	
+	if(nombre == null || nombre == 0){
+		alert('Debe ingresar un nombre'); 
+		return false;  
+	}else
+	if (maximaspendientes == null || maximaspendientes == 0) {
+		alert('Debe ingresar cantidad maxima de reservas pendientes');   
+		return false; 
+	}
+		$('#frmModal').modal('show');
+		return true;
+	
+}
+
+function validarModificacionTipoElemento(){
+	
+	var maximaspendientes = document.getElementById("txtcantmax").value;
+	if (maximaspendientes == null || maximaspendientes == 0) {
+		alert('Debe ingresar cantidad maxima de reservas pendientes');   
+		return false; 
+	}
+		$('#frmModal').modal('show');
+		return true;
+	
+}
+
+function validarModificacionElemento(){
+	
+	var nombre = document.getElementById("txtnombre").value;
+	
+	if (nombre == null || nombre == 0) {
+		alert('Debe ingresar un nombre');   
+		return false; 
+	}
+		$('#frmModal').modal('show');
+		return true;
+	
+	
+}
+
+
+function tomariddelboton(boton){
+	var id = boton.id;
+	var botonenviar = document.getElementById("btnenviar");
+	botonenviar.value = id;
+	$('#frmModal').modal('show');
 	
 }
 

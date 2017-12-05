@@ -68,7 +68,7 @@ public class ValidarTipoElemento extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/altatipoelementoexitosa.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/altaexitosa.jsp").forward(request, response);
 		
 		
 		

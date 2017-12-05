@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.Persona;
 import entidades.Reserva;
 import negocio.ReservasLogic;
 import util.AppDataException;
@@ -47,11 +48,14 @@ public class FinalizarAltaReserva extends HttpServlet {
 		SimpleDateFormat simple= new SimpleDateFormat("dd/MM/yyyy");
 		Reserva reserva = new Reserva();
 		ReservasLogic reservaslogic = new ReservasLogic();
+		Persona persona =  new Persona();
 		
 			
 			int idelemento = Integer.parseInt(request.getParameter("idelemento"));
 			int idpersona = Integer.parseInt(request.getParameter("idpersona"));
 			String detalle = request.getParameter("txtdetalle");
+			
+			String categoria = ((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion();
 			
 			try {
 				
@@ -82,7 +86,13 @@ public class FinalizarAltaReserva extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
+			if (categoria.equals("Usuario")) {
+				request.getRequestDispatcher("traerreservasusuario.servlet").forward(request, response);
+			}else
+				if (categoria.equals("Administrador")) {
+					request.getRequestDispatcher("ListadoReservas.servlet").forward(request, response);
+				}
+		
 		
 		
 		

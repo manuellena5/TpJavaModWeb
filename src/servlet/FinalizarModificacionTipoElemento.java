@@ -41,9 +41,7 @@ public class FinalizarModificacionTipoElemento extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int idtipoelemento = Integer.parseInt(request.getParameter("btneleccion"));
 		
-		int cantMaxReservasPend = Integer.parseInt(request.getParameter("txtcantmax"));
 		
 		Tipo_ElementosLogic tipoelementoLogic = new Tipo_ElementosLogic();
 		
@@ -51,6 +49,10 @@ public class FinalizarModificacionTipoElemento extends HttpServlet {
 		
 		
 		try {
+			
+			int idtipoelemento = Integer.parseInt(request.getParameter("txtid"));
+			
+			int cantMaxReservasPend = Integer.parseInt(request.getParameter("txtcantmax"));
 		
 		tipoel = tipoelementoLogic.GetById(idtipoelemento);
 		tipoel.setCantMaxReservasPend(cantMaxReservasPend);
@@ -72,7 +74,7 @@ public class FinalizarModificacionTipoElemento extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/modificacionexitosatipoelemento.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/modificacionexitosa.jsp").forward(request, response);
 	}
 
 }

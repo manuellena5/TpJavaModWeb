@@ -68,7 +68,7 @@ public class FinalizarEliminacionTipoElemento extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/modificacionexitosatipoelemento.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/eliminacionexitosa.jsp").forward(request, response);
 	}
 
 }

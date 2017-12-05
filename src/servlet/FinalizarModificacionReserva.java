@@ -100,6 +100,11 @@ public class FinalizarModificacionReserva extends HttpServlet {
 
 			
 			String detalle = request.getParameter("detalle");
+			
+			if (detalle.isEmpty()) {
+				detalle = "Sin detalle";
+			}
+			
 			reserva.setDetalle(detalle);
 			
 			String estado = request.getParameter("estado");
@@ -122,7 +127,7 @@ public class FinalizarModificacionReserva extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/modificacionexitosareserva.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/modificacionexitosa.jsp").forward(request, response);
 		
 		
 		

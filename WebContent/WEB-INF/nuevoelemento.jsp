@@ -101,7 +101,7 @@
 
 		<div class="cuerpo">
 		
-			<form action="validarelemento.servlet" method="post" style="width:50%;" onsubmit="return validarNuevoElemento();">
+			<form action="validarelemento.servlet" method="post" style="width:50%;">
 		    
 		    
 		    
@@ -120,17 +120,17 @@
 		    
 		    <div class="form-group">
 			    <label for="exampleFormControlInput1">*Nombre elemento: </label>
-			    <input type="text" id="txtnombre" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre del elemento">
+			    <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Ingrese nombre del elemento">
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Autor: </label>
-			    <input type="text" id="txtautor" name="txtautor" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese autor" >
+			    <input type="text" id="txtautor" name="txtautor" class="form-control" placeholder="Ingrese autor" >
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">Genero: </label>
-			    <input type="text" id="txtgenero" name="txtgenero" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese genero">
+			    <input type="text" id="txtgenero" name="txtgenero" class="form-control" placeholder="Ingrese genero">
 			</div>
 			
 			
@@ -142,11 +142,38 @@
 	  		</div>
 			
 			
-			 <button type="submit" class="btn btn-primary" name="btnagregar">Agregar</button>
+			 <button type="button" class="btn btn-primary" name="btnagregar" id="btnagregar" onclick="return validarNuevoElemento();">
+			  				Agregar
+							</button>
 			<a class="btn btn-primary" href="Start">Cancelar</a>
 			
+			
+			 <!-- Modal -->
+						<div class="modal fade" id="frmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Agregar elemento</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        ¿Está seguro que desea agregar este elemento?
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						        <button type="submit" class="btn btn-primary" name="btnagregar" >Aceptar</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+				<!--Fin Modal -->
+			
+			
 			</form>
-
+			
+			
 		</div> 
 		
 		<footer class="pie container-fluid">

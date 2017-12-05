@@ -87,7 +87,7 @@ public class ModificacionReserva extends HttpServlet {
 			
 			
 		
-		request.getRequestDispatcher("/WEB-INF/modificarreserva.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/frmmodificar.jsp").forward(request, response);
 
 		}
 	

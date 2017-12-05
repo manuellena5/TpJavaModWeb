@@ -82,7 +82,7 @@ public class FinalizarModificacionPersona extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/modificacionexitosapersona.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/modificacionexitosa.jsp").forward(request, response);
 	
 	}
 

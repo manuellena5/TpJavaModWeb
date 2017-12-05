@@ -65,7 +65,7 @@ public class ModificarMisDatos extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/modificarpersona.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/frmmodificar.jsp").forward(request, response);
 	}
 	
 }

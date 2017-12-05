@@ -63,7 +63,7 @@ public class EliminacionPersona extends HttpServlet {
 		catch (Exception e) {
 			response.setStatus(502);
 		}
-		request.getRequestDispatcher("WEB-INF/eliminarpersona.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/frmeliminar.jsp").forward(request, response);
 	}
 
 }

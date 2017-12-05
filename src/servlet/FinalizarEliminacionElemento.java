@@ -41,7 +41,7 @@ public class FinalizarEliminacionElemento extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int idelemento = Integer.parseInt(request.getParameter("btneleccion"));
+		int idelemento = Integer.parseInt(request.getParameter("txtid"));
 		
 		ElementosLogic elementoLogic = new ElementosLogic();
 		
@@ -69,7 +69,7 @@ public class FinalizarEliminacionElemento extends HttpServlet {
 				response.setStatus(502);
 			}
 			
-			request.getRequestDispatcher("WEB-INF/eliminacionelementoexitosa.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/eliminacionexitosa.jsp").forward(request, response);
 	}
 
 }

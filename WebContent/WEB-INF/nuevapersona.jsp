@@ -100,7 +100,7 @@
 
 		<div class="cuerpo">
 		
-			<form name="frm" action="validarpersona.servlet" method="post" style="width:50%;" onsubmit="return validarfrmNuevapersona();">
+			<form name="frm" action="validarpersona.servlet" method="post" style="width:50%;" >
 			
 			<div class="form-group">
 		    	<label>*Categoria </label>
@@ -161,10 +161,33 @@
 			 <small class="form-text text-muted">* Campos obligatorios</small>
 			 </div>
 			 
-			
-			 <button type="submit" class="btn btn-primary" name="btnagregar">Agregar</button>
+			 <button type="button" class="btn btn-primary" name="btnagregar" id="btnagregar" onclick="return validarfrmNuevapersona();">
+			  				Agregar
+							</button>
 			 <a class="btn btn-primary" href="Start">Cancelar</a>
 			
+			
+			<!-- Modal -->
+						<div class="modal fade" id="frmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Agregar persona</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        ¿Está seguro que desea agregar esta persona?
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						        <button type="submit" class="btn btn-primary" name="btnagregar">Aceptar</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+				<!--Fin Modal -->
 			
 			</form>
 

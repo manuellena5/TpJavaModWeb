@@ -63,7 +63,7 @@ public class EliminacionTipoElemento extends HttpServlet {
 		catch (Exception e) {
 			response.setStatus(502);
 		}
-		request.getRequestDispatcher("WEB-INF/eliminartipoelemento.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/frmeliminar.jsp").forward(request, response);
 	}
 
 }

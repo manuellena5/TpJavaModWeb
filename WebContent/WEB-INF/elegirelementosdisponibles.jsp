@@ -179,8 +179,31 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 					
 					      <td><div class="btn-group" role="group" aria-label="Basic example">
 								  
-								  <button type="submit" class="btn btn-secondary" name="btneleccion" value="<%=e.getId_elemento()%>">Elegir</button>
+								  <button type="button" class="btn btn-secondary" name="btneleccion" onclick="tomariddelboton(this);" id="<%=e.getId_elemento()%>">
+			  					  Elegir
+								  </button>
 								  
+								  <!-- Modal -->
+										<div class="modal fade" id="frmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										  <div class="modal-dialog" role="document">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <h5 class="modal-title" id="exampleModalLabel">Eleccion de elemento</h5>
+										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										          <span aria-hidden="true">&times;</span>
+										        </button>
+										      </div>
+										      <div class="modal-body">
+										        ¿Está seguro que desea elegir este elemento?
+										      </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+										        <button type="submit" id="btnenviar" name="btnenviar" value="" class="btn btn-primary">Aceptar</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+								<!--Fin Modal -->
 								  
 								  
 							</div>
@@ -189,7 +212,12 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 					    <% }} %>
 					  </tbody>
 					</table>
-					<button type="submit" class="btn btn-primary" name="btnatras" onclick="javascript:window.history.back();">Atras</button>
+					<button type="button" class="btn btn-primary" name="btnatras" onclick="javascript:window.history.back();">Atras</button>
+			
+				 
+				
+			
+			
 			</form>
 		</div> 
 		
@@ -271,6 +299,7 @@ Reserva r = (Reserva)request.getAttribute("reserva");
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="style/js/validaform.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
     <script src="style/js/ie10-viewport-bug-workaround.js"></script>

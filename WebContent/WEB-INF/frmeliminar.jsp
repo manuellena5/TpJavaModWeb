@@ -2,6 +2,7 @@
 <%@page import="entidades.Persona"%>
 <%@page import="entidades.Elemento"%>
 <%@page import="entidades.Categoria"%>
+<%@page import="entidades.Tipo_Elemento"%>
 
 <% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 %>
@@ -19,7 +20,7 @@
     
     
      
-	 <title>Eliminar persona</title>
+	 <title>Eliminar elemento</title>
 	 
 	 <!-- Bootstrap CSS -->
     <link href="style/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +29,7 @@
   </head>
  <body>
     
-       <div class="contenedorprincipal container-fluid">
+        <div class="contenedorprincipal container-fluid">
 		
 		<div class="cabeza">	
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
@@ -97,8 +98,88 @@
 
 		<div class="cuerpo">
 		
-		<% Persona persona = (Persona)request.getAttribute("persona"); %>
-		
+		<% Elemento elemento = (Elemento)request.getAttribute("elemento");
+			Persona persona = (Persona)request.getAttribute("persona");
+			Tipo_Elemento tipoelemento = (Tipo_Elemento)request.getAttribute("tipoelemento");
+			if(elemento != null){%>
+			
+			
+			
+			<!-- FORMULARIO ELEMENTO -->
+			
+			<form action="FinalizarEliminacionElemento.servlet" method="post" style="width:50%;">
+			
+					<div class="form-group">
+					    <label for="txtid">ID</label>
+					    <input type="text" class="form-control" id="txtid" name="txtid" value="<%=elemento.getId_elemento()%>" readonly="true">
+					  </div>
+					  <div class="form-group">
+					    <label for="txtusuario">Nombre</label>
+					    <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="<%=elemento.getNombre()%>" readonly="true">
+					  </div>	
+
+					  <div class="form-group">
+					    <label for="txtnombre">Descripci&oacute;n</label>
+					    <input type="text" class="form-control" id="txtdescripcion" name="txtdescripcion" value="<%=elemento.getDescripcion() %>" readonly="true">
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="txtapellido">Autor</label>
+					    <input type="text" class="form-control" id="txtautor" name="txtautor" value="<%=elemento.getAutor() %>" readonly="true">
+					  </div>
+					  
+					   <div class="form-group">
+					    <label for="txtapellido">G&eacute;nero</label>
+					    <input type="text" class="form-control" id="txtgenero" name="txtgenero" value="<%=elemento.getGenero() %>" readonly="true">
+					  </div>
+					  
+					  <div class="form-group" style="display:none;">
+					    <label for="txtapellido">Stock</label>
+					    <input type="text" class="form-control" id="txtstock" name="txtstock" value="<%=elemento.getStock() %>" readonly="true">
+					  </div>
+					  
+					  
+					  <div class="btn-group" role="group" aria-label="Basic example">
+								  <button type="button" class="btn btn-outline-danger" name="btneleccion" data-toggle="modal" data-target="#frmModal">
+			  					  Eliminar
+								  </button>
+								  
+						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
+					  </div>
+					
+					 <!-- Modal -->
+						<div class="modal fade" id="frmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Eliminar elemento</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        ¿Está seguro que desea eliminar este elemento?
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						        <button type="submit" class="btn btn-outline-danger" name="btneleccion">Eliminar</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+				<!--Fin Modal -->
+					
+					
+			</form>
+			
+			<!-- FIN FORMULARIO ELEMENTO -->
+			<%}else
+			if(persona != null){%>
+				
+			
+			
+			<!--FORMULARIO PERSONA -->
+			
 			<form action="FinalizarEliminacionPersona.servlet" method="post" style="width:50%;">
 			
 					<div class="form-group">
@@ -127,11 +208,100 @@
 					  
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
-								  <button type="submit" class="btn btn-outline-danger" name="btneleccion" value="<%=persona.getId_persona()%>">Deshabilitar</button>
+								  <button type="button" class="btn btn-outline-danger" name="btneleccion" data-toggle="modal" data-target="#frmModal">
+			  					  Deshabilitar
+								  </button>
+								 
 						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
 					  </div>
-					
+						
+					  
+					  <!-- Modal -->
+										<div class="modal fade" id="frmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										  <div class="modal-dialog" role="document">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <h5 class="modal-title" id="exampleModalLabel">Deshabilitacion persona</h5>
+										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										          <span aria-hidden="true">&times;</span>
+										        </button>
+										      </div>
+										      <div class="modal-body">
+										        ¿Está seguro que desea deshabilitar esta persona?
+										      </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+										        <button type="submit" class="btn btn-outline-danger" name="btneleccion">Aceptar</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+						<!--Fin Modal -->
 			</form>
+			
+			<!--FIN FORMULARIO PERSONA -->
+			<%}
+			else if(tipoelemento != null){%>
+				
+			
+			
+			<!-- FORMULARIO TIPO ELEMENTO -->
+			<%  %>
+		
+			<form action="FinalizarEliminacionTipoElemento.servlet" method="post" style="width:50%;">
+			
+					<div class="form-group">
+					    <label for="txtid">ID</label>
+					    <input type="text" class="form-control" id="txtidtipoelemento" name="txtidtipoelemento" value="<%=tipoelemento.getId_tipoelemento() %>" readonly="true">
+					  </div>
+					  <div class="form-group">
+					    <label for="txtusuario">Nombre</label>
+					    <input type="text" class="form-control" id="txtnombre" name="txtnombre" value="<%=tipoelemento.getNombre()%>" readonly="true">
+					  </div>	
+
+					  <div class="form-group">
+					    <label for="txtnombre">Cantidad maxima reservas pendientes</label>
+					    <input type="text" class="form-control" id="txtcantmax" name="txtcantmax" value="<%=tipoelemento.getCantMaxReservasPend() %>" readonly="true">
+					  </div>
+					  
+					  
+					  <div class="btn-group" role="group" aria-label="Basic example">
+								  <button type="button" class="btn btn-outline-danger" name="btneleccion" data-toggle="modal" data-target="#frmModal">
+			  					  Eliminar
+								  </button>
+								  
+						  		  <a class="btn btn-secondary" href="Start">Cancelar</a>
+					  </div>
+					  
+					   
+					   
+					   <!-- Modal -->
+						<div class="modal fade" id="frmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Eliminar tipo de elemento</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        ¿Está seguro que desea eliminar este tipo de elemento?
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						        <button type="submit" class="btn btn-outline-danger" name="btneleccion">Eliminar</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					   <!--Fin Modal -->
+						
+			</form>
+			
+			<%}%>
+			
+			<!--FIN FORMULARIO TIPO ELEMENTO -->
 		</div> 
 		
 		<footer class="pie container-fluid">

@@ -57,6 +57,17 @@ public class FinalizarModificacionElemento extends HttpServlet {
 		
 		
 		try {
+			
+			if (descripcion.isEmpty()) {
+				descripcion = "Sin descripcion";
+			}
+			if (autor.isEmpty()) {
+				autor = "Sin autor";
+			}
+			if (genero.isEmpty()) {
+				genero = "Sin genero";
+			}
+			
 		el = elementoLogic.GetOne(idelemento);
 		el.setNombre(nombre);
 		el.setDescripcion(descripcion);
@@ -79,7 +90,7 @@ public class FinalizarModificacionElemento extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/modificacionexitosaelemento.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/modificacionexitosa.jsp").forward(request, response);
 	
 	}
 

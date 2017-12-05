@@ -106,21 +106,51 @@
 		   
 		    <div class="form-group">
 			    <label for="exampleFormControlInput1">*Nombre del tipo de elemento: </label>
-			    <input type="text" name="txtnombre" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese nombre del tipo de elemento"required="">
+			    <input type="text" name="txtnombre" class="form-control" id="txtnombre" placeholder="Ingrese nombre del tipo de elemento"required="">
 			</div>
 			
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">*Limite de cantidades pendientes: </label>
-			    <input type="text" name="txtcantmaxreservaspend" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese el maximo de cantidades pendientes" required="">
+			    <input type="text" name="txtcantmaxreservaspend" class="form-control" id="txtcantmaxreservaspend" placeholder="Ingrese el maximo de cantidades pendientes" required="">
 				<small class="form-text text-muted">*Campos obligatorios</small>
 			</div>
 			
-			 <button type="submit" class="btn btn-primary" name="btnagregar">Agregar</button>
+			
+			<button type="button" class="btn btn-primary" name="btnagregar" onclick="return validarNuevoTipoElemento();">
+			  Agregar
+			</button>
 			<a class="btn btn-primary" href="Start">Cancelar</a>
+			
+			<!-- Modal -->
+				<div class="modal fade" id="frmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">Agregar tipo de elemento</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        ¿Está seguro que desea agregar este tipo de elemento?
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				        <button type="submit" class="btn btn-primary">Aceptar</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			<!--Fin Modal -->
+			
 			
 			</form>
 
 		</div> 
+		
+		<!-- Button trigger modal -->
+		
+		
 		
 		<footer class="pie container-fluid">
 				
@@ -182,6 +212,7 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="style/js/validaform.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
     <script src="style/js/ie10-viewport-bug-workaround.js"></script>

@@ -142,10 +142,8 @@
 			      <%}else{%>
 			    	  <td><%=estado%></td>
 			      <%} %>
-
 					
-			      
-			      <td><div class="btn-group" role="group" aria-label="Basic example">
+					<td><div class="btn-group" role="group" aria-label="Basic example">
 						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionPersona.servlet?id=<%=p.getId_persona() %>">Modificar</a>
 						  <% if(estado.equals("Habilitado")){ %>
 						  <a class="btn btn-secondary" name="lnkeliminar" href="EliminacionPersona.servlet?id=<%=p.getId_persona() %>">Deshabilitar</a>
@@ -155,6 +153,7 @@
 						  <% }%>
 					</div>
 				  </td>
+							      
 			    </tr>
 			    <%} %>
 			  </tbody>

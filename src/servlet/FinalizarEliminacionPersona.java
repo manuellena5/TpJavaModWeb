@@ -41,7 +41,7 @@ public class FinalizarEliminacionPersona extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int idpersona = Integer.parseInt(request.getParameter("btneleccion"));
+		int idpersona = Integer.parseInt(request.getParameter("txtid"));
 		
 		PersonaLogic personaLogic = new PersonaLogic();
 		
@@ -68,7 +68,7 @@ public class FinalizarEliminacionPersona extends HttpServlet {
 			response.setStatus(502);
 		}
 		
-		request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
+		request.getRequestDispatcher("ListadoPersonas.servlet").forward(request, response);
 	}
 
 }
