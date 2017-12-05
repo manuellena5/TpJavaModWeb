@@ -276,7 +276,7 @@
 						    <input type="text" size="20" class="form-control" id="txtpass2" name="txtpass2" value="<%=persona.getPassword() %>">
 						  </div>
 						  
-						  <%if(((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Administrador")){ %>
+						  
 						  
 						  <div class="form-group" style="display:none;">
 							<label for="exampleFormControlInput1">*Habilitado: </label>
@@ -291,7 +291,7 @@
 								  </label>
 							 </div>
 						 </div>
-						 <%} %>
+						 
 						 
 						 <div>
 						 <small class="form-text text-muted">* Campos obligatorios</small>
