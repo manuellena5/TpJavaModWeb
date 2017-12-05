@@ -18,7 +18,7 @@ function validarfrmModificarPersona(){
 				return false; 
 				
 		}else
-		if(isNaN(dni) || dni == null || dni.length == 0)    
+		if(isNaN(dni) || dni == null || dni.length == 0 || dni.length < 7 || dni.length > 9)    
 		{  
 			alert('Ingrese un numero de dni valido');   
 			return false;  
@@ -70,7 +70,7 @@ function validarfrmNuevapersona(){
 			return false; 
 			
 	}else	
-	if(isNaN(dni) || dni == null || dni.length == 0)    
+	if(isNaN(dni) || dni == null || dni.length == 0 || dni.length < 7 || dni.length > 9)    
 	{  
 		alert('Ingrese un numero de dni valido');   
 		return false;  

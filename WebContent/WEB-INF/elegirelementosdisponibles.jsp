@@ -253,12 +253,6 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 							  <li class="nav-item">
 							   <a class="nav-link itemmapa" href="#">Modificar mis datos</a>
 							  </li>
-							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ayuda</a>
-							  </li>
-							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Contacto</a>
-							  </li>
 							  <%}else if ((cat.getDescripcion().equals("Administrador"))) 
 					  {%>	  
 					  		  <li class="nav-item">
@@ -272,12 +266,6 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoTiposElementos.servlet">Ver tipos de elementos</a>
-							  </li><
-							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ayuda</a>
-							  </li>
-							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Contacto</a>
 							  </li>
 							  <%} %>
 						</ul>

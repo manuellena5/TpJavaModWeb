@@ -179,12 +179,6 @@
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoTiposElementos.servlet">Ver tipos de elementos</a>
 							  </li>
-							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Ayuda</a>
-							  </li>
-							  <li class="nav-item">
-							    <a class="nav-link itemmapa" href="#">Contacto</a>
-							  </li>
 						</ul>
 					</div>
 
