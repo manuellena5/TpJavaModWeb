@@ -75,7 +75,6 @@ public class ValidarPersona extends HttpServlet {
 			boolean estado = Boolean.valueOf(request.getParameter("estado"));
 			
 			
-			
 			persona.setNombre(nombre);
 			persona.setApellido(apellido);
 			persona.setDni(dni);
@@ -87,18 +86,29 @@ public class ValidarPersona extends HttpServlet {
 			personalogic.add(persona);
 			
 			
+			if (persona == null){
+				
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}else{
+			
 			request.setAttribute("persona",persona);
+			
+			}
 		}catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (AppDataException ade) {
-			request.setAttribute("Error", ade.getMessage());
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(ade.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
-			response.setStatus(502);
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			
 		}
 		request.getRequestDispatcher("/WEB-INF/altaexitosa.jsp").forward(request, response);
 		

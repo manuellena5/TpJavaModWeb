@@ -51,19 +51,25 @@ public class FinalizarAltaReserva extends HttpServlet {
 		Persona persona =  new Persona();
 		
 			
-			int idelemento = Integer.parseInt(request.getParameter("idelemento"));
-			int idpersona = Integer.parseInt(request.getParameter("idpersona"));
-			String detalle = request.getParameter("txtdetalle");
 			
-			String categoria = ((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion();
 			
 			try {
+				int idelemento = Integer.parseInt(request.getParameter("idelemento"));
+				int idpersona = Integer.parseInt(request.getParameter("idpersona"));
+				String detalle = request.getParameter("txtdetalle");
+				
 				
 				String fecha = request.getParameter("fecharegistro");
 				data = simple.parse(fecha);
 				java.sql.Date fecharegistro = new java.sql.Date(data.getTime());
 				
 				reserva = reservaslogic.GetOne(idpersona, idelemento, fecharegistro);
+				
+				if (reserva  == null) {
+					request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+					request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+				
+				}else{
 				
 				if (detalle.isEmpty()) {
 					detalle="Sin detalle";
@@ -72,7 +78,8 @@ public class FinalizarAltaReserva extends HttpServlet {
 				reserva.setDetalle(detalle);
 				
 				reservaslogic.update(reserva);
-			
+				
+				}
 		}catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(e.getMessage());
@@ -83,13 +90,15 @@ public class FinalizarAltaReserva extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
-			response.setStatus(502);
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
-			if (categoria.equals("Usuario")) {
+			if (((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Usuario")) {
 				request.getRequestDispatcher("traerreservasusuario.servlet").forward(request, response);
 			}else
-				if (categoria.equals("Administrador")) {
+				if (((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Administrador")) {
 					request.getRequestDispatcher("ListadoReservas.servlet").forward(request, response);
 				}
 		

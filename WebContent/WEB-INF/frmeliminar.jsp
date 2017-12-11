@@ -20,7 +20,7 @@
     
     
      
-	 <title>Eliminar elemento</title>
+	 <title>Eliminar</title>
 	 
 	 <!-- Bootstrap CSS -->
     <link href="style/css/bootstrap.min.css" rel="stylesheet">
@@ -192,18 +192,23 @@
 					  </div>	
 
 					  <div class="form-group">
-					    <label for="txtnombre">Apellido</label>
+					    <label for="txtapellido">Apellido</label>
 					    <input type="text" class="form-control" id="txtapellido" name="txtapellido" value="<%=persona.getApellido() %>" readonly="true">
 					  </div>
 					  
 					  <div class="form-group">
-					    <label for="txtapellido">Dni</label>
+					    <label for="txtdni">Dni</label>
 					    <input type="text" class="form-control" id="txtdni" name="txtdni" value="<%=persona.getDni() %>" readonly="true">
 					  </div>
 					  
 					   <div class="form-group">
-					    <label for="txtapellido">Usuario</label>
+					    <label for="txtusuario">Usuario</label>
 					    <input type="text" class="form-control" id="txtusuario" name="txtusuario" value="<%=persona.getUsuario() %>" readonly="true">
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="txtapellido">Tipo de usuario</label>
+					    <input type="text" class="form-control" id="txtcategoria" name="txtcategoria" value="<%=persona.getCategoria().getDescripcion() %>" readonly="true">
 					  </div>
 					  
 					  
@@ -313,20 +318,9 @@
 				</div>
 
 
-				<div class="row">
-					<div class="politicas col-xl-4 col-lg-4 col-md-4 col-sm-4">
+			<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
-							<li class="nav-item">
-							    <a href="politicas.php">Pol&iacute;ticas</a>
-							 </li>
-							<li class="nav-item">
-							    <a href="terminosycondiciones.php">T&eacute;rminos y condiciones</a>
-							 </li>
-						</ul>
-					</div>
-	
-					<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
-						<ul class="nav flex-column">
+							 <%if(cat.getDescripcion().equals("Administrador")){ %>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoReservas.servlet">Ver reservas</a>
 							  </li>
@@ -339,9 +333,22 @@
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoTiposElementos.servlet">Ver tipos de elementos</a>
 							  </li>
+							  <%}else if(cat.getDescripcion().equals("Usuario"))
+							  {%>
+							  		<li class="nav-item">
+									    <a class="nav-link itemmapa" href="traerreservasusuario.servlet">Mis reservas</a>
+									  </li>
+									  <li class="nav-item">
+									    <a class="nav-link itemmapa" href="TraerTipoElementos.servlet">Nueva reserva</a>
+									  </li>
+									  <li class="nav-item">
+									    <a class="nav-link itemmapa" href="modificarmisdatos.servlet">Mis datos</a>
+									 </li>
+									 
+					
+							 <% } %>
 						</ul>
 					</div>
-
 					
 
 					

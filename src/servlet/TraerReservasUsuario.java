@@ -51,9 +51,9 @@ public class TraerReservasUsuario extends HttpServlet {
 		Persona usuario = new Persona();
 		ReservasLogic reservaslogic = new ReservasLogic();
 		
-		usuario = (Persona)request.getSession().getAttribute("user");
 		
 		try {
+			usuario = (Persona)request.getSession().getAttribute("user");
 			
 			reservaslogic.actualizarEstadoReservas();
 			
@@ -61,19 +61,26 @@ public class TraerReservasUsuario extends HttpServlet {
 			
 			listadoreservas = reservaslogic.getByUsuario(usuario);
 			
-			request.setAttribute("listareservasusuario", listadoreservas);
+			if (listadoreservas == null) {
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}else{
 			
+			request.setAttribute("listareservasusuario", listadoreservas);
+			}
 		}catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (AppDataException ade) {
-			request.setAttribute("Error", ade.getMessage());
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(ade.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
-			response.setStatus(502);
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
 		request.getRequestDispatcher("WEB-INF/reservasusuario.jsp").forward(request, response);

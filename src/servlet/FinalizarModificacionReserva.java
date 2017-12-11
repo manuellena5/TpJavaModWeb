@@ -69,12 +69,11 @@ public class FinalizarModificacionReserva extends HttpServlet {
 			int idtipoelemento = Integer.parseInt(request.getParameter("idtipoelemento"));
 			
 			persona = personalogic.GetById(idpersona);
-			reserva.setPersona(persona);
-			
 			tipoelemento = tipoelementoslogic.GetById(idtipoelemento);
-			
 			elemento = elementologic.GetOne(idelemento);
 			elemento.setTipo_Elemento(tipoelemento);
+			
+			reserva.setPersona(persona);
 			
 			reserva.setElemento(elemento);
 			
@@ -112,19 +111,30 @@ public class FinalizarModificacionReserva extends HttpServlet {
 			
 			reservalogic.update(reserva);
 			
+			if (reserva == null || reserva.getElemento() == null || reserva.getPersona() == null || reserva.getElemento().getTipo_Elemento() == null) {
+				
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
+			else{
+			
 			request.setAttribute("reserva", reserva);
-		
+			
+			}
+			
 		}catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (AppDataException ade) {
-			request.setAttribute("Error", ade.getMessage());
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(ade.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
-			response.setStatus(502);
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
 		request.getRequestDispatcher("/WEB-INF/modificacionexitosa.jsp").forward(request, response);

@@ -41,25 +41,36 @@ public class EliminacionElemento extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int idelemento = Integer.parseInt(request.getParameter("id"));
+		
 		
 		ElementosLogic elementologic = new ElementosLogic();
 		Elemento elemento = new Elemento();
 		try {
+			int idelemento = Integer.parseInt(request.getParameter("id"));
+			
 			elemento = elementologic.GetOne(idelemento);
-
-			request.setAttribute("elemento", elemento);
+			
+			if (elemento == null) {
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+				
+			}else {
+			
+				request.setAttribute("elemento", elemento);
+			}
 		} catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (AppDataException ade) {
-			request.setAttribute("Error", ade.getMessage());
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(ade.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
-			response.setStatus(502);
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
 		request.getRequestDispatcher("WEB-INF/frmeliminar.jsp").forward(request, response);

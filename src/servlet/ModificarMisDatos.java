@@ -41,28 +41,34 @@ public class ModificarMisDatos extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int idpersona = ((Persona)request.getSession().getAttribute("user")).getId_persona();
+		
 		
 		
 		PersonaLogic personaLogic = new PersonaLogic();
 		Persona persona = new Persona();
 		try {
+			int idpersona = ((Persona)request.getSession().getAttribute("user")).getId_persona();
 			
 			persona = personaLogic.GetById(idpersona);
-			
+			if (persona == null) {
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}else{
 			request.setAttribute("persona", persona);
-			
+			}
 		}catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (AppDataException ade) {
-			request.setAttribute("Error", ade.getMessage());
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(ade.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
-			response.setStatus(502);
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
 		request.getRequestDispatcher("WEB-INF/frmmodificar.jsp").forward(request, response);

@@ -75,30 +75,39 @@ public class TraerElementosDisponibles extends HttpServlet {
 			int idtipoelemento = Integer.parseInt(request.getParameter("idtipoelemento"));
 			int idpersona = Integer.parseInt(request.getParameter("idpersona"));
 			
+			
+			listaelementos = reservalogic.getElementosSinReserva(fechainicio, fechafin,fecharegistro, idtipoelemento,idpersona);
+			persona = personaLogic.GetById(idpersona);
+			
+			if (persona == null || fechainicio == null || fecharegistro == null || fechafin == null || listaelementos == null) {
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+				
+			}else{
+			
+			request.setAttribute("persona", persona);
 			request.setAttribute("fechainicio", fechainicio);
 			request.setAttribute("fecharegistro", fecharegistro);
 			request.setAttribute("fechafin", fechafin);
+			request.setAttribute("listaElementos",listaelementos);
 			
-			persona = personaLogic.GetById(idpersona);
-			
-			request.setAttribute("persona", persona);
-			
-			listaelementos = reservalogic.getElementosSinReserva(fechainicio, fechafin,fecharegistro, idtipoelemento,idpersona);
-			
+			}
 		} catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (AppDataException ade) {
-			request.setAttribute("Error", ade.getMessage());
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(ade.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
-			response.setStatus(502);
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
-		request.setAttribute("listaElementos",listaelementos);
+		
 		
 		
 		request.getRequestDispatcher("WEB-INF/elegirelementosdisponibles.jsp").forward(request, response);

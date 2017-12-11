@@ -42,13 +42,7 @@ public class FinalizarModificacionPersona extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-		int idpersona = Integer.parseInt(request.getParameter("btneleccion"));
-		String nombre = request.getParameter("txtnombre");
-		String apellido = request.getParameter("txtapellido");
-		String dni = request.getParameter("txtdni");
-		String usuario = request.getParameter("txtusuario");
-		String pass = request.getParameter("txtpass");
-		boolean estado = Boolean.valueOf(request.getParameter("estado"));
+		
 		
 		PersonaLogic personaLogic = new PersonaLogic();
 		
@@ -56,7 +50,22 @@ public class FinalizarModificacionPersona extends HttpServlet {
 		
 		
 		try {
+			int idpersona = Integer.parseInt(request.getParameter("btneleccion"));
+			String nombre = request.getParameter("txtnombre");
+			String apellido = request.getParameter("txtapellido");
+			String dni = request.getParameter("txtdni");
+			String usuario = request.getParameter("txtusuario");
+			String pass = request.getParameter("txtpass");
+			boolean estado = Boolean.valueOf(request.getParameter("estado"));
+			
 		per = personaLogic.GetById(idpersona);
+		
+		if (per == null) {
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			
+		}else{
+		
 		per.setNombre(nombre);
 		per.setApellido(apellido);
 		per.setDni(dni);
@@ -68,18 +77,20 @@ public class FinalizarModificacionPersona extends HttpServlet {
 		personaLogic.update(per);
 			
 		request.setAttribute("persona", per);
-		
+		}
 		} catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (AppDataException ade) {
-			request.setAttribute("Error", ade.getMessage());
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(ade.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
-			response.setStatus(502);
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
 		request.getRequestDispatcher("WEB-INF/modificacionexitosa.jsp").forward(request, response);

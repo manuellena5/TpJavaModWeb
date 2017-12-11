@@ -40,7 +40,7 @@ public class FinalizarHabilitacionPersona extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idpersona = Integer.parseInt(request.getParameter("txtid"));
+		
 		
 		PersonaLogic personaLogic = new PersonaLogic();
 		
@@ -48,23 +48,35 @@ public class FinalizarHabilitacionPersona extends HttpServlet {
 		
 		
 		try {
+		
+		int idpersona = Integer.parseInt(request.getParameter("txtid"));
 		per = personaLogic.GetById(idpersona);
+		
+		if (per == null) {
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			
+		}else{
 		
 		per.setHabilitado(true);
 		personaLogic.update(per);
 		
 		request.setAttribute("persona", per);
+		
+		}
 		} catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (AppDataException ade) {
-			request.setAttribute("Error", ade.getMessage());
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(ade.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
-			response.setStatus(502);
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
 		request.getRequestDispatcher("ListadoPersonas.servlet").forward(request, response);

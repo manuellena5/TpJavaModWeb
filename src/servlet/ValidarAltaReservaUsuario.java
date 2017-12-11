@@ -94,13 +94,20 @@ public class ValidarAltaReservaUsuario extends HttpServlet {
 				reserva.setEstado(estado);
 				
 				reservalogic.add(reserva);
-			
+				
+				if (reserva == null || reserva.getElemento() == null || reserva.getPersona() == null) {
+					request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+					request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+				}else{
+				
+				request.setAttribute("reserva", reserva);
+				}
 			} catch (SQLException e) {
 				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 				System.out.println(e.getMessage());
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			} catch (AppDataException ade) {
-				request.setAttribute("Error", ade.getMessage());
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 				System.out.println(ade.getMessage());
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
@@ -109,11 +116,7 @@ public class ValidarAltaReservaUsuario extends HttpServlet {
 				System.out.println(e.getMessage());
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
-		
-			
-			
-			request.setAttribute("reserva", reserva);
-			
+
 			request.getRequestDispatcher("WEB-INF/finalizaraltareserva.jsp").forward(request, response);
 		
 		

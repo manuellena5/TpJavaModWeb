@@ -43,29 +43,36 @@ public class ValidarTipoElemento extends HttpServlet {
 		Tipo_ElementosLogic tipoelementoslogic = new Tipo_ElementosLogic();
 		Tipo_Elemento tipoelemento = new Tipo_Elemento();
 		
-		String nombre =  request.getParameter("txtnombre");
-		int cantmaxreservaspend = Integer.parseInt(request.getParameter("txtcantmaxreservaspend"));
-		
-		tipoelemento.setNombre(nombre);
-		tipoelemento.setCantMaxReservasPend(cantmaxreservaspend);
-		
 		
 		try {
+			String nombre =  request.getParameter("txtnombre");
+			int cantmaxreservaspend = Integer.parseInt(request.getParameter("txtcantmaxreservaspend"));
+			
+			tipoelemento.setNombre(nombre);
+			tipoelemento.setCantMaxReservasPend(cantmaxreservaspend);
+			
 			tipoelementoslogic.add(tipoelemento);
+			if (tipoelemento == null ) {
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+				
+			}else{
 			
 			request.setAttribute("tipoelemento", tipoelemento);
-			
+			}
 		} catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (AppDataException ade) {
-			request.setAttribute("Error", ade.getMessage());
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(ade.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
-			response.setStatus(502);
+			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			System.out.println(e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
 		request.getRequestDispatcher("/WEB-INF/altaexitosa.jsp").forward(request, response);

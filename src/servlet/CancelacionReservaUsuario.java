@@ -50,11 +50,13 @@ public class CancelacionReservaUsuario extends HttpServlet {
 		
 		
 		
-			int idpersona = Integer.parseInt(request.getParameter("idpersona"));
-			int idelemento = Integer.parseInt(request.getParameter("idelemento"));
+			
 			
 			try {
-			
+				
+			int idpersona = Integer.parseInt(request.getParameter("idpersona"));
+			int idelemento = Integer.parseInt(request.getParameter("idelemento"));
+				
 			String fecha = request.getParameter("fecharegistro");
 			data = simple.parse(fecha);
 			java.sql.Date sqlDate = new java.sql.Date(data.getTime());
@@ -62,22 +64,35 @@ public class CancelacionReservaUsuario extends HttpServlet {
 			
 			reserva = reservalogic.GetOne(idpersona, idelemento, sqlDate);
 			
-			reserva.setEstado("Cancelada");
+			if (reserva == null) {
+				
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			
+			}else{
+			
+				reserva.setEstado("Cancelada");
 			
 			reservalogic.update(reserva);
 			
+			
 			request.setAttribute("reserva", reserva);
+			
+			}
+			
 			}catch (SQLException e) {
 				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 				System.out.println(e.getMessage());
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			} catch (AppDataException ade) {
-				request.setAttribute("Error", ade.getMessage());
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 				System.out.println(ade.getMessage());
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
 			catch (Exception e) {
-				response.setStatus(502);
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				System.out.println(e.getMessage());
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
 			
 		

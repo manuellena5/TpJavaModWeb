@@ -214,23 +214,9 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 	
 					<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
-
-							   <%if ((cat.getDescripcion().equals("Usuario"))) 
-					  {%>
-							  
+							 <%if(cat.getDescripcion().equals("Administrador")){ %>
 							  <li class="nav-item">
-							   <a class="nav-link itemmapa" href="reservasusuario.servlet">Mis reservas</a>
-
-							  </li>
-							  <li class="nav-item">
-
-							   <a class="nav-link itemmapa" href="#">Modificar mis datos</a>
-
-							  </li>
-							  <%}else if ((cat.getDescripcion().equals("Administrador"))) 
-					  {%>	  
-					  		  <li class="nav-item">
-							     <a class="nav-link itemmapa" href="ListadoReservas.servlet">Gestionar reservas</a>
+							    <a class="nav-link itemmapa" href="ListadoReservas.servlet">Ver reservas</a>
 							  </li>
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoPersonas.servlet">Ver personas</a>
@@ -241,7 +227,20 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="ListadoTiposElementos.servlet">Ver tipos de elementos</a>
 							  </li>
-							  <%} %>
+							  <%}else if(cat.getDescripcion().equals("Usuario"))
+							  {%>
+							  		<li class="nav-item">
+									    <a class="nav-link itemmapa" href="traerreservasusuario.servlet">Mis reservas</a>
+									  </li>
+									  <li class="nav-item">
+									    <a class="nav-link itemmapa" href="TraerTipoElementos.servlet">Nueva reserva</a>
+									  </li>
+									  <li class="nav-item">
+									    <a class="nav-link itemmapa" href="modificarmisdatos.servlet">Mis datos</a>
+									 </li>
+									 
+					
+							 <% } %>
 						</ul>
 					</div>
 
