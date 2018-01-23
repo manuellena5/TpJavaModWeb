@@ -112,9 +112,21 @@
 			<div class="form-group">
 			    <label for="exampleFormControlInput1">*Limite de cantidades pendientes: </label>
 			    <input type="text" name="txtcantmaxreservaspend" class="form-control" id="txtcantmaxreservaspend" placeholder="Ingrese el maximo de cantidades pendientes" required="">
-				<small class="form-text text-muted">*Campos obligatorios</small>
+				
 			</div>
 			
+			<div class="form-group">
+				    <label for="exampleFormControlSelect1">*Tipo de acceso: </label>
+				    <select class="form-control" name="acceso" id="acceso">
+				      <option selected value="Publico">Publico</option>
+				      <option value="Usuarios">Usuario</option>
+				      <option value="Encargados">Encargado</option>
+				    </select>
+			</div>
+			
+			<div>
+			<small class="form-text text-muted">*Campos obligatorios</small>
+			</div>
 			
 			<button type="button" class="btn btn-primary" name="btnagregar" onclick="return validarNuevoTipoElemento();">
 			  Agregar

@@ -1,10 +1,13 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
+<%@page import="entidades.Reserva"%>
 <%@page import="entidades.Tipo_Elemento"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Categoria"%>
 
 <% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
+
+	Reserva reserva = ((Reserva)request.getAttribute("reserva"));
 %>
 
     
@@ -36,7 +39,7 @@
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 					  <a class="navbar-brand" href="Start">Biblioteca</a>
 					<ul class="nav nav-pills">
-					<%if ((cat.getDescripcion().equals("Usuario"))) 
+					<%if ((cat.getDescripcion().equals("Usuario")) || (cat.getDescripcion().equals("Encargado"))) 
 					  {%>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
@@ -102,16 +105,25 @@
 		<form action="elegirfechas.servlet" method="POST" id="formtipoelemento" style="width:50%;" onsubmit="return validarfrmNuevaReserva();">
 		
 			<div class="form-group col-md-4">
-			  <input id="idpersona" name="idpersona" style="display:none;" value="<%=((Persona)request.getAttribute("persona")).getId_persona()%>">
+			  <input id="idpersona" name="idpersona" style="display:none;" value="<%=((Reserva)request.getAttribute("reserva")).getPersona().getId_persona()%>">
 		      <label>Reserva a nombre de: </label>
 		      <br>
-		      <label><%=((Persona)request.getAttribute("persona")).getNombre()+" "+((Persona)request.getAttribute("persona")).getApellido()%></label>
+		      <label><%=((Reserva)request.getAttribute("reserva")).getPersona().getNombre()+" "+((Reserva)request.getAttribute("reserva")).getPersona().getApellido()%></label>
 		      <label>¿Que desea reservar?</label>
 		      <select id="eleccion" name="eleccion" class="form-control">
 		        <option selected>Elija...</option>
 		        <% ArrayList<Tipo_Elemento> lista = (ArrayList<Tipo_Elemento>)request.getAttribute("listaTipoElementos"); 
-			  for(Tipo_Elemento te : lista){ %>
-		        <option value="<%=te.getId_tipoelemento()%>"><%=te.getNombre()%></option>
+			  for(Tipo_Elemento te : lista){ 
+			  if((((Reserva)request.getAttribute("reserva")).getPersona().getCategoria().getDescripcion()).equals("Encargado") && (te.getAcceso().equals("Encargado") || te.getAcceso().equals("publico"))){
+				%>  
+				  <option value="<%=te.getId_tipoelemento()%>"><%=te.getNombre()%></option>
+				  
+			  <%}else if((((Reserva)request.getAttribute("reserva")).getPersona().getCategoria().getDescripcion()).equals("Usuario") && (!te.getAcceso().equals("Encargado"))){
+				 %>
+				  <option value="<%=te.getId_tipoelemento()%>"><%=te.getNombre()%></option>
+				  
+			  <%}%>
+		        
 		        <%} %>
 		      </select>
 		      <button type="submit" class="btn btn-primary">Buscar</button>

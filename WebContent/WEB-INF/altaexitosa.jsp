@@ -159,6 +159,7 @@
 			    <p>Id: <%=te.getId_tipoelemento()%></p>
 				<p>Nombre: <%=te.getNombre()%></p>
 				<p>Cantidad maxima de pendientes: <%=te.getCantMaxReservasPend()%></p>
+				<p>Tipo de acceso: <%=te.getAcceso()%></p>
 			  
 			   <a href="Start" class="alert-link">Volver a pagina principal</a>
 			</div>

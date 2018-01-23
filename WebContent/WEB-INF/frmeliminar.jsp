@@ -265,10 +265,14 @@
 					  </div>	
 
 					  <div class="form-group">
-					    <label for="txtnombre">Cantidad maxima reservas pendientes</label>
+					    <label for="txtcantmax">Cantidad maxima reservas pendientes</label>
 					    <input type="text" class="form-control" id="txtcantmax" name="txtcantmax" value="<%=tipoelemento.getCantMaxReservasPend() %>" readonly="true">
 					  </div>
 					  
+					   <div class="form-group">
+					    <label for="acceso">Tipo de Acceso</label>
+					    <input type="text" class="form-control" id="acceso" name="acceso" value="<%=tipoelemento.getAcceso() %>" readonly="true">
+					  </div>
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
 								  <button type="button" class="btn btn-outline-danger" name="btneleccion" data-toggle="modal" data-target="#frmModal">

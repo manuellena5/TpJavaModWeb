@@ -1,6 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
 <%@page import="entidades.Elemento"%>
+<%@page import="entidades.Reserva"%>
 <%@page import="entidades.Tipo_Elemento"%>
 <%@page import="entidades.Categoria"%>
 <%@page import="java.util.Date"%>
@@ -54,7 +55,7 @@ fechaActual = simple.format(FechaDelSistema);
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 					  <a class="navbar-brand" href="Start">Biblioteca</a>
 					<ul class="nav nav-pills">
-					<%if ((cat.getDescripcion().equals("Usuario"))) 
+					<%if ((cat.getDescripcion().equals("Usuario")) || (cat.getDescripcion().equals("Encargado"))) 
 					  {%>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
@@ -130,29 +131,43 @@ fechaActual = simple.format(FechaDelSistema);
 		
 		<% }else{   %>
 		
-		<input id="idpersona" name="idpersona" style="display:none;" value="<%=((Persona)request.getAttribute("persona")).getId_persona()%>">
+		<input id="idpersona" name="idpersona" style="display:none;" value="<%=((Reserva)request.getAttribute("reserva")).getPersona().getId_persona()%>">
 		
-		<p>Reserva a nombre de: <%=((Persona)request.getAttribute("persona")).getNombre()+" "+((Persona)request.getAttribute("persona")).getApellido()%></p>
+		<p>Reserva a nombre de: <%=((Reserva)request.getAttribute("reserva")).getPersona().getNombre()+" "+((Reserva)request.getAttribute("reserva")).getPersona().getApellido()%></p>
 		      
 		      
-		<p>Tipo de elemento a reservar: <%=tipoelemento.getNombre()%></p>
-	
+		<p >Tipo de elemento a reservar: <%=tipoelemento.getNombre()%></p>
+		<input id="nombretipoelemento" name="nombretipoelemento" type="text" style="display:none;" value="<%=tipoelemento.getNombre()%>">
+		
+		
 		<input id="idtipoelemento" name="idtipoelemento" type="text" style="display:none;" value="<%=((Tipo_Elemento)request.getAttribute("tipoelemento")).getId_tipoelemento()%>">
 		
 		
 		<div class="form-group">
 		<label>Fecha de registro:</label>	
-		<input id="datepicker1" name="fecharegistro" type="text" required="" value="<%=fechaActual%>"> <!-- fechaActual es la fecha del sistema, la seteo arriba de todo --> 
+		<input id="datepicker1" name="fecharegistro" type="text" required="" value="<%=fechaActual%>" onchange="setearfechas();"> <!-- fechaActual es la fecha del sistema, la seteo arriba de todo --> 
+		<div id="smalltext1">
+			<small class="form-text text-muted">Seleccione una fecha de registro</small>
+		</div>
 		</div>
 		
-		<div class="form-group">
+		
+		
+		
+		<div id="divfechainicio" class="form-group" style="display:none;">
 		<label>Fecha de inicio la reserva:</label>	
-		<input id="datepicker2" name="fechainicio" type="text" required="">
+		<input id="datepicker2" name="fechainicio" type="text" value="<%=fechaActual%>" required="" onchange="setearfechas();">
+		<div id="smalltext2">
+			<small class="form-text text-muted">Seleccione una fecha de inicio</small>
+		</div>
 		</div>
 		
-		<div class="form-group">
+		<div id="divfechafin" class="form-group" style="display:none;">
 		<label>Fecha de fin de la reserva:</label>	
-		<input id="datepicker3" name="fechafin" type="text" required="" onchange="validarfecha();">
+		<input id="datepicker3" name="fechafin" type="text" required="" onchange="setearfechas();">
+		<div id="smalltext3">
+			<small class="form-text text-muted">Seleccione una fecha de fin</small>
+		</div>
 		</div>
 	  	
 	  	<button type="submit" class="btn btn-primary">Siguiente</button>
@@ -235,17 +250,31 @@ fechaActual = simple.format(FechaDelSistema);
    
 	<script type="text/javascript">
     $(function () {
-    	var today = new Date();
-    	$("#datepicker1").datepicker({ minDate: 0 });
-    	$("#datepicker2").datepicker({ minDate: 0 });
-    	$("#datepicker3").datepicker({ minDate: 0 });
+    	
+
+    	
+    	$("#datepicker1").datepicker({ minDate: 0, beforeShowDay: $.datepicker.noWeekends, onClose: function (selectedDate) {
+    		
+    			 $("#datepicker2").datepicker("option", "minDate", selectedDate);
+    			
+    		 
+    	}  });
+    	
+    	$("#datepicker2").datepicker({ minDate: 0, beforeShowDay: $.datepicker.noWeekends, onClose: function (selectedDate) {
+    		
+    		$("#datepicker3").datepicker("option", "minDate", selectedDate);
+    		
+    		
+    	} });
+    	
+    	$("#datepicker3").datepicker({ minDate: 0,maxDate:"+7D", beforeShowDay: $.datepicker.noWeekends });
+    	
+    	
     	$("#datepicker").datepicker($.datepicker.regional["es"]);
  
     });
-    
-   
+
 	</script>
-	
 
   </body>
 </html>

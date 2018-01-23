@@ -95,7 +95,7 @@ public class FinalizarAltaReserva extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
-			if (((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Usuario")) {
+			if (((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Usuario") || ((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Encargado")) {
 				request.getRequestDispatcher("traerreservasusuario.servlet").forward(request, response);
 			}else
 				if (((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Administrador")) {

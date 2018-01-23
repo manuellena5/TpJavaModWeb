@@ -109,6 +109,7 @@
 				      <th scope="col">Id tipo elemento</th>
 				      <th scope="col">Nombre</th>
 				      <th scope="col">Cantidad maxima de reservas pendientes</th>
+				      <th scope="col">Tipo de Acceso</th>
 				      <th scope="col"></th>
 				    </tr>
 				 </thead>
@@ -127,6 +128,7 @@
 			      <td><%=t.getId_tipoelemento() %></td>
 			      <td><%=t.getNombre() %></td>
 			      <td><%=t.getCantMaxReservasPend() %></td>
+			      <td><%=t.getAcceso() %></td>
 			      <td><div class="btn-group" role="group" aria-label="Basic example">
 						  <a class="btn btn-secondary" name="lnkmodificar" href="ModificacionTipoElemento.servlet?id=<%=t.getId_tipoelemento() %>">Modificar</a>
 						  <a class="btn btn-secondary" name="lnkeliminar" href="EliminacionTipoElemento.servlet?id=<%=t.getId_tipoelemento() %>">Eliminar</a>

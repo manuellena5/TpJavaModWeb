@@ -36,7 +36,7 @@
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 					  <a class="navbar-brand" href="Start">Biblioteca</a>
 					<ul class="nav nav-pills">
-					<%if ((cat.getDescripcion().equals("Usuario"))) 
+					<%if ((cat.getDescripcion().equals("Usuario")) || (cat.getDescripcion().equals("Encargado")) ) 
 					  {%>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>

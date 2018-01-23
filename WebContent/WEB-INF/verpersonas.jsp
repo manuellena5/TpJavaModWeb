@@ -127,8 +127,11 @@
 					estado = "Habilitado";
 				}else{
 					estado = "No habilitado";
-					} %>
-
+					} 
+				if(!p.getUsuario().equals(((Persona)session.getAttribute("user")).getUsuario()))	/*Para no mostrar el Admin*/
+				{
+					%>
+				
 			    <tr>
 			      <th scope="row"><%=count%></th>
 			      <td><%=p.getId_persona() %></td>
@@ -155,7 +158,7 @@
 				  </td>
 							      
 			    </tr>
-			    <%} %>
+			    <%}} %>
 			  </tbody>
 			</table> 
 			<a class="btn btn-primary" href="Start">Salir</a>

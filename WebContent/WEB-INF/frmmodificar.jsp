@@ -194,7 +194,7 @@
 			  	
 			  	<div class="form-group">
 				    <label for="exampleFormControlSelect1">Estado: </label>
-				    <select class="form-control" name="estado" id="exampleFormControlSelect1">
+				    <select class="form-control" name="estado" id="estado">
 				      <option selected value="<%=r.getEstado()%>"><%=r.getEstado()%></option>
 				      <option value="Activa">Activa</option>
 				      <option value="Cancelada">Cancelada</option>
@@ -347,10 +347,23 @@
 					  </div>	
 
 					  <div class="form-group">
-					    <label for="txtnombre">Cantidad maxima reservas pendientes</label>
+					    <label for="txtnombre">*Cantidad maxima reservas pendientes</label>
 					    <input type="text" class="form-control" id="txtcantmax" name="txtcantmax" required="" value="<%=tipoelemento.getCantMaxReservasPend() %>">
 					  </div>
 					  
+					  <div class="form-group">
+					    <label for="exampleFormControlSelect1">*Tipo de acceso: </label>
+					    <select class="form-control" name="acceso" id="acceso">
+					      <option selected value="<%=tipoelemento.getAcceso()%>"><%=tipoelemento.getAcceso()%></option>
+					      <option value="Publico">Publico</option>
+					      <option value="Usuarios">Usuario</option>
+					      <option value="Encargados">Encargado</option>
+					    </select>
+					</div>
+					  
+					  <div>
+						<small class="form-text text-muted">*Campos obligatorios</small>
+					  </div>
 					  
 					  <div class="btn-group" role="group" aria-label="Basic example">
 					  		<button type="button" class="btn btn-primary" name="btnmodificar" onclick="return validarModificacionTipoElemento();">
@@ -477,7 +490,7 @@
 						<p>Horario de atenci&oacute;n: lunes a viernes de 8 hs a 20 hs</p>
 				</div>
 
-<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
+				<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
 							 <%if(cat.getDescripcion().equals("Administrador")){ %>
 							  <li class="nav-item">

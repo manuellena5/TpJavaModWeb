@@ -7,6 +7,9 @@ public class Tipo_Elemento implements Serializable{
 	private int id_tipoelemento;
 	private String nombre;
 	private int cantMaxReservasPend;
+	private String acceso;
+	
+	
 	
 	public int getId_tipoelemento() {
 		return id_tipoelemento;
@@ -27,11 +30,19 @@ public class Tipo_Elemento implements Serializable{
 		this.cantMaxReservasPend = cantMaxReservasPend;
 	}
 	
-	public Tipo_Elemento(int id_tipoelemento, String nombre, int cantMaxReservasPend) {
+	public String getAcceso() {
+		return acceso;
+	}
+	public void setAcceso(String acceso) {
+		this.acceso = acceso;
+	}
+	
+	public Tipo_Elemento(int id_tipoelemento, String nombre, int cantMaxReservasPend, String acceso) {
 		super();
 		this.id_tipoelemento = id_tipoelemento;
 		this.nombre = nombre;
 		this.cantMaxReservasPend = cantMaxReservasPend;
+		this.acceso = acceso;
 	}
 	
 	public Tipo_Elemento()

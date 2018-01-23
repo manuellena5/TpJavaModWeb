@@ -25,6 +25,7 @@ public class DataTipo_Elementos {
 								te.setId_tipoelemento(rs.getInt("id_tipoelemento"));
 								te.setNombre(rs.getString("nombre"));
 								te.setCantMaxReservasPend(rs.getInt("cantMaxReservasPend"));
+								te.setAcceso(rs.getString("acceso"));
 								
 								tipoElementos.add(te);
 										}
@@ -62,7 +63,7 @@ public class DataTipo_Elementos {
 			try {
 				 
 				stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-						"select id_tipoelemento, nombre, cantMaxReservasPend from tipo_elementos where nombre=?");
+						"select id_tipoelemento, nombre, cantMaxReservasPend,acceso from tipo_elementos where nombre=?");
 						
 				stmt.setString(1, tipoElementos.getNombre());
 				rs = stmt.executeQuery();
@@ -72,6 +73,7 @@ public class DataTipo_Elementos {
 					te.setId_tipoelemento(rs.getInt("id_tipoelemento")); 
 					te.setNombre(rs.getString("nombre"));
 					te.setCantMaxReservasPend(rs.getInt("cantMaxReservasPend"));
+					te.setAcceso(rs.getString("acceso"));
 				
 				}
 				
@@ -103,7 +105,7 @@ public class DataTipo_Elementos {
 		try {
 			 
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select id_tipoelemento, nombre, cantMaxReservasPend from tipo_elementos where id_tipoelemento=?");
+					"select id_tipoelemento, nombre, cantMaxReservasPend,acceso from tipo_elementos where id_tipoelemento=?");
 					
 			stmt.setInt(1, tipoElementos.getId_tipoelemento());
 			rs = stmt.executeQuery();
@@ -113,6 +115,7 @@ public class DataTipo_Elementos {
 				te.setId_tipoelemento(rs.getInt("id_tipoelemento")); 
 				te.setNombre(rs.getString("nombre"));
 				te.setCantMaxReservasPend(rs.getInt("cantMaxReservasPend"));
+				te.setAcceso(rs.getString("acceso"));
 			
 			}
 			
@@ -141,12 +144,13 @@ public class DataTipo_Elementos {
 			try {
 				stmt=FactoryConexion.getInstancia().getConn()
 						.prepareStatement(
-						"insert into tipo_elementos(nombre,cantMaxReservasPend) values (?,?)",
+						"insert into tipo_elementos(nombre,cantMaxReservasPend,acceso) values (?,?,?)",
 						PreparedStatement.RETURN_GENERATED_KEYS
 						);
 				
 				stmt.setString(1, te.getNombre());
 				stmt.setInt(2, te.getCantMaxReservasPend());
+				stmt.setString(3, te.getAcceso());
 				
 				stmt.executeUpdate();
 				keyResultSet=stmt.getGeneratedKeys();
@@ -170,11 +174,13 @@ public class DataTipo_Elementos {
 			
 			try {
 				stmt= FactoryConexion.getInstancia().getConn().prepareStatement(
-						"update tipo_elementos set nombre=?, cantMaxReservasPend=? where id_tipoelemento=?");
+						"update tipo_elementos set nombre=?, cantMaxReservasPend=?, acceso=? where id_tipoelemento=?");
 				
 				stmt.setString(1, te.getNombre());
 				stmt.setInt(2, te.getCantMaxReservasPend());
-				stmt.setInt(3, te.getId_tipoelemento());
+				stmt.setString(3, te.getAcceso());
+				stmt.setInt(4, te.getId_tipoelemento());
+				
 			
 				stmt.executeUpdate();
 				

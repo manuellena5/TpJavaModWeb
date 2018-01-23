@@ -47,9 +47,11 @@ public class ValidarTipoElemento extends HttpServlet {
 		try {
 			String nombre =  request.getParameter("txtnombre");
 			int cantmaxreservaspend = Integer.parseInt(request.getParameter("txtcantmaxreservaspend"));
+			String acceso =  request.getParameter("acceso");
 			
 			tipoelemento.setNombre(nombre);
 			tipoelemento.setCantMaxReservasPend(cantmaxreservaspend);
+			tipoelemento.setAcceso(acceso);
 			
 			tipoelementoslogic.add(tipoelemento);
 			if (tipoelemento == null ) {

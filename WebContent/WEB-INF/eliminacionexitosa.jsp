@@ -112,6 +112,9 @@
 			Tipo_Elemento te = ((Tipo_Elemento)request.getAttribute("tipoelemento"));
 			
 			if(ele != null){%>
+			
+			<!-- ELEMENTO  -->
+			
 				<div class="alert alert-success" role="alert">
 				<h3>Su elemento se ha eliminado correctamente</h3>
 			   
@@ -124,18 +127,24 @@
 			   <a href="Start" class="alert-link">Volver a pagina principal</a>
 			</div>
 				
+				<!-- FIN ELEMENTO  -->
+				
 			<% }else if(te != null){%>
+				
+				<!-- TIPO DE ELEMENTO  -->
 				
 				<div class="alert alert-success" role="alert">
 				<h3>Su tipo de elemento se ha eliminado correctamente</h3>
 			   
 				<p>Id: <%=te.getId_tipoelemento()%></p>
 				<p>Nombre: <%=te.getNombre()%></p>	
-				<p>Cantidad maxima de reservas pendientes: <%=te.getCantMaxReservasPend()%></p>	
+				<p>Cantidad maxima de reservas pendientes: <%=te.getCantMaxReservasPend()%></p>
+				<p>Tipo de acceso: <%=te.getAcceso()%></p>	
 				
 			   <a href="Start" class="alert-link">Volver a pagina principal</a>
 				</div>
 				
+				<!-- FIN TIPO DE ELEMENTO  -->
 			<% }%>
 			
 	  	

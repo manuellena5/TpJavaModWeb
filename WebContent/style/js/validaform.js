@@ -176,7 +176,7 @@ function validarNuevoElemento(){
 }
 
 function validarNuevoTipoElemento(){
-	
+	var acceso = document.getElementById("acceso").selectedIndex;
 	var nombre = document.getElementById("txtnombre").value;
 	var maximaspendientes = document.getElementById("txtcantmaxreservaspend").value;
 	
@@ -187,6 +187,10 @@ function validarNuevoTipoElemento(){
 	if (maximaspendientes == null || maximaspendientes == 0) {
 		alert('Debe ingresar cantidad maxima de reservas pendientes');   
 		return false; 
+	}else
+	if (acceso == null || acceso == 0) {
+		alert('Debe seleccionar que tipo de acceso va a tener el tipo de elemento');
+		return false;
 	}
 		$('#frmModal').modal('show');
 		return true;
@@ -194,12 +198,16 @@ function validarNuevoTipoElemento(){
 }
 
 function validarModificacionTipoElemento(){
-	
+	var acceso = document.getElementById("acceso").selectedIndex;
 	var maximaspendientes = document.getElementById("txtcantmax").value;
 	if (maximaspendientes == null || maximaspendientes == 0) {
 		alert('Debe ingresar cantidad maxima de reservas pendientes');   
 		return false; 
-	}
+	}else
+		if (acceso == null || acceso == 0) {
+			alert('Debe seleccionar que tipo de acceso va a tener el tipo de elemento');
+			return false;
+		}
 		$('#frmModal').modal('show');
 		return true;
 	
@@ -227,6 +235,56 @@ function tomariddelboton(boton){
 	$('#frmModal').modal('show');
 	
 }
+
+
+function setearfechas(){
+	
+	var divfechainicio = document.getElementById("divfechainicio");
+	var divfechafin = document.getElementById("divfechafin");
+	var smalltext1 = document.getElementById("smalltext1");
+	var smalltext2 = document.getElementById("smalltext2");
+	
+	
+	
+	if (divfechainicio.style.display == "block") {
+		divfechafin.style.display = "block";
+		smalltext2.style.display = "none";
+	}
+	
+	divfechainicio.style.display = "block";
+	smalltext1.style.display = "none";
+	
+	var fechafin = document.getElementById("datepicker3").value;
+    var tipoelemento = document.getElementById("nombretipoelemento").value;
+    var fecharegistro = $.datepicker.parseDate('dd/mm/yy', document.getElementById("datepicker1").value);
+    var fechainicio = $.datepicker.parseDate('dd/mm/yy', document.getElementById("datepicker2").value);
+    let dias = ["L", "M", "X", "J", "V", "S", "D"];
+    
+    
+    if (dias[fecharegistro.getDay()-1] == "V") {
+    			 
+    			 var fecha = $.datepicker.parseDate('dd/mm/yy', document.getElementById("datepicker1").value);
+    			 var duracion = 3;
+    			 $("#datepicker2").datepicker("option", "minDate", fecharegistro);
+    			 fecha.setDate(fecharegistro.getDate() + duracion);
+    			 $("#datepicker2").datepicker("option", "maxDate", fecha);
+
+	}
+    else{
+    			 var duracion = 1;
+    			 var fecha = $.datepicker.parseDate('dd/mm/yy', document.getElementById("datepicker1").value);
+    			 
+    			 $("#datepicker2").datepicker("option", "minDate", fecharegistro);
+    			 fecha.setDate(fecharegistro.getDate() + duracion);
+    			 $("#datepicker2").datepicker("option", "maxDate", fecha);
+    }
+    
+    
+    
+	
+}
+
+
 
 
 

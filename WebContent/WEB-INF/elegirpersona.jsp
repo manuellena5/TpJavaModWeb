@@ -122,6 +122,8 @@
 				ArrayList<Persona> listaPers = (ArrayList<Persona>)request.getAttribute("listaPersonas");
 				for(Persona p : listaPers){
 				count++;
+				if(!p.getUsuario().equals(((Persona)session.getAttribute("user")).getUsuario()))	/*Para no mostrar el Admin*/
+				{
 				%>
 			
 				  
@@ -140,7 +142,7 @@
 					</div>
 				  </td>
 			    </tr>
-			    <% } %>
+			    <% }} %>
 			  </tbody>
 			</table> 
 			 <a class="btn btn-primary" href="Start">Cancelar</a>

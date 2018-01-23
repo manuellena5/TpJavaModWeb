@@ -51,7 +51,7 @@ public class FinalizarModificacionTipoElemento extends HttpServlet {
 		try {
 			
 			int idtipoelemento = Integer.parseInt(request.getParameter("txtid"));
-			
+			String acceso = request.getParameter("acceso");
 			int cantMaxReservasPend = Integer.parseInt(request.getParameter("txtcantmax"));
 		
 		tipoel = tipoelementoLogic.GetById(idtipoelemento);
@@ -61,6 +61,7 @@ public class FinalizarModificacionTipoElemento extends HttpServlet {
 			
 		}else{
 		tipoel.setCantMaxReservasPend(cantMaxReservasPend);
+		tipoel.setAcceso(acceso);
 		
 		tipoelementoLogic.update(tipoel);
 			

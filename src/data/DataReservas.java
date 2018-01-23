@@ -450,7 +450,8 @@ public class DataReservas {
 	}
 	
 	
-	public ArrayList<Elemento> getElementosSinReserva(Date fechainicio,Date fechafin,Date fecharegistro,int idtipoelemento,int idpersona) throws Exception{
+	
+public ArrayList<Elemento> getElementosSinReserva(Reserva reserva) throws Exception{
 		
 		ArrayList<Elemento> lista = new ArrayList<Elemento>();
 		Tipo_Elemento te = null;
@@ -480,14 +481,14 @@ public class DataReservas {
 		+ 	" INNER JOIN reservas r on r.id_elemento=eee.id_elemento"
 		+ 	" WHERE r.fecha_registro=? and r.`id_persona`=? and (r.`estado`='Terminada' or r.`estado`='Cancelada'))"); 
 					
-			stmt.setInt(1, idtipoelemento);
-			stmt.setInt(2, idtipoelemento);
-			stmt.setDate(3, fechainicio);
-			stmt.setDate(4, fechafin);
-			stmt.setDate(5, fechainicio);
-			stmt.setDate(6, fechafin);
-			stmt.setDate(7, fecharegistro);
-			stmt.setInt(8, idpersona);
+			stmt.setInt(1, reserva.getElemento().getTipo_Elemento().getId_tipoelemento());
+			stmt.setInt(2, reserva.getElemento().getTipo_Elemento().getId_tipoelemento());
+			stmt.setDate(3, (Date) reserva.getFecha_inicio());
+			stmt.setDate(4,(Date) reserva.getFecha_fin());
+			stmt.setDate(5, (Date) reserva.getFecha_inicio());
+			stmt.setDate(6, (Date) reserva.getFecha_fin());
+			stmt.setDate(7,(Date) reserva.getFecha_registro());
+			stmt.setInt(8, reserva.getPersona().getId_persona());
 			rs = stmt.executeQuery();
 			
 			if (rs != null) {
@@ -529,6 +530,8 @@ public class DataReservas {
 		
 		return lista;
 	}
+	
+	
 	
 	
 	

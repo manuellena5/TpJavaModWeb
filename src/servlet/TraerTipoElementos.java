@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Persona;
+import entidades.Reserva;
 import entidades.Tipo_Elemento;
 import negocio.PersonaLogic;
 import negocio.ReservasLogic;
@@ -47,7 +48,7 @@ public class TraerTipoElementos extends HttpServlet {
 		
 		Tipo_ElementosLogic tipoelementoslogic = new Tipo_ElementosLogic();
 		ArrayList<Tipo_Elemento> listadotipoelementos = new ArrayList<>();
-		
+		Reserva reserva = new Reserva();
 		
 		int idpersona;
 		
@@ -59,7 +60,7 @@ public class TraerTipoElementos extends HttpServlet {
 			
 			persona = (Persona)request.getSession().getAttribute("user");
 			
-			if (persona.getCategoria().getDescripcion().equals("Usuario")) {
+			if (persona.getCategoria().getDescripcion().equals("Usuario") || persona.getCategoria().getDescripcion().equals("Encargado")) {
 				idpersona= persona.getId_persona();
 				
 			}else{
@@ -72,14 +73,18 @@ public class TraerTipoElementos extends HttpServlet {
 			listadotipoelementos =  tipoelementoslogic.GetAll();
 			
 			if (persona == null || listadotipoelementos == null) {
+				
 				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+				
 			}else{
-			request.setAttribute("persona", persona);
 			
-			
-			
-			request.setAttribute("listaTipoElementos",listadotipoelementos);
+				reserva.setPersona(persona);
+				
+				request.setAttribute("reserva", reserva);
+				request.setAttribute("listaTipoElementos",listadotipoelementos);
+				
+				
 			}
 		}catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");

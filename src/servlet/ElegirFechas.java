@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.Elemento;
 import entidades.Persona;
+import entidades.Reserva;
 import entidades.Tipo_Elemento;
 import negocio.ElementosLogic;
 import negocio.PersonaLogic;
@@ -48,20 +50,20 @@ public class ElegirFechas extends HttpServlet {
 		
 		Tipo_ElementosLogic tipoelementoslogic = new Tipo_ElementosLogic();
 		Tipo_Elemento tipoelemento = new Tipo_Elemento();
+		Elemento elemento = new Elemento();
 		
 		PersonaLogic personaLogic = new PersonaLogic();
 		Persona persona = new Persona();
+		
+		Reserva reserva = new Reserva();
 		
 		try {
 			
 			int idtipoelemento = Integer.parseInt(request.getParameter("eleccion"));
 			
-			if (((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Usuario")) {
-				idpersona= ((Persona)request.getSession().getAttribute("user")).getId_persona();
-				
-			}else{
+			
 				idpersona = Integer.parseInt(request.getParameter("idpersona"));
-			}
+			
 			
 			
 			tipoelemento = tipoelementoslogic.GetById(idtipoelemento);
@@ -75,8 +77,11 @@ public class ElegirFechas extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 				
 			}else{
+				elemento.setTipo_Elemento(tipoelemento);
+				reserva.setElemento(elemento);
+				reserva.setPersona(persona);
 				
-				request.setAttribute("persona", persona);
+				request.setAttribute("reserva", reserva);
 				
 				
 				if (val) {

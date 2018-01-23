@@ -113,7 +113,14 @@
 			Reserva res = ((Reserva)request.getAttribute("reserva"));
 			Tipo_Elemento te = ((Tipo_Elemento)request.getAttribute("tipoelemento"));
 			
+			
+			
+			
 			if(ele != null){%>
+			
+			<!-- ELEMENTO -->
+			
+			
 				<div class="alert alert-success" role="alert">
 				<h3>Su elemento se ha modificado correctamente</h3>
 			   
@@ -126,7 +133,13 @@
 			  
 			   <a href="Start" class="alert-link">Volver a pagina principal</a>
 			</div>
+			
+			<!-- FIN ELEMENTO -->
+			
 			<%}else if(per != null){%>
+			
+			<!-- PERSONA -->
+			
 				<div class="alert alert-success" role="alert">
 				<h3>Los datos se han modificado correctamente</h3>
 			   
@@ -137,7 +150,12 @@
 			  
 			   <a href="Start" class="alert-link">Volver a pagina principal</a>
 			</div>
+			
+			<!-- FIN PERSONA -->
+			
 			<%}else if(res != null){%>
+			
+			<!-- RESERVA -->
 				
 				<div class="alert alert-success" role="alert">
 				<h3>Su reserva se ha modificado correctamente</h3>
@@ -155,19 +173,24 @@
 			  
 			   <a href="Start" class="alert-link">Volver a pagina principal</a>
 			</div>
+			
+			<!-- FIN RESERVA -->
+			
 			<%}else if(te != null){%>
-				
+			
+			<!-- TIPO DE ELEMENTO -->	
 				<div class="alert alert-success" role="alert">
 				<h3>Su tipo de elemento se ha modificado correctamente</h3>
 			   
 				<p>Id: <%=te.getId_tipoelemento()%></p>
 				<p>Nombre: <%=te.getNombre()%></p>	
 				<p>Cantidad maxima de reservas pendientes: <%=te.getCantMaxReservasPend()%></p>
+				<p>Tipo de acceso: <%=te.getAcceso()%></p>
 					
 				
 			   <a href="Start" class="alert-link">Volver a pagina principal</a>
 			</div>
-			
+			<!-- FIN TIPO DE ELEMENTO -->
 			<%}%>
 		
 		

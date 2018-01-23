@@ -9,10 +9,10 @@
 
 <% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 
-Reserva r = (Reserva)request.getAttribute("reserva"); 
+
 			java.util.Date data = null;
 		    SimpleDateFormat simple= new SimpleDateFormat("yy-MM-dd");
-			String fechainicio = request.getAttribute("fechainicio").toString();
+			String fechainicio = ((Reserva)request.getAttribute("reserva")).getFecha_inicio().toString();
 			data = simple.parse(fechainicio);
 			simple = new SimpleDateFormat("dd/MM/yyyy");
 			fechainicio = simple.format(data);
@@ -20,14 +20,14 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 			
 			data = null;
 		    simple= new SimpleDateFormat("yy-MM-dd");
-			String fecharegistro = request.getAttribute("fecharegistro").toString();
+			String fecharegistro = ((Reserva)request.getAttribute("reserva")).getFecha_registro().toString();
 			data = simple.parse(fecharegistro);
 			simple = new SimpleDateFormat("dd/MM/yyyy");
 			fecharegistro = simple.format(data);
 			
 			data = null;
 		    simple= new SimpleDateFormat("yy-MM-dd");
-			String fechafin = request.getAttribute("fechafin").toString();
+			String fechafin = ((Reserva)request.getAttribute("reserva")).getFecha_fin().toString();
 			data = simple.parse(fechafin);
 			simple = new SimpleDateFormat("dd/MM/yyyy");
 			fechafin = simple.format(data);
@@ -132,10 +132,10 @@ Reserva r = (Reserva)request.getAttribute("reserva");
 				<input style="display:none;" name="fechainicio" value="<%=fechainicio%>" >
 				<input style="display:none;" name="fechafin" value="<%=fechafin%>" >
 				
-				<input id="idpersona" name="idpersona" style="display:none;" value="<%=((Persona)request.getAttribute("persona")).getId_persona()%>">
+				<input id="idpersona" name="idpersona" style="display:none;" value="<%=((Reserva)request.getAttribute("reserva")).getPersona().getId_persona()%>">
 		      <label>Reserva a nombre de: </label>
 		      <br>
-		      <label><%=((Persona)request.getAttribute("persona")).getNombre()+" "+((Persona)request.getAttribute("persona")).getApellido()%></label>
+		      <label><%=((Reserva)request.getAttribute("reserva")).getPersona().getNombre()+" "+((Reserva)request.getAttribute("reserva")).getPersona().getApellido()%></label>
 					
 					<table class="table table-striped">
 					
