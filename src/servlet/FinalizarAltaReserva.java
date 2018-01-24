@@ -14,6 +14,7 @@ import entidades.Persona;
 import entidades.Reserva;
 import negocio.ReservasLogic;
 import util.AppDataException;
+import util.Emailer;
 
 /**
  * Servlet implementation class ValidarAltaReserva
@@ -49,7 +50,7 @@ public class FinalizarAltaReserva extends HttpServlet {
 		Reserva reserva = new Reserva();
 		ReservasLogic reservaslogic = new ReservasLogic();
 		Persona persona =  new Persona();
-		
+
 			
 			
 			
@@ -57,6 +58,7 @@ public class FinalizarAltaReserva extends HttpServlet {
 				int idelemento = Integer.parseInt(request.getParameter("idelemento"));
 				int idpersona = Integer.parseInt(request.getParameter("idpersona"));
 				String detalle = request.getParameter("txtdetalle");
+				String mail = request.getParameter("txtmail");
 				
 				
 				String fecha = request.getParameter("fecharegistro");
@@ -65,7 +67,7 @@ public class FinalizarAltaReserva extends HttpServlet {
 				
 				reserva = reservaslogic.GetOne(idpersona, idelemento, fecharegistro);
 				
-				if (reserva  == null) {
+				if (reserva  == null || mail.equals("")) {
 					request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 					request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 				
@@ -79,7 +81,11 @@ public class FinalizarAltaReserva extends HttpServlet {
 				
 				reservaslogic.update(reserva);
 				
+				Emailer.getInstance().send(mail,"Su reserva se ha registrado correctamente",reservaslogic.getDatosReserva(reserva));
+				
+				/*em.SendMail(mail,reservaslogic.getDatosReserva(reserva));*/
 				}
+		
 		}catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 			System.out.println(e.getMessage());
@@ -96,6 +102,7 @@ public class FinalizarAltaReserva extends HttpServlet {
 		}
 		
 			if (((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Usuario") || ((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Encargado")) {
+				
 				request.getRequestDispatcher("traerreservasusuario.servlet").forward(request, response);
 			}else
 				if (((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Administrador")) {

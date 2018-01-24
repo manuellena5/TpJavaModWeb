@@ -149,10 +149,17 @@ rfecharegistro = simple.format(data);
 			</div>
 			
 			<div class="form-group">
+			    <label for="exampleFormControlTextarea1">Ingrese su direccion de email para enviarle los datos de su reserva</label>
+			    <input id="txtmail" name="txtmail" type="text">
+		  	</div>
+			
+			<div class="form-group">
 			    <label for="exampleFormControlTextarea1">¿Desea agregar algun detalle?</label>
 			    <textarea class="form-control detalle" name="txtdetalle" placeholder="Sin detalle" value="Sin detalle"></textarea>
 			    <small class="form-text text-muted">*Dejar vacio en caso de no querer agregar un detalle</small>
 		  	</div>
+		  	
+		  	
 							  	
 		  	<button type="submit" class="btn btn-primary">Finalizar</button>
 	  	</form>

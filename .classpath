@@ -15,5 +15,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/manuel/Documents/GitHub/Proyectos_Java/workspace/javax.mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

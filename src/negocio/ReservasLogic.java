@@ -154,7 +154,20 @@ public class ReservasLogic {
 	}
 	
 	
-	
+	public String getDatosReserva(Reserva reserva) throws Exception{
+		
+		String texto = "Datos de la reserva:\n"
+				+ "Tipo de elemento: " + reserva.getElemento().getTipo_Elemento().getNombre()+"\n"
+				+ "Elemento reservado: " + reserva.getElemento().getNombre()+"\n"
+				+ "Fecha de inicio de la reserva: " + reserva.getFecha_inicio()+"\n"
+				+ "Fecha de fin de la reserva: " + reserva.getFecha_fin()+"\n"
+				+ "Datos personales:\n"
+				+ "Nombre: " + reserva.getPersona().getNombre()+"\n"
+				+ "Apellido: " + reserva.getPersona().getApellido()+"\n"
+				+ "Dni: " + reserva.getPersona().getDni();
+
+		return texto;
+	}
 
 
 
