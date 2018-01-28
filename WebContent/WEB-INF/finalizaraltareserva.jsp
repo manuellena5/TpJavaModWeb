@@ -148,11 +148,12 @@ rfecharegistro = simple.format(data);
 				<p>Dni: <em><%=r.getPersona().getDni() %></em></p>
 			</div>
 			
+			<% if(cat.equals("Usuario")){%>
 			<div class="form-group">
 			    <label for="exampleFormControlTextarea1">Ingrese su direccion de email para enviarle los datos de su reserva</label>
 			    <input id="txtmail" name="txtmail" type="text">
 		  	</div>
-			
+		  	<% }%>
 			<div class="form-group">
 			    <label for="exampleFormControlTextarea1">¿Desea agregar algun detalle?</label>
 			    <textarea class="form-control detalle" name="txtdetalle" placeholder="Sin detalle" value="Sin detalle"></textarea>

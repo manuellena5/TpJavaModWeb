@@ -2,8 +2,7 @@
 <%@page import="entidades.Persona"%>
 <%@page import="entidades.Categoria"%>
 
-<% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
-%>
+
 
     
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -36,7 +35,7 @@
 				<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 					  <a class="navbar-brand" href="Start">Biblioteca</a>
 					<ul class="nav nav-pills">
-					<%if ((cat.getDescripcion().equals("Usuario"))) 
+					<%if(request.getSession().getAttribute("user")!= null && (((Persona)session.getAttribute("user")).getCategoria().getDescripcion().equals("Usuario"))) 
 					  {%>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reservas</a>
@@ -55,7 +54,7 @@
 					  			<a href="CerrarSesion" style="color: blue;text-decoration: underline;">(Cerrar sesion) </a>
 					  						</p>
 					  <%}else
-					  if ((cat.getDescripcion().equals("Administrador"))) 
+					  if (request.getSession().getAttribute("user")!= null && (((Persona)session.getAttribute("user")).getCategoria().getDescripcion().equals("Administrador"))) 
 					  {%>
 					  <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Personas</a>
@@ -127,7 +126,7 @@
 	
 					<div class="mapa col-xl-4 col-lg-4 col-md-4 col-sm-4">
 						<ul class="nav flex-column">
-							   <%if ((cat.getDescripcion().equals("Usuario"))) 
+							   <%if (request.getSession().getAttribute("user")!= null && (((Persona)session.getAttribute("user")).getCategoria().getDescripcion().equals("Usuario"))) 
 					  {%>
 							  
 							  <li class="nav-item">
@@ -142,7 +141,7 @@
 							  <li class="nav-item">
 							    <a class="nav-link itemmapa" href="#">Contacto</a>
 							  </li>
-							  <%}else if ((cat.getDescripcion().equals("Administrador"))) 
+							  <%}else if (request.getSession().getAttribute("user")!= null && (((Persona)session.getAttribute("user")).getCategoria().getDescripcion().equals("Administrador"))) 
 					  {%>	  
 					  		  <li class="nav-item">
 							     <a class="nav-link itemmapa" href="ListadoReservas.servlet">Gestionar reservas</a>

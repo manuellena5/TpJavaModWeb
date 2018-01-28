@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.Logger;
+
 import entidades.Persona;
 import entidades.Reserva;
 import negocio.ReservasLogic;
@@ -50,6 +52,7 @@ public class FinalizarAltaReserva extends HttpServlet {
 		Reserva reserva = new Reserva();
 		ReservasLogic reservaslogic = new ReservasLogic();
 		Persona persona =  new Persona();
+		
 
 			
 			
@@ -80,23 +83,29 @@ public class FinalizarAltaReserva extends HttpServlet {
 				reserva.setDetalle(detalle);
 				
 				reservaslogic.update(reserva);
+				if (!mail.equals("")) {
 				
-				Emailer.getInstance().send(mail,"Su reserva se ha registrado correctamente",reservaslogic.getDatosReserva(reserva));
+					Emailer.getInstance().send(mail,"Su reserva se ha registrado correctamente",reservaslogic.getDatosReserva(reserva));
+				}
+				
+				
 				
 				/*em.SendMail(mail,reservaslogic.getDatosReserva(reserva));*/
 				}
 		
 		}catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
-			System.out.println(e.getMessage());
+			new AppDataException(e, e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (AppDataException ade) {
 			request.setAttribute("Error", ade.getMessage());
+			new AppDataException(ade, ade.getMessage());
 			System.out.println(ade.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+			new AppDataException(e, e.getMessage());
 			System.out.println(e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}

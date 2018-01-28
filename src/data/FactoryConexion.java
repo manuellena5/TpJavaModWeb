@@ -1,21 +1,34 @@
 package data;
 import java.sql.*;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.core.Logger;
+
 import util.AppDataException;
 
 
 public class FactoryConexion {
 
 	
+	private Logger logger;
 	
-	
-	private Connection conn;
+	/*private Connection conn;
 	private int cantConn=0;
 	private String driver = "com.mysql.jdbc.Driver";
 	private String host ="localhost";
 	private String user="root";
 	private String port = "3306";
 	private String password="";
+	private String db="biblioteca";*/
+	
+	private Connection conn;
+	private int cantConn=0;
+	private String driver = "com.mysql.jdbc.Driver";
+	private String host ="node14124-biblioteca.jelastic.saveincloud.net";
+	private String user="root";
+	private String password="ROIpnk13429";
 	private String db="biblioteca";
+
 
 	private static FactoryConexion instancia;
 
@@ -52,13 +65,15 @@ public class FactoryConexion {
 	public Connection getConn() throws SQLException,AppDataException{
 		
 		try {if (conn == null || conn.isClosed()) {
-			conn = DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+password);
+			conn = DriverManager.getConnection("jdbc:mysql://"+host+"/"+db+"?user="+user+"&password="+password);
 			
+			/*conn = DriverManager.getConnection(host+"?user="+user+"&password="+password);*/
 			
 		}
 			}catch (SQLException e) {
-			
-				throw new AppDataException(e, "Error al conectar a la base de datos");
+				
+				/*throw new AppDataException(e, "Error al conectar a la base de datos");*/
+				throw e;
 			}
 		cantConn++; 	/*contador de cantidades de conexiones abiertas*/
 		return conn;

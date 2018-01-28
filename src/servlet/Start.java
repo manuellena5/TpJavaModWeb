@@ -1,7 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -97,10 +97,22 @@ public class Start extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/principal.jsp").forward(request, response);
 			}
 			}
-			}catch(Exception e){
+			}catch(SQLException e){
+				logger.log(Level.ERROR,e.getMessage());
+				logger.log(Level.ERROR,e.getSQLState());
+				logger.log(Level.ERROR,e.getErrorCode());
+				
+				
 				request.setAttribute("Error", e.getMessage());
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}catch(Exception e){
+				request.setAttribute("Error", e.getMessage());
+				
+				logger.log(Level.ERROR,e.getMessage());
+				logger.log(Level.ERROR,e.getCause());
+				
 				System.out.println(e.getMessage());
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
 		
 		
