@@ -23,7 +23,7 @@ public class DataReservas {
 							+ " e.`autor`,e.`genero`, te.nombre tipoelemento, te.id_tipoelemento, te.cantMaxReservasPend from reservas r inner join personas p on p.`id_persona` = r.`id_persona`" 
 					  		+ " inner join elementos e on e.`id_elemento` = r.`id_elemento`"
 							+ " inner join tipo_elementos te on te.`id_tipoelemento` = e.`id_tipoelemento` "
-							+ " order by r.fecha_registro, r.fecha_inicio, r.fecha_fin");
+							+ " order by p.apellido, r.fecha_registro, r.fecha_inicio, r.fecha_fin");
 					  
 					  
 					  
@@ -52,7 +52,7 @@ public class DataReservas {
 								res.getElemento().setAutor(rs.getString("autor"));
 								res.getElemento().setGenero(rs.getString("genero"));
 								res.getElemento().setTipo_Elemento(te);
-								/*res.getElemento().getTipo_Elemento().setNombre(rs.getString("tipoelemento")); Como hacer para traer el tipo de elemento*/ 
+								 
 								
 								res.getPersona().setId_persona(rs.getInt("id_persona"));
 								res.getPersona().setNombre(rs.getString("nombrePersona"));
@@ -170,7 +170,7 @@ public class DataReservas {
 				throw e;
 			}
 			try {
-				if(keyResultSet!=null)keyResultSet.close();  /* preguntar que hace esta linea */ 
+				if(keyResultSet!=null)keyResultSet.close(); 
 				if(stmt!=null)stmt.close();
 				FactoryConexion.getInstancia().releaseConn();
 			} catch (SQLException e) {
@@ -288,7 +288,7 @@ public class DataReservas {
 			ResultSet rs = null;
 			
 			try {
-				 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+				 
 				stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 						"select r.`id_elemento`,r.`id_persona`,r.`fecha_registro`,r.`fecha_inicio`,r.`fecha_fin`,r.`detalle`,r.`detalle`,r.estado,"
 								+ "e.`nombre` nombreelemento,e.`autor`,e.`genero`,e.`descripcion`,e.`stock`,e.`id_tipoelemento`,"
@@ -374,7 +374,7 @@ public class DataReservas {
 		ResultSet rs = null;
 		
 		try {
-			 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+			 
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 					"select r.`id_elemento`,r.`id_persona`,r.`fecha_registro`,r.`fecha_inicio`,r.`fecha_fin`,r.`detalle`,r.`detalle`,r.estado,"
 								+ "e.`nombre` nombreelemento,e.`autor`,e.`genero`,e.`descripcion`,e.`stock`,e.`id_tipoelemento`,"
@@ -451,7 +451,7 @@ public class DataReservas {
 	
 	
 	
-public ArrayList<Elemento> getElementosSinReserva(Reserva reserva) throws Exception{
+	public ArrayList<Elemento> getElementosSinReserva(Reserva reserva) throws Exception{
 		
 		ArrayList<Elemento> lista = new ArrayList<Elemento>();
 		Tipo_Elemento te = null;
@@ -461,7 +461,7 @@ public ArrayList<Elemento> getElementosSinReserva(Reserva reserva) throws Except
 		ResultSet rs = null;
 		
 		try {
-			 /*al poner el signo de pregunta el driver se da cuenta que en ese lugar va a ir un parametro*/
+			
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
 			" SELECT DISTINCT e.`id_elemento`,e.`nombre`,e.`autor`,e.`genero`,e.`descripcion`,e.`id_tipoelemento`,e.`stock`, te.`nombre` nombretipoelemento,te.`cantMaxReservasPend` "
 		+	" FROM elementos e"

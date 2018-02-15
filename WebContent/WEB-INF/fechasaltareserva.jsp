@@ -132,7 +132,7 @@ fechaActual = simple.format(FechaDelSistema);
 		<% }else{   %>
 		
 		<input id="idpersona" name="idpersona" style="display:none;" value="<%=((Reserva)request.getAttribute("reserva")).getPersona().getId_persona()%>">
-		
+		<input id="categoria" name="categoria" style="display:none;" value="<%=((Persona)session.getAttribute("user")).getCategoria().getDescripcion()%>">
 		<p>Reserva a nombre de: <%=((Reserva)request.getAttribute("reserva")).getPersona().getNombre()+" "+((Reserva)request.getAttribute("reserva")).getPersona().getApellido()%></p>
 		      
 		      
@@ -253,7 +253,7 @@ fechaActual = simple.format(FechaDelSistema);
     	
 
     	
-    	$("#datepicker1").datepicker({ minDate: 0, beforeShowDay: $.datepicker.noWeekends, onClose: function (selectedDate) {
+    	$("#datepicker1").datepicker({ minDate: 0,maxDate:"1D", beforeShowDay: $.datepicker.noWeekends, onClose: function (selectedDate) {
     		
     			 $("#datepicker2").datepicker("option", "minDate", selectedDate);
     			

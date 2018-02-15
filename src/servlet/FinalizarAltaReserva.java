@@ -52,7 +52,7 @@ public class FinalizarAltaReserva extends HttpServlet {
 		SimpleDateFormat simple= new SimpleDateFormat("dd/MM/yyyy");
 		Reserva reserva = new Reserva();
 		ReservasLogic reservaslogic = new ReservasLogic();
-		Persona persona =  new Persona();
+		
 		
 		
 			

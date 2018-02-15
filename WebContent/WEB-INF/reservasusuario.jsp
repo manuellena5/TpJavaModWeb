@@ -116,7 +116,7 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 
 		<div class="cuerpo">
 			
-		<table class="table table-striped">
+		<table class="table table-hover">
 		
 				<thead>
 				    <tr>
@@ -159,7 +159,7 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 			      <th scope="row"><%=count%></th>
 			      <td><%=r.getElemento().getId_elemento()%></td>
 			      <td><%=r.getPersona().getId_persona()%></td>
-			      <% if(r.getEstado().equals("Cancelada")){
+			      <% if(r.getEstado().equals("Cancelada") || r.getEstado().equals("Terminada")){
 			    	  %>
 			    	  <td class="table-danger"><%=r.getEstado()%></td>
 			      <%}else{ %>

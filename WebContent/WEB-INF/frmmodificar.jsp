@@ -192,14 +192,28 @@
 				    <textarea class="form-control detalle" name="detalle" value="<%=r.getDetalle()%>" ><%=r.getDetalle()%></textarea>
 			  	</div>
 			  	
+			  	
+			  	 <% java.sql.Date ffin = new java.sql.Date(r.getFecha_fin().getTime());
+			  		Date Fsistema = new Date(); /*Tomo la hora del sistema*/
+			  		java.sql.Date fActual = new java.sql.Date(Fsistema.getTime()); 
+						 
+						  
+							  %>
 			  	<div class="form-group">
 				    <label for="exampleFormControlSelect1">Estado: </label>
 				    <select class="form-control" name="estado" id="estado">
 				      <option selected value="<%=r.getEstado()%>"><%=r.getEstado()%></option>
+				      <% if(ffin.after(fActual) && r.getEstado().equals("Activa")){%>
+				      
+				      <option value="Cancelada">Cancelada</option>
+				      <option value="Terminada">Terminada</option>
+				      <option value="Sin devolver">Sin devolver</option>
+				      <%}else{ %>
 				      <option value="Activa">Activa</option>
 				      <option value="Cancelada">Cancelada</option>
 				      <option value="Terminada">Terminada</option>
 				      <option value="Sin devolver">Sin devolver</option>
+				    <%} %>
 				    </select>
 				 </div>
 				 

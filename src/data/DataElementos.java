@@ -20,7 +20,7 @@ public class DataElementos {
 					  rs = stmt.executeQuery("select e.id_elemento,e.nombre,e.stock,e.autor,e.genero,e.descripcion,te.id_tipoelemento,te.cantMaxReservasPend,te.nombre nombreTipoElemento "
 					  		+ " from elementos e "
 					  		+ " inner join tipo_elementos te on te.id_tipoelemento = e.id_tipoelemento "
-					  		+ " order by e.nombre, nombreTipoElemento ");
+					  		+ " order by nombreTipoElemento,e.nombre");
 					  
 				if (rs != null) {
 						while (rs.next()) {

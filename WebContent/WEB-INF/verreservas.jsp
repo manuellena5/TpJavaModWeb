@@ -104,19 +104,19 @@
 
 		<div class="cuerpo">
 			
-		<table class="table table-striped">
+		<table class="table table-hover">
 		
 				<thead>
 				    <tr>
 				      <th scope="col">Reserva</th>
 				      <th scope="col">Id elemento</th>
 				      <th scope="col">Id Persona</th>
+				      <th scope="col">Persona</th>
 				      <th scope="col">Estado</th>
 				      <th scope="col">Fecha registro</th>
 				      <th scope="col">Fecha inicio</th>
 				      <th scope="col">Fecha fin</th>
 				      <th scope="col">Detalle</th>
-				      <th scope="col">Persona</th>
 				      <th scope="col">Elemento</th>
 				      <th scope="col">Tipo de elemento</th>
 				      <th scope="col"></th>
@@ -148,12 +148,16 @@
 			      <th scope="row"><%=count%></th>
 			      <td><%=r.getElemento().getId_elemento()%></td>
 			      <td><%=r.getPersona().getId_persona()%></td>
-			      <td><%=r.getEstado() %></td>
+			      <td><%=r.getPersona().getApellido()+" "+r.getPersona().getNombre()%></td>
+			      <% if(r.getEstado().equals("Cancelada") || r.getEstado().equals("Terminada")){
+			    	  %>
+			    	  <td class="table-danger"><%=r.getEstado()%></td>
+			      <%}else{ %>
+			      <td><%=r.getEstado() %></td><%} %>
 			      <td><%=r.getFecha_registro() %></td>
 			      <td><%=r.getFecha_inicio() %></td>
 			      <td><%=r.getFecha_fin() %></td>
 			      <td><%=r.getDetalle() %></td>
-			      <td><%=r.getPersona().getApellido()+" "+r.getPersona().getNombre()%></td>
 			      <td><%=r.getElemento().getNombre()%></td>
 			      <td><%=r.getElemento().getTipo_Elemento().getNombre() %></td>
 			      <td><div class="btn-group" role="group" aria-label="Basic example">

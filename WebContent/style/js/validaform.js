@@ -250,6 +250,7 @@ function setearfechas(){
 	
 	
 	
+	
 	if (divfechainicio.style.display == "block") {
 		divfechafin.style.display = "block";
 		smalltext2.style.display = "none";
@@ -258,11 +259,15 @@ function setearfechas(){
 	divfechainicio.style.display = "block";
 	smalltext1.style.display = "none";
 	
+	var categoria = document.getElementById("categoria");
+	
 	var fechafin = document.getElementById("datepicker3").value;
     var tipoelemento = document.getElementById("nombretipoelemento").value;
     var fecharegistro = $.datepicker.parseDate('dd/mm/yy', document.getElementById("datepicker1").value);
     var fechainicio = $.datepicker.parseDate('dd/mm/yy', document.getElementById("datepicker2").value);
     let dias = ["L", "M", "X", "J", "V", "S", "D"];
+    
+  
     
     
     if (dias[fecharegistro.getDay()-1] == "V") {
