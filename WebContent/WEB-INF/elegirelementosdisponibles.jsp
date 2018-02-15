@@ -161,7 +161,7 @@
 						<div class="alert alert-danger" role="alert">
 						  No se han encontrado elementos disponibles para esa fecha! Por favor seleccione otra
 						</div>	
-						<a href="javascript:window.history.back();">Volver a la pagina anterior</a>
+						
 						 	
 						<!-- window.history.go(-2); -->
 						<%}else{

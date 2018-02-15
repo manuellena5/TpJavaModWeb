@@ -268,12 +268,12 @@
 						  
 						  <div class="form-group">
 						    <label for="txtpass">*Password</label>
-						    <input type="text" size="20" class="form-control" id="txtpass" name="txtpass" value="<%=persona.getPassword() %>">
+						    <input type="password" size="20" class="form-control" id="txtpass" name="txtpass" value="<%=persona.getPassword() %>">
 						  </div>
 						  
 						  <div class="form-group">
 						    <label for="txtpass2">*Repita el password</label>
-						    <input type="text" size="20" class="form-control" id="txtpass2" name="txtpass2" value="<%=persona.getPassword() %>">
+						    <input type="password" size="20" class="form-control" id="txtpass2" name="txtpass2" value="<%=persona.getPassword() %>">
 						  </div>
 						  
 						  
@@ -357,7 +357,7 @@
 					      <option selected value="<%=tipoelemento.getAcceso()%>"><%=tipoelemento.getAcceso()%></option>
 					      <option value="Publico">Publico</option>
 					      <option value="Usuarios">Usuario</option>
-					      <option value="Encargados">Encargado</option>
+					      <option value="Encargados">Encargados</option>
 					    </select>
 					</div>
 					  

@@ -118,7 +118,7 @@
 				%>  
 				  <option value="<%=te.getId_tipoelemento()%>"><%=te.getNombre()%></option>
 				  
-			  <%}else if((((Reserva)request.getAttribute("reserva")).getPersona().getCategoria().getDescripcion()).equals("Usuario") && (!te.getAcceso().equals("Encargado"))){
+			  <%}else if((((Reserva)request.getAttribute("reserva")).getPersona().getCategoria().getDescripcion()).equals("Usuario") && (!te.getAcceso().equals("Encargados"))){
 				 %>
 				  <option value="<%=te.getId_tipoelemento()%>"><%=te.getNombre()%></option>
 				  

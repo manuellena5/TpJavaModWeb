@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.Level;
+
 import entidades.Reserva;
 import negocio.ReservasLogic;
 import util.AppDataException;
@@ -82,15 +84,18 @@ public class CancelacionReservaUsuario extends HttpServlet {
 			
 			}catch (SQLException e) {
 				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				new AppDataException(e, e.getMessage(),Level.ERROR);
 				System.out.println(e.getMessage());
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			} catch (AppDataException ade) {
 				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				new AppDataException(ade, ade.getMessage(),Level.ERROR);
 				System.out.println(ade.getMessage());
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}
 			catch (Exception e) {
 				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				new AppDataException(e, e.getMessage(),Level.ERROR);
 				System.out.println(e.getMessage());
 				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 			}

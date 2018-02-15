@@ -281,9 +281,16 @@ function setearfechas(){
     			 $("#datepicker2").datepicker("option", "minDate", fecharegistro);
     			 fecha.setDate(fecharegistro.getDate() + duracion);
     			 $("#datepicker2").datepicker("option", "maxDate", fecha);
+    			 
+    			 
+    			 
     }
     
-    
+    var fecha2 = $.datepicker.parseDate('dd/mm/yy', document.getElementById("datepicker2").value);
+    var duracion = 7;
+	 $("#datepicker3").datepicker("option", "minDate", fechainicio);
+	 fecha2.setDate(fechainicio.getDate() + duracion);
+	 $("#datepicker3").datepicker("option", "maxDate", fecha2);
     
 	
 }

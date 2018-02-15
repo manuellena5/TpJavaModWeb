@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.Level;
+
 import entidades.Elemento;
 import entidades.Persona;
 import entidades.Reserva;
@@ -103,18 +105,21 @@ public class TraerElementosDisponibles extends HttpServlet {
 			request.setAttribute("listaElementos",listaelementos);
 			
 			}
-		} catch (SQLException e) {
+		}catch (SQLException e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
-			System.out.println(e.getMessage() + " Error SqlException");
+			new AppDataException(e, e.getMessage(),Level.ERROR);
+			System.out.println(e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (AppDataException ade) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
-			System.out.println(ade.getMessage() + " Error AppDataException");
+			new AppDataException(ade, ade.getMessage(),Level.ERROR);
+			System.out.println(ade.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		catch (Exception e) {
 			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
-			System.out.println(e.getMessage() + " Error exception");
+			new AppDataException(e, e.getMessage(),Level.ERROR);
+			System.out.println(e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		

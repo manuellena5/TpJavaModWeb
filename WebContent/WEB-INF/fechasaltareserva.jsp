@@ -171,7 +171,7 @@ fechaActual = simple.format(FechaDelSistema);
 		</div>
 	  	
 	  	<button type="submit" class="btn btn-primary">Siguiente</button>
-
+		<button type="button" class="btn btn-primary" name="btnatras" onclick="javascript:window.history.back();">Atras</button>
 	  	<%} %>
 
 	  	
@@ -267,7 +267,7 @@ fechaActual = simple.format(FechaDelSistema);
     		
     	} });
     	
-    	$("#datepicker3").datepicker({ minDate: 0,maxDate:"+7D", beforeShowDay: $.datepicker.noWeekends });
+    	$("#datepicker3").datepicker({ minDate: 0, beforeShowDay: $.datepicker.noWeekends });
     	
     	
     	$("#datepicker").datepicker($.datepicker.regional["es"]);

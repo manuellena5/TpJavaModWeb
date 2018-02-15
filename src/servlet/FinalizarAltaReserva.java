@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import entidades.Persona;
@@ -24,7 +25,7 @@ import util.Emailer;
 @WebServlet({ "/FinalizarAltaReserva", "/finalizaraltareserva.servlet" })
 public class FinalizarAltaReserva extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private Logger logger;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -53,7 +54,7 @@ public class FinalizarAltaReserva extends HttpServlet {
 		ReservasLogic reservaslogic = new ReservasLogic();
 		Persona persona =  new Persona();
 		
-
+		
 			
 			
 			
@@ -61,7 +62,7 @@ public class FinalizarAltaReserva extends HttpServlet {
 				int idelemento = Integer.parseInt(request.getParameter("idelemento"));
 				int idpersona = Integer.parseInt(request.getParameter("idpersona"));
 				String detalle = request.getParameter("txtdetalle");
-				String mail = request.getParameter("txtmail");
+				
 				
 				
 				String fecha = request.getParameter("fecharegistro");
@@ -70,10 +71,10 @@ public class FinalizarAltaReserva extends HttpServlet {
 				
 				reserva = reservaslogic.GetOne(idpersona, idelemento, fecharegistro);
 				
-				if (reserva  == null || mail.equals("")) {
+				if (reserva  == null) {
 					request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
 					request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-				
+					
 				}else{
 				
 				if (detalle.isEmpty()) {
@@ -83,38 +84,43 @@ public class FinalizarAltaReserva extends HttpServlet {
 				reserva.setDetalle(detalle);
 				
 				reservaslogic.update(reserva);
-				if (!mail.equals("")) {
+				
+				if (((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Usuario") || ((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Encargado")) {
+					String mail = request.getParameter("txtmail");
+					
+				if (!mail.isEmpty()) {
 				
 					Emailer.getInstance().send(mail,"Su reserva se ha registrado correctamente",reservaslogic.getDatosReserva(reserva));
-				}
+				}}
 				
 				
 				
 				/*em.SendMail(mail,reservaslogic.getDatosReserva(reserva));*/
 				}
 		
-		}catch (SQLException e) {
-			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
-			new AppDataException(e, e.getMessage());
-			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-		} catch (AppDataException ade) {
-			request.setAttribute("Error", ade.getMessage());
-			new AppDataException(ade, ade.getMessage());
-			System.out.println(ade.getMessage());
-			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-		}
-		catch (Exception e) {
-			request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
-			new AppDataException(e, e.getMessage());
-			System.out.println(e.getMessage());
-			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-		}
+			}catch (SQLException e) {
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				new AppDataException(e, e.getMessage(),Level.ERROR);
+				System.out.println(e.getMessage());
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			} catch (AppDataException ade) {
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				new AppDataException(ade, ade.getMessage(),Level.ERROR);
+				System.out.println(ade.getMessage());
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
+			catch (Exception e) {
+				request.setAttribute("Error", "Ha ocurrido un error inesperado, vuelva a intentarlo mas tarde");
+				new AppDataException(e, e.getMessage(),Level.ERROR);
+				System.out.println(e.getMessage());
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			}
 		
 			if (((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Usuario") || ((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Encargado")) {
 				
 				request.getRequestDispatcher("traerreservasusuario.servlet").forward(request, response);
 			}else
-				if (((Persona)request.getSession().getAttribute("user")).getCategoria().getDescripcion().equals("Administrador")) {
+				 {
 					request.getRequestDispatcher("ListadoReservas.servlet").forward(request, response);
 				}
 		
