@@ -236,6 +236,10 @@ function tomariddelboton(boton){
 	
 }
 
+function mostrarmodal(){
+	$('#frmModal').modal('show');
+	
+}
 
 function setearfechas(){
 	

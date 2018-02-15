@@ -24,9 +24,9 @@ public class FactoryConexion {
 	private Connection conn;
 	private int cantConn=0;
 	private String driver = "com.mysql.jdbc.Driver";
-	private String host ="node14124-biblioteca.jelastic.saveincloud.net";
+	private String host ="mysql34375-biblioteca.jl.serv.net.mx";
 	private String user="root";
-	private String password="ROIpnk13429";
+	private String password="MFNaoe31869";
 	private String db="biblioteca";
 
 

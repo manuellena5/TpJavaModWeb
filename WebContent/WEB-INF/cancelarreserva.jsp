@@ -1,27 +1,10 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="entidades.Persona"%>
-<%@page import="entidades.Reserva"%>
-<%@page import="entidades.Elemento"%>
-<%@page import="entidades.Tipo_Elemento"%>
 <%@page import="entidades.Categoria"%>
-<%@page import="java.util.Date"%>
+<%@page import="entidades.Elemento"%>
 <%@page import="entidades.Reserva"%>
-<%@page import="java.text.SimpleDateFormat"%>
 
-<% Categoria cat= ((Persona)session.getAttribute("user")).getCategoria();
-
-Date FechaDelSistema = new Date(); /*Tomo la hora del sistema*/
-java.sql.Date fechaActual = new java.sql.Date(FechaDelSistema.getTime());
-
-Reserva r = (Reserva)request.getAttribute("reserva"); 
-java.util.Date data = null;
-
-
-SimpleDateFormat simple= new SimpleDateFormat("yy-MM-dd");
-String rfecharegistro = r.getFecha_registro().toString();
-data = simple.parse(rfecharegistro);
-simple = new SimpleDateFormat("dd/MM/yyyy");
-rfecharegistro = simple.format(data);
+<% Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 %>
 
     
@@ -38,7 +21,9 @@ rfecharegistro = simple.format(data);
     
     
      
-	 <title>Pagina principal</title>
+
+	 <title>Cancelacion exitosa de la reserva</title>
+
 	 
 	 
 	 <!-- Bootstrap CSS -->
@@ -121,49 +106,70 @@ rfecharegistro = simple.format(data);
 				 
 				</nav>
 		</div>
+
+		<div class="cuerpo">
 		
-		<div class="cuerpo container">
 		
+
 		
-		<form action="finalizaraltareserva.servlet" method="post">
 		
 			
-			<input id="fecharegistro" name="fecharegistro" type="text" style="display:none;"  value="<%=rfecharegistro%>">
-			<input id="idtipoelemento" name="idtipoelemento" type="text" style="display:none;"  value="<%=r.getElemento().getTipo_Elemento().getId_tipoelemento()%>">
-			<input id="idelemento" name="idelemento" type="text" style="display:none;"  value="<%=r.getElemento().getId_elemento()%>">
-			<input id="idpersona" name="idpersona" type="text" style="display:none;" value="<%=r.getPersona().getId_persona()%>">
-			
-			<div class="alert alert-success" role="alert">
-			  <h4 class="alert-heading">Su reserva se ha registrado correctamente</h4>
-			  <p><strong>Datos de la reserva: </strong></p>
-			  <hr>
-			    <p><%=r.getElemento().getTipo_Elemento().getNombre() %></p>
-				<p><%=r.getElemento().getNombre() %></p>
-				<p>Fecha inicio de la reserva: <em><%=r.getFecha_inicio() %></em></p>
-				<p>Fecha fin de la reserva: <em><%=r.getFecha_fin() %></em></p>
-				<p><strong>Datos de la persona</strong></p>
-				<hr>
-				<p>Nombre: <em><%=r.getPersona().getNombre() %></em></p>
-				<p>Apellido: <em><%=r.getPersona().getApellido() %></em></p>
-				<p>Dni: <em><%=r.getPersona().getDni() %></em></p>
+			<div class="alert alert-danger" role="alert">
+				<form action="FinalizarCancelacionReservaUsuario.servlet" method="post">
+				
+				<input id="idpersona" name="idpersona" style="display:none;" value="<%=((Reserva)request.getAttribute("reserva")).getPersona().getId_persona()%>">
+				<input id="fecharegistro" name="fecharegistro" style="display:none;" value="<%=((Reserva)request.getAttribute("reserva")).getFecha_registro()%>">
+				<input id="idelemento" name="idelemento" style="display:none;" value="<%=((Reserva)request.getAttribute("reserva")).getElemento().getId_elemento()%>">
+				
+				<h3>Los datos de su reserva son los siguientes</h3>
+			   
+			   	<p>Fecha de registro: <%=((Reserva)request.getAttribute("reserva")).getFecha_registro()%></p>
+				<p>Fecha de inicio: <%=((Reserva)request.getAttribute("reserva")).getFecha_inicio()%></p>
+				<p>Fecha de fin: <%=((Reserva)request.getAttribute("reserva")).getFecha_fin()%></p>
+				<p>Detalle: <%=((Reserva)request.getAttribute("reserva")).getDetalle()%></p>
+				<p>Estado: <%=((Reserva)request.getAttribute("reserva")).getEstado()%></p>
+				<p>Persona que reserva: <%=((Reserva)request.getAttribute("reserva")).getPersona().getNombre() + " " + ((Reserva)request.getAttribute("reserva")).getPersona().getApellido()%></p>	
+				<p>Tipo de elemento reservado: <%=((Reserva)request.getAttribute("reserva")).getElemento().getTipo_Elemento().getNombre()%></p>	
+			  	<p>Nombre del elemento reservado: <%=((Reserva)request.getAttribute("reserva")).getElemento().getNombre()%></p>	
+			  	
+			  	<% if(cat.getDescripcion().equals("Usuario")){%>
+				<div class="form-group">
+			    	<label for="exampleFormControlTextarea1">Ingrese su direccion de email para enviarle los datos de su reserva</label>
+			    <input id="txtmail" name="txtmail" type="text">
+		  		</div>
+		  		<% }%>
+			  	
+			  	<button type="button" class="btn btn-secondary" name="btneleccion" onclick="mostrarmodal();">
+			  					  Siguiente
+								  </button>
+			   <a href="Start" class="alert-link">Volver a pagina principal</a>
+			   
+ 			   
+			    <!-- Modal -->
+										<div class="modal fade" id="frmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										  <div class="modal-dialog" role="document">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <h5 class="modal-title" id="exampleModalLabel">Eleccion de elemento</h5>
+										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										          <span aria-hidden="true">&times;</span>
+										        </button>
+										      </div>
+										      <div class="modal-body">
+										        ¿Está seguro que desea cancelar esta elemento?
+										      </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+										        <button type="submit" id="btnenviar" name="btnenviar"  class="btn btn-primary">Aceptar</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+								<!--Fin Modal -->
 			</div>
 			
-			<% if(cat.getDescripcion().equals("Usuario")){%>
-			<div class="form-group">
-			    <label for="exampleFormControlTextarea1">Ingrese su direccion de email para enviarle los datos de su reserva</label>
-			    <input id="txtmail" name="txtmail" type="text">
-		  	</div>
-		  	<% }%>
-			<div class="form-group">
-			    <label for="exampleFormControlTextarea1">¿Desea agregar algun detalle?</label>
-			    <textarea class="form-control detalle" name="txtdetalle" placeholder="Sin detalle" value="Sin detalle"></textarea>
-			    <small class="form-text text-muted">*Dejar vacio en caso de no querer agregar un detalle</small>
-		  	</div>
-		  	
-		  	
-							  	
-		  	<button type="submit" class="btn btn-primary">Finalizar</button>
-	  	</form>
+	  	
+	  	
 			
 			
 		</div> 
@@ -226,35 +232,20 @@ rfecharegistro = simple.format(data);
 	</div> <!-- fin div container general -->
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
-    <script type="text/javascript" src="style/js/jquery.js"></script>
+  <script type="text/javascript" src="style/js/jquery.js"></script>
     <script type="text/javascript" src="style/js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="style/js/jquery-ui.js"></script>
-    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
-    <script type="text/javascript" src="style/js/datepicker-es.js"></script>
-
+    <script type="text/javascript" src="style/js/validaform.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script type="text/javascript" src="style/js/bootstrap.min.js"></script>
+    <script src="style/js/ie10-viewport-bug-workaround.js"></script>
+
+    
    
 	<script type="text/javascript">
     $(function () {
-    	var today = new Date();
-    	$("#datepicker1").datepicker({ minDate: 0 });
-    	$("#datepicker2").datepicker({ minDate: 0 });
-    	$("#datepicker3").datepicker({ minDate: 0 });
-    	$("#datepicker").datepicker($.datepicker.regional["es"]);
- 
-    });
-    
-    function validarfecha(){
-    	var fechainicio = document.getElementById("datepicker2").value;
-    	var fechafin = document.getElementById("datepicker3").value;
-    	
-    	if (fechainicio > fechafin) {
-			alert("La fecha de fin debe ser mayor a la fecha de inicio");
-		}
-    }
+    	$("#datepicker").datepicker();
+    	});
 	</script>
-	
 
   </body>
 </html>

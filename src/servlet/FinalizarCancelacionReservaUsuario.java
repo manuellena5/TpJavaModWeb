@@ -13,18 +13,19 @@ import javax.servlet.http.HttpServletResponse;
 import entidades.Reserva;
 import negocio.ReservasLogic;
 import util.AppDataException;
+import util.Emailer;
 
 /**
- * Servlet implementation class ModificacionReservaUsuario
+ * Servlet implementation class FinalizarCancelacionReservaUsuario
  */
-@WebServlet({ "/CancelacionReservaUsuario", "/cancelacionreservausuario.servlet","/CancelacionReservaUsuario.servlet" })
-public class CancelacionReservaUsuario extends HttpServlet {
+@WebServlet({ "/FinalizarCancelacionReservaUsuario.servlet", "/finalizarcancelacionreservausuario" })
+public class FinalizarCancelacionReservaUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CancelacionReservaUsuario() {
+    public FinalizarCancelacionReservaUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,7 +42,6 @@ public class CancelacionReservaUsuario extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 
 		ReservasLogic reservalogic = new ReservasLogic();
 		Reserva reserva = new Reserva();
@@ -61,6 +61,7 @@ public class CancelacionReservaUsuario extends HttpServlet {
 			data = simple.parse(fecha);
 			java.sql.Date sqlDate = new java.sql.Date(data.getTime());
 			
+			String mail = request.getParameter("txtmail");
 			
 			reserva = reservalogic.GetOne(idpersona, idelemento, sqlDate);
 			
@@ -71,10 +72,14 @@ public class CancelacionReservaUsuario extends HttpServlet {
 			
 			}else{
 			
-				
+				reserva.setEstado("Cancelada");
 			
 			reservalogic.update(reserva);
 			
+			if (!mail.equals("")) {
+				
+				Emailer.getInstance().send(mail,"Su reserva se ha cancelado correctamente",reservalogic.getDatosReserva(reserva));
+			}
 			
 			request.setAttribute("reserva", reserva);
 			
@@ -96,10 +101,7 @@ public class CancelacionReservaUsuario extends HttpServlet {
 			}
 			
 		
-		request.getRequestDispatcher("/WEB-INF/cancelarreserva.jsp").forward(request, response);
-		
-		}
-		
+		request.getRequestDispatcher("/WEB-INF/cancelarreservaexitosa.jsp").forward(request, response);
 	}
 
-
+}
