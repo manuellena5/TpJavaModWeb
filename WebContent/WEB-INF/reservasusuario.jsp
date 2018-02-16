@@ -188,7 +188,7 @@ Categoria cat=((Persona)session.getAttribute("user")).getCategoria();
 			    <% }} %>
 			  </tbody>
 			</table>
-
+			<a class="btn btn-primary" href="Start">Atras</a>
 		</div> 
 		
 		<footer class="pie container-fluid">

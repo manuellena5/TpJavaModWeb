@@ -114,7 +114,7 @@
 		        <option selected>Elija...</option>
 		        <% ArrayList<Tipo_Elemento> lista = (ArrayList<Tipo_Elemento>)request.getAttribute("listaTipoElementos"); 
 			  for(Tipo_Elemento te : lista){ 
-			  if((((Reserva)request.getAttribute("reserva")).getPersona().getCategoria().getDescripcion()).equals("Encargado") && (te.getAcceso().equals("Encargado") || te.getAcceso().equals("publico"))){
+			  if((((Reserva)request.getAttribute("reserva")).getPersona().getCategoria().getDescripcion()).equals("Encargado") && (te.getAcceso().equals("Encargados") || te.getAcceso().equals("Publico"))){
 				%>  
 				  <option value="<%=te.getId_tipoelemento()%>"><%=te.getNombre()%></option>
 				  
